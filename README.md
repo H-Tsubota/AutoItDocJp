@@ -13,7 +13,7 @@ H. Tsubota (http://blog.livedoor.jp/blackcode)
 
 ***Japanese***
 これはAutoIt( http://www.autoitscript.com/site/ )のマニュアルの日本語訳です。
-AutoItはWindows用のGUI自動化をスクリプト/プラグラミング言語です。
+AutoItはWindows用のGUI自動化スクリプト/プラグラミング言語です。
 http://blog.livedoor.jp/blackcode/archives/1224220.html でchmファイル版のこのドキュメントをダウンロードすることができます。
 
 使用の際にはこのプロジェクトのhtml/licence.htm, licenceJP.htmをご一読ください。
