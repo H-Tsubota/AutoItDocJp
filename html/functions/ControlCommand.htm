@@ -1,0 +1,173 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function ControlCommand</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">ControlCommand</font>
+<hr size="2">
+<p>コントロールにコマンドを送ります。<br></p>
+
+<p class="codeheader">
+ControlCommand ( "title", "text", controlID, "command" [, "option"] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">title</td>
+    <td width="85%">アクセスするウィンドウの名前</td>
+  </tr>
+  <tr>
+   <td>text</td>
+   <td>アクセスするウィンドウのテキスト</td>
+  </tr>
+  <tr>
+   <td>controlID</td>
+  <td>操作するコントロール。<a href="../intro/controls.htm">Controls</a>参照.</td>
+  </tr>
+  <tr>
+   <td>command</td>
+   <td>コントロールに送るコマンド</td>
+  </tr>
+  <tr>
+   <td>option</td>
+   <td><b>[オプション]</b> コマンドごとに必要なパラメータ</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+下表のコマンドによって異なる。エラーの場合（コマンド、ウィンドウ/コントロールの間違いなど）の場合 @errorを1にします。<br>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="40%"><b>コマンド, オプション</b></td>
+    <td width="60%"><b>返し値</b></td>
+  </tr>
+  <tr>
+   <td>"IsVisible", ""</td>
+   <td>コントロールが可視の場合1を、それ以外の場合0を返します。</td>
+  </tr>
+  <tr>
+   <td>"IsEnabled", ""</td>
+   <td>コントロールが操作可能な場合1を、それ以外の場合0を返します。</td>
+  </tr>
+  <tr>
+   <td>"ShowDropDown", ""</td>
+   <td>コンボボックスをドロップします。</td>
+  </tr>
+  <tr>
+   <td>"HideDropDown", ""</td>
+   <td>コンボボックスをしまいます。</td>
+  </tr>
+  <tr>
+   <td>"AddString", 'string'</td>
+   <td>リストボックス、コンボボックスの最後に文字列（string)を加えます。</td>
+  </tr>
+  <tr>
+   <td>"DelString", occurrence</td>
+   <td>occurrenceに従ってリストボックス、コンボボックス内の文字列を削除します。</td>
+  </tr>
+  <tr>
+   <td>"FindString", 'string'</td>
+   <td>
+   リストボックス、コンボボックス内のstringのoccurrence位置を返します。</td>
+  </tr>
+  <tr>
+   <td>"SetCurrentSelection", <i>occurrence</i></td>
+   <td>occurrenceに従ってリストボックス、コンボボックス内の選択設定をおこないます。</td>
+  </tr>
+  <tr>
+   <td>"SelectString", 'string'</td>
+   <td>リストボックス、コンボボックスから文字列（string）によって指定した選択肢を選択します。</td>
+  </tr>
+  <tr>
+   <td>"IsChecked", ""</td>
+   <td>ボタンがチェックされている場合1を、それ以外の場合0を返します。</td>
+  </tr>
+  <tr>
+   <td>"Check", ""</td>
+   <td>ラジオボタン、チェックボタンをチェックします。</td>
+  </tr>
+  <tr>
+   <td>"UnCheck", ""</td>
+   <td>ラジオボタン、チェックボタンのチェックをはずします。</td>
+  </tr>
+  <tr>
+   <td>"GetCurrentLine", ""</td>
+   <td>エディットコントロール内で現在キャレットが何行目にあるかを返します。</td>
+  </tr>
+  <tr>
+   <td>"GetCurrentCol", ""</td>
+   <td>エディットコントロール内で現在キャレットが行の左端から何文字目にあるかを返します。</td>
+  </tr>
+  <tr>
+   <td>"GetCurrentSelection", ""</td>
+   <td>リストボックス、コンボボックスで現在選択されているアイテムの名前を返します。</td>
+  </tr>
+  <tr>
+   <td>"GetLineCount", ""</td>
+   <td>エディットコントロールの行数を返します。</td>
+  </tr>
+  <tr>
+   <td>"GetLine", <i>line</i>#</td>
+   <td>エディットコントロールの指定した行数のテキストを返します。</td>
+  </tr>
+  <tr>
+   <td>"GetSelected", ""</td>
+   <td>エデイットコントロールの選択されているテキストを返します。</td>
+  </tr>
+  <tr>
+   <td>"EditPaste", 'string'</td>
+   <td>エディトコントロールの現在のキャレット位置に指定された文(string）をペーストします。</td>
+  </tr>
+  <tr>
+   <td>"CurrentTab", ""</td>
+   <td>SysTabControl32の現在のタブ位置を返します。</td>
+  </tr>
+  <tr>
+   <td>"TabRight", ""</td>
+   <td>SysTabControl32の現在のタブ位置を右隣に移動します。</td>
+  </tr>
+  <tr>
+   <td>"TabLeft", ""</td>
+   <td>SysTabControl32の現在のタブ位置を左隣に移動します。</td>
+  </tr>
+  <tr>
+   <td>"SendCommandID", <i>Command ID</i></td>
+   <td>WM_COMMANDメッセージを模擬します。通常、ToolbarWindow32で使用します。Command IDを取得するにはAu3InfoのToolBarタブを使用してください。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+コントロールの中にはウィンドウがアクティブでないと自動操作できないものがあります。そういったコントロールに対してControlCommand()を使用する前にはWinActive()関数を使ってコントロールのウィンドウを最前面にしてください。<br>
+<br>
+コンボボックス、リストボックスに対するコマンドの中には”ComboLBox”コントロールに対して使えないものがあります。<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="ControlClick.htm">ControlClick</a>, <a href="ControlDisable.htm">ControlDisable</a>, <a href="ControlEnable.htm">ControlEnable</a>, <a href="ControlFocus.htm">ControlFocus</a>, <a href="ControlGetPos.htm">ControlGetPos</a>, <a href="ControlGetText.htm">ControlGetText</a>, <a href="ControlHide.htm">ControlHide</a>, <a href="ControlMove.htm">ControlMove</a>, <a href="ControlSetText.htm">ControlSetText</a>, <a href="ControlShow.htm">ControlShow</a>, <a href="StatusbarGetText.htm">StatusbarGetText</a>, <a href="WinActivate.htm">WinActivate</a>, <a href="WinMenuSelectItem.htm">WinMenuSelectItem</a>, <a href="WinGetClassList.htm">WinGetClassList</a>, <a href="ControlGetFocus.htm">ControlGetFocus</a>, <a href="ControlListView.htm">ControlListView</a>, <a href="ControlSend.htm">ControlSend</a>, <a href="ControlTreeView.htm">ControlTreeView</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S4">Run</span><span class="S8">(</span><span class="S7">"notepad.exe"</span><span class="S8">)</span><br>
+<span class="S4">ControlCommand</span><span class="S8">(</span><span class="S7">"[CLASS:Notepad]"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Edit1"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"GetLineCount"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">)</span><br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\ControlCommand.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

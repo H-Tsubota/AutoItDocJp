@@ -1,0 +1,36 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function Notes</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift-jis">
+  <link href="css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Notes</h1>
+<p>
+多くの関数が持っているオプションパラメータは省略することが可能です。ただしオプションパラメータを設定したい場合はそのパラメータの前の全てのパラメータを設定しなければなりません!
+例えば<i><a href="functions/Run.htm">Run</a> ( "filename", ["workingdir" 
+  [, flag]] )</i>で考えてみましょう。もし<i>flag</i>を設定したい場合、<i>workingdir</i>も<b>必ず</b>設定しなければいけません。<br>
+  <br>
+多くのWin___関数はオプションパラメータ"text"を持っています。このパラメータは同じタイトルを持つウィンドウの区別を手助けするためのものです。<br>
+  <br>
+  <br>
+関数のいくつかは成功/失敗を<b>返し値</b>で知らせます。その他のものは<b>@errorフラグ</b>の設定、あるいは両方の方法で知らせます。<br>
+@error = 0 ;は常に成功を表します。<br>
+ただしReturnする変数は通常はコードを読みやすくするために非ゼロで成功を表します。<br>
+  <br>
+  &nbsp;&nbsp;&nbsp; If someUserFunc() then&nbsp; ;...関数正常動作<br>
+  &nbsp;&nbsp;&nbsp; If Not someUserFunc() then&nbsp; ;...関数失敗<br>
+  <br>
+  &nbsp;&nbsp;&nbsp; $x = FileReadLine("C:\someFile.txt")<br>
+  &nbsp;&nbsp;&nbsp; If @error = -1 Then ;ファイル終端に到達<br>
+  <br>  
+<b>関数が@errorフラグを設定する場合、返し値を使用する前に必ず@errorを調べなければなりません。@errorがエラーを通知している場合、一般に関数の返し値は未定義です。</b><br>
+</p>
+<p>関数内に入った際は@errorは常に0に設定されます。</p>
+<p>ドキュメンテーションに「返し値なし」と書いてある場合でもAutoItはエラーを避けるために常に値を返します。普通は1が返されますがこの返し値に依存したコードを書かないでください。</p>
+<p>オプションパラメータの定義が必要で、その前に1つ以上のオプションパラメータが存在する場合はデフォルト値を設定しておく必要があります。普通は文字列パラメータには""を、その他のパラメータには-1を設定します。StringInStrやStringReplaceといった関数では0を設定する必要があります。それぞれのオプションパラメータの説明を参照してください。</p>
+<p>&nbsp;</p>
+</body>
+</html>

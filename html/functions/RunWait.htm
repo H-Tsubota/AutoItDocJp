@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function RunWait</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">RunWait</font>
+<hr size="2">
+<p>外部プログラムを起動し、外部プログラムが終了するまでスクリプトの実行を一時停止します。<br></p>
+
+<p class="codeheader">
+RunWait ( "program" [, "workingdir" [, show_flag [, opt_flag ]]] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">program</td>
+    <td width="85%">実行するプログラム(EXE, BAT, COM, PIF)のフルパス (注意を参照)</td>
+  </tr>
+  <tr>
+   <td>workingdir</td>
+   <td><b>[オプション]</b>作業ディレクトリ名。プログラムのパスではありません。</td>
+  </tr>
+  <tr>
+   <td>show_flag</td>
+   <td><b>[オプション]</b>実行するプログラムの表示状態を切り替えます。<br>
+       &nbsp;&nbsp;  @SW_HIDE = ウィンドウを隠す  (Defaultキーワードの場合も同様)<br>
+       &nbsp;&nbsp;  @SW_MINIMIZE = ウィンドウを最小化<br>
+       &nbsp;&nbsp;  @SW_MAXIMIZE = ウィンドウを最大化</td>
+  </tr>
+  <tr>
+   <td>opt_flag</td>
+   <td><b>[オプション]</b> 
+   親プロセスと子プロセスがどのように連携するかに関連するさまざまなオプションを制御<br>
+       &nbsp;&nbsp;0x10000 ($RUN_CREATE_NEW_CONSOLE) = 
+		子コンソールプロセスは親プロセスのウィンドウを使用する代わりに独自のウィンドウを作成します。
+		このフラグは親がコンソールアプリケーションとしてコンパイルされる場合にのみ使用できます。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">成功</td>
+    <td width="90%">実行したプログラムの終了コードを返します。</td>
+  </tr>
+  <tr>
+    <td valign="top">失敗</td>
+    <td>0を返し@errorに非ゼロを設定します。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+スペースを含むパスはコーテーションで囲む必要があります。<br>
+<br>
+DOSコマンド実行をするためには <i>Run(@ComSpec & " /c " & 'commandName', "", @SW_HIDE)</i>としてください。"/c"の前の" "を忘れないようにしてください。<br>
+<br>
+指定したプログラムが終了す売るまでスクリプトは一時停止します。プログラムを実行し、平行してスクリプトの実行をおこなう場合Run関数を使ってください。<br>
+<br>
+プログラムのなかにはプログラムが終了していないにも関わらず処理を返すものがあります。これらのプログラムは別のプロセスを起動しています。－このような場合ProcessWaitClose関数を使用することで対処することができます。<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="ProcessWait.htm">ProcessWait</a>, <a href="ProcessWaitClose.htm">ProcessWaitClose</a>, <a href="Run.htm">Run</a>, <a href="ShellExecute.htm">ShellExecute</a>, <a href="ShellExecuteWait.htm">ShellExecuteWait</a>, <a href="RunAs.htm">RunAs</a>, <a href="RunAsWait.htm">RunAsWait</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$val</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">RunWait</span><span class="S8">(</span><span class="S6">@WindowsDir</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">"\Notepad.exe"</span><span class="S8">,</span><span class="S0"> </span><span class="S6">@WindowsDir</span><span class="S8">,</span><span class="S0"> </span><span class="S6">@SW_MAXIMIZE</span><span class="S8">)</span><br>
+<span class="S1">; メモ帳が閉じるまでスクリプトは停止します。</span><br>
+<span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Program returned with exit code:"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$val</span><span class="S8">)</span><br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\RunWait.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

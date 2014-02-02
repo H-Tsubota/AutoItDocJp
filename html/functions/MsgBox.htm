@@ -1,0 +1,262 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function MsgBox</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">MsgBox</font>
+<hr size="2">
+<p>オプションによってタイムアウト時間を設定したシンプルなメッセージボックスを表示します。<br></p>
+
+<p class="codeheader">
+MsgBox ( flag, "title", "text" [, timeout [, hwnd]] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">flag</td>
+    <td width="85%">メッセージボックスの種類と表示するボタンの組み合わせを指定します。”注意”を参照。</td>
+  </tr>
+  <tr>
+   <td>title</td>
+   <td>メッセージボックスの名前</td>
+  </tr>
+  <tr>
+   <td>text</td>
+   <td>メッセージボックスのテキスト</td>
+  </tr>
+  <tr>
+   <td>timeout</td>
+   <td><b>[オプション]</b> タイムアウトまでの秒数。タイムアウト時間をすぎるとメッセージボックスは自動的に閉じます。デフォルト値は0で、タイムアウトしません。</td>
+  </tr>
+  <tr>
+   <td>hwnd</td>
+   <td><b>[オプション]</b> このダイアログの親として使用するウィンドウハンドル</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">成功</td>
+    <td width="90%">押されたボタンのIDを返します。</td>
+  </tr>
+  <tr>
+    <td valign="top">失敗</td>
+    <td>タイムアウトした場合-1を返します。<br></td>
+  </tr>
+</table><br><br>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%"><b>押されたボタン</b></td>
+    <td width="85%"><b>返し値</b></td>
+  </tr>
+  <tr>
+   <td>OK</td>
+   <td>&nbsp;1</td>
+  </tr>
+  <tr>
+   <td>キャンセル</td>
+   <td>&nbsp;2</td>
+  </tr>
+  <tr>
+   <td>中止</td>
+   <td>&nbsp;3</td>
+  </tr>
+  <tr>
+   <td>再試行</td>
+   <td>&nbsp;4</td>
+  </tr>
+  <tr>
+   <td>無視</td>
+   <td>&nbsp;5</td>
+  </tr>
+  <tr>
+   <td>はい</td>
+   <td>&nbsp;6</td>
+  </tr>
+  <tr>
+   <td>いいえ</td>
+   <td>&nbsp;7</td>
+  </tr>
+  <tr>
+   <td>再実行 **</td>
+   <td>10</td>
+  </tr>
+  <tr>
+   <td>続行 **</td>
+   <td>11</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+フラグパラメータには下表の値の組み合わせて指定することができます。<br>
+<br>
+<table width="100%" border="1" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td style="border-bottom-style: solid; border-bottom-width: 1"><b>フラグ（10進数表示）</b></td>
+    <td style="border-bottom-style: solid; border-bottom-width: 1"><b>設定されるボタン</b></td>
+    <td style="border-bottom-style: solid; border-bottom-width: 1"><b>フラグ（16進数表示）</a></td>
+  </tr>
+  <tr>
+    <td>0</td>
+    <td>OK ボタン</td>
+    <td>0x0</td>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>OK, キャンセル</td>
+    <td>0x1</td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>中止, 再試行, 無視</td>
+    <td>0x2</td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td>はい, いいえ, キャンセル</td>
+    <td>0x3</td>
+  </tr>
+  <tr>
+    <td>4</td>
+    <td>はい, いいえ</td>
+    <td>0x4</td>
+  </tr>
+  <tr>
+    <td>5</td>
+    <td>再試行, キャンセル</td>
+    <td>0x5</td>
+  </tr>
+  <tr>
+    <td>6 **</td>
+    <td>キャンセル, 再実行, 続行</td>
+    <td>0x6</td>
+  </tr>
+  <tr>
+    <td><b>フラグ（10進数表示）</b></td>
+    <td><b>設定されるアイコン</b></td>
+    <td><b>フラグ（16進数表示）</a></td>
+  </tr>
+  <tr>
+    <td>0</td>
+    <td>(アイコンなし)</td>
+    <td>0x0</td>
+  </tr>
+  <tr>
+    <td>16</td>
+    <td>ストップサインアイコン</td>
+    <td>0x10</td>
+  </tr>
+  <tr>
+    <td>32</td>
+    <td>クエスチョンマークアイコン</td>
+    <td>0x20</td>
+  </tr>
+  <tr>
+    <td>48</td>
+    <td>エクスクラメーションマークアイコン</td>
+    <td>0x30</td>
+  </tr>
+  <tr>
+    <td>64</td>
+    <td>インフォメーションマークアイコン（"i"をまるで囲ったマーク）</td>
+    <td>0x40</td>
+  </tr>
+  <tr>
+    <td><b>フラグ（10進数表示）</b></td>
+    <td><b>設定されるデフォルト設定</b></td>
+    <td><b>フラグ（16進数表示）</a></td>
+  </tr>
+  <tr>
+    <td>0</td>
+    <td>最初のボタンがデフォルトボタンになります。</td>
+    <td>0x0</td>
+  </tr>
+  <tr>
+    <td>256</td>
+    <td>2番目のボタンがデフォルトボタンになります。</td>
+    <td>0x100</td>
+  </tr>
+  <tr>
+    <td>512</td>
+    <td>3番目のボタンがデフォルトボタンになります。</td>
+    <td>0x200</td>
+  </tr>
+  <tr>
+    <td><b>フラグ（10進数表示）</b></td>
+    <td><b>設定される形式</b></td>
+    <td><b>フラグ（16進数表示）</a></td>
+  </tr>
+  <tr>
+    <td>0</td>
+    <td>アプリケーション </td>
+    <td>0x0</td>
+  </tr>
+  <tr>
+    <td>4096</td>
+    <td>システム形式 (ダイアログはアイコンを持ちます)</td>
+    <td>0x1000</td>
+  </tr>
+  <tr>
+    <td>8192</td>
+    <td>タスク形式</td>
+    <td>0x2000</td>
+  </tr>
+  <tr>
+    <td><b>フラグ（10進数表示）</b></td>
+    <td><b>その他の設定</b></td>
+    <td><b>フラグ（16進数表示）</a></td>
+  </tr>
+  <tr>
+    <td>0</td>
+    <td>(通常)</td>
+    <td>0x0</td>
+  </tr>
+  <tr>
+    <td>262144</td>
+    <td>MsgBox has top-most attribute set</td>
+    <td>0x40000</td>
+  </tr>
+  <tr>
+    <td>524288</td>
+    <td>タイトルがテキストが右揃えになります。</td>
+    <td>0x80000</td>
+  </tr>
+</table><br>
+** Windows 2000/XP以上のみ<br>
+<br>
+例えば、「システム形式」で「はい/いいえ」ボタンを持つメッセージボックスを作るためにはフラグは4096+4（あるいは4100)を指定します。もし16進数で設定するのであれば0x1000+0x4 (あるいは0x1004)とします。<br>
+<br>
+メッセージボックスは画面の中央にテキストの長さにあわせて表示されます。ただし、システム形式フラグ（4096）を使用した場合タイトルは切り詰められます。<br>
+<br>
+"title"が<a href="../keywords/Default.htm">Defaultキーワード</a>の場合、@Scriptnameが使用されます。<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="InputBox.htm">InputBox</a>, <a href="ToolTip.htm">ToolTip</a>, <a href="TrayTip.htm">TrayTip</a>, <a href="SplashTextOn.htm">SplashTextOn</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">4096</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Test"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"This box will time out in 10 seconds"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">10</span><span class="S8">)</span><br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\MsgBox.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

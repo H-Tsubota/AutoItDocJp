@@ -1,0 +1,58 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function Break</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">Break</font>
+<hr size="2">
+<p>トレイアイコンメニューからスクリプト実行を終了する機能の無効/有効を切り替えます。<br></p>
+
+<p class="codeheader">
+Break ( mode )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">mode</td>
+    <td width="85%">スクリプトのブレイクモードを設定<br>
+       &nbsp;&nbsp;1 = ブレイクを有効にする(ユーザーによる終了可能)(デフォルト)<br>
+       &nbsp;&nbsp;0 = ブレイクを無効にする(ユーザーによる終了不可能)</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+なし。<br>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+仕方のない理由のある場合のみブレイクを無効にしてください。<br>
+AutoItは通常、実行時にトレイアイコンを作成し、このアイコンを右クリックすることでユーザーはスクリプトの一時停止/終了をおこなえます。ブレイクを無効(0)にすると、ユーザーはこの方法でスクリプトの終了ができなくなります。<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+なし。
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S4">Break</span><span class="S8">(</span><span class="S3">0</span><span class="S8">)</span><span class="S0"> </span><span class="S1">;ブレイク無効</span><br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\Break.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function FileFindNextFile</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">FileFindNextFile</font>
+<hr size="2">
+<p>FileFindFirstFileの呼び出し結果に基づいてファイル名を返します。<br></p>
+
+<p class="codeheader">
+FileFindNextFile ( search )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">search</td>
+    <td width="85%">FileFindFirstFileが返す検索文字列。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">成功</td>
+    <td width="90%">FileFindFirstFileの呼び出し結果に基づいてファイル名を返します。ファイル名がディレクトリの場合@extendedを1に設定します。</td>
+  </tr>
+  <tr>
+    <td valign="top">失敗</td>
+    <td>検索に一致するファイル/ディレクトリがない場合@errorを1に設定します。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+検索準備と検索ハンドル取得のためのFileFindFirstFileの呼び出しは必須です。FileFindFirstFileで指定された検索文字列に基づいてFileFindNextFileの呼び出し毎に見つかったファイルが返されます。@error = 1の場合、元の検索文字列に一致するファイルは存在しません。<br>
+<br>
+FileFind...関数による検索を終了する場合には検索ハンドルを解放するためにFileClose() を呼ぶ必要があります。<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="FileClose.htm">FileClose</a>, <a href="FileFindFirstFile.htm">FileFindFirstFile</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S1">; 現在のディレクトリ内の全てのファイルのファイル名を表示</span><br>
+<span class="S9">$search</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">FileFindFirstFile</span><span class="S8">(</span><span class="S7">"*.*"</span><span class="S8">)</span><span class="S0"> &nbsp;</span><br>
+<br>
+<span class="S1">; 検索が成功したかを調べる</span><br>
+<span class="S5">If</span><span class="S0"> </span><span class="S9">$search</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S0"> </span><span class="S5">Then</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Error"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"No files/directories matched the search pattern"</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Exit</span><br>
+<span class="S5">EndIf</span><br>
+<br>
+<span class="S5">While</span><span class="S0"> </span><span class="S3">1</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$file</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">FileFindNextFile</span><span class="S8">(</span><span class="S9">$search</span><span class="S8">)</span><span class="S0"> </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">If</span><span class="S0"> </span><span class="S6">@error</span><span class="S0"> </span><span class="S5">Then</span><span class="S0"> </span><span class="S5">ExitLoop</span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">4096</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"File:"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$file</span><span class="S8">)</span><br>
+<span class="S5">WEnd</span><br>
+<br>
+<span class="S1">; 検索ハンドルを閉じる</span><br>
+<span class="S4">FileClose</span><span class="S8">(</span><span class="S9">$search</span><span class="S8">)</span><br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\FileFindNextFile.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

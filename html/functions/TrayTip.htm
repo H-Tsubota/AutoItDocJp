@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function TrayTip</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">TrayTip</font>
+<hr size="2">
+<p>AutoItアイコンからバルーンチップを表示します(2000/XPのみ)<br></p>
+
+<p class="codeheader">
+TrayTip ( "title", "text", timeout [, option] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">title</td>
+    <td width="85%">バルーンチップの最上段に太文字で表示されるテキスト(最大63文字)</td>
+  </tr>
+  <tr>
+   <td>text</td>
+   <td>バルーンチップに表示されるメッセージ(最大255文字)</td>
+  </tr>
+  <tr>
+   <td>timeout</td>
+   <td>   バルーンチップが表示されているおおよその時間(単位：秒)(Windowsでは10-30秒の範囲で最大最大値を設定できますが、この設定は必ずしも正確に動作しません)。</td>
+  </tr>
+  <tr>
+   <td>option</td>
+   <td><b>[オプション]</b> 注意を参照。  0=アイコンなし (デフォルト),<br>
+       1=情報アイコン, 2=警告アイコン, 3=エラーアイコン</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+なし。<br>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+TrayTipはWindows2000/XP以降でのみ動作します。<br>
+<br>
+TrayTip はAutoItトレイアイコンが消えると動作しません。従って、TrayTipはAutoItSetOption("TrayIconHide", 1)が設定されている場合、ユーザーがレジストリ設定でバルーンチップを無効にしている場合、動作しません!<br>
+<br>
+WindowsXPは通常、バルーンチップ表示時に音を鳴らします。音を消す場合は<i>options</i>パラメータに16を足すか、空文字列をtitleに設定します。<br>
+<br>
+表示されているバルーンチップを消す場合は空文字列をtextパラメータに設定して(任意のtitleで)再度この関数を呼び出します。<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="MsgBox.htm">MsgBox</a>, <a href="ToolTip.htm">ToolTip</a>, <a href="AutoItSetOption.htm#TrayIconHide">TrayIconHide (Option)</a>, <a href="TraySetToolTip.htm">TraySetToolTip</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S4">TrayTip</span><span class="S8">(</span><span class="S7">"I'm a title"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"I'm the message"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">5</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">)</span><br>
+<span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">4096</span><span class="S8">,</span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Press OK to see another tip."</span><span class="S8">)</span><br>
+<span class="S4">TrayTip</span><span class="S8">(</span><span class="S7">"clears any tray tip"</span><span class="S8">,</span><span class="S7">""</span><span class="S8">,</span><span class="S3">0</span><span class="S8">)</span><br>
+<span class="S4">TrayTip</span><span class="S8">(</span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"A different tray tip."</span><span class="S8">,</span><span class="S0"> </span><span class="S3">5</span><span class="S8">)</span><br>
+<span class="S4">Sleep</span><span class="S8">(</span><span class="S3">5000</span><span class="S8">)</span><br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\TrayTip.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

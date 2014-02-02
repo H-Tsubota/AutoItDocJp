@@ -1,0 +1,155 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+
+<head>
+  <title>History</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Script Breaking Changes in Recent Versions</h1>
+<p>
+このページには<strong>既存のスクリプトを変更する必要がある</strong>最近の更新での全ての変更点のリストが載っています。あなたがベータ版の開発を追いかけていない場合にはアップグレード時に注意してこのリストを読んでください。これらの変更点による影響がある場合には<strong>スクリプトを変更する必要があります</strong>。</p>
+
+
+<p>&nbsp;</p>
+<p style="font-size: small; text-decoration: underline"><strong>7th March, 2010  - v3.3.6.0</strong></p>
+<p><strong>UDFs:</strong></p>
+<ul>
+	<li>_DateToDayOfWeekIsoが0-6を返していたが月曜日=1とした1-7を返すように変更。</li>
+</ul>
+<p>&nbsp;</p>
+<p style="font-size: small; text-decoration: underline"><strong>15th January,
+2010 - v3.3.4.0</strong></p>
+<p><i><b>以下の機能の一部は廃止されています。廃止された機能はドキュメント上は存在しませんが動作はします。廃止された機能はversion 3.3.4.0以降に削除されます。廃止された機能を使用しているスクリプトは新しい処理に更新することを強く推奨します。一部の機能は既に削除され、ここに記載される予定です。</b></i></p>
+<p><strong>AutoIt:</strong></p>
+<ul>
+	<li>FileOpen()のRAW読み取りモードが削除された。</li>
+	<li>InetGet("abort")、@InetGetActive、@InetGetBytesReadが削除された。以下に従来の処理を行うための新しい関数のリストを示す。<ul>
+			<li><b>InetGet("abort")</b> - ダウンロードを破棄するためには<a href="functions/InetGet.htm">InetGet()</a>の返すハンドルを使って新しい関数である<a href="functions/InetClose.htm">InetClose()</a>関数を呼ぶ。</li>
+			<li><b>@InetGetActive</b> - 新しい関数である<a href="functions/InetGetInfo.htm">InetGetInfo()</a>関数をパラメータ無しで呼ぶとアクティブなダウンロードの数が返される。</li>
+			<li><b>@InetGetBytesRead</b> - <a href="functions/InetGet.htm">InetGet()</a>の返すハンドルを使って新しい関数である<a href="functions/InetGetInfo.htm">InetGetInfo()</a>関数を呼ぶとダウンロードの読み取りバイト数(など)が返される。</li>
+			</ul>
+	</li>
+	<li>AdlibEnable()とAdlibDisable()が削除された。新しい関数の<a href="functions/AdlibRegister.htm">AdlibRegister()</a>と<a href="functions/AdlibUnRegister.htm">AdlibUnRegister()</a>を参照。</li>
+	<li>OnAutoItStart()が削除された。新しいプリプロセッサ文の<a href="keywords/OnAutoItStartRegister.htm">#OnAutoItStartRegister</a>を参照。</li>
+	<li>OnAutoItExit()が削除された。新しい関数の<a href="functions/OnAutoItExitRegister.htm">OnAutoItExitRegister()</a>と<a href="functions/OnAutoItExitUnRegister.htm">OnAutoItExitUnregister()</a>を参照。</li>
+
+</ul>
+
+<p>&nbsp;</p>
+<p style="font-size: small; text-decoration: underline"><strong>18th December, 2009  - v3.3.2.0</strong></p>
+<p><i><b>以下の機能の一部は廃止されています。廃止された機能はドキュメント上は存在しませんが動作はします。廃止された機能はversion 3.3.2.0以降に削除されます。廃止された機能を使用しているスクリプトは新しい処理に更新することを強く推奨します。一部の機能は既に削除され、ここに記載される予定です。</b></i></p>
+<p><strong>AutoIt:</strong></p>
+<ul>
+	<li><a href="functions/ShellExecute.htm">ShellExecute()</a>と<a href="functions/ShellExecuteWait.htm">ShellExecuteWait()</a>のデフォルトで"open"を使用しないようにした。詳細についてはこれらの関数の注意部分を参照。</li>
+	<li><a href="functions/InetGet.htm">InetGet()</a>の返し値を変更。<a href="functions/InetGet.htm">InetGet()</a>を正しく使用しないと<u>リソースのリークが起きる可能性がある</u>ので<b>よく</b>変更点について読んで理解して欲しい。</li>
+	<li>InetGet("abort")、@InetGetActive、@InetGetBytesReadが廃止された。以下に従来の処理を行うための新しい関数のリストを示す。<ul>
+			<li><b>InetGet("abort")</b> - ダウンロードを破棄するためには<a href="functions/InetGet.htm">InetGet()</a>の返すハンドルを使って新しい関数である<a href="functions/InetClose.htm">InetClose()</a>関数を呼ぶ。</li>
+			<li><b>@InetGetActive</b> - 新しい関数である<a href="functions/InetGetInfo.htm">InetGetInfo()</a>関数をパラメータ無しで呼ぶとアクティブなダウンロードの数が返される。</li>
+			<li><b>@InetGetBytesRead</b> - <a href="functions/InetGet.htm">InetGet()</a>の返すハンドルを使って新しい関数である<a href="functions/InetGetInfo.htm">InetGetInfo()</a>関数を呼ぶとダウンロードの読み取りバイト数(など)が返される。</li>
+			</ul>
+	</li>	
+	<li>AutoItSetOption()でのFtpBinaryModeオプションが削除された。新しい<a href="functions/InetGet.htm">InetGet()</a>には転送モードを指定するためのフラグがある。</li>
+	<li><a href="functions/InetGet.htm">InetGet()</a>の別名であるURLDownloadToFile()が削除された。</li>
+	<li>AdlibEnable()とAdlibDisable()が廃止された。新しい関数の<a href="functions/AdlibRegister.htm">AdlibRegister()</a>と<a href="functions/AdlibUnRegister.htm">AdlibUnRegister()</a>を参照。</li>
+	<li>OnAutoItStart()が廃止された。新しいプリプロセッサ文の<a href="keywords/OnAutoItStartRegister.htm">#OnAutoItStartRegister</a>を参照。</li>
+	<li>OnAutoItExit()が廃止された。新しい関数の<a href="functions/OnAutoItExitRegister.htm">OnAutoItExitRegister()</a>と<a href="functions/OnAutoItExitUnRegister.htm">OnAutoItExitUnregister()</a>を参照。</li>
+	<li>AutoItSetOption()でのOnExitFuncオプションが削除された。新しい関数である<a href="functions/OnAutoItExitRegister.htm">OnAutoItExitRegister()</a>と<a href="functions/OnAutoItExitUnRegister.htm">OnAutoItExitUnregister()</a>を参照。</li>
+	<li>$WS_EX_MDICHILDを使用した<a href="functions/GUICreate.htm">GUICreate()</a>がドキュメントにあるようにクライアント領域に対して相対するように修正された。</li>
+	<li><a href="functions/ProcessWait.htm">ProcessWait()</a>の成功時に1でなくPIDを返すようにした。</li>
+	<li><a href="functions/WinWait.htm">WinWait()</a>、<a href="functions/WinWaitActive.htm">WinWaitActive()</a>、<a href="functions/WinActivate.htm">WinActivate()</a>、<a href="functions/WinActive.htm">WinActive()</a>、<a href="functions/WinMove.htm">WinMove()</a>で成功時に1ではなくHWNDを返すようにした。</li>
+	<li><a href="macros/TimeAndDate.htm">@YDAY</a>マクロで1 - 366の代わりに001 - 366を使用するようにした。
+	これによってマクロは他の言語(C/C++など)とより一貫性が取れたものになった。また0埋めされた他の全てのマクロ関連の日付け文字列とも一貫性が取れたものになった。</li>
+	<li><a href="functions/RegEnumKey.htm">RegEnumKey()</a>と<a href="functions/RegEnumVal.htm">RegEnumVal()</a>でエラーメッセージの代わりに空文字列を返すようにした。</li>
+</ul>
+<p><strong>UDFs:</strong></p>
+<ul>
+	<li><a href="libfunctions/_StringBetween.htm">_StringBetween()</a>の最後のオプションパラメータが削除された。</li>
+	<li>_StringAddThousandsSep()が削除された。この関数はオプションが多すぎたし、作成時に何度も変更がおこなわれていた。</li>
+	<li>_SQLite_SaveMode()を_SQLite_SafeMode()に名称変更。</li>
+</ul>
+<p>&nbsp;</p>
+<p style="font-size: small; text-decoration: underline"><strong>24th December, 2008  - v3.3.0.0</strong></p>
+<p><strong>AutoIt:</strong></p>
+<ul>
+	<li>Windows9x系オペレーティングシステムとWindowsNT4.0オペレーティングシステムのサポートを解除。必要な場合はAutoItのv3.2.12.1を使用すること。</li>
+	<li>間違えやすかったので@ProcessorArchを@OSArchに変更。</li>
+	<li><a href="functions/RegRead.htm">RegRead()</a>と<a href="functions/RegWrite.htm">RegWrite()</a>でREG_BINARY型に16進数文字列を使わなくなった。ネィティブバイナリデータ型が使用される。</li>
+</ul>
+<p><strong>AutoItX:</strong></p>
+<ul>
+  <li>DLLのネイティブ版でUnicode文字列のみを使用するようにした(LPWSTRとLPCWTSR)。ANSI文字列を必要とする場合はv3.2.12.1の使用を継続すること。
+  最も簡単な回避策はUnicodeとANSIの変換をおこなう簡単な&quot;ラッパー&quot;関数を使用することである。
+  ANSI版では関数に制限があるが(WinWait...とSend)、多くの人からの要望がない限りANSI版にこれ以上の追加をするつもりはない。
+  </li>
+</ul>
+<p><strong>UDFs:</strong></p>
+<ul>
+  <li>なし</li>
+</ul>
+<p>&nbsp;</p>
+<p style="font-size: small; text-decoration: underline"><strong>16th May, 2008  - v3.2.12.0</strong></p>
+<p><strong>AutoIt:</strong></p>
+<ul>
+	<li>RunAsSet()が削除された。代わりに新しい関数の<a href="functions/RunAs.htm">RunAs()</a>と
+	<a href="functions/RunAsWait.htm">RunAsWait()</a>
+	を使用すること。これらの関数では多少のセキュリティ強化が施され
+	（しかし依然として重要なパスワードをスクリプト内に書くことは推奨されない）、
+	より機能的になっている。</li>
+	<li><a href="functions/AutoItSetOption.htm">RunErrorsFatal</a>オプションが削除された。
+	<a href="functions/Run.htm">Run()</a>、<a href="functions/RunWait.htm">RunWait()</a>、
+	<a href="functions/ShellExecute.htm">ShellExecute()</a>
+	、<a href="functions/ShellExecuteWait.htm">ShellExecuteWait()</a>がアプリケーション実行時に@errorを設定するようになった。</li>
+	<li>
+	<a href="functions/StdoutRead.htm">StdoutRead()</a>、
+	<a href="functions/StderrRead.htm">StderrRead()</a>、
+	<a href="functions/ConsoleRead.htm">ConsoleRead()</a>で大幅な変更があった。
+	処理をブロックせずに直ちに返るようになった。またパラメータも変更された。
+	パラメータの総数を読み取ることはできなくなった。peekパラメータは2番目のパラメータになった。
+	3番目のパラメータを使用してバイナリ形式のデータを返すことができる(デフォルトはテキスト)。
+	@extendedマクロには読み取ったバイト数/文字数が保持される。</li>
+	<li><a href="functions/StdinWrite.htm">StdinWrite()</a>、
+	<a href="functions/ConsoleWrite.htm">ConsoleWrite()</a>、
+	<a href="functions/ConsoleWriteError.htm">ConsoleWriteError()</a>	ではバイナリデータを渡された際の動作が変更された。バイナリデータは文字列に変換されることなくそのまま書き込まれる。またこれらの関数の返し値は1ではなく書き込んだバイト数になった。
+	</li>
+	<li>削除: ColorModeオプション( <a href="functions/AutoItSetOption.htm">Opt()</a> )。</li>
+	<li>修正: Random(Min,Max,1)。以前は実際のMaxを返していなかったので、
+	Maxがわざとインクリメントされている場合はそのスクリプトを変更する必要がある。
+	</li>
+</ul>
+<p><strong>UDFs:</strong></p>
+<p style="font-size: xx-small">(
+これらの変更の詳細とヘルプについては
+<a href="http://www.autoitscript.com/forum/index.php?showtopic=70902">このフォーラム</a>の
+スレッドを参照してください。</p>
+<ul>
+	<li>		GUIConstants.au3はGUIConstantsEx.au3と同じ。これは応用的GUI機能を使用している多くのスクリプトで定数が記載されている以前の誤ってインクルードされていたファイルをインクルードするために追加の#include文を使用する必要があることを意味している。</li>
+	<li>
+	GUIDefaultConstants.au3はもう存在しない。
+	コントロールのタイプに応じて対応する個々の定数ファイルを#includeする必要がある。
+	例えばListBoxConstants.au3、ComboConstants.au3、EditConstants.au3 etc...
+	</li>
+	<li>
+	_ArrayCreate()のドキュメントが削除された。この関数は現在も存在するが将来的には削除される予定。
+	スクリプトをAutoItに組み込まれている配列初期化構文を使用するように更新した方が良いだろう。
+	</li>
+</ul>
+<p>&nbsp;</p>
+<p style="font-size: small; text-decoration: underline"><strong>25th November, 2007  - v3.2.10.0</strong></p>
+<p><strong>AutoIt</strong></p>
+<ul>
+	<li> <a href="functions/DllCall.htm">DllCall()</a>: short_ptr型、long_ptr型、int_ptr型が廃止された。
+	それぞれshort*、long*、int*を使用すること。</li>
+</ul>
+<p><strong>UDFs</strong></p>
+<ul>
+	<li>_GUICtrlXXXYYY()を_GUICtrlXXX_YYY()に名称変更。機能上の変更は無い。<a href="libfunction_renaming.htm">UDF名称変更</a>を参照。</li>
+</ul>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</body>
+</html>

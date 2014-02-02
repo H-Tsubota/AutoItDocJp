@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function TrayGetMsg</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">TrayGetMsg</font>
+<hr size="2">
+<p>イベントが起きていないかどうかトレイをポーリングします。<br></p>
+
+<p class="codeheader">
+TrayGetMsg ( )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+なし。<br>
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+イベントを返します。<br>
+返される"イベント"はメッセージを送信したコントロールのコントロールIDもしくは特別なイベント(トレイアイコンのマウスクリックなど)です。メッセージが無い場合はイベントは0になります。<br>
+<BR><br>
+<b>イベントID</b><br>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">0</td>
+    <td width="90%">イベントなし</td>
+  </tr>
+  <tr>
+    <td valign="top">Control ID</td>
+    <td>メッセージを送信したコントロールのID</td>
+  </tr>
+  <tr>
+    <td valign="top">$TRAY_EVENT_PRIMARYDOWN</td>
+    <td>１番目のマウスボタンが押された</td>
+  </tr>
+  <tr>
+    <td valign="top">$TRAY_EVENT_PRIMARYUP</td>
+    <td>１番目のマウスボタンが離された</td>
+  </tr>
+  <tr>
+    <td valign="top">$TRAY_EVENT_SECONDARYDOWN</td>
+    <td>2番目のマウスボタンが押された</td>
+  </tr>
+  <tr>
+    <td valign="top">$TRAY_EVENT_SECONDARYUP</td>
+    <td>2番目のマウスボタンが離された</td>
+  </tr>
+  <tr>
+    <td valign="top">$TRAY_EVENT_PRIMARYDOUBLE</td>
+    <td>１番目のマウスボタンが2度押しされた</td>
+  </tr>
+  <tr>
+    <td valign="top">$TRAY_EVENT_SECONDARYDOUBLE</td>
+    <td>2番目のマウスボタンが2度押しされた</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+この関数は動作時に自動でCPUをアイドリングします。従ってループ内で使用した場合もCPUを占有することはありません。<br>
+<br>
+蒸気の定数は#include &lt;Constants.au3&gt;で定義されています。<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="TrayCreateItem.htm">TrayCreateItem</a>, <a href="TrayCreateMenu.htm">TrayCreateMenu</a>, <a href="TrayItemSetOnEvent.htm">TrayItemSetOnEvent</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span class="S11">#NoTrayIcon</span><br>
+<br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">"TrayMenuMode"</span><span class="S8">,</span><span class="S3">1</span><span class="S8">)</span><span class="S0">&nbsp; &nbsp;</span><span class="S1">; デフォルトのトレイメニューアイテム(スクリプト 停止/終了)を非表示</span><br>
+<br>
+<span class="S9">$settingsitem</span><span class="S0">&nbsp; &nbsp;</span><span class="S8">=</span><span class="S0"> </span><span class="S4">TrayCreateMenu</span><span class="S8">(</span><span class="S7">"Settings"</span><span class="S8">)</span><br>
+<span class="S9">$displayitem</span><span class="S0">&nbsp; &nbsp; </span><span class="S8">=</span><span class="S0"> </span><span class="S4">TrayCreateItem</span><span class="S8">(</span><span class="S7">"Display"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$settingsitem</span><span class="S8">)</span><br>
+<span class="S9">$printeritem</span><span class="S0">&nbsp; &nbsp; </span><span class="S8">=</span><span class="S0"> </span><span class="S4">TrayCreateItem</span><span class="S8">(</span><span class="S7">"Printer"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$settingsitem</span><span class="S8">)</span><br>
+<span class="S4">TrayCreateItem</span><span class="S8">(</span><span class="S7">""</span><span class="S8">)</span><br>
+<span class="S9">$aboutitem</span><span class="S0">&nbsp; &nbsp; &nbsp; </span><span class="S8">=</span><span class="S0"> </span><span class="S4">TrayCreateItem</span><span class="S8">(</span><span class="S7">"About"</span><span class="S8">)</span><br>
+<span class="S4">TrayCreateItem</span><span class="S8">(</span><span class="S7">""</span><span class="S8">)</span><br>
+<span class="S9">$exititem</span><span class="S0">&nbsp; &nbsp;&nbsp; &nbsp; </span><span class="S8">=</span><span class="S0"> </span><span class="S4">TrayCreateItem</span><span class="S8">(</span><span class="S7">"Exit"</span><span class="S8">)</span><br>
+<br>
+<span class="S4">TraySetState</span><span class="S8">()</span><br>
+<br>
+<span class="S5">While</span><span class="S0"> </span><span class="S3">1</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$msg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">TrayGetMsg</span><span class="S8">()</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Select</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Case</span><span class="S0"> </span><span class="S9">$msg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">ContinueLoop</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Case</span><span class="S0"> </span><span class="S9">$msg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$aboutitem</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S4">Msgbox</span><span class="S8">(</span><span class="S3">64</span><span class="S8">,</span><span class="S7">"About:"</span><span class="S8">,</span><span class="S7">"AutoIt3-Tray-sample"</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Case</span><span class="S0"> </span><span class="S9">$msg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$exititem</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">ExitLoop</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">EndSelect</span><br>
+<span class="S5">WEnd</span><br>
+<br>
+<span class="S5">Exit</span><br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\TrayGetMsg.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

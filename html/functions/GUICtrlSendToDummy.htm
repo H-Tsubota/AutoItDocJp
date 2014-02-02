@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function GUICtrlSendToDummy</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">GUICtrlSendToDummy</font>
+<hr size="2">
+<p>ダミーコントロールにメッセージを送信します。<br></p>
+
+<p class="codeheader">
+GUICtrlSendToDummy ( controlID [, state] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">controlID</td>
+    <td width="85%"><a href="GUICtrlCreateDummy.htm">GUICtrlCreateDummy</a>関数によって返されるコントロール識別子(コントロールID)。</td>
+  </tr>
+  <tr>
+   <td>state</td>
+   <td><b>[オプション]</b> <a href="GUICtrlRead.htm">GUICtrlRead</a>によって取得される値</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">成功</td>
+    <td width="90%">1を返します。</td>
+  </tr>
+  <tr>
+    <td valign="top">失敗</td>
+    <td>0を返します。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+この関数が呼ばれると メッセージループまたは<a href="GUICtrlSetOnEvent.htm">OnEvent</a>関数によってハンドルされる通知情報が(コントロールが&quot;クリック&quot;された際の様に)発生します。
+<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="GUICtrlCreateDummy.htm">GUICtrlCreateDummy</a>, <a href="GUICtrlSetOnEvent.htm">GUICtrlSetOnEvent</a>, <a href="GUICtrlRead.htm">GUICtrlRead</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;GUIConstantsEx.au3&gt;</span><br>
+<br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">'MustDeclareVars'</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">)</span><br>
+<br>
+<span class="S5">Global</span><span class="S0"> </span><span class="S9">$user</span><br>
+<br>
+<span class="S0">Example</span><span class="S8">()</span><br>
+<br>
+<span class="S5">Func</span><span class="S0"> Example</span><span class="S8">()</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$iOldOpt</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$button</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$iOldOpt</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">Opt</span><span class="S8">(</span><span class="S7">"GUIOnEventMode"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">)</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUICreate</span><span class="S8">(</span><span class="S7">"GUISendToDummy"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">220</span><span class="S8">,</span><span class="S0"> </span><span class="S3">200</span><span class="S8">,</span><span class="S0"> </span><span class="S3">100</span><span class="S8">,</span><span class="S0"> </span><span class="S3">200</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUISetBkColor</span><span class="S8">(</span><span class="S3">0x00E0FFFF</span><span class="S8">)</span><span class="S0"> &nbsp;</span><span class="S1">; 背景色を変更</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUICtrlSetOnEvent</span><span class="S8">(</span><span class="S9">$GUI_EVENT_CLOSE</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"OnClick"</span><span class="S8">)</span><span class="S0"> </span><span class="S1">; ボタンクリックをハンドル</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$user</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICtrlCreateDummy</span><span class="S8">()</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUICtrlSetOnEvent</span><span class="S8">(-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Onexit"</span><span class="S8">)</span><span class="S0"> </span><span class="S1">; ボタンクリックをハンドル</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$button</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICtrlCreateButton</span><span class="S8">(</span><span class="S7">"event"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">75</span><span class="S8">,</span><span class="S0"> </span><span class="S3">170</span><span class="S8">,</span><span class="S0"> </span><span class="S3">70</span><span class="S8">,</span><span class="S0"> </span><span class="S3">20</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUICtrlSetOnEvent</span><span class="S8">(-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"OnClick"</span><span class="S8">)</span><span class="S0"> </span><span class="S1">; ボタンクリックをハンドル</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUISetState</span><span class="S8">()</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">While</span><span class="S0"> </span><span class="S3">1</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S4">Sleep</span><span class="S8">(</span><span class="S3">100</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">WEnd</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">Opt</span><span class="S8">(</span><span class="S7">"GUIOnEventMode"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$iOldOpt</span><span class="S8">)</span><br>
+<br>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;Example</span><br>
+<br>
+<span class="S5">Func</span><span class="S0"> OnClick</span><span class="S8">()</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUICtrlSendToDummy</span><span class="S8">(</span><span class="S9">$user</span><span class="S8">)</span><span class="S0"> &nbsp;</span><span class="S1">; ダミーコントロールを動作させる</span><br>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;OnClick</span><br>
+<br>
+<span class="S5">Func</span><span class="S0"> OnExit</span><span class="S8">()</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; 終了前におこなう動作</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Exit</span><br>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;OnExit</span></span><br>
+<script type="text/javascript">
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\GUICtrlSendToDummy.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+</body>
+</html>

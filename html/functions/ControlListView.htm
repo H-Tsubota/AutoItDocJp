@@ -1,0 +1,140 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function ControlListView</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">ControlListView</font>
+<hr size="2">
+<p>ListView32 コントロールにコマンドを送信します。<br></p>
+
+<p class="codeheader">
+ControlListView ( "title", "text", controlID, "command" [, option1 [, option2]] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">title</td>
+    <td width="85%">アクセスするウィンドウの名前</td>
+  </tr>
+  <tr>
+   <td>text</td>
+   <td>アクセスするウィンドウのテキスト</td>
+  </tr>
+  <tr>
+   <td>controlID</td>
+   <td>対象となるコントロール。<a href="../intro/controls.htm">Controls</a>参照。</td>
+  </tr>
+  <tr>
+   <td>command</td>
+   <td>コントロールに送信するコマンド（下表参照）</td>
+  </tr>
+  <tr>
+   <td>option1</td>
+   <td><b>[オプション]</b> 一部のコマンドで必要となる追加パラメータ</td>
+  </tr>
+  <tr>
+   <td>option2</td>
+   <td><b>[オプション]</b> .一部のコマンドで必要となる追加パラメータ</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+下表に示すコマンドによって異なる。 エラーの場合（コマンドの間違いやウィンドウ/コントロールが見つからなかった場合）は@errorを1に設定します。<br>
+<br><br>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="40%"><b>コマンド、オプション1、オプション2</b></td>
+    <td width="60%"><b>処理</b></td>
+  </tr>
+  <tr>
+   <td>"DeSelect", From [, To]</td>
+   <td>1つまたはそれ以上のアイテムの選択を解除します。</td>
+  </tr>
+  <tr>
+   <td>"FindItem", "string to find" [, SubItem]</td>
+   <td>指定した文字列のアイテムのアイテム番号を返します。見つからなかった場合-1を返します。</td>
+  </tr>
+  <tr>
+   <td>"GetItemCount"</td>
+   <td>アイテムの数を返します。</td>
+  </tr>
+  <tr>
+   <td>"GetSelected" [, option]</td>
+   <td>選択されているアイテムのアイテム番号を格納した文字列を返します。option=0 (デフォルト) では一番最初のアイテムの番号のみ返されます。option=1 ではすべての選択されたアイテムのアイテム番号が｜で区切られて（例：&quot;0|3|4|10&quot;）返されます。アイテムが選択されていない場合、空の文字列""が返されます。</td>
+  </tr>
+  <tr>
+   <td>"GetSelectedCount"</td>
+   <td>選択されているアイテムの数を返します。</td>
+  </tr>
+  <tr>
+   <td>"GetSubItemCount"</td>
+   <td>サブアイテムの数を返します。</td>
+  </tr>
+  <tr>
+   <td>"GetText", Item, SubItem</td>
+   <td>アイテム/サブアイテムで指定した位置のテキストを返します。</td>
+  </tr>
+  <tr>
+   <td>"IsSelected", Item</td>
+   <td>指定したアイテムが選択されている場合1を返し、それ以外で0を返します。</td>
+  </tr>
+  <tr>
+   <td>"Select", From [, To]</td>
+   <td>1つまたはそれ以上のアイテムを選択します。</td>
+  </tr>
+  <tr>
+   <td>"SelectAll"</td>
+   <td>全てのアイテムを選択します。</td>
+  </tr>
+  <tr>
+   <td>"SelectClear"</td>
+   <td>全てのアイテムの選択を解除します。</td>
+  </tr>
+  <tr>
+   <td>"SelectInvert"</td>
+   <td>現在の選択状態を反転させます。</td>
+  </tr>
+  <tr>
+   <td>"ViewChange", "view"</td>
+   <td>現在の表示状態を切り替えます。有効な表示状態は"list", "details", "smallicons", "largeicons"です。</td>
+  </tr>
+</table><br><br>
+すべてのアイテム/サブアイテムは0を基準とします。つまり、リストの最初のアイテム/サブアイテムが0、2番目が1、・・・となります。<br>
+ListView32 コントロールの"詳細"表示では、&quot;アイテム&quot;は&quot;行&quot;で、&quot;サブアイテム&quot; は&quot;列&quot;と考えることができます。<br>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+32ビットのAutoItプロセスを使って64ビットのプロセスから読み込みをするとコマンドが失敗することがあります。同様に64ビットのAutoItプロセスを使って32ビットのプロセスから読み込みをするとコマンドが失敗することがあります。<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="ControlCommand.htm">ControlCommand</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S4">ControlListView</span><span class="S8">(</span><span class="S6">@ProgramFilesDir</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">"\AutoIt3"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"SysListView321"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"SelectAll"</span><span class="S8">)</span><br>
+<span class="S4">ControlListView</span><span class="S8">(</span><span class="S6">@ProgramFilesDir</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">"\AutoIt3"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"SysListView321"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Deselect"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">2</span><span class="S8">,</span><span class="S0"> </span><span class="S3">5</span><span class="S8">)</span><br>
+<span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S4">ControlListView</span><span class="S8">(</span><span class="S6">@ProgramFilesDir</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">"\AutoIt3"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"SysListView321"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"GetText"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">9</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">)</span><span class="S0"> </span><span class="S8">)</span><br>
+<span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S4">ControlListView</span><span class="S8">(</span><span class="S6">@ProgramFilesDir</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">"\AutoIt3"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"SysListView321"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"FindItem"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"14 KB"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">)</span><span class="S0"> </span><span class="S8">)</span><br>
+<span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S4">ControlListView</span><span class="S8">(</span><span class="S6">@ProgramFilesDir</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">"\AutoIt3"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"SysListView321"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"GetSelected"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">)</span><span class="S0"> </span><span class="S8">)</span><br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\ControlListView.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

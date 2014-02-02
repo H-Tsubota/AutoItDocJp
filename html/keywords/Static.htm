@@ -1,0 +1,148 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Keyword Static</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift-jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<div class="experimental">警告: この機能は実験的なものです。動作しない、バグがある可能性があります。また予告なしに変更、削除される可能性があります。<br/><br/>この機能についてバグ報告、要望を出さないでください。<br/><br/>自己の責任のもとに使用してください。</div>
+<h1>Keyword Reference</h1>
+<font size="+1">Static</font>
+<hr size="2">
+<p>静的変数の宣言、または静的配列の作成を行います。<br></p>
+
+<p class="codeheader">
+<b>Static</b> [Scope] $variable [ = initializer ]<br>
+<b>Static</b> [Scope] $array<b>[</b>subscript 1<b>]</b>...<b>[</b>subscript n<b>]</b> [ = initializer ]<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">Scope</td>
+    <td width="85%">オプションの修飾句。<b>Local</b>または<b>Global</b>で変数のスコープを指定します。</td>
+  </tr>
+  <tr>
+   <td>$variable</td>
+   <td>宣言する静的変数の名前</td>
+  </tr>
+  <tr>
+   <td>initializer</td>
+   <td>変数の初期代入値。initializerには数式、文字列操作を含む関数呼び出しを指定できます。
+   このinitializerはこの変数の最初の宣言時にのみ評価されます。</td>
+  </tr>
+  <tr>
+   <td>subscript</td>
+   <td>配列の各次元に作成する要素数。0からn-1でインデックスされる。</td>
+  </tr>
+</table>
+
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+Static句はオプションのスコープ指定句の前、または後に書くことができます。例えば<b>Local Static</b>、<b>Static Local</b>はどちらも問題なく動作します。<br>
+<br>
+スコープ修飾句に<b>Local</b>が使用された場合、静的変数は宣言された関数の中でだけ参照、代入ができるようになります。スコープ修飾句に<b>Global</b>が使用された場合、静的変数はスクリプトのどこからでも参照、代入ができるようになります。この点でGlobal StaticとGlobal変数の間には大きな違いはありません。スコープ修飾句が使用されなかった場合、静的変数はローカルスコープで作成されます。この場合、StaticはDimと同じ意味を持ちます。<br>
+<br>
+LocalとStaticの違いは変数の寿命です。Local変数は関数呼び出しの間だけ保持され、宣言された関数の中でだけ使用することができます。関数が返ると全てのローカル変数は解放されます。Static変数も同様に宣言された関数の中でだけ使用できますが、関数の実行が終わった後も最後に代入された値を保持したまま存在し続けます。変数を探す際にはローカルスコープがまず調べられ、次にグローバルスコープが調べられます。<br>
+<br>
+Static句はGlobal/Local/Dim句と同じ機能を持っています。<br>
+<ol><li>これらは全て使用前に変数を宣言します。</li><br>
+<li>これらは全て配列を作成することができます。</li></ol><br>
+<br>
+<b>注意</b>:  AutoItSetOption("MustDeclareVars")が設定されているかどうかによらず、Static変数は使用前に<i>必ず</i><b>Static</b>句を使用して宣言されている必要があります。Static変数を<b><a href="Dim.htm">Const</a></b>にすることはできません。<br>
+<br>
+1行で複数の静的変数を宣言することもできます:<br>
+<p class="code">Static $a, $b, $c</p><br>
+また変数の初期化も可能です:<br>
+<p class="code">Static $a = 2, $b = 10, $c = 20</p><br>
+<br>
+静的変数を初期化する場合、初期値は変数が作成されてから一度だけ代入、評価されます。移行の処理での初期化は無視されます。<br>
+<br>
+配列に対して使用する場合の詳細については<a href="Dim.htm">Local</a>を参照してください。以下の点を除いてはLocalと同じ機能を持っています:<br>
+<ol><li>Static変数の再初期化は機能しません。</li><br>
+<li>Static配列のサイズ変更はReDimと同じように行います。</li><br>
+<li>静的変数をローカル変数またはグローバル変数に変更することはできません。逆も同様です。</li></ol><br>
+<br>
+配列のサイズを変更したい場合はStaticを使用して行い、ReDimを使用しないでください。<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="Dim.htm">Local</a>, <a href="../../html/functions/UBound.htm">UBound</a>, <a href="ReDim.htm">ReDim</a>, <a href="../functions/AutoItSetOption.htm#MustDeclareVars">AutoItSetOption</a></b>
+<p>&nbsp;</p>
+
+<p><b>Example</b></p>
+<p class="codebox">
+<br>
+<span><span class="S1">; Static変数の例</span><br>
+<br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">"MustDeclareVars"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">)</span><br>
+<br>
+<span class="S5">Func</span><span class="S0"> Test1</span><span class="S8">()</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Static</span><span class="S0"> </span><span class="S9">$STbFirstPass</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">1</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">If</span><span class="S0"> </span><span class="S9">$STbFirstPass</span><span class="S0"> </span><span class="S5">Then</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$STbFirstPass</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S1">; 最初に通過した際に行うタスク</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">EndIf</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; 関数が行う他の処理</span><br>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;Test1</span><br>
+<br>
+<span class="S5">Func</span><span class="S0"> Accumulate</span><span class="S8">(</span><span class="S9">$State</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Static</span><span class="S0"> </span><span class="S9">$Values</span><span class="S8">[</span><span class="S3">9</span><span class="S8">]</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$I</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">If</span><span class="S0"> </span><span class="S4">IsNumber</span><span class="S8">(</span><span class="S9">$State</span><span class="S8">)</span><span class="S0"> </span><span class="S5">Then</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Switch</span><span class="S0"> </span><span class="S9">$State</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Case</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S1">; リセット</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">For</span><span class="S0"> </span><span class="S9">$I</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><span class="S0"> </span><span class="S5">To</span><span class="S0"> </span><span class="S3">8</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$Values</span><span class="S8">[</span><span class="S9">$I</span><span class="S8">]</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Next</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Return</span><span class="S0"> </span><span class="S5">True</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Case</span><span class="S0"> </span><span class="S8">-</span><span class="S3">2</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Return</span><span class="S0"> </span><span class="S9">$Values</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Case</span><span class="S0"> </span><span class="S3">0</span><span class="S0"> </span><span class="S5">To</span><span class="S0"> </span><span class="S4">UBound</span><span class="S8">(</span><span class="S9">$Values</span><span class="S8">)</span><span class="S0"> </span><span class="S8">-</span><span class="S0"> </span><span class="S3">1</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$Values</span><span class="S8">[</span><span class="S9">$State</span><span class="S8">]</span><span class="S0"> </span><span class="S8">+=</span><span class="S0"> </span><span class="S3">1</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Return</span><span class="S0"> </span><span class="S9">$Values</span><span class="S8">[</span><span class="S9">$State</span><span class="S8">]</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Case</span><span class="S0"> </span><span class="S5">Else</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">If</span><span class="S0"> </span><span class="S9">$State</span><span class="S0"> </span><span class="S8">&lt;</span><span class="S0"> </span><span class="S3">0</span><span class="S0"> </span><span class="S5">Then</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S4">SetError</span><span class="S8">(</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Return</span><span class="S0"> </span><span class="S5">False</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Else</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Static</span><span class="S0"> </span><span class="S9">$Values</span><span class="S8">[</span><span class="S9">$State</span><span class="S0"> </span><span class="S8">+</span><span class="S0"> </span><span class="S3">1</span><span class="S8">]</span><span class="S0"> </span><span class="S1">; 新しい値に合わせて配列をサイズ変更</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$Values</span><span class="S8">[</span><span class="S9">$State</span><span class="S8">]</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">1</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Return</span><span class="S0"> </span><span class="S3">1</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">EndIf</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">EndSwitch</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Else</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S4">SetError</span><span class="S8">(</span><span class="S3">2</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">EndIf</span><br>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;Accumulate</span><br>
+<br>
+<span class="S5">Global</span><span class="S0"> </span><span class="S9">$I</span><br>
+<br>
+<span class="S0">Test1</span><span class="S8">()</span><br>
+<br>
+<span class="S5">For</span><span class="S0"> </span><span class="S9">$I</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">1</span><span class="S0"> </span><span class="S5">To</span><span class="S0"> </span><span class="S3">99</span><br>
+<span class="S0">&nbsp; &nbsp; Accumulate</span><span class="S8">(</span><span class="S4">Random</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S3">20</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">))</span><br>
+<span class="S5">Next</span><br>
+<span class="S5">For</span><span class="S0"> </span><span class="S9">$I</span><span class="S0"> </span><span class="S5">In</span><span class="S0"> Accumulate</span><span class="S8">(-</span><span class="S3">2</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">ConsoleWrite</span><span class="S8">(</span><span class="S9">$I</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">", "</span><span class="S8">)</span><br>
+<span class="S5">Next</span><br>
+<span class="S4">ConsoleWrite</span><span class="S8">(</span><span class="S7">"\n"</span><span class="S8">)</span><span class="S1">;</span><br>
+<br>
+<span class="S0">Test1</span><span class="S8">()</span><br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\Static.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

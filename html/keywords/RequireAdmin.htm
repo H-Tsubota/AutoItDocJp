@@ -1,0 +1,51 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Keyword #RequireAdmin</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Keyword Reference</h1>
+<font size="+1">#RequireAdmin</font>
+<hr size="2">
+<p>スクリプトの実行に管理者権限を必要とするように設定します。<br></p>
+
+<p class="codeheader">
+<b>#RequireAdmin</b><br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+なし<br>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+この機能は当初はAutoItがWindowsVistaのユーザーアカウントコントロール(UAC)上でも正常に動作するよう許可することを目的にしていました(しかし Windows 2000、Windows XPでも機能します)。<br><br>
+より詳細な情報については<a href="../intro/autoit_on_vista.htm">AutoIt on Windows Vista</a>を参照。<br>
+<br>
+この機能で起動した新しいプロセスではConsolewrite()などの一部の関数が動作しません(Sciteで何も表示されません)。<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="../../html/functions/IsAdmin.htm">IsAdmin</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S11">#RequireAdmin</span><br>
+<br>
+<span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">4096</span><span class="S8">,</span><span class="S7">"Info"</span><span class="S8">,</span><span class="S7">"Now running with admin rights"</span><span class="S8">)</span><br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\RequireAdmin.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

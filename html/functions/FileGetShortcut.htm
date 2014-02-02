@@ -1,0 +1,76 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function FileGetShortcut</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">FileGetShortcut</font>
+<hr size="2">
+<p>ショートカットの詳細を取得します。<br></p>
+
+<p class="codeheader">
+FileGetShortcut ( "lnk" )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">lnk</td>
+    <td width="85%">ショートカットのフルパス、ファイル名</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">成功</td>
+    <td width="90%">シュートカットの情報が格納された配列を返します。注意を参照。</td>
+  </tr>
+  <tr>
+    <td valign="top">失敗</td>
+    <td>ショートカットにアクセスできなかった場合、@errorを1に設定します。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+この関数から返される配列は1次元配列で次の要素を格納しています。<br>
+$array[0] = ショートカットのターゲットパス<br>
+$array[1] = 作業フォルダ<br>
+$array[2] = 引数<br>
+$array[3] = 説明<br>
+$array[4] = アイコンのファイル名<br>
+$array[5] = アイコンのインデックス<br>
+$array[6] = ショートカットの状態(@SW_SHOWNORMAL、@SW_SHOWMINNOACTIVE、@SW_SHOWMAXIMIZED)<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="FileCreateShortcut.htm">FileCreateShortcut</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S1">;ctrl+alt+t ショートカットキーをショートカットに設定</span><br>
+<span class="S4">FileCreateShortcut</span><span class="S8">(</span><span class="S6">@WindowsDir</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">"\Explorer.exe"</span><span class="S8">,</span><span class="S6">@DesktopDir</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">"\Shortcut Test.lnk"</span><span class="S8">,</span><span class="S6">@WindowsDir</span><span class="S8">,</span><span class="S7">"/e,c:\"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"This is an Explorer link;-)"</span><span class="S8">,</span><span class="S0"> </span><span class="S6">@SystemDir</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">"\shell32.dll"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"^!t"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"15"</span><span class="S8">,</span><span class="S0"> </span><span class="S6">@SW_MINIMIZE</span><span class="S8">)</span><br>
+<br>
+<span class="S1">; ショートカットのパスを読む</span><br>
+<span class="S9">$details</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">FileGetShortcut</span><span class="S8">(</span><span class="S6">@DesktopDir</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">"\Shortcut Test.lnk"</span><span class="S8">)</span><br>
+<span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Path:"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$details</span><span class="S8">[</span><span class="S3">0</span><span class="S8">])</span><br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\FileGetShortcut.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

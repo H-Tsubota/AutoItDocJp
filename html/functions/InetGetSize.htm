@@ -1,0 +1,82 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function InetGetSize</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">InetGetSize</font>
+<hr size="2">
+<p>インターネット上のファイルのサイズをbyte単位で返します。<br></p>
+
+<p class="codeheader">
+InetGetSize ( "URL" [, options ] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">URL</td>
+    <td width="85%">ダウンロードするファイルのURL。下記、注意を参照。</td>
+  </tr>
+  <tr>
+   <td>options</td>
+   <td><b>[オプション]</b> 0 = (デフォルト) 利用可能な場合、ローカルキャッシュからファイルを取得します。<br>
+       1 = 常にリモートサイトからリロードします。<br>
+       2 = 全てのSSLエラーを無視します(HTTPSコネクション時)。<br>
+       4 = FTPプロトコルによるファイル転送時にASCIIを使用します(フラグ8と組み合わせることはできません)。<br>
+       8 = FTPプロトコルによるファイル転送時にBINARYを使用します(フラグ4と組み合わせることはできません)。何も設定していない場合、これがデフォルトの転送モードになります。
+	</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">成功</td>
+    <td width="90%">ファイルサイズをbyte単位で返します。</td>
+  </tr>
+  <tr>
+    <td valign="top">失敗</td>
+    <td>0を返し、@errorを非ゼロに設定します。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+この関数の動作にはインターネットエクスプローラ3以上が必要です。(ftp:// URLの場合IE 5が必要です!)<br>
+<br>
+URLパラメータはウェブブラウザに入力する場合と同様に"http://www.somesite.com/path/file.html"形式でなければなりません。<br>
+<br>
+ユーザー名、パスワードを使用する場合はサーバー名の前に"username:password@"形式で付け加えます。
+<br>
+例："http://myuser:mypassword@www.somesite.com"<br>
+<br>
+サーバーが正しいファイルサイズを返さない場合があります(特にプロキシサーバーを使用する場合)。<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="InetGet.htm">InetGet</a>, <a href="InetRead.htm">InetRead</a>, <a href="HttpSetProxy.htm">HttpSetProxy</a>, <a href="FtpSetProxy.htm">FtpSetProxy</a>, <a href="HttpSetUserAgent.htm">HttpSetUserAgent</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$nSize</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">InetGetSize</span><span class="S8">(</span><span class="S7">"http://www.autoitscript.com/autoit3/files/beta/update.dat"</span><span class="S8">)</span><br>
+<span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Size of remote file:"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nSize</span><span class="S8">)</span><br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\InetGetSize.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

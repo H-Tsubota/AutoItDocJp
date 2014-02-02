@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function ProcessGetStats</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">ProcessGetStats</font>
+<hr size="2">
+<p>実行中のプロセスのメモリ、IO情報の配列を返します。<br></p>
+
+<p class="codeheader">
+ProcessGetStats ( ["process" [, type]] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">process</td>
+    <td width="85%">	<b>[オプション]</b> 情報を取得するプロセスの名前またはPID。デフォルト(-1)は現在のプロセスです。</td>
+  </tr>
+  <tr>
+   <td>type</td>
+   <td>	<b>[オプション]</b> 0 = (デフォルト) メモリ情報、1 = IO情報</td>
+  </tr>
+</table>
+
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">成功</td>
+    <td width="90%">情報データの配列 (注意を参照)</td>
+  </tr>
+  <tr>
+    <td valign="top">失敗</td>
+    <td>0</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+返される配列は1次元で次のような形式になっています:<br>
+<br>
+Type = 0 : メモリ統計<br>
+<br>
+$array[0] = メモリ使用量<br>
+$array[1] = 最大メモリ使用量<br>
+<br>
+Type = 1 : IO統計<br>
+<br>
+$array[0] = 行われた読み込み操作の回数<br>
+$array[1] = 行われた書き込み操作の回数<br>
+$array[2] = 行われた読み込み・書き込み操作以外のI/O操作の回数<br>
+$array[3] = 読み込んだバイト数<br>
+$array[4] = 書き込んだバイト数<br>
+$array[5] = 読み込み・書き込み操作以外の操作中に転送されたバイト数<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="ProcessList.htm">ProcessList</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S1">; 現在実行中のプロセスのメモリ情報を取得</span><br>
+<span class="S9">$mem</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">ProcessGetStats</span><span class="S8">()</span><br>
+<br>
+<span class="S1">; r現在実行中のプロセスのIO情報を取得</span><br>
+<span class="S9">$IO</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">ProcessGetStats</span><span class="S8">(-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">)</span><br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\ProcessGetStats.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

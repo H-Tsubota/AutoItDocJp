@@ -1,0 +1,65 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function FileRecycle</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">FileRecycle</font>
+<hr size="2">
+<p>ファイル、フォルダをゴミ箱に送ります。<br></p>
+
+<p class="codeheader">
+FileRecycle ( "source" )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">source</td>
+    <td width="85%">捨てるファイル、フォルダのパス。ワイルドカード使用可。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">成功</td>
+    <td width="90%">1を返します。</td>
+  </tr>
+  <tr>
+    <td valign="top">失敗</td>
+    <td>0を返します(基本的にはファイルが使用中か、存在しない場合) 。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+ワイルドカードについては<a href="FileFindFirstFile.htm">FileFindFirstFile</a>を参照。<br>
+フォルダを削除する場合は、パスの最後にバックスラッシュをつけないでください。<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="FileDelete.htm">FileDelete</a>, <a href="FileRecycleEmpty.htm">FileRecycleEmpty</a>, <a href="DirRemove.htm">DirRemove</a>, <a href="FileMove.htm">FileMove</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S4">FileRecycle</span><span class="S8">(</span><span class="S7">"C:\*.tmp"</span><span class="S8">)</span><br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\FileRecycle.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

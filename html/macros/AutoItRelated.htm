@@ -1,0 +1,263 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Macros Reference - AutoIt Related</title>
+  <meta content="text/html; charset=shift_jis"
+ http-equiv="Content-Type">
+  <link type="text/css" rel="stylesheet" href="../css/default.css">
+  <style>
+<!--
+.borderwrap{ /* this will affect the outlining border of all the tables and boxes through-out the skin. */
+	background: #FFF;
+	border: 1px solid #072A66;
+	padding: 0px;
+	margin: 0px;
+}
+
+.ipbtable { width:100% }
+
+table.ipbtable
+{ /* required for text in tables, because tables do not inherit from body */
+	background: transparent;
+	color: #222;
+	font-size: 11px;
+	line-height: 135%;
+}
+
+.post1{
+	background: #F5F9FD;
+}
+
+.ipbtable td{ /* gives all tables faux cellpadding of 5px */
+	padding: 5px;
+}
+
+.postcolor{
+	font-size: 12px;
+	line-height: 160%;
+}
+
+-->
+  </style>
+</head>
+<body>
+<h1>Macro Reference - AutoIt Related</h1>
+<p>AutoIt関連のマクロは下表の通りです。<br>
+</p>
+<p>全てのマクロの表は<a href="../macros.htm">こちら</a>。</p>
+
+<p>&nbsp;</p>
+
+<table height="590" bordercolor="#c0c0c0" cellpadding="3" cellspacing="0" width="100%" border="1">
+<tr>
+  <td width="25%" bgcolor="#000099"><font color="#ffffff"><strong>マクロ</strong></font></td>
+  <td width="75%" bgcolor="#000099"><font color="#ffffff"><strong>説明</strong></font></td>
+</tr>
+<tr>
+	<td style="font-weight: bold;">@compiled</td>
+	<td>スクリプトが実行可能ファイルにコンパイルされている場合1を返します。それ以外の場合0を返します。</td>
+</tr>
+<tr>
+	<td style="font-weight: bold;">@error</td>
+	<td>エラーフラグ<a
+href="../functions/SetError.htm">SetError</a>関数参照。</td>
+</tr>
+<tr>
+	<td style="font-weight: bold;">@exitCode</td>
+	<td><a href="../keywords/Exit.htm">Exit</a>命令で設定された終了コード</td>
+</tr>
+<tr>
+	<td style="font-weight: bold;">@exitMethod</td>
+	<td>Exitメソッド。<a
+href="../functions/OnAutoItExitRegister.htm">OnAutoItExitRegister()関数</a>参照</td>
+</tr>
+<tr>
+	<td style="font-weight: bold;">@extended</td>
+	<td>関数の返し値の拡張 - <a href="../functions/StringReplace.htm">StringReplace</a>のような関数で使用されます。</td>
+</tr>
+<tr>
+	<td style="font-weight: bold;">@NumParams</td>
+	<td>ユーザー設定関数の呼び出し時に使われた引数の数</td>
+</tr>
+<tr>
+	<td style="font-weight: bold;">@ScriptName</td>
+	<td>実行中のスクリプトのファイル名</td>
+</tr>
+<tr>
+	<td style="font-weight: bold;">@ScriptDir</td>
+	<td>実行中のスクリプトの存在するフォルダ(バックスラッシュを含みません)。 </td>
+</tr>
+<tr>
+	<td style="font-weight: bold;">@ScriptFullPath</td>
+	<td>”@ScriptDir & "\" & @ScriptName”と同じ</td>
+</tr>
+<tr>
+	<td style="font-weight: bold;">@ScriptLineNumber</td>
+	<td>現在実行されている行番号。 デバグの際、関数呼び出し側の行番号をパスしたい場合に特に有効。(コンパイルしたスクリプトでは無効)</td>
+</tr>
+<tr>
+	<td style="font-weight: bold;">@WorkingDir</td>
+	<td>現在アクティブな作業フォルダ。  (バックスラッシュを含みません) </td>
+</tr>
+<tr>
+	<td style="font-weight: bold;">@AutoItExe</td>
+	<td>現在実行中のAutoItランタイムのフルパスとファイル名。コンパイル済みスクリプトではスクリプトのパスとなります。</td>
+</tr>
+<tr>
+	<td style="font-weight: bold;">@AutoItPID</td>
+	<td>実行中スクリプトのプロセスのPID</td>
+</tr>
+<tr>
+	<td style="font-weight: bold;">@AutoItVersion</td>
+	<td>AutoItのバージョン。例）3.0.81.0</td>
+</tr>
+<tr>
+	<td style="font-weight: bold;">@AutoItX64</td>
+	<td>AutoItのネイティブx64版でスクリプトが実行されている場合、1を返します。</td>
+</tr>
+<tr>
+    <td height="16" colspan="2"></td>
+</tr>
+<tr>
+	<td style="font-weight: bold;">@COM_EventObj</td>
+	<td>fire中のCOMイベントのオブジェクト。イベント関数でのみ有効。</td>
+</tr>
+<tr>
+	<td style="font-weight: bold;">@GUI_CtrlId</td>
+	<td>最後にクリックしたGUI コントロールのID。イベント関数でのみ有効。</td>
+</tr>
+<tr>
+	<td style="font-weight: bold;">@GUI_CtrlHandle</td>
+	<td>最後にクリックしたGUI コントロールのハンドル。イベント関数でのみ有効。</td>
+</tr>
+<tr>
+	<td style="font-weight: bold;">@GUI_DragID</td>
+	<td>ドラッグGUIコントロールのID。ドロップイベントでのみ有効。GUISetOnEvent関数を参照。</td>
+</tr>
+<tr>
+	<td style="font-weight: bold;">@GUI_DragFile</td>
+	<td>ドロップされたファイルのファイル名。ドロップイベントでのみ有効。GUISetOnEvent関数を参照。</td>
+</tr>
+<tr>
+	<td style="font-weight: bold;">@GUI_DropID</td>
+	<td>ドロップGUIコントロールのID。ドロップイベントでのみ有効。GUISetOnEvent関数を参照。</td>
+</tr>
+<tr>
+	<td style="font-weight: bold;">@GUI_WinHandle</td>
+	<td>最後にクリックされたGUI ウィンドウのハンドル。イベント関数でのみ有効。</td>
+</tr>
+<tr>
+	<td style="font-weight: bold;">@HotKeyPressed</td>
+	<td>最後に押されたHotKey。<a
+href="../functions/HotKeySet.htm">HotkeySet </a>関数を参照。</td>
+</tr>
+<tr>
+    <td height="16" colspan="2"></td>
+</tr>
+<tr>
+    <td height="16" rowspan="1" colspan="2"><a href="../functions/WinSetState.htm">WinSetState</a>、
+      <a href="../functions/Run.htm">Run</a>、<a href="../functions/RunWait.htm">RunWait</a>, <a href="../functions/FileCreateShortcut.htm">FileCreateShortcut</a>、<a href="../functions/FileGetShortcut.htm">FileGetShortcut</a>関数で使用。<br></td>
+</tr>
+<tr>
+	<td style="font-weight: bold;">@SW_DISABLE</td>
+	<td>ウィンドウへの操作を無効にします。</td>
+</tr>
+<tr>
+	<td style="font-weight: bold;">@SW_ENABLE</td>
+	<td>ウィンドウへの操作を有効にします。</td>
+</tr>
+<tr>
+	<td style="font-weight: bold;">@SW_HIDE </td>
+	<td>ウィンドウを隠し、他のウィンドウをアクティブにします。</td>
+</tr>
+<tr>
+	<td style="font-weight: bold;">@SW_LOCK</td>
+	<td>ウィンドウ描画できないようロックします。</td>
+</tr>
+<tr>
+	<td style="font-weight: bold;">@SW_MAXIMIZE </td>
+	<td>指定したウィンドウを最大化します。</td>
+</tr>
+<tr>
+	<td style="font-weight: bold;">@SW_MINIMIZE </td>
+	<td>指定したウィンドウを最小化し、次に最前面にあるウィンドウをアクティブにします。</td>
+</tr>
+<tr>
+	<td style="font-weight: bold;">@SW_RESTORE </td>
+	<td>ウィンドウをアクティブ化し表示します。ウィンドウが最小化・最大化されている場合、システムはそれをもとの大きさ・位置に戻します。アプリケーションの最小化したウィンドウをもとに戻す場合このフラグを指定します。</td>
+</tr>
+<tr>
+	<td style="font-weight: bold;">@SW_SHOW </td>
+	<td>現在の大きさ・位置でウィンドウをアクティブ化し表示します。</td>
+</tr>
+<tr>
+	<td style="font-weight: bold;">@SW_SHOWDEFAULT </td>
+	<td>プログラムが指定したアプリケーションが開始された時点でのSW_値に基づいてウィンドウの表示状態を設定します。</td>
+</tr>
+<tr>
+	<td style="font-weight: bold;">@SW_SHOWMAXIMIZED </td>
+	<td>ウィンドウをアクティブ化し、最大化して表示します。</td>
+</tr>
+<tr>
+	<td style="font-weight: bold;">@SW_SHOWMINIMIZED </td>
+	<td>ウィンドウをアクティブ化し、最小化して表示します。</td>
+</tr>
+<tr>
+	<td style="font-weight: bold;">@SW_SHOWMINNOACTIVE </td>
+	<td>ウィンドウを最小化して表示します。ウィンドウをアクティブ化しないことを除いては@SW_SHOWMINIMIZEDと同様です。</td>
+</tr>
+<tr>
+	<td style="font-weight: bold;">@SW_SHOWNA </td>
+	<td>現在の大きさ・位置でウィンドウを表示します。この値はウィンドウをアクティブ化しない以外は@SW_SHOWと同様です。</td>
+</tr>
+<tr>
+	<td style="font-weight: bold;">@SW_SHOWNOACTIVATE </td>
+	<td>ウィンドウを直近の大きさ・位置で表示します。この値はウィンドウをアクティブ化しない以外は@SW_SHOWNORMALと同様です。</td>
+</tr>
+<tr>
+	<td style="font-weight: bold;">@SW_SHOWNORMAL </td>
+	<td>ウィンドウをアクティブ化し表示します。ウィンドウが最小化・最大化されている場合、システムはそれをもとの大きさ・位置に戻します。アプリケーションは一番最初にウィンドウを表示するときこのフラグを指定します。</td>
+</tr>
+<tr>
+	<td style="font-weight: bold;">@SW_UNLOCK</td>
+	<td>ウィンドウ描画できるようロックを解除します。</td>
+</tr>
+<tr>
+    <td height="16" colspan="2"></td>
+</tr>
+<tr>
+	<td style="font-weight: bold;">@TRAY_ID</td>
+	<td>TraySet(Item)OnEventの動作中、最後にクリックされたアイテムのID。</td>
+</tr>
+<tr>
+	<td style="font-weight: bold;">@TrayIconFlashing</td>
+	<td>トレイアイコンが点滅している場合1、それ以外の場合0。</td>
+</tr>
+<tr>
+	<td style="font-weight: bold;">@TrayIconVisible</td>
+	<td>トレイアイコンが可視の場合1、それ以外の場合0。</td>
+</tr>
+<tr>
+    <td height="16" colspan="2"></td>
+</tr>
+<tr>
+	<td style="font-weight: bold;">@CR</td>
+	<td>キャリッジリターン、 Chr(13); 改行コードとして使われます。</td>
+</tr>
+<tr>
+	<td style="font-weight: bold;">@LF</td>
+	<td>ラインフィード、 Chr(10); 改行コードとしてよく使われます。</td>
+</tr>
+<tr>
+	<td style="font-weight: bold;">@CRLF</td>
+	<td>= @CR & @LF  ;改行コードとして使われます。</td>
+</tr>
+<tr>
+	<td style="font-weight: bold;">@TAB</td>
+	<td>Tab文字, Chr(9)</td>
+</tr>
+</table>
+
+<p>&nbsp;</p>
+</body>
+</html>

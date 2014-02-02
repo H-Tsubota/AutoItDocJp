@@ -1,0 +1,67 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Running under Windows 64-bit Edition</title>
+  <META http-equiv=Content-Type content="text/html; charset=shift-jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Running under Windows 64-bit Edition</h1>
+
+<p>AutoItは元来は32ビットアプリケーションですが 3.2.10.0 リリースから下記を含むx64バージョンのコンポーネントが追加されました:</p>
+<ul>
+	<li>AutoIt (AutoIt3_x64.exe)</li>
+	<li>Aut2Exe (Aut2Exe_x64.exe)</li>
+	<li>Au3Info (Au3Info_x64.exe)</li>
+	<li>AutoItX (AutoItX3_x64.dll)</li>
+</ul>
+<p>インストール時にx64上での実行を検知するとx64バージョンのインストール、設定を行うかどうかの選択肢が表れます。このバージョンはx64完全互換ですが<a href="../functions/DllCall.htm">
+DllCall</a>/<a href="../functions/DllStructCreate.htm">DllStruct</a>で自作の構造体を使用している一部のスクリプトでは64ビット互換性を破る値を使用する場合があります(ポインタに32ビット整数を使用するなど)。これはAutoItに同梱されているUDFにも含まれ、その全てがx64環境下でテストされているわけではありません。</p>
+<p>スクリプトを右クリックし&quot;Run Script (x86)&quot;を選ぶことでAutoItのx86バージョンのを実行することができます。</p>
+x86環境下で正常に動作するスクリプトがx64環境で正常に動作しない疑いがある場合はバグレポートを行うようお願いします。</p>
+<p>Windowsの64ビットエディションで実行しているかどうか確認するには@OSArchマクロを使用してください。AutoItの32ビットバージョンを使用しているか64ビットバーションを使用しているかを確認するには@AutoItX64を使用してください。</p>
+<p>&nbsp;</p>
+<h2>x64システム上でのAutoIt 32ビットバージョンの実行</h2>
+<p>
+ファイルについて：Windowsはいくつかのシステムディレクトリを切り替える特別なシステムを持っています。
+</p>
+<table borderColor="#c0c0c0" cellSpacing="0" cellPadding="3" width="623" border="1">
+  <tr>
+    <td width="129" bgColor="#000099" height="16"><b><font color="#FFFFFF">
+    ディレクトリ</font></b></td>
+    <td width="253" bgColor="#000099" height="16"><b><font color="#FFFFFF">
+    32ビットの場合</font></b></td>
+    <td width="215" bgColor="#000099" height="16"><b><font color="#FFFFFF">
+    64ビットの場合</font></b></td>
+  </tr>
+  <tr>
+    <td width="129">@SystemDir</td>
+    <td width="253">@WindowsDir &amp; &quot;\SYSWOW64&quot;</td>
+    <td width="215">@WindowsDir &amp; &quot;\System32&quot;</td>
+  </tr>
+  <tr>
+    <td width="129">@ProgramFilesDir</td>
+    <td width="253">{SystemDrive} &amp; &quot;\Program Files(x86)&quot;</td>
+    <td width="215">{SystemDrive} &amp; &quot;\Program Files&quot;</td>
+  </tr>
+</table>
+<p>
+切り替えシステムを無効にすることで64ビット版のフォルダにアクセスすることが可能です。
+</p>
+<p class="codebox"><br>
+<span class="S4"><span style="background-position: 0% 0%">D<span style="background-color: #F0F5FA">llCall</span></span></span><span class="S8">(</span><span class="S7">&quot;kernel32.dll&quot;</span><span class="S8">,</span><span class="S0">
+</span><span class="S7">&quot;int&quot;</span><span class="S8">,</span><span class="S0">
+</span><span class="S7">&quot;Wow64DisableWow64FsRedirection&quot;</span><span class="S8">,</span><span class="S0">
+</span><span class="S7">&quot;int&quot;</span><span class="S8">,</span><span class="S0">
+</span><span class="S7"><font color="#FF00FF">1</font></span><span class="S8">)</span><br>
+&nbsp;</p>
+<p>より詳細な情報は
+<a href="http://msdn.microsoft.com/library/default.asp?url=/library/en-us/winprog64/winprog64/file_system_redirector.asp">
+<u>MSDN</u></a>を参照。</p>
+<p>
+レジストリについて：HKCR64もしくはHKLM64を使って切り替えシステムを回避する方法についてはレジストリ関数のドキュメントを参照。
+</p>
+<p>&nbsp;</p>
+</body>
+</html>

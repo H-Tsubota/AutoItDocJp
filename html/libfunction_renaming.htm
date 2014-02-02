@@ -1,0 +1,405 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>UDFs renaming</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>UDFs renaming</h1>
+v3.2.9.3から_GUICtrlXXXYYY()は_GUICtrlXXX_YYY()に名称が変わりました。下記の表にある以外は機能的な変更はありません。
+<p>
+XXXが&quot;Combo&quot;と&quot;List&quot;の場合には&quot;ComboBox&quot;と&quot;ListBox&quot;に変更になります。これらはGuiComboBox.au3とGuiListBox.au3で定義されています。従って#includeファイルも変更する必要があります。
+</p>
+<p><br>
+</p>
+<table border="1" style="width: 830;" cellspacing="0" cellpadding="3" bordercolor="#c0c0c0">
+  <tr style="color: rgb(255, 255, 255);">
+    <th style="background-color: rgb(0, 0, 153); width: 193;">旧</th>
+    <th style="background-color: rgb(0, 0, 153); width: 226;">新</th>
+    <th style="background-color: rgb(0, 0, 153);" width="385">コメント</th>
+  </tr>
+  <tr>
+    <td>_GUICtrlComboAddDir</td>
+    <td>_GUICtrlComboBox_AddDir</td>
+    <td>パラメータの位置変更と$vAttrib-&gt;$iAttrib.</td>
+  </tr>
+  <tr>
+    <td>_GUICtrlComboAutoComplete</td>
+    <td>_GUICtrlComboBox_AutoComplete</td>
+    <td>$sText、$s_WTitle、$s_WTextパラメータを無視する</td>
+  </tr>
+  <tr>
+    <td>_GUICtrlComboFindString</td>
+    <td>_GUICtrlComboBox_FindString</td>
+    <td>$fexactを使用する場合は_GUICtrlComboBox_FindStringExact</td>
+  </tr>
+  <tr>
+    <td>_GUICtrlComboGetList</td>
+    <td>_GUICtrlComboBox_GetList</td>
+    <td>$sDelimiterによってOpt(&quot;GUIDataSeparatorChar&quot;)が必要なくなった</td>
+  </tr>
+  <tr>
+    <td>_GUICtrlComboInsertString</td>
+    <td>_GUICtrlComboBox_InsertString</td>
+    <td>パラメータの位置変更</td>
+  </tr>
+  <tr>
+    <td>_GUICtrlComboSelectString</td>
+    <td>_GUICtrlComboBox_SelectString</td>
+    <td>パラメータの位置変更</td>
+  </tr>
+  <tr>
+    <td>_GUICtrlComboSetItemHeight</td>
+    <td>_GUICtrlComboBox_SetItemHeight</td>
+    <td >パラメータの位置変更</td>
+  </tr>
+  </table>
+<br>
+<table border="1" style="width: 831;" cellspacing="0" cellpadding="3" bordercolor="#c0c0c0">
+<tr style="color: rgb(255, 255, 255);">
+  <th style="background-color: rgb(0, 0, 153); width: 193;">旧</th>
+  <th style="background-color: rgb(0, 0, 153); width: 226;">新</th>
+  <th style="background-color: rgb(0, 0, 153);" width="386">コメント</th>
+</tr>
+<tr>
+    <td>_GUICtrlEditFind</td>
+    <td>_GUICtrlEdit_Find</td>
+    <td>$hGuiパラメータの削除</td>
+  </tr>
+<tr>
+    <td>_GUICtrlEditFindText</td>
+    <td>&nbsp;</td>
+    <td>廃止</td>
+  </tr>
+<tr>
+    <td>_GUICtrlEditGetRECT</td>
+    <td>_GUICtrlEdit_GetRECT</td>
+    <td>返し値を変更</td>
+  </tr>
+<tr>
+    <td>_GUICtrlEditGetSel</td>
+    <td>_GUICtrlEdit_GetSel</td>
+    <td>返し値を変更</td>
+  </tr>
+<tr>
+    <td>_GUICtrlEditSetRECT</td>
+    <td>_GUICtrlEdit_SetRECT</td>
+    <td>返し値を変更</td>
+  </tr>
+</table>
+<br>
+<table border="1" style="width: 831;" cellspacing="0" cellpadding="3" bordercolor="#c0c0c0">
+<tr style="color: rgb(255, 255, 255);">
+  <th style="background-color: rgb(0, 0, 153); width: 193;">旧</th>
+  <th style="background-color: rgb(0, 0, 153); width: 226;">新</th>
+  <th style="background-color: rgb(0, 0, 153);" width="386">コメント</th>
+</tr>
+<tr>
+    <td>_GUICtrlIpAddressClear</td>
+    <td>_GUICtrlIpAddress_ClearAddress</td>
+    <td>名称変更</td>
+  </tr>
+<tr>
+    <td>_GUICtrlIpAddressDelete</td>
+    <td>_GUICtrlIpAddress_Destroy</td>
+    <td>名称変更</td>
+  </tr>
+</table>
+<br>
+<table border="1" style="width: 831;" cellspacing="0" cellpadding="3" bordercolor="#c0c0c0">
+<tr style="color: rgb(255, 255, 255);">
+  <th style="background-color: rgb(0, 0, 153); width: 193;">旧</th>
+  <th style="background-color: rgb(0, 0, 153); width: 226;">新</th>
+  <th style="background-color: rgb(0, 0, 153);" width="386">コメント</th>
+</tr>
+<tr>
+    <td>_GUICtrlListAddDir</td>
+    <td>_GUICtrlListBox_Dir</td>
+    <td>パラメータの位置変更と$vAttrib-&gt;$iAttrib</td>
+  </tr>
+<tr>
+    <td>_GUICtrlListAddItem</td>
+    <td>_GUICtrlListBox_AddString</td>
+    <td>名称変更</td>
+  </tr>
+<tr>
+    <td>_GUICtrlListClear</td>
+    <td>_GUICtrlListBox_ResetContent</td>
+    <td>名称変更</td>
+  </tr>
+<tr>
+    <td>_GUICtrlListCount</td>
+    <td>_GUICtrlListBox_GetCount</td>
+    <td>名称変更</td>
+  </tr>
+<tr>
+    <td>_GUICtrlListDeleteItem</td>
+    <td>_GUICtrlListBox_DeleteString</td>
+    <td>名称変更</td>
+  </tr>
+<tr>
+    <td>_GUICtrlListGetInfo</td>
+    <td>_GUICtrlListBox_GetListBoxInfo</td>
+    <td>名称変更</td>
+  </tr>
+<tr>
+    <td>_GUICtrlListGetItemRect</td>
+    <td>_GUICtrlListBox_GetItemRect</td>
+    <td>返し値を変更</td>
+  </tr>
+<tr>
+    <td>_GUICtrlListGetLocale</td>
+    <td>_GUICtrlListBox_GetLocale</td>
+    <td>$fDecを無視する</td>
+  </tr>
+<tr>
+    <td>_GUICtrlListGetSelState</td>
+    <td>_GUICtrlListBox_GetSel</td>
+    <td>名称変更</td>
+  </tr>
+<tr>
+    <td>_GUICtrlListInsertItem</td>
+    <td>_GUICtrlListBox_InsertString</td>
+    <td>名称変更</td>
+  </tr>
+<tr>
+    <td>_GUICtrlListSelectedIndex</td>
+    <td>_GUICtrlListBox_GetCurSel</td>
+    <td>名称変更</td>
+  </tr>
+<tr>
+    <td>_GUICtrlListSelectIndex</td>
+    <td>_GUICtrlListBox_SetCurSel</td>
+    <td>名称変更</td>
+  </tr>
+<tr>
+    <td>_GUICtrlListSelItemRange</td>
+    <td>_GUICtrlListBox_SelItemRange</td>
+    <td>パラメータの位置変更</td>
+  </tr>
+<tr>
+    <td>_GUICtrlListSetSel</td>
+    <td>_GUICtrlListBox_SetSel</td>
+    <td>パラメータの位置変更</td>
+  </tr>
+</table>
+<br>
+<table border="1" style="width: 831;" cellspacing="0" cellpadding="3" bordercolor="#c0c0c0" height="315">
+<tr style="color: rgb(255, 255, 255);">
+  <th style="background-color: rgb(0, 0, 153); width: 193;" height="19">旧</th>
+  <th style="background-color: rgb(0, 0, 153); width: 226;" height="19">新</th>
+  <th style="background-color: rgb(0, 0, 153);" width="386" height="19">コメント</th>
+</tr>
+<tr>
+    <td>_GUICtrlListViewFindItem</td>
+    <td>_GUICtrlListView_FindInText</td>
+    <td>_GUICtrlListView_FindItem、
+    _GUICtrlListView_FindNearest、_GUICtrlListView_FindParam、
+    _GUICtrlListView_FindText</td>
+  </tr>
+<tr>
+    <td>_GUICtrlListViewGetBackColor </td>
+    <td>_GUICtrlListView_GetBkColor</td>
+    <td>名称変更</td>
+  </tr>
+<tr>
+    <td>_GUICtrlListViewGetCheckedState</td>
+    <td>_GUICtrlListView_GetItemChecked</td>
+    <td>名称変更</td>
+  </tr>
+<tr>
+    <td>_GUICtrlListViewGetCurSel</td>
+    <td>_GUICtrlListView_GetNextItem</td>
+    <td>名称変更</td>
+  </tr>
+<tr>
+    <td>_GUICtrlListViewGetItemText</td>
+    <td>_GUICtrlListView_GetItemText</td>
+    <td>アイテムは必須または_GUICtrlListView_GetItemTextString</td>
+  </tr>
+<tr>
+    <td>_GUICtrlListViewGetNextItem</td>
+    <td>_GUICtrlListView_GetNextItem</td>
+    <td>$i_directionパラメータ変更</td>
+  </tr>
+<tr>
+    <td>_GUICtrlListViewGetSubItemsCount</td>
+    <td>_GUICtrlListView_GetColumnCount</td>
+    <td>名称変更</td>
+  </tr>
+<tr>
+    <td>_GUICtrlListViewInsertColumn</td>
+    <td>_GUICtrlListView_InsertColumn</td>
+    <td>オプションパラメータの位置変更</td>
+  </tr>
+<tr>
+    <td>_GUICtrlListViewInsertItem</td>
+    <td>_GUICtrlListView_InsertItem</td>
+    <td>column &gt;1では_GUICtrlListView_SetItemText</td>
+  </tr>
+<tr>
+    <td>_GUICtrlListViewSetColumnHeaderText</td>
+    <td>_GUICtrlListView_SetColumn</td>
+    <td>パラメータの位置変更</td>
+  </tr>
+<tr>
+    <td>_GUICtrlListViewSetColumnOrder</td>
+    <td>_GUICtrlListView_SetColumnOrder</td>
+    <td>$orderは分割されている必要がある</td>
+  </tr>
+<tr>
+    <td>_GUICtrlListViewSetCheckState</td>
+    <td>_GUICtrlListView_SetItemChecked</td>
+    <td>名称変更</td>
+  </tr>
+<tr>
+    <td>_GUICtrlListViewSetItemSelState</td>
+    <td>_GUICtrlListView_SetItemSelected</td>
+    <td>または_GUICtrlListView_SetItemFocused</td>
+  </tr>
+<tr>
+    <td>_GUICtrlListViewSetItemText</td>
+    <td>_GUICtrlListView_SetItemText</td>
+    <td>パラメータの位置変更</td>
+  </tr>
+<tr>
+    <td>_GUICtrlListViewSort</td>
+    <td>_GUICtrlListView_SimpleSort</td>
+    <td>名称変更</td>
+  </tr>
+</table>
+<br>
+<table border="1" style="width: 831;" cellspacing="0" cellpadding="3" bordercolor="#c0c0c0">
+<tr style="color: rgb(255, 255, 255);">
+  <th style="background-color: rgb(0, 0, 153); width: 193;">旧</th>
+  <th style="background-color: rgb(0, 0, 153); width: 226;">新</th>
+  <th style="background-color: rgb(0, 0, 153);" width="386">コメント</th>
+</tr>
+<tr>
+    <td>_GUICtrlMonthCalGet1stDOW</td>
+    <td>_GUICtrlMonthCal_GetFirstDOWStr</td>
+    <td>名称変更</td>
+  </tr>
+<tr>
+    <td>_GUICtrlMonthCalGetColor</td>
+    <td>_GUICtrlMonthCal_GetColorArray</td>
+    <td>名称変更</td>
+  </tr>
+<tr>
+    <td>_GUICtrlMonthCalGetMinReqRECT</td>
+    <td>_GUICtrlMonthCalGetMinReqRECT</td>
+    <td>名称変更</td>
+  </tr>
+<tr>
+    <td>_GUICtrlMonthCalSetColor</td>
+    <td>_GUICtrlMonthCal_SetColor</td>
+    <td>返し値を変更</td>
+  </tr>
+<tr>
+    <td>_GUICtrlMonthCalSet1stDOW</td>
+    <td>_GUICtrlMonthCal_SetFirstDOW</td>
+    <td>名称変更</td>
+  </tr>
+<tr>
+    <td>_GUICtrlMonthCalSetDelta</td>
+    <td>_GUICtrlMonthCal_SetMonthDelta</td>
+    <td>名称変更</td>
+  </tr>
+</table>
+<br>
+<table border="1" style="width: 832;" cellspacing="0" cellpadding="3" bordercolor="#c0c0c0">
+<tr style="color: rgb(255, 255, 255);">
+  <th style="background-color: rgb(0, 0, 153); width: 229;">旧</th>
+  <th style="background-color: rgb(0, 0, 153); width: 235;">新</th>
+  <th style="background-color: rgb(0, 0, 153);" width="342">コメント</th>
+</tr>
+<tr>
+    <td>_GUICtrlStatusBarCreateProgress</td>
+    <td>&nbsp;</td>
+    <td>廃止</td>
+  </tr>
+<tr>
+    <td>_GUICtrlStatusBarDelete</td>
+    <td>_GUICtrlStatusBar_Destroy</td>
+    <td>名称変更</td>
+  </tr>
+<tr>
+    <td>_GUICtrlStatusBarGetParts</td>
+    <td>_GUICtrlStatusBar_GetCount</td>
+    <td>名称変更</td>
+  </tr>
+<tr>
+    <td>_GUICtrlStatusBarGetTip</td>
+    <td>_GUICtrlStatusBar_GetTipText</td>
+    <td>名称変更</td>
+  </tr>
+<tr>
+    <td>_GUICtrlStatusBarGetUnicode</td>
+    <td>_GUICtrlStatusBar_GetUnicodeFormat</td>
+    <td>名称変更</td>
+  </tr>
+<tr>
+    <td>_GUICtrlStatusBarSetIcon</td>
+    <td>_GUICtrlStatusBar_SetIcon</td>
+    <td>オプションパラメータの位置変更</td>
+  </tr>
+<tr>
+    <td>_GUICtrlStatusBarSetParts</td>
+    <td>_GUICtrlStatusBar_SetParts</td>
+    <td>$hGUIパラメータは必要なくなった</td>
+  </tr>
+<tr>
+    <td>_GUICtrlStatusBarSetUnicode</td>
+    <td>_GUICtrlStatusBar_SetUnicodeFormat</td>
+    <td>名称変更</td>
+  </tr>
+</table>
+<br>
+<table border="1" style="width: 831;" cellspacing="0" cellpadding="3" bordercolor="#c0c0c0">
+<tr style="color: rgb(255, 255, 255);">
+  <th style="background-color: rgb(0, 0, 153); width: 228;">旧</th>
+  <th style="background-color: rgb(0, 0, 153); width: 241;">新</th>
+  <th style="background-color: rgb(0, 0, 153);" width="336">コメント</th>
+</tr>
+<tr>
+    <td>_GUICtrlTabGetItemRECT</td>
+    <td>_GUICtrlTab_GetItemRect</td>
+    <td>返し値を変更</td>
+  </tr>
+</table>
+<br>
+<table border="1" style="width: 832;" cellspacing="0" cellpadding="3" bordercolor="#c0c0c0" height="162">
+<tr style="color: rgb(255, 255, 255);">
+  <th style="background-color: rgb(0, 0, 153); width: 217;" height="19">旧</th>
+  <th style="background-color: rgb(0, 0, 153); width: 251;" height="19">新</th>
+  <th style="background-color: rgb(0, 0, 153);" width="338" height="19">コメント</th>
+</tr>
+<tr>
+    <td>_GUICtrlTreeViewDeleteAllItems</td>
+    <td>_GUICtrlTreeView_DeleteAll</td>
+    <td>名称変更</td>
+  </tr>
+<tr>
+    <td>_GUICtrlTreeViewDeleteItem</td>
+    <td>_GUICtrlTreeView_Delete</td>
+    <td>$hGUIパラメータの削除</td>
+  </tr>
+<tr>
+    <td>_GUICtrlTreeViewExpand</td>
+    <td>_GUICtrlTreeView_Expand</td>
+    <td>オプションパラメータの位置変更</td>
+  </tr>
+<tr>
+    <td>_GUICtrlTreeViewGetParentID</td>
+    <td>_GUICtrlTreeView_GetParentParam</td>
+    <td>名称変更</td>
+  </tr>
+<tr>
+    <td>_GUICtrlTreeViewGetTree</td>
+    <td>_GUICtrlTreeView_GetTree</td>
+    <td>$sSeparatorによってOpt(&quot;GUIDataSeparatorChar&quot;)が必要なくなった</td>
+  </tr>
+</table>
+&nbsp;</body></html>

@@ -1,0 +1,123 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function ObjCreate</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">ObjCreate</font>
+<hr size="2">
+<p>与えられたクラス名からCOMオブジェクトの参照を作成します。<br></p>
+
+<p class="codeheader">
+ObjCreate ( "classname"  [, "servername" [,"username", ["password"]]] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">classname</td>
+    <td width="85%">オブジェクトのクラス。次のフォーマットで指定。<br>
+       "appname.objectype"</td>
+  </tr>
+  <tr>
+   <td>servername</td>
+   <td><b>[オプション]</b>オブジェクトを取得するリモートコンピュータの名前。<br>
+	</td>
+  </tr>
+  <tr>
+   <td>username</td>
+   <td><b>[オプション]</b>リモートコンピュータでのユーザー名。<br>
+   "computer\usercode"または"domain\usercode"のフォーマットで指定。<br>
+   </td>
+  </tr>
+  <tr>
+   <td>password</td>
+   <td><b>[オプション]</b>リモートコンピュータでのユーザー名に対応したパスワード。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">成功</td>
+    <td width="90%">オブジェクトを返します。</td>
+  </tr>
+  <tr>
+    <td valign="top">失敗</td>
+    <td>0を返し、@errorを1に設定します。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+目的のアプリケーションの新しいインスタンスが欲しい場合、ObjCreate()を使用してください。<br>
+既に存在するプロセスに接続したい場合は代わりにObjGet()を使用してください。<br>
+<br>
+全てのコンピュータが同じオブジェクトを持っている訳ではありせん。ObjCreate()呼び出し後、<b>必ず</b>エラーチェックをおこなってください。<br>
+<br>
+<i>リモート</i>コンピュータ上のオブジェクトにアクセスする場合、次の項目が満たされていなければなりません。
+- スクリプトが適切な権限で実行されていること。
+- リモートコンピュータ上のオブジェクトがDCOM (Distributed COM)をサポートしていること。
+- リモートコンピュータが'Remote Registry Service'と'File and Printer sharing'を実行していること。
+<br>
+オブジェクトについてのより詳しい説明については<a href="../intro/ComRef.htm">Obj/COM Reference</a>を参照してください。<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="GUICtrlCreateObj.htm">GUICtrlCreateObj</a>, <a href="IsObj.htm">IsObj</a>, <a href="ObjEvent.htm">ObjEvent</a>, <a href="ObjGet.htm">ObjGet</a>, <a href="ObjName.htm">ObjName</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S1">; 例 1</span><br>
+<span class="S1">;</span><br>
+<span class="S1">; 開いているシェルウィンドウの数をかぞえる。</span><br>
+<br>
+<span class="S9">$oShell</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">ObjCreate</span><span class="S8">(</span><span class="S7">"shell.application"</span><span class="S8">)</span><span class="S0">&nbsp; &nbsp; </span><span class="S1">; ウィンドウシェルオブジェクトを取得</span><br>
+<span class="S9">$oShellWindows</span><span class="S8">=</span><span class="S9">$oShell</span><span class="S8">.</span><span class="S14">windows</span><span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S1">; 開いているシェルウィンドウのコレクションを取得</span><br>
+<br>
+<span class="S5">if</span><span class="S0"> </span><span class="S4">Isobj</span><span class="S8">(</span><span class="S9">$oShellWindows</span><span class="S8">)</span><span class="S0"> </span><span class="S5">then</span><br>
+<br>
+<span class="S0">&nbsp;&nbsp;</span><span class="S9">$string</span><span class="S8">=</span><span class="S7">""</span><span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S1">; 表示用文字列</span><br>
+<br>
+<span class="S0">&nbsp;&nbsp;</span><span class="S5">for</span><span class="S0"> </span><span class="S9">$Window</span><span class="S0"> </span><span class="S5">in</span><span class="S0"> </span><span class="S9">$oShellWindows</span><span class="S0"> &nbsp;&nbsp; &nbsp;&nbsp; &nbsp; </span><span class="S1">; 存在する全てのシェルウィンドウをかぞえる</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$String</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$String</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$Window</span><span class="S8">.</span><span class="S14">LocationName</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><br>
+<span class="S0">&nbsp;&nbsp;</span><span class="S5">next</span><br>
+<br>
+<span class="S0">&nbsp;&nbsp;</span><span class="S4">Msgbox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S7">"Shell Windows"</span><span class="S8">,</span><span class="S7">"You have the following shell windows:"</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$String</span><span class="S8">)</span><span class="S1">;</span><br>
+<br>
+<span class="S5">endif</span><br>
+<span class="S5">exit</span><br>
+<br>
+<br>
+<span class="S1">; 例 2</span><br>
+<span class="S1">;</span><br>
+<span class="S1">; リモートコンピュータ上のメディアプレイヤーを開く</span><br>
+<span class="S9">$oRemoteMedia</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">ObjCreate</span><span class="S8">(</span><span class="S7">"MediaPlayer.MediaPlayer.1"</span><span class="S8">,</span><span class="S7">"name-of-remote-computer"</span><span class="S8">)</span><br>
+<br>
+<span class="S5">If</span><span class="S0"> </span><span class="S5">not</span><span class="S0"> </span><span class="S6">@error</span><span class="S0"> </span><span class="S5">then</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">Msgbox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S7">"Remote ObjCreate Test"</span><span class="S8">,</span><span class="S7">"ObjCreate() of a remote Mediaplayer Object successful !"</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$oRemoteMedia</span><span class="S8">.</span><span class="S14">Open</span><span class="S8">(</span><span class="S0"> </span><span class="S6">@WindowsDir</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">"\media\Windows XP Startup.wav"</span><span class="S8">)</span><span class="S0">&nbsp; &nbsp; &nbsp; </span><span class="S1">; ファイルが存在する場合、音声を再生する</span><br>
+<span class="S5">Else</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">Msgbox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S7">"Remote ObjCreate Test"</span><span class="S8">,</span><span class="S7">"Failed to open remote Object. Error code: "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S4">hex</span><span class="S8">(</span><span class="S6">@error</span><span class="S8">,</span><span class="S3">8</span><span class="S8">))</span><br>
+<span class="S5">Endif</span><br>
+<br>
+<br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\ObjCreate.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

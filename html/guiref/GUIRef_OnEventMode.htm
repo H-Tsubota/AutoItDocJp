@@ -1,0 +1,186 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>GUI Reference - OnEvent Mode</title>
+  <META http-equiv=Content-Type content="text/html; charset=shift-jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>GUI Reference - OnEvent Mode </h1>
+
+
+<p>OnEventモードでは、何が起きているか知るためにGUIをポーリングする代わりにGUIにスクリプトの一時停止と事前に定義した関数の呼び出しをおこなわせます。例えば、ユーザーがボタン1を押すとGUIはメインスクリプトを停止して事前に定義したボタン1用のユーザー関数を呼び出します。関数が終了するとメインスクリプトが再開します。このモードはVisualBasicの形式と同じものです。 
+</p>
+<p>
+GUIが実行されている間、メインスクリプトは通常のスクリプト処理をおこないます。しかし簡単のために例ではメインスクリプトはWhileによる無限ループで「アイドリング」させておくことにしましょう。
+</p>
+<p>
+デフォルトのモードはMessageLoopモードなのでOnEventモードを使う前に<a href="../functions/AutoItSetOption.htm#GUIOnEventMode">Opt(&quot;GUIOnEventMode&quot;, 1)</a>を使わなければいけません。 
+</p>
+<p>&nbsp;</p>
+<h2>OnEventフォーマットの基本</h2>
+<p>一般的なOnEventコードの書き方は次の通りです。</p>
+<p class="codebox">While 1<br>
+&nbsp;&nbsp;Sleep(1000)&nbsp;&nbsp; ; 単なるアイドリング<br>
+WEnd<br>
+&nbsp;&nbsp;<br>
+Func Event1()<br>
+&nbsp;&nbsp;; ここにイベント処理用コードを書く<br>
+EndFunc<br>
+<br>
+Func Event2()<br>
+&nbsp;&nbsp;; ここにイベント処理用コードを書く<br>
+EndFunc
+</p>
+<p>&nbsp;</p>
+<h2>GUIイベント</h2>
+<p>OnEventモードではGUIで次の「イベント」を発生させなければいけません。</p>
+<p>
+<li>コントロールイベント</li>
+<li>システムイベント</li>
+<p>&nbsp;</p>
+<p>
+両タイプのイベントはそれぞれGUI(<a href="../functions/GUISetOnEvent.htm">GUISetOnEvent</a>)とコントロール(<a href="../functions/GUICtrlSetOnEvent.htm">GUICtrlSetOnEvent</a>)に設定されたユーザー定義関数を呼びます。もしイベントに対して関数が定義されていない場合は単純に無視されます。この呼ばれる関数内でイベントを処理するためにさまざまなマクロの値が設定されます。
+</p>
+<table width="100%" border="1" cellspacing="0" cellpadding="3">
+  <tr bgcolor="#000066">
+    <td width="12%" nowrap><strong><font color="#FFFFFF">Macro</font></strong></td>
+    <td width="88%"><strong><font color="#FFFFFF">Details</font></strong></td>
+  </tr>
+  <tr>
+    <td>@GUI_CTRLID</td>
+    <td>メッセージを送信したコントロールのコントロールID<strong>または</strong>システムイベントID</td>
+  </tr>
+  <tr>
+    <td>@GUI_WINHANDLE</td>
+    <td>メッセージを送信したGUIのハンドル</td>
+  </tr>
+  <tr>
+    <td>@GUI_CTRLHANDLE</td>
+    <td>メッセージを送信したコントロールのコントロールハンドル(利用できる場合)</td>
+  </tr>
+</table>
+<p>
+<strong>注意：</strong>同じ関数を複数のイベント処理に使用することはまったく問題ありません。その場合必要なことは@GUI_CTRLIDマクロに基づいて動作を決定することです。例えば全てのシステムイベントに同じ関数を登録することができます。
+</p>
+<p>&nbsp;</p>
+<p><strong>コントロールイベント</strong></p>
+<p>
+コントロールがクリックされたりコントロールに変化があった場合、コントロールイベントが送信されます。イベントは<a href="../functions/GUICtrlSetOnEvent.htm">GUICtrlSetOnEvent</a>で定義された関数に送られます。ユーザー定義関数内では@GUI_CTRLIDが<a href="GUICtrlCreate.htm">GUICtrlCreate...</a>でコントロールを作成したときに返される<b>コントロールID</b>に設定されます。
+</p>
+<p>&nbsp;</p>
+<p><strong>システムイベント</strong></p>
+<p>
+GUI終了などのシステムイベントもコントロールイベントと同様に送信されます。ただしイベントタイプは@GUI_CTRLIDによって定義されます。イベントは<a href="../functions/GUISetOnEvent.htm">GUISetOnEvent</a>で定義された関数に送られます。システムイベントが取りえる値は次のとおりです。
+</p>
+<p class="code">$GUI_EVENT_CLOSE<br>
+  $GUI_EVENT_MINIMIZE<br>
+  $GUI_EVENT_RESTORE<br>
+  $GUI_EVENT_MAXIMIZE<br>
+  $GUI_EVENT_PRIMARYDOWN<br>
+  $GUI_EVENT_PRIMARYUP<br>
+  $GUI_EVENT_SECONDARYDOWN<br>
+  $GUI_EVENT_SECONDARYUP<br>
+$GUI_EVENT_MOUSEMOVE<br>
+$GUI_EVENT_RESIZED<br>
+$GUI_EVENT_DROPPED<br>
+<p>&nbsp;</p>
+<h2>GUIの例</h2>
+<p>
+メインの<a href="GUIRef.htm">GUIリファレンスページ</a>で、次のような簡単なハローワールドの例を作りました。 
+</p>
+<p class="codebox">#include &lt;GUIConstantsEx.au3&gt;<br>
+    <br>
+  GUICreate(&quot;Hello World&quot;, 200, 100) <br>
+  GUICtrlCreateLabel("Hello world! How are you?", 30, 10)<br>
+  GUICtrlCreateButton("OK", 70, 50, 60)<br>
+  GUISetState(@SW_SHOW)<br>
+  Sleep(2000)</p>
+<p>&nbsp;</p>
+<p>さて、OnEventsと上で述べたイベントメッセージを使ってコードを完成させましょう。</p>
+<p>&nbsp;</p>
+<p class="codebox">
+#include &lt;GUIConstantsEx.au3&gt;<br>
+<br>
+Opt(&quot;GUIOnEventMode&quot;, 1)&nbsp; ; Change to OnEvent mode <br>
+$mainwindow = GUICreate("Hello World", 200, 100)<br>
+GUISetOnEvent($GUI_EVENT_CLOSE, &quot;CLOSEClicked&quot;)<br>
+GUICtrlCreateLabel("Hello world!  How are you?", 30, 10)<br>
+$okbutton = GUICtrlCreateButton("OK", 70, 50, 60)<br>
+GUICtrlSetOnEvent($okbutton, &quot;OKButton&quot;)<br>
+GUISetState(@SW_SHOW)<br>
+<br>
+While 1<br>
+  &nbsp;&nbsp;Sleep(1000)&nbsp; ; Idle around<br>
+  WEnd<br>
+<br>
+ Func OKButton()<br>
+&nbsp; ;Note: at this point @GUI_CTRLID would equal $okbutton,<br>
+&nbsp; ;and @GUI_WINHANDLE would equal $mainwindow<br>
+&nbsp; MsgBox(0, &quot;GUI Event&quot;, &quot;You pressed OK!&quot;)<br>
+EndFunc<br>
+<br>
+Func CLOSEClicked()<br>
+&nbsp; ;Note: at this point @GUI_CTRLID would equal $GUI_EVENT_CLOSE, <br>
+&nbsp; ;and @GUI_WINHANDLE would equal $mainwindow <br>
+&nbsp;
+MsgBox(0, &quot;GUI Event&quot;, &quot;You clicked CLOSE! Exiting...&quot;)<br>
+&nbsp;&nbsp;Exit<br>
+EndFunc</p>
+<p>
+とても単純です。たくさんのウィンドウとコントロールがある場合はより複雑になります。しかしその場合も上に示したものが基本です。</p>
+<p>&nbsp;</p>
+<h2>応用と複数ウィンドウ</h2>
+<p>
+複数のウィンドウを作った場合でも コントロールIDはユニークです。しかしどのように複数のウィンドウを取り扱うのでしょうか?
+</p>
+<p>次に上の例と機能は同じで、もう1つの「ダミー」ウィンドウをもつ例を示します。&nbsp; </p>
+<p class="codebox"> #include &lt;GUIConstantsEx.au3&gt;<br>
+  <br>
+Opt(&quot;GUIOnEventMode&quot;, 1)&nbsp; ; Change to OnEvent mode <br>
+$mainwindow = GUICreate("Hello World", 200, 100)<br>
+GUISetOnEvent($GUI_EVENT_CLOSE, &quot;CLOSEClicked&quot;)<br>
+GUICtrlCreateLabel("Hello world! How are you?", 30, 10)<br>
+$okbutton = GUICtrlCreateButton("OK", 70, 50, 60)<br>
+GUICtrlSetOnEvent($okbutton, &quot;OKButton&quot;)<br>
+<br>
+$dummywindow = GUICreate("Dummy window for testing ", 200, 100)<br>
+GUISetOnEvent($GUI_EVENT_CLOSE, &quot;CLOSEClicked&quot;)<br>
+<br>
+GUISwitch($mainwindow)<br>
+GUISetState(@SW_SHOW)<br>
+<br>
+While 1<br>
+&nbsp;&nbsp;Sleep(1000)&nbsp; ; Idle around<br>
+WEnd<br>
+<br>
+Func OKButton()<br>
+&nbsp; ;Note: at this point @GUI_CTRLID would equal $okbutton<br>
+&nbsp; MsgBox(0, &quot;GUI Event&quot;, &quot;You pressed OK!&quot;)<br>
+EndFunc<br>
+<br>
+Func CLOSEClicked()<br>
+&nbsp; ;Note: at this point @GUI_CTRLID would equal $GUI_EVENT_CLOSE,<br>
+&nbsp; ;@GUI_WINHANDLE will be either $mainwindow or $dummywindow<br>
+&nbsp; If @GUI_WINHANDLE = $mainwindow Then
+<br>
+&nbsp;&nbsp;&nbsp;
+MsgBox(0, &quot;GUI Event&quot;, &quot;You clicked CLOSE in the main window! Exiting...&quot;)<br>
+&nbsp;&nbsp;&nbsp; Exit<br>
+&nbsp; EndIf
+<br>
+
+EndFunc</p>
+<p>&nbsp;</p>
+<p>
+最初の大きな違いは<a href="../functions/GUISwitch.htm">GUISwitch</a>関数が呼ばれていることです。新しいウィンドウが作られるとそれが次回以降のGUI操作の「デフォルト」ウィンドウになります(コントロール作成もそうです)。 今回の場合、動かしたいのはメインの「Hello World」ウィンドウで、テストウィンドウではないので「switch」をおこないます。 いくつかのGUI関数では関数呼び出しにウィンドウハンドルが使えます。これらの関数は自動で切り替えをおこなってくれます。  先ほどの例に使うと次のようになります。 
+</p>
+<p class="codebox">GUISetState(@SW_SHOW, $mainwindow)</p>
+<p>&nbsp;</p>
+<p>
+また両方のウィンドウで同じOnEvent関数を使って「終了」を処理していることがわかります。@GUI_WINHANDLEを使用してどのウィンドウからメッセージが送られたのかを決定し、クローズボタンが押され、<strong>かつ</strong>メッセージがメインウィンドウから送信された場合のみGUIを終了しています。&nbsp; 簡単のためにそれぞれのウィンドウ用に関数を分けることもできます。
+</p>
+<p>&nbsp;</p>
+</body>
+</html>

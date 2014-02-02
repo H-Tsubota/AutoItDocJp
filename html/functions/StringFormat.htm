@@ -1,0 +1,282 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function StringFormat</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">StringFormat</font>
+<hr size="2">
+<p>フォーマットした文字列を返します(Cのsprintf()関数と同様です)。<br></p>
+
+<p class="codeheader">
+StringFormat ( "format control", var1 [, ... var32] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">format control</td>
+    <td width="85%">使用するフォーマットとフラグ(注意を参照)</td>
+  </tr>
+  <tr>
+   <td>var1...var32</td>
+   <td>&quot;format control&quot;に従って出力される32個以下の変数</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+&quot;format control&quot;パラメータで定義された&quot;変数フォーマット&quot;に基づいてフォーマットされた文字列が返されます。<br>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+バッファオーバーフローを防ぐため、各&quot;変数&quot;は65535文字以下でなければなりません。<br>
+&quot;書式制御&quot;では\n (@LF), \r (@CR), \t (@TAB)のようなエスケープ文字を使用できます。&quot;\&quot;を使いたい場合は\\を使用してください。動揺に&quot;%&quot;には%%を使用してください。<br>
+<br>
+&quot;変数フォーマット&quot; は %[flags] [width] [.precision] 形式です。<br>
+<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; <b>幅指定</b><br>
+<br>
+２番目のオプションフィールドは幅指定です。
+幅指定は非負の10進数整数でおこない、表示する文字数の最小値を制御します。
+もし出力する文字数が指定した幅よりも少ない場合、空白が(左揃えのための)flagに基づいて値の左か右に指定幅になるまで追加されます。
+widthの頭に0をつけるとゼロが指定幅になるまで追加されます(左揃えオプションは使えません)。<br>
+<br>
+幅指定は値の切捨てを引き起こしません。
+出力値の文字数が指定幅より多きい場合、幅が指定されていない場合、
+値の全ての文字が(精度の範囲内で)表示されます。<br>
+<br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; <b>型指定</b><br>
+<br>
+<table width="100%" border="1" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td style="border-bottom-style: solid; border-bottom-width: 1"><b>型</b></td>
+    <td style="border-bottom-style: solid; border-bottom-width: 1"><b>値の型</b></td>
+    <td style="border-bottom-style: solid; border-bottom-width: 1"><b>出力形式</b></td>
+  </tr>
+  <tr>
+    <td>d, i</td>
+    <td>Integer</td>
+    <td>符号付10進数整数</td>
+  </tr>
+  <tr>
+    <td>o</td>
+    <td>Integer</td>
+    <td>符号なし8進数整数</td>
+  </tr>
+  <tr>
+    <td>u</td>
+    <td>Integer</td>
+    <td>符号なし10進数整数</td>
+  </tr>
+  <tr>
+    <td>x</td>
+    <td>Integer</td>
+    <td>&quot;abcdef&quot;を使用した符号なし16進数整数</td>
+  </tr>
+  <tr>
+    <td>X</td>
+    <td>Integer</td>
+    <td>&quot;ABCDEF&quot;を使用した符号なし16進数整数</td>
+  </tr>
+  <tr>
+    <td>e</td>
+    <td>Float</td>
+    <td>[ - ]<i>d</i><b>.</b><i>dddd</i> <b>e</b> [<i>sign</i>]<i>ddd</i>形式の符号付きの値。
+	<i>d</i> は1桁の10進数。<i>dddd</i> は1桁以上の10進数。<i>ddd</i> は正確に3桁の10進数。<i>sign</i> は+もしくは-。</td>
+  </tr>
+  <tr>
+    <td>E</td>
+    <td>Float</td>
+    <td>指数を表す文字が<b>e</b>ではなく<b>E</b>である以外は<b>e</b>と同じ。
+	</td>
+  </tr>
+  <tr>
+    <td>f</td>
+    <td>Float</td>
+    <td>[ - ]<i>dddd</i><b>.</b><i>dddd</i>形式の符号付の値。<i>dddd</i>は1桁以上。
+	小数点の前の桁数は数値の大きさに依存し、小数点の後の桁数は要求された精度に依存します。
+	</td>
+  </tr>
+  <tr>
+    <td>g</td>
+    <td>Float</td>
+    <td>
+	<b>f</b>または<b>e</b>形式の符号付の値。いずれの場合でもよりコンパクトな値と精度になる。指数の値が-4以下または指定された精度以上の場合のみ<b>e</b>形式が使用される。末尾のゼロは切り捨てられ小数点以下に数値がある場合のみ小数点が表示される。
+</td>
+  </tr>
+  <tr>
+    <td>G</td>
+    <td>Float</td>
+    <td>(適所)指数を表す文字が<b>e</b>ではなく<b>E</b>である以外は<b>g</b>と同じ。
+	</td>
+  </tr>
+  <tr>
+    <td>s</td>
+    <td>String</td>
+    <td>文字列</td>
+  </tr>
+</table><br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; <b>フラグ指定</b><br>
+<br>
+<table width="100%" border="1" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td style="border-bottom-style: solid; border-bottom-width: 1"><b>フラグ</b></td>
+    <td style="border-bottom-style: solid; border-bottom-width: 1"><b>意味</b></td>
+    <td style="border-bottom-style: solid; border-bottom-width: 1"><b>デフォルト</b></td>
+  </tr>
+  <tr>
+    <td>-</td>
+    <td>与えられた幅で結果を右揃えにする。</td>
+    <td>右揃え.</td>
+  </tr>
+  <tr>
+    <td>+</td>
+    <td>出力値が符号付型の場合、符号(+、-) を頭につける</td>
+    <td>符号は負値(-)の場合のみ表示される。</td>
+  </tr>
+  <tr>
+    <td>0</td>
+    <td>
+	<i>width</i>の先頭に<b>0</b>をつけると指定幅に達するまでゼロが付加されます。0と-が指定された場合、<b>0</b>は無視されます。整数形式(<b>i</b>、<b>u</b>、<b>x</b>、<b>X</b>、<b>o</b>、<b>d</b>)が指定された場合、<b>0</b>は無視されます。</td>
+    <td>ゼロ埋めなし</td>
+  </tr>
+  <tr>
+    <td>空白</td>
+    <td>出力値が符号付正数の場合、先頭に空白が付加されます。空白と+フラグが指定された場合、空白は無視されます。</td>
+    <td>空白なし</td>
+  </tr>
+  <tr>
+    <td>#</td>
+    <td><b>o</b>、<b>x</b>、<b>X</b>形式に使用した場合、<b>#</b>フラグによって非ゼロの出力値の先頭にそれぞれ0、 0x、0Xが付加されます。
+</td>
+    <td>なし</td>
+  </tr>
+  <tr>
+    <td>#</td>
+	<td><b>e</b>、<b>E</b>、<b>f</b>形式に使用した場合、<b>#</b>フラグによって全ての出力値に小数点が含まれるようになります。
+</td>
+    <td>小数点以下の桁が存在する場合のみ小数点が表示されます。</td>
+  </tr>
+  <tr>
+    <td>#</td>
+    <td>
+	<b>g</b>、<b>G</b>形式に使用した場合、<b>#</b>フラグによって全ての出力値に小数点が含まれるようになり、末尾のゼロの切捨てがおこなわれなくなります。<br>
+	<b>c</b>、<b>d</b>、<b>i</b>、<b>u</b>、<b>s</b>に使用した場合は無視されます。</td>
+    <td>小数点以下の桁が存在する場合のみ小数点が表示されます。末尾のゼロは切り捨てられます。</td>
+  </tr>
+</table><br>
+&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; <b>精度指定</b><br>
+<br>
+3番目のオプションフィールドは精度指定です。先頭にピリオド(.)を付けた非負の10進数整数を指定します。これにより表示する文字数、小数点以下の桁数、有効桁数を指定します(下表参照)。幅指定と異なり精度指定は出力値の切捨てや浮動小数値の丸め込みがおこなわれます。下に示すように精度指定に0を使用し値の変換値が0の場合、文字出力されません。
+<br>
+<br>
+StringFormat( "%.0d", 0 );      /* 文字は返されない */<br>
+<br>
+&nbsp;&nbsp;&nbsp; <b>精度値が型に与える影響</b><br>
+<br>
+<table width="100%" border="1" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td style="border-bottom-style: solid; border-bottom-width: 1"><b>型</b></td>
+    <td style="border-bottom-style: solid; border-bottom-width: 1"><b>意味</b></td>
+    <td style="border-bottom-style: solid; border-bottom-width: 1"><b>デフォルト</b> </td>
+  </tr>
+  <tr>
+    <td>d, i, u, o, x, X</td>
+    <td>
+	精度は表示される最小桁数を指定します。
+	桁数指定が精度より少ない場合、出力値は左側からゼロで穴埋めされます。
+	桁数が精度より多い場合は値の切捨てはおこなわれません。
+	</td>
+    <td>デフォルト精度は1です。</td>
+  </tr>
+  <tr>
+    <td>e, E</td>
+    <td>
+	精度は表示される小数点以下の桁数を指定します。表示される最後の桁は丸め込まれます。
+	</td>
+    <td>
+	デフォルト精度は6です。精度0、ピリオド(.)以下に数値が無い場合は小数点が表示されません。
+	</td>
+  </tr>
+  <tr>
+    <td>f </td>
+    <td>	精度は表示される小数点以下の桁数を指定します。小数点がある場合、少なくとも1桁が小数点の前にあります。値は適切な桁数に丸め込まれます。
+	</td>
+    <td>
+	デフォルト精度は6です。精度0、ピリオド(.)以下に数値が無い場合は小数点が表示されません。
+	</td>
+  </tr>
+  <tr>
+    <td>g, G</td>
+    <td>精度は表示される有効桁数の最大値を指定します。</td>
+    <td>有効桁6桁で表示され、末尾のゼロは切り捨てられます。</td>
+  </tr>
+  <tr>
+    <td>s</td>
+    <td>
+	精度は表示される最大文字数を指定します。精度を超える文字は表示されません。</td>
+    <td>NULL文字に到達するまでの文字が表示されます。</td>
+  </tr>
+</table><br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+なし。
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S9">$n</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> &nbsp;</span><span class="S3">43951789</span><span class="S1">;</span><br>
+<span class="S9">$u</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S8">-</span><span class="S3">43951789</span><span class="S1">;</span><br>
+<br>
+<span class="S1">; %%に注意。'%'として表示される</span><br>
+<span class="S0">printf</span><span class="S8">(</span><span class="S7">"%%d = '%d'\n"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$n</span><span class="S8">)</span><span class="S1">;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; '43951789'&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 標準の整数表記</span><br>
+<span class="S0">printf</span><span class="S8">(</span><span class="S7">"%%e = '%e'\n"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$n</span><span class="S8">)</span><span class="S1">;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; '4.395179e+007'&nbsp;&nbsp; &nbsp;科学表記</span><br>
+<span class="S0">printf</span><span class="S8">(</span><span class="S7">"%%u = '%u'\n"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$n</span><span class="S8">)</span><span class="S1">;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; '43951789'&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 正の整数の符号なし整数表記</span><br>
+<span class="S0">printf</span><span class="S8">(</span><span class="S7">"%%u &lt;0 = '%u'\n"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$u</span><span class="S8">)</span><span class="S1">;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; '4251015507'&nbsp; &nbsp; &nbsp; &nbsp; 負の整数の符号なし整数表記</span><br>
+<span class="S0">printf</span><span class="S8">(</span><span class="S7">"%%f = '%f'\n"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$n</span><span class="S8">)</span><span class="S1">;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; '43951789.000000'&nbsp; &nbsp;浮動小数点表記</span><br>
+<span class="S0">printf</span><span class="S8">(</span><span class="S7">"%%.2f = '%.2f'\n"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$n</span><span class="S8">)</span><span class="S1">;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; '43951789.00'&nbsp; &nbsp;&nbsp; &nbsp; 小数点以下2桁の浮動小数点表記</span><br>
+<span class="S0">printf</span><span class="S8">(</span><span class="S7">"%%o = '%o'\n"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$n</span><span class="S8">)</span><span class="S1">;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; '247523255'&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; 8進数表記</span><br>
+<span class="S0">printf</span><span class="S8">(</span><span class="S7">"%%s = '%s'\n"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$n</span><span class="S8">)</span><span class="S1">;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; '43951789'&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 文字列表記</span><br>
+<span class="S0">printf</span><span class="S8">(</span><span class="S7">"%%x = '%x'\n"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$n</span><span class="S8">)</span><span class="S1">;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; '29ea6ad'&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; 16進数表記 (小文字)</span><br>
+<span class="S0">printf</span><span class="S8">(</span><span class="S7">"%%X = '%X'\n"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$n</span><span class="S8">)</span><span class="S1">;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; '29EA6AD'&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; 16進数表記 (大文字)</span><br>
+<br>
+<span class="S0">printf</span><span class="S8">(</span><span class="S7">"%%+d = '%+d'\n"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$n</span><span class="S8">)</span><span class="S1">;&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; '+43951789'&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; 符号付きの正の整数</span><br>
+<span class="S0">printf</span><span class="S8">(</span><span class="S7">"%%+d &lt;0= '%+d'\n"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$u</span><span class="S8">)</span><span class="S1">;&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; '-43951789'&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; 符号付きの負の整数</span><br>
+<br>
+<br>
+<span class="S9">$s</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S7">'monkey'</span><span class="S1">;</span><br>
+<span class="S9">$t</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S7">'many monkeys'</span><span class="S1">;</span><br>
+<br>
+<span class="S0">printf</span><span class="S8">(</span><span class="S7">"%%s = [%s]\n"</span><span class="S8">,</span><span class="S0"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S9">$s</span><span class="S8">)</span><span class="S1">;&nbsp; &nbsp; &nbsp; &nbsp; [monkey]&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 標準の文字列出力</span><br>
+<span class="S0">printf</span><span class="S8">(</span><span class="S7">"%%10s = [%10s]\n"</span><span class="S8">,</span><span class="S0"> &nbsp;&nbsp;&nbsp;</span><span class="S9">$s</span><span class="S8">)</span><span class="S1">;&nbsp; &nbsp; &nbsp; [ &nbsp;&nbsp;&nbsp;monkey]&nbsp; &nbsp; &nbsp; &nbsp; スペース付き右寄せ</span><br>
+<span class="S0">printf</span><span class="S8">(</span><span class="S7">"%%-10s = [%-10s]\n"</span><span class="S8">,</span><span class="S0"> &nbsp;&nbsp;</span><span class="S9">$s</span><span class="S8">)</span><span class="S1">;&nbsp;&nbsp; &nbsp; [monkey &nbsp;&nbsp;&nbsp;]&nbsp; &nbsp; &nbsp; &nbsp; スペース付き左寄せ</span><br>
+<span class="S0">printf</span><span class="S8">(</span><span class="S7">"%%010s = [%010s]\n"</span><span class="S8">,</span><span class="S0"> &nbsp;&nbsp;</span><span class="S9">$s</span><span class="S8">)</span><span class="S1">;&nbsp;&nbsp; &nbsp; [0000monkey]&nbsp; &nbsp; &nbsp; &nbsp; 文字列もゼロ埋めできる</span><br>
+<span class="S0">printf</span><span class="S8">(</span><span class="S7">"%%10.10s = [%10.10s]\n"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$t</span><span class="S8">)</span><span class="S1">;&nbsp; &nbsp;[many monke]&nbsp; &nbsp; &nbsp; &nbsp; 左寄せ。ただし10文字まで</span><br>
+<br>
+<span class="S0">printf</span><span class="S8">(</span><span class="S7">"%04d-%02d-%02d\n"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">2008</span><span class="S8">,</span><span class="S0"> </span><span class="S3">4</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">)</span><span class="S1">;</span><br>
+<br>
+<span class="S5">Func</span><span class="S0"> Printf</span><span class="S8">(</span><span class="S9">$format</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$var1</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$var2</span><span class="S8">=-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$var3</span><span class="S8">=-</span><span class="S3">1</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">If</span><span class="S0"> </span><span class="S9">$var2</span><span class="S8">=-</span><span class="S3">1</span><span class="S0"> </span><span class="S5">Then</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S4">ConsoleWrite</span><span class="S8">(</span><span class="S4">StringFormat</span><span class="S8">(</span><span class="S9">$format</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$var1</span><span class="S8">))</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Else</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S4">ConsoleWrite</span><span class="S8">(</span><span class="S4">StringFormat</span><span class="S8">(</span><span class="S9">$format</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$var1</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$var2</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$var3</span><span class="S8">))</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">EndIf</span><span class="S0">&nbsp; &nbsp;</span><br>
+<span class="S5">EndFunc</span><br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\StringFormat.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

@@ -1,0 +1,504 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Help for AutoIt v2 users</title>
+  <META http-equiv=Content-Type content="text/html; charset=shift-jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Notes for users familiar with AutoIt 2.64</h1>
+<p>
+ウィンドウとキーストロークというコンセプトを離れたことで、AutoIt v3はv2.64以前のバージョンのAutoItと本質的に違ったものになりました。&nbsp;
+v2.64のダウンロードは今後も可能ですし、ユーザーが既存のスクリプトを変換しようとするいくつかの理由(システムを変更したくないなど)もあります。&nbsp;しかしv3は以前に較べて格段にGUI自動化を簡単にするすばらしい新機能を多く持っていますし、より優れた汎用スクリプト言語になっています。
+</p>
+<p>
+v3の使用を開始するにあたって以下の情報が助けになるでしょう。&nbsp;またv2.64からv3へのスクリプトコンバータがインストールフォルダの「Extra」フォルダ内にあります。
+</p>
+<p><br>
+-バックスラッシュは特殊記号でなくなりました。ただしコーテーション記号が新しく特殊記号になりました。<br>
+  &nbsp;&nbsp;&nbsp;&nbsp; 例：<b>Run('C:\Windows\Notepad.exe "C:\Some File.txt" ')</b><br>
+  <br>
+-コマンドライン構文：<br>
+  &nbsp;&nbsp;&nbsp;&nbsp; 
+  スクリプトモードのみになりました。つまり <b>AutoIt.exe &lt;filename
+  of script file&gt;</b> です。<br>
+  <br>
+  - 構文：<br>
+  &nbsp;&nbsp;&nbsp;&nbsp; 
+  
+  <i>&lt;cmd&gt;, &lt;parameter1&gt; [,&lt;parameter2&gt;]</i>&nbsp;
+  は <i>Cmd(parm1 [,parm2])</i> に変わりました。<br>
+  <br>
+  <br>
+  - ループとユーザー定義関数のサポートによりGoto文がなくなりました。<br>
+  <br>
+  - AutoItv3は多くのプログラミング言語と同様、変数をサポートします。：&nbsp; <b>$myVar
+  = "Example of assignment"</b><br>
+  <br>
+  - スクリプトの拡張子が.autから<b>.au3</b>に変わりました。<br>
+  <br>
+  <br>
+  バージョン2.64のスクリプトをバージョン3用に書き直したい場合、次の表が助けになるでしょう。<br>
+  <br>
+  &nbsp; &nbsp; </p>
+<table bordercolor="#c0c0c0" cellpadding="3" cellspacing="0" width="100%" border="1">
+<tr>
+  <td style="background-color: rgb(0, 0, 153); color: white; font-weight: bold;">バージョン 2.64 関数</td>
+  <td style="background-color: rgb(0, 0, 153); color: white; font-weight: bold;">バージョン 3 では</td>
+</tr>
+<tr>
+  <td>AdlibOn</td>
+  <td><a href="../functions/AdlibRegister.htm">AdlibRegister</a></td>
+</tr>
+<tr>
+  <td>BlockInput</td>
+  <td><a href="../functions/BlockInput.htm">BlockInput</a></td>
+</tr>
+<tr>
+  <td>Break</td>
+  <td><a href="../functions/Break.htm">Break</a></td>
+</tr>
+<tr>
+  <td>DetectHiddenText</td>
+  <td style="font-family: courier new,courier,monospace;"><a href="../functions/AutoItSetOption.htm#WinDetectHiddenText">AutoItSetOption</a>("WinDetectHiddenText",...)</td>
+</tr>
+<tr>
+  <td>Exit</td>
+  <td><a href="../keywords/Exit.htm">Exit</a></td>
+</tr>
+<tr>
+  <td>EnvAdd</td>
+  <td>[+ 演算子を参照]</td>
+</tr>
+<tr>
+  <td>EnvDiv</td>
+  <td>[/ 演算子を参照</td>
+</tr>
+<tr>
+  <td>EnvMult</td>
+  <td>[* 演算子を参照]</td>
+</tr>
+<tr>
+  <td>EnvSub</td>
+  <td>[- 演算子を参照]</td>
+</tr>
+<tr>
+  <td>FileAppend</td>
+  <td>[<a href="../functions/FileOpen.htm">FileOpen</a>(...,2)後に<a href="../functions/FileWriteLine.htm">FileWriteLine</a>]</td>
+</tr>
+<tr>
+  <td>FileCopy</td>
+  <td><a href="../functions/FileCopy.htm">FileCopy</a></td>
+</tr>
+<tr>
+  <td>FileCreateDir</td>
+  <td><a href="../functions/DirCreate.htm">DirCreate</a></td>
+</tr>
+<tr>
+  <td>FileDelete</td>
+  <td><a href="../functions/FileDelete.htm">FileDelete </a>or <a href="../functions/FileRecycle.htm">FileRecycle</a></td>
+</tr>
+<tr>
+  <td>FileInstall</td>
+  <td><a href="../functions/FileInstall.htm">FileInstall</a></td>
+</tr>
+<tr>
+  <td>FileReadLine</td>
+  <td><a href="../functions/FileReadLine.htm">FileReadLine</a></td>
+</tr>
+<tr>
+  <td>FileRemoveDir</td>
+  <td><a href="../functions/DirRemove.htm">DirRemove</a></td>
+</tr>
+<tr>
+  <td>FileSelectFile</td>
+  <td><a href="../functions/FileOpenDialog.htm">FileOpenDialog </a>or <a href="../functions/FileSaveDialog.htm">FileSaveDialog</a></td>
+</tr>
+<tr>
+  <td>Gosub</td>
+  <td>[<a href="../keywords/Func.htm">Func...EndFunc</a>参照]</td>
+</tr>
+<tr>
+  <td>Return</td>
+  <td>[<a href="../keywords/Func.htm">Func...EndFunc</a>参照]</td>
+</tr>
+<tr>
+  <td>Goto</td>
+  <td>[必要なし]</td>
+</tr>
+<tr>
+  <td>HideAutoItDebug</td>
+  <td>--</td>
+</tr>
+<tr>
+  <td>HideAutoItWin</td>
+  <td><a href="../functions/AutoItSetOption.htm#TrayIconHide">AutoItSetOption</a>("TrayIconHide",...)</td>
+</tr>
+<tr>
+  <td>IfInString</td>
+  <td style="font-family: courier new,courier,monospace;">If <a href="../functions/StringInStr.htm">StringInStr</a>(...) Then</td>
+</tr>
+<tr>
+  <td>IfNotInString</td>
+  <td style="font-family: courier new,courier,monospace;">If Not <a href="../functions/StringInStr.htm">StringInStr</a>(...) Then</td>
+</tr>
+<tr>
+  <td>IfWinExist</td>
+  <td style="font-family: courier new,courier,monospace;">If <a href="../functions/WinExists.htm">WinExists</a>(...) Then</td>
+</tr>
+<tr>
+  <td>IfWinNotExist</td>
+  <td style="font-family: courier new,courier,monospace;">If Not <a href="../functions/WinExists.htm">WinExists</a>(...) Then</td>
+</tr>
+<tr>
+  <td>IfWinActive</td>
+  <td style="font-family: courier new,courier,monospace;">If <a href="../functions/WinActive.htm">WinActive</a>(...) Then</td>
+</tr>
+<tr>
+  <td>IfWinNotActive</td>
+  <td style="font-family: courier new,courier,monospace;">If Not <a href="../functions/WinActive.htm">WinActive</a>(...) Then</td>
+</tr>
+<tr>
+  <td>IfEqual</td>
+  <td>[= 演算子と == 演算子を参照]</td>
+</tr>
+<tr>
+  <td>IfNotEqual</td>
+  <td>[&lt;&gt; 演算子を参照]</td>
+</tr>
+<tr>
+  <td>IfGreater</td>
+  <td>[&gt; 演算子を参照]</td>
+</tr>
+<tr>
+  <td>IfGreaterOrEqual</td>
+  <td>[&gt;= 演算子を参照]</td>
+</tr>
+<tr>
+  <td>IfLess</td>
+  <td>[&lt; 演算子を参照]</td>
+</tr>
+<tr>
+  <td>IfLessOrEqual</td>
+  <td>[&lt;= 演算子を参照]</td>
+</tr>
+<tr>
+  <td>IfExist</td>
+  <td><a href="../functions/FileExists.htm">FileExists</a></td>
+</tr>
+<tr>
+  <td>IfNotExist</td>
+  <td style="font-family: courier new,courier,monospace;">If Not <a href="../functions/FileExists.htm">FileExists</a>(...) Then</td>
+</tr>
+<tr>
+  <td>IfMsgBox</td>
+  <td>[<a href="../functions/MsgBox.htm">MsgBox</a>(...)と<a href="../keywords/Select.htm">Select...Case...EndSelect</a>を参照]</td>
+</tr>
+<tr>
+  <td>IniRead</td>
+  <td><a href="../functions/IniRead.htm">IniRead</a></td>
+</tr>
+<tr>
+  <td>IniWrite</td>
+  <td><a href="../functions/IniWrite.htm">IniWrite</a></td>
+</tr>
+<tr>
+  <td>IniDelete</td>
+  <td><a href="../functions/IniDelete.htm">IniDelete</a></td>
+</tr>
+<tr>
+  <td>InputBox</td>
+  <td><a href="../functions/InputBox.htm">InputBox</a></td>
+</tr>
+<tr>
+  <td>LeftClick</td>
+  <td style="font-family: courier new,courier,monospace;"><a href="../functions/MouseClick.htm">MouseClick</a>("left",...)</td>
+</tr>
+<tr>
+  <td>RightClick</td>
+  <td style="font-family: courier new,courier,monospace;"><a href="../functions/MouseClick.htm">MouseClick</a>("right",...)</td>
+</tr>
+<tr>
+  <td>LeftClickDrag</td>
+  <td style="font-family: courier new,courier,monospace;"><a href="../functions/MouseClickDrag.htm">MouseClickDrag</a>("left",...)</td>
+</tr>
+<tr>
+  <td>RightClickDrag</td>
+  <td style="font-family: courier new,courier,monospace;"><a href="../functions/MouseClickDrag.htm">MouseClickDrag</a>("right",...)</td>
+</tr>
+<tr>
+  <td>MouseGetPos</td>
+  <td><a href="../functions/MouseGetPos.htm">MouseGetPos</a></td>
+</tr>
+<tr>
+  <td>MouseMove</td>
+  <td><a href="../functions/MouseMove.htm">MouseMove</a></td>
+</tr>
+<tr>
+  <td>MsgBox</td>
+  <td><a href="../functions/MsgBox.htm">MsgBox</a></td>
+</tr>
+<tr>
+  <td>Random</td>
+  <td><a href="../functions/Random.htm">Random</a></td>
+</tr>
+<tr>
+  <td>RegRead</td>
+  <td><a href="../functions/RegRead.htm">RegRead</a></td>
+</tr>
+<tr>
+  <td>RegWrite</td>
+  <td><a href="../functions/RegWrite.htm">RegWrite</a></td>
+</tr>
+<tr>
+  <td>RegDelete</td>
+  <td><a href="../functions/RegDelete.htm">RegDelete</a></td>
+</tr>
+<tr>
+  <td>Repeat</td>
+  <td>[<a href="../keywords/For.htm">For...Next</a>参照]</td>
+</tr>
+<tr>
+  <td>EndRepeat</td>
+  <td>[<a href="../keywords/For.htm">For...Next</a>参照]</td>
+</tr>
+<tr>
+  <td>Run</td>
+  <td><a href="../functions/Run.htm">Run</a></td>
+</tr>
+<tr>
+  <td>RunWait</td>
+  <td><a href="../functions/RunWait.htm">RunWait</a></td>
+</tr>
+<tr>
+  <td>Send</td>
+  <td><a href="../functions/Send.htm">Send</a></td>
+</tr>
+<tr>
+  <td>SetCapslockState</td>
+  <td><a href="../functions/AutoItSetOption.htm#SendCapslockMode">AutoItSetOption</a>("SendCapslockMode",0) + <a href="../functions/Send.htm">Send</a> ("{CAPSLOCK}")</td></td>
+</tr>
+<tr>
+  <td>SetEnv</td>
+  <td><a href="../functions/EnvSet.htm">EnvSet</a></td>
+</tr>
+<tr>
+  <td>SetBatchLines</td>
+  <td>--</td>
+</tr>
+<tr>
+  <td>SetKeyDelay</td>
+  <td style="font-family: courier new,courier,monospace;"><a href="../functions/AutoItSetOption.htm#SendKeyDelay">AutoItSetOption</a>("SendKeyDelay",...)</td>
+</tr>
+<tr>
+  <td>SetStoreCapslockMode</td>
+  <td style="font-family: courier new,courier,monospace;"><a href="../functions/AutoItSetOption.htm#SendCapslockMode">AutoItSetOption</a>("SendCapslockMode",...)</td>
+</tr>
+<tr>
+  <td>SetTitleMatchMode</td>
+  <td style="font-family: courier new,courier,monospace;"><a href="../functions/AutoItSetOption.htm#WinTitleMatchMode">AutoItSetOption</a>("WinTitleMatchMode",...)</td>
+</tr>
+<tr>
+  <td>SetWinDelay</td>
+  <td style="font-family: courier new,courier,monospace;"><a href="../functions/AutoItSetOption.htm#WinWaitDelay">AutoItSetOption</a>("WinWaitDelay",...)</td>
+</tr>
+<tr>
+  <td>Shutdown</td>
+  <td><a href="../functions/Shutdown.htm">Shutdown</a></td>
+</tr>
+<tr>
+  <td>Sleep</td>
+  <td><a href="../functions/Sleep.htm">Sleep</a></td>
+</tr>
+<tr>
+  <td>SplashTextOn</td>
+  <td><a href="../functions/SplashTextOn.htm">SplashTextOn</a>など</td>
+</tr>
+<tr>
+  <td>SplashTextOff</td>
+  <td><a href="../functions/SplashOff.htm">SplashOff</a></td>
+</tr>
+<tr>
+  <td>StringCaseSense</td>
+  <td>[個々の関数を参照] </td>
+</tr>
+<tr>
+  <td>StringLeft</td>
+  <td><a href="../functions/StringLeft.htm">StringLeft</a></td>
+</tr>
+<tr>
+  <td>StringRight</td>
+  <td><a href="../functions/StringRight.htm">StringRight</a></td>
+</tr>
+<tr>
+  <td>StringMid</td>
+  <td><a href="../functions/StringMid.htm">StringMid</a></td>
+</tr>
+<tr>
+  <td>StringLen</td>
+  <td><a href="../functions/StringLen.htm">StringLen</a></td>
+</tr>
+<tr>
+  <td>StringReplace</td>
+  <td><a href="../functions/StringReplace.htm">StringReplace</a></td>
+</tr>
+<tr>
+  <td>StringTrimLeft</td>
+  <td><a href="../functions/StringTrimLeft.htm">StringTrimLeft</a></td>
+</tr>
+<tr>
+  <td>StringTrimRight</td>
+  <td><a href="../functions/StringTrimRight.htm">StringTrimRight</a></td>
+</tr>
+<tr>
+  <td>StringGetPos</td>
+  <td><a href="../functions/StringInStr.htm">StringInStr</a></td>
+</tr>
+<tr>
+  <td>WinGetActiveStats</td>
+  <td>[<a href="../functions/WinGetPos.htm">WinGetPos</a>, <a href="../functions/WinGetTitle.htm">WinGetTitle</a>, <a href="../functions/WinGetText.htm">WinGetText</a>参照]</td>
+</tr>
+<tr>
+  <td>WinGetActiveTitle</td>
+  <td style="font-family: courier new,courier,monospace;"><a href="../functions/WinGetTitle.htm">WinGetTitle("")</a></td>
+</tr>
+<tr>
+  <td>WinKill</td>
+  <td><a href="../functions/WinKill.htm">WinKill</a></td>
+</tr>
+<tr>
+  <td>WinWait</td>
+  <td><a href="../functions/WinWait.htm">WinWait</a></td>
+</tr>
+<tr>
+  <td>WinWaitClose</td>
+  <td><a href="../functions/WinWaitClose.htm">WinWaitClose</a></td>
+</tr>
+<tr>
+  <td>WinWaitActive</td>
+  <td><a href="../functions/WinWaitActive.htm">WinWaitActive</a></td>
+</tr>
+<tr>
+  <td>WinWaitNotActive</td>
+  <td><a href="../functions/WinWaitNotActive.htm">WinWaitNotActive</a></td>
+</tr>
+<tr>
+  <td>WinHide</td>
+    <td style="font-family: courier new,courier,monospace;"><a href="../functions/WinSetState.htm">WinSetState</a>(...,
+      @SW_HIDE)</td>
+</tr>
+<tr>
+  <td>WinShow</td>
+    <td style="font-family: courier new,courier,monospace;"><a href="../functions/WinSetState.htm">WinSetState</a>(...,
+      @SW_SHOW)</td>
+</tr>
+<tr>
+  <td>WinRestore</td>
+    <td style="font-family: courier new,courier,monospace;"><a href="../functions/WinSetState.htm">WinSetState</a>(...,@SW_RESTORE)</td>
+</tr>
+<tr>
+  <td>WinMinimize</td>
+    <td style="font-family: courier new,courier,monospace;"><a href="../functions/WinSetState.htm">WinSetState</a>(...,@SW_MINIMIZE)</td>
+</tr>
+<tr>
+  <td>WinMaximize</td>
+    <td style="font-family: courier new,courier,monospace;"><a href="../functions/WinSetState.htm">WinSetState</a>(...,@SW_MAXIMIZE)</td>
+</tr>
+<tr>
+  <td>WinActivate</td>
+  <td><a href="../functions/WinActivate.htm">WinActivate</a></td>
+</tr>
+<tr>
+  <td>WinClose</td>
+  <td><a href="../functions/WinClose.htm">WinClose</a></td>
+</tr>
+<tr>
+  <td>WinMove</td>
+  <td><a href="../functions/WinMove.htm">WinMove</a></td>
+</tr>
+<tr>
+  <td>WinSetTitle</td>
+  <td><a href="../functions/WinSetTitle.htm">WinSetTitle</a></td>
+</tr>
+<tr>
+  <td>WinMinimizeAll</td>
+  <td><a href="../functions/WinMinimizeAll.htm">WinMinimizeAll</a></td>
+</tr>
+<tr>
+  <td>WinMinimizeAllUndo</td>
+  <td><a href="../functions/WinMinimizeAllUndo.htm">WinMinimizeAllUndo</a></td>
+</tr>
+<tr>
+  <td>#Include</td>
+  <td><a href="../keywords/include.htm">#Include</a></td>
+</tr>
+<tr>
+  <td>%CLIPBOARD%</td>
+  <td>[<a href="../functions/ClipGet.htm">ClipGet</a>と<a
+href="../functions/ClipPut.htm">ClipPut</a>参照]</td>
+</tr>
+<tr>
+  <td>A_OSTYPE</td>
+  <td><a href="../macros/SystemInfo.htm">@OSType</a></td>
+</tr>
+<tr>
+  <td>A_OSVERSION</td>
+  <td><a href="../macros/SystemInfo.htm">@OSVersion</a></td>
+</tr>
+<tr>
+  <td>A_SCRIPTNAME</td>
+  <td><a href="../macros/AutoItRelated.htm">@ScriptName</a></td>
+</tr>
+<tr>
+  <td>A_SCRIPTDIR</td>
+  <td><a href="../macros/AutoItRelated.htm">@ScriptDir</a></td>
+</tr>
+<tr>
+  <td>A_SCRIPTFULLPATH</td>
+  <td><a href="../macros/AutoItRelated.htm">@ScriptFullPath</a></td>
+</tr>
+<tr>
+  <td>A_WORKINGDIR</td>
+  <td><a href="../macros/AutoItRelated.htm">@WorkingDir</a></td>
+</tr>
+<tr>
+  <td>A_NUMBATCHLINES</td>
+  <td>--</td>
+</tr>
+<tr>
+  <td>A_SEC</td>
+  <td><a href="../macros/TimeAndDate.htm">@SEC</a></td>
+</tr>
+<tr>
+  <td>A_MIN</td>
+  <td><a href="../macros/TimeAndDate.htm">@MIN</a></td>
+</tr>
+<tr>
+  <td>A_HOUR</td>
+  <td><a href="../macros/TimeAndDate.htm">@HOUR</a></td>
+</tr>
+<tr>
+  <td>A_MDAY</td>
+  <td><a href="../macros/TimeAndDate.htm">@MDAY</a></td>
+</tr>
+<tr>
+  <td>A_MON</td>
+  <td><a href="../macros/TimeAndDate.htm">@MON</a></td>
+</tr>
+<tr>
+  <td>A_YEAR</td>
+  <td><a href="../macros/TimeAndDate.htm">@YEAR</a></td>
+</tr>
+<tr>
+  <td>A_WDAY</td>
+  <td><a href="../macros/TimeAndDate.htm">@WDAY</a></td>
+</tr>
+<tr>
+  <td>A_YDAY</td>
+  <td><a href="../macros/TimeAndDate.htm">@YDAY</a></td>
+</tr>
+</table>
+
+</body>
+</html>

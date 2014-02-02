@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function GUISetAccelerators</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">GUISetAccelerators</font>
+<hr size="2">
+<p>GUIウィンドウで使用されるアクセラレータの表を設定します。<br></p>
+
+<p class="codeheader">
+GUISetAccelerators ( accelerators [, winhandle] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">accelerators</td>
+    <td width="85%">アクセラレータの表を保持している2次元配列(注意を参照)</td>
+  </tr>
+  <tr>
+   <td>winhandle</td>
+   <td>	<b>[オプション]</b> GUICreateによって返されるウィンドウハンドル(デフォルトでは直前に使用されたウィンドウ)</td>
+  </tr>
+</table>
+
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">成功</td>
+    <td width="90%">1を返します。</td>
+  </tr>
+  <tr>
+    <td valign="top">失敗</td>
+    <td>0を返します。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+この関数に渡す配列にはホットキーとアクセラレータのコントロールIDを格納します。<br>
+配列はDim $array[n][2]で定義される必要があります。nは設定するアクセラレータキーの数です:<br>
+<br>
+$array[0][0] = 1番目のアクセラレータのホットキー(HotKeySet() でのフォーマット)<br>
+$array[0][1] = 1番目のアクセラレータのコントロールID。GUICtrlCreate...()によって返される。<br>
+$array[1][0] = 2番目のアクセラレータのホットキー<br>
+$array[1][1] = 2番目のアクセラレータのコントロールID<br>
+...<br>
+$array[n][0] = n番目のアクセラレータのホットキー<br>
+$array[n][1] = n番目のアクセラレータのコントロールID<br>
+<br>
+この関数に配列以外を渡すと指定されたウィンドウハンドルの全てのアクセラレータを解除します。<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="GUICreate.htm">GUICreate</a>, <a href="HotKeySet.htm">HotKeySet</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S1">; MessageLoopモードを使用する簡単な独自のメッセージボックス</span><br>
+<br>
+<span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;GUIConstantsEx.au3&gt;</span><br>
+<br>
+<span class="S4">GUICreate</span><span class="S8">(</span><span class="S7">"Custom Msgbox"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">210</span><span class="S8">,</span><span class="S0"> </span><span class="S3">80</span><span class="S8">)</span><br>
+<br>
+<span class="S4">GUICtrlCreateLabel</span><span class="S8">(</span><span class="S7">"Please click a button!"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">10</span><span class="S8">,</span><span class="S0"> </span><span class="S3">10</span><span class="S8">)</span><br>
+<span class="S9">$YesID</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICtrlCreateButton</span><span class="S8">(</span><span class="S7">"Yes"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">10</span><span class="S8">,</span><span class="S0"> </span><span class="S3">50</span><span class="S8">,</span><span class="S0"> </span><span class="S3">50</span><span class="S8">,</span><span class="S0"> </span><span class="S3">20</span><span class="S8">)</span><br>
+<span class="S9">$NoID</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICtrlCreateButton</span><span class="S8">(</span><span class="S7">"No"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">80</span><span class="S8">,</span><span class="S0"> </span><span class="S3">50</span><span class="S8">,</span><span class="S0"> </span><span class="S3">50</span><span class="S8">,</span><span class="S0"> </span><span class="S3">20</span><span class="S8">)</span><br>
+<span class="S9">$ExitID</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICtrlCreateButton</span><span class="S8">(</span><span class="S7">"Exit"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">150</span><span class="S8">,</span><span class="S0"> </span><span class="S3">50</span><span class="S8">,</span><span class="S0"> </span><span class="S3">50</span><span class="S8">,</span><span class="S0"> </span><span class="S3">20</span><span class="S8">)</span><br>
+<br>
+<span class="S1">; Ctrl+y と Ctrl+n のアクセラレータを設定</span><br>
+<span class="S5">Dim</span><span class="S0"> </span><span class="S9">$AccelKeys</span><span class="S8">[</span><span class="S3">2</span><span class="S8">][</span><span class="S3">2</span><span class="S8">]=[[</span><span class="S7">"^y"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$YesID</span><span class="S8">],</span><span class="S0"> </span><span class="S8">[</span><span class="S7">"^n"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$NoID</span><span class="S8">]]</span><br>
+<span class="S4">GUISetAccelerators</span><span class="S8">(</span><span class="S9">$AccelKeys</span><span class="S8">)</span><br>
+<br>
+<span class="S4">GUISetState</span><span class="S8">()</span><span class="S0"> &nbsp;</span><span class="S1">; GUIを表示</span><br>
+<br>
+<span class="S5">Do</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$msg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUIGetMsg</span><span class="S8">()</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Select</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Case</span><span class="S0"> </span><span class="S9">$msg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$YesID</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"You clicked on"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Yes"</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Case</span><span class="S0"> </span><span class="S9">$msg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$NoID</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"You clicked on"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"No"</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Case</span><span class="S0"> </span><span class="S9">$msg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$ExitID</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"You clicked on"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Exit"</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Case</span><span class="S0"> </span><span class="S9">$msg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$GUI_EVENT_CLOSE</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"You clicked on"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Close"</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">EndSelect</span><br>
+<span class="S5">Until</span><span class="S0"> </span><span class="S9">$msg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$GUI_EVENT_CLOSE</span><span class="S0"> </span><span class="S5">Or</span><span class="S0"> </span><span class="S9">$msg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$ExitID</span><br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\GUISetAccelerators.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

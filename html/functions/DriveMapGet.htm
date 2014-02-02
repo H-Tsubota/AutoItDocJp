@@ -1,0 +1,70 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function DriveMapGet</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">DriveMapGet</font>
+<hr size="2">
+<p>マップされたドライブの内容を取得します。<br></p>
+
+<p class="codeheader">
+DriveMapGet ( "device" )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">device</td>
+    <td width="85%">調べるデバイス(ドライブ、プリンター)文字。例："O:"、"LPT1:"。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">成功</td>
+    <td width="90%">マップの内容を返します。例：\\server\share</td>
+  </tr>
+  <tr>
+    <td valign="top">失敗</td>
+    <td>空文字列 ""を返し、@errorを1に設定します。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+なし。<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="DriveMapAdd.htm">DriveMapAdd</a>, <a href="DriveMapDel.htm">DriveMapDel</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S0"></span><br>
+<span class="S1">; ドライブXを\\myserver\stuffに現在のユーザーでマップ</span><br>
+<span class="S4">DriveMapAdd</span><span class="S8">(</span><span class="S7">"X:"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"\\myserver\stuff"</span><span class="S8">)</span><br>
+<br>
+<span class="S1">; マップの内容を取得</span><br>
+<span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Drive X: is mapped to"</span><span class="S8">,</span><span class="S0"> </span><span class="S4">DriveMapGet</span><span class="S8">(</span><span class="S7">"X:"</span><span class="S8">))</span><br>
+<br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\DriveMapGet.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

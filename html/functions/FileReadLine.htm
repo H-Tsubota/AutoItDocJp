@@ -1,0 +1,94 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function FileReadLine</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">FileReadLine</font>
+<hr size="2">
+<p>読み込みモードで開いたテキストファイルから1行を読み取ります。<br></p>
+
+<p class="codeheader">
+FileReadLine ( "filehandle/filename" [, line] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">filehandle/filename</td>
+    <td width="85%">FileOpen呼び出し時に返されるファイルのハンドル。またファイル名を表す文字列を使用することもできます。 </td>
+  </tr>
+  <tr>
+   <td>line</td>
+   <td><b>[オプション]</b> 読み取る行数。テキストの最初の行は1(ゼロではない)、最後の行は-1です。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">成功</td>
+    <td width="90%">テキストの行を返します。</td>
+  </tr>
+  <tr>
+    <td valign="top">特定</td>
+    <td>ファイルの最終端に到達した場合@errorを-1に設定します。</td>
+  </tr>
+  <tr>
+    <td valign="top">失敗</td>
+    <td>ファイルが読み込みモードで開かれていないなどのエラー時には@errorを1に設定します。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+読み取ったテキスト行を返す際、行末の改行文字(CHR(10)や@LF)は自動で取り除かれます。<br>
+読み取り行を指定しない場合、「次の」行が読み取られます。(新しく開いたファイルの「次の行」は最初の行です。)<br>
+filenameがファイルハンドル以外で与えられた場合、ファイルは関数呼び出し中に開閉されます。大きなテキストファイルを読み込む際にはファイルハンドルを使った場合よりも処理が遅くなります。<br>
+注意：ファイルハンドルとファイル名を混ぜて使用しないでください。例えばFileOpenでファイルを開き、この関数でファイル名を使用するといったことはしないでください。一連の処理ではファイルハンドルもしくはファイル名のどちらかだけを使用してください。<br>
+<br>
+パフォーマンスの観点からいって、「line」パラメータをインクリメントして先頭から一行ずつ読み取るのは悪いアイディアです。毎回、AutoItはファイル先頭から指定された行まで再読み込みをおこなうことになるからです。
+<br>
+ANSIとUTF16/UTF8、どちらのテキストフォーマットでも読み込めます - AutoItは自動でどちらかを判定します。<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="IniRead.htm">IniRead</a>, <a href="FileOpen.htm">FileOpen</a>, <a href="FileRead.htm">FileRead</a>, <a href="FileWrite.htm">FileWrite</a>, <a href="FileWriteLine.htm">FileWriteLine</a>, <a href="FileSetPos.htm">FileSetPos</a>, <a href="FileGetPos.htm">FileGetPos</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S9">$file</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">FileOpen</span><span class="S8">(</span><span class="S7">"test.txt"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">)</span><br>
+<br>
+<span class="S1">;ファイルが読み込みモードで開かれたかどうかチェック</span><br>
+<span class="S5">If</span><span class="S0"> </span><span class="S9">$file</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S0"> </span><span class="S5">Then</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Error"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Unable to open file."</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Exit</span><br>
+<span class="S5">EndIf</span><br>
+<br>
+<span class="S1">;EOFに達するまで1文字づつ読み込む。</span><br>
+<span class="S5">While</span><span class="S0"> </span><span class="S3">1</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$line</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">FileReadLine</span><span class="S8">(</span><span class="S9">$file</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">If</span><span class="S0"> </span><span class="S6">@error</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S0"> </span><span class="S5">Then</span><span class="S0"> </span><span class="S5">ExitLoop</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Line read:"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$line</span><span class="S8">)</span><br>
+<span class="S5">Wend</span><br>
+<br>
+<span class="S4">FileClose</span><span class="S8">(</span><span class="S9">$file</span><span class="S8">)</span><br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\FileReadLine.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

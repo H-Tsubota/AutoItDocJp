@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function TrayItemSetOnEvent</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">TrayItemSetOnEvent</font>
+<hr size="2">
+<p>トレイアイテムがクリックされた際に呼ばれるユーザー定義関数を定義します。<br></p>
+
+<p class="codeheader">
+TrayItemSetOnEvent ( itemID, "function" )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">itemID</td>
+    <td width="85%">
+	<a href="../functions/TrayCreateItem.htm">TrayCreateItem</a>関数によって返されるアイテム識別子(アイテムID)</td>
+  </tr>
+  <tr>
+   <td>function</td>
+   <td>呼ばれるユーザー関数の名前</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">成功</td>
+    <td width="90%">1を返します。</td>
+  </tr>
+  <tr>
+    <td valign="top">失敗</td>
+    <td>0を返します。</td>
+	<tr>
+    <td valign="top">@error:</td>
+    <td>"function"が定義されていない場合、1</td>
+  </tr>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+OnEvent関数はTrayOnEventModeオプションが1に設定されている場合のみ呼ばれます。このモードの際はTrayGetMsgは使用されません。<br>
+<br>
+呼ばれたユーザー関数内ではアイテム識別子は@TRAY_IDを使用して取得することができます。<br>
+<br>
+functionが空文字列""の場合、それ以前のユーザー定義は無効になります。<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="TrayCreateItem.htm">TrayCreateItem</a>, <a href="TrayGetMsg.htm">TrayGetMsg</a>, <a href="AutoItSetOption.htm#TrayOnEventMode">TrayOnEventMode (Option)</a>, <a href="TraySetOnEvent.htm">TraySetOnEvent</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span class="S11">#NoTrayIcon</span><br>
+<br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">"TrayOnEventMode"</span><span class="S8">,</span><span class="S3">1</span><span class="S8">)</span><br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">"TrayMenuMode"</span><span class="S8">,</span><span class="S3">1</span><span class="S8">)</span><span class="S0">&nbsp; &nbsp;</span><span class="S1">;  デフォルトのトレイメニューアイテム(スクリプト 停止/終了)を非表示</span><br>
+<br>
+<span class="S4">TraySetClick</span><span class="S8">(</span><span class="S3">16</span><span class="S8">)</span><span class="S0">&nbsp; &nbsp; </span><span class="S1">; 2番目のマウスボタンでトレイメニュー表示できるようにする</span><br>
+<br>
+<span class="S9">$infoitem</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">TrayCreateItem</span><span class="S8">(</span><span class="S7">"Info"</span><span class="S8">)</span><br>
+<span class="S4">TrayItemSetOnEvent</span><span class="S8">(-</span><span class="S3">1</span><span class="S8">,</span><span class="S7">"ShowInfo"</span><span class="S8">)</span><br>
+<br>
+<span class="S4">TrayCreateItem</span><span class="S8">(</span><span class="S7">""</span><span class="S8">)</span><br>
+<br>
+<span class="S9">$exititem</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">TrayCreateItem</span><span class="S8">(</span><span class="S7">"Exit"</span><span class="S8">)</span><br>
+<span class="S4">TrayItemSetOnEvent</span><span class="S8">(-</span><span class="S3">1</span><span class="S8">,</span><span class="S7">"ExitScript"</span><span class="S8">)</span><br>
+<br>
+<span class="S4">TraySetState</span><span class="S8">()</span><br>
+<br>
+<span class="S5">While</span><span class="S0"> </span><span class="S3">1</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">Sleep</span><span class="S8">(</span><span class="S3">10</span><span class="S8">)</span><span class="S0">&nbsp; &nbsp;</span><span class="S1">; アイドリングループ</span><br>
+<span class="S5">WEnd</span><br>
+<br>
+<span class="S5">Exit</span><br>
+<br>
+<br>
+<span class="S1">; 関数</span><br>
+<span class="S5">Func</span><span class="S0"> ShowInfo</span><span class="S8">()</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">Msgbox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S7">"Info"</span><span class="S8">,</span><span class="S7">"Tray OnEvent Demo"</span><span class="S8">)</span><br>
+<span class="S5">EndFunc</span><br>
+<br>
+<br>
+<span class="S5">Func</span><span class="S0"> ExitScript</span><span class="S8">()</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Exit</span><br>
+<span class="S5">EndFunc</span><br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\TrayItemSetOnEvent.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

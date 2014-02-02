@@ -1,0 +1,75 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function MouseGetCursor</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">MouseGetCursor</font>
+<hr size="2">
+<p>現在のマウスカーソルのカーソルIDを返します。<br></p>
+
+<p class="codeheader">
+MouseGetCursor ( )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+なし。<br>
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+カーソルIDを返します。<br>
+&nbsp;&nbsp;&nbsp;&nbsp;0 = UNKNOWN (不明)  (ポインティング、手掴みアイコンを含む)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;1 = APPSTARTING (アプリケーション開始)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;2 = ARROW (矢印)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;3 = CROSS (十字)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;4 = HELP (ヘルプ)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;5 = IBEAM (I-字型)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;6 = ICON (アイコン)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;7 = NO (禁止)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;8 = SIZE (サイズ)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;9 = SIZEALL (全方向)<br>
+&nbsp;&nbsp;10 = SIZENESW (北東-南西方向サイズ)<br>
+&nbsp;&nbsp;11 = SIZENS (南北方向サイズ)<br>
+&nbsp;&nbsp;12 = SIZENWSE (北西-南東方向サイズ)<br>
+&nbsp;&nbsp;13 = SIZEWE (東西方向サイズ)<br>
+&nbsp;&nbsp;14 = UPARROW (上矢印)<br>
+&nbsp;&nbsp;15 = WAIT (待機)<br>
+&nbsp;&nbsp;16 = HAND (手)<br>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+なし。<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="MouseGetPos.htm">MouseGetPos</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S4">sleep</span><span class="S8">(</span><span class="S3">2000</span><span class="S8">)</span><span class="S0"> &nbsp;</span><span class="S1">;IDを取得する前にマウスを移動させる時間</span><br>
+<br>
+<span class="S1">;IDの意味を示すための配列を作成します。</span><br>
+<span class="S9">$IDs</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">StringSplit</span><span class="S8">(</span><span class="S7">"AppStarting|Arrow|Cross|Help|IBeam|Icon|No|"</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S8">_</span><br>
+<span class="S7">"Size|SizeAll|SizeNESW|SizeNS|SizeNWSE|SizeWE|UpArrow|Wait|Hand"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"|"</span><span class="S8">)</span><br>
+<span class="S9">$IDs</span><span class="S8">[</span><span class="S3">0</span><span class="S8">]</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S7">"Unknown"</span><br>
+<br>
+<span class="S9">$cursor</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">MouseGetCursor</span><span class="S8">()</span><br>
+<span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">4096</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"ID = "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$cursor</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Which means "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$IDs</span><span class="S8">[</span><span class="S9">$cursor</span><span class="S8">])</span><br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\MouseGetCursor.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

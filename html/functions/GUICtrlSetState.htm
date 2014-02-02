@@ -1,0 +1,185 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function GUICtrlSetState</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">GUICtrlSetState</font>
+<hr size="2">
+<p>コントロールの状態を変更します。<br></p>
+
+<p class="codeheader">
+GUICtrlSetState ( controlID, state )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">controlID</td>
+    <td width="85%"><a href="GUICtrlCreate%20Management.htm">GUICtrlCreate...</a>関数によって返されるコントロール識別子(コントロールID)。</td>
+  </tr>
+  <tr>
+   <td>state</td>
+   <td>下記の<a href="#StateTable">状態表</a>を参照。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">成功</td>
+    <td width="90%">1を返します。</td>
+  </tr>
+  <tr>
+    <td valign="top">失敗</td>
+    <td>0を返します。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+<br>
+&nbsp;&nbsp;&nbsp; <a name="StateTable"></a><b>状態表</b><br>
+<table width="100%" border="1" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td style="border-bottom-style: solid; border-bottom-width: 1"><b>状態</b></td>
+    <td style="border-bottom-style: solid; border-bottom-width: 1"><b>コメント</b></td>
+  </tr>
+  <tr>
+    <td>変更なし</td>
+    <td>0</td>
+  </tr>
+  <tr>
+    <td>$GUI_UNCHECKED</td>
+    <td>ラジオ、チェックボックス、リストビューアイテムのチェックをはずします。</td>
+  </tr>
+  <tr>
+    <td>$GUI_CHECKED</td>
+    <td>ラジオ、チェックボックス、リストビューアイテムのチェックをつけます。</td>
+  </tr>
+  <tr>
+    <td>$GUI_INDETERMINATE</td>
+    <td>3状態を持つチェックボックスの状態をグレイアウトに設定します。</td>
+  </tr>
+  <tr>
+    <td>$GUI_AVISTART</td>
+    <td>Aviコントロールが再生を開始します。</td>
+  </tr>
+  <tr>
+    <td>$GUI_AVISTOP</td>
+    <td>Aviコントロールが再生を停止します。</td>
+  </tr>
+  <tr>
+    <td>$GUI_AVICLOSE</td>
+    <td>Aviコントロールが再生を停止し、リソースを解放します。</td>
+  </tr>
+  <tr>
+    <td>$GUI_DROPACCEPTED</td>
+    <td>コントロールへのドラッグアンドドロップによる入力を可能にします。ファイル、他コントロールの入力を入力できます。注意を参照。</td>
+  </tr>
+  <tr>
+    <td>$GUI_NODROPACCEPTED</td>
+    <td>コントロールへのドラッグアンドドロップによる入力を不可にします。</td>
+  </tr>
+  <tr>
+    <td>$GUI_SHOW</td>
+    <td>コントロールを表示します。タブアイテムコントロールでは1番目のタブを表示します。</td>
+  </tr>
+  <tr>
+    <td>$GUI_HIDE</td>
+    <td>コントロールを非表示にします。</td>
+  </tr>
+  <tr>
+    <td>$GUI_ENABLE</td>
+    <td>コントロールを有効にします。</td>
+  </tr>
+  <tr>
+    <td>$GUI_DISABLE</td>
+    <td>コントロールを無効にします。</td>
+  </tr>
+  <tr>
+    <td>$GUI_FOCUS</td>
+    <td>コントロールに入力/選択のフォーカスをあわせます。</td>
+  </tr>
+  <tr>
+    <td>$GUI_NOFOCUS</td>
+    <td>リストビューコントロールのフォーカスをはずします。</td>
+  </tr>
+  <tr>
+    <td>$GUI_DEFBUTTON</td>
+    <td>コントロールをウィンドウのデフォルトボタンに設定します。ツリービューアイテムに関しては注意を参照してください。</td>
+  </tr>
+  <tr>
+    <td>$GUI_EXPAND</td>
+    <td>ツリービューアイテムを開いて子アイテムを表示します。</td>
+  </tr>
+  <tr>
+    <td>$GUI_ONTOP</td>
+    <td>コントロールの位置(Z-ordering)をウィンドウの最前面に設定します。</td>
+  </tr>
+</table><br>
+状態値は足し合わせることｔができます。例えば$GUI_DISABLE + $GUI_HIDEを設定するとコントロールは無効/非表示状態になります。<br>
+<br>
+AVIコントロールを$GUI_HIDEを使って非表示にする場合は$GUI_AVICLOSEによって終了しなければなりません。<br>
+<br>
+"コンテキストメニュー"コントロールの状態は<b>変更することができません</b>。<br>
+"リストビューアイテム"コントロールの状態は、関係する"リストビュー"コントロールに拡張スタイルの$LVS_EX_CHECKBOXESが設定されている場合のみ変更できます。$GUI_FOCUS、$GUI_NOFOCUSはスタイルに$LVS_SHOWSELALWAYSが設定され、表示可能になっているリストビューコントロールのリストビューアイテムにのみ使用できます。<br>
+"メニュー"、"メニューアイテム"コントロールの状態は<b>非表示にすることができません</b>。<br>
+<br>
+! $GUI_EXPANDに関する重要な情報：この状態はTreeViewItemsだけにしか使用できません。この'動作'を使用する場合、アイテムの下に少なくとも1つのツリービューアイテムが存在/作成されていることが必要です !<br>
+ツリービュー内の他のアイテムを選択したい場合は$GUI_FOCUSを使用します。親ツリービューにウィンドウのフォーカスがあい、指定したアイテムに選択マークがつきます。<br>
+ツリービューアイテムの1つをデフォルトアイテム(太文字表示される)に設定したい場合は$GUI_DEFBUTTONを使用します。設定を解除するには$GUI_DEFBUTTON以外の値、例えば0を設定します。この状態はGUICtrlGetStateによって返されません。<br>
+<br>
+GUI_DROPACCEPTEDを表示されているコントロールに設定するとドラッグアンドドロップが利用できます。エディットコントロール/インプットコントロールにはファイル名が設定されます。<br>
+
+他のコントロールで$GUI_EVENT_DROPPEDが発生すると、@GUI_DRAGIDがドラッグ開始位置のコントロールのIDに(ファイルの場合-1に設定され、@GUI_DRAGFILEにファイル名が設定されます)、@GUI_DROPID がドロップ位置のコントロールのIDに設定されます。<br>
+リストビューアイテムでのドラッグアンドドロップ処理時のみ、@GUI_DRAGIDにリストビューのコントロールIDが設定されます。<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="GUICtrlCreate%20Management.htm">GUICtrlCreate...</a>, <a href="GUICtrlGetState.htm">GUICtrlGetState</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;GUIConstantsEx.au3&gt;</span><br>
+<br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">'MustDeclareVars'</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">)</span><br>
+<br>
+<span class="S0">Example</span><span class="S8">()</span><br>
+<br>
+<span class="S5">Func</span><span class="S0"> Example</span><span class="S8">()</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$msg</span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUICreate</span><span class="S8">(</span><span class="S7">"My GUI state"</span><span class="S8">)</span><span class="S0"> &nbsp;</span><span class="S1">; 表示時に中央に表示されるダイアログボックスを作成</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUICtrlCreateLabel</span><span class="S8">(</span><span class="S7">"my disable label"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">10</span><span class="S8">,</span><span class="S0"> </span><span class="S3">20</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUICtrlSetState</span><span class="S8">(-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$GUI_DISABLE</span><span class="S8">)</span><span class="S0"> &nbsp; </span><span class="S1">; ラベルを無効状態にする</span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUICtrlCreateButton</span><span class="S8">(</span><span class="S7">"my button"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">50</span><span class="S8">,</span><span class="S0"> </span><span class="S3">50</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUICtrlSetState</span><span class="S8">(-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$GUI_FOCUS</span><span class="S8">)</span><span class="S0"> &nbsp; &nbsp; </span><span class="S1">; フォーカスをこのボタンに設定</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUISetState</span><span class="S8">()</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; ダイアログが閉じられるまでGUIを実行</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">While</span><span class="S0"> </span><span class="S3">1</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$msg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUIGetMsg</span><span class="S8">()</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">If</span><span class="S0"> </span><span class="S9">$msg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$GUI_EVENT_CLOSE</span><span class="S0"> </span><span class="S5">Then</span><span class="S0"> </span><span class="S5">ExitLoop</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">WEnd</span><br>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;Example</span></span><br>
+<script type="text/javascript">
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\GUICtrlSetState.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+</body>
+</html>

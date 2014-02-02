@@ -1,0 +1,389 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function GUICtrlRegisterListViewSort</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">GUICtrlRegisterListViewSort</font>
+<hr size="2">
+<p>リストビュー内部のソートコールバック関数にユーザー定義関数を登録します。<br></p>
+
+<p class="codeheader">
+GUICtrlRegisterListViewSort ( controlID, "function" )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">controlID</td>
+    <td width="85%">
+	ユーザー関数が処理するリストビューのコントロールID。</td>
+  </tr>
+  <tr>
+   <td>function</td>
+   <td>ソートコールバック実行時に呼ばれるユーザー関数名。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">成功</td>
+    <td width="90%">1</td>
+  </tr>
+  <tr>
+    <td valign="top">失敗</td>
+    <td>0</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+!!! ユーザー関数を正常に動作させるためには<strong>最大で4つの関数パラメータを定義しなければいけません</strong>。パラメータの定義が不適切な場合、関数は呼び出されません !!!<br>
+例：<br>
+Func MySortFunction($nListViewID, $LParam1, $LParam2, $nColumn)<br>
+...<br>
+EndFunc<br>
+<br>
+または<br>
+<br>
+Func MySortFunction($nListViewID, $LParam1, $LParam2)<br>
+...<br>
+EndFunc<br>
+<br>
+ユーザー関数が呼び出し時、これら4つのパラメータは次の値を持ちます。<br>
+<table width="100%" border="1" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td style="border-bottom-style: solid; border-bottom-width: 1"><b>位置</b></td>
+    <td style="border-bottom-style: solid; border-bottom-width: 1"><b>パラメータ</b></td>
+    <td style="border-bottom-style: solid; border-bottom-width: 1"><b>意味</b></td>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>controlID</td>
+    <td>コールバック関数が使用されるリストビューコントロールのコントロールID。</td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>lParam1</td>
+    <td>1番目のアイテムのlParam値(デフォルトではアイテムのコントロールID)。</td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td>lParam2</td>
+    <td>2番目のアイテムのlParam値(デフォルトではアイテムのコントロールID)。</td>
+  </tr>
+  <tr>
+    <td>4</td>
+    <td>column</td>
+    <td>ソートのためにクリックされた列(1番目の列の番号は0)。</td>
+  </tr>
+</table><br>
+ソートコールバックの動作を変更するために次の値が<strong>返されなければなりません</strong>。
+<br>
+<table width="100%" border="1" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td style="border-bottom-style: solid; border-bottom-width: 1"><b>返し値</b></td>
+    <td style="border-bottom-style: solid; border-bottom-width: 1"><b>意味</b></td>
+  </tr>
+  <tr>
+    <td>-1</td>
+    <td>1番目のアイテムが2番目のアイテムの前にくる。</td>
+  </tr>
+  <tr>
+    <td>0</td>
+    <td>変更なし。</td>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>2番目のアイテムが1番目のアイテムの前にくる。</td>
+  </tr>
+</table><br>
+例にある自作のGUIリストビューアイテムのソートも参照してください。<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="GUICtrlCreateListView.htm">GUICtrlCreateListView</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;GUIConstantsEx.au3&gt;</span><br>
+<span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;ListViewConstants.au3&gt;</span><br>
+<br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">'MustDeclareVars'</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">)</span><br>
+<br>
+<span class="S5">Global</span><span class="S0"> </span><span class="S9">$nCurCol</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><br>
+<span class="S5">Global</span><span class="S0"> </span><span class="S9">$nSortDir</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">1</span><br>
+<span class="S5">Global</span><span class="S0"> </span><span class="S9">$bSet</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><br>
+<span class="S5">Global</span><span class="S0"> </span><span class="S9">$nCol</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><br>
+<br>
+<span class="S0">Example1</span><span class="S8">()</span><br>
+<span class="S0">Example2</span><span class="S8">()</span><br>
+<br>
+<span class="S1">; *******************************************************</span><br>
+<span class="S1">; 例 1 - 3列毎のソート</span><br>
+<span class="S1">; *******************************************************</span><br>
+<span class="S5">Func</span><span class="S0"> Example1</span><span class="S8">()</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$hGUI</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$lv</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$lvi1</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$lvi2</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$lvi3</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$msg</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$hGUI</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICreate</span><span class="S8">(</span><span class="S7">"Test"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">300</span><span class="S8">,</span><span class="S0"> </span><span class="S3">200</span><span class="S8">)</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$lv</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICtrlCreateListView</span><span class="S8">(</span><span class="S7">"Column1|Col2|Col3"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">10</span><span class="S8">,</span><span class="S0"> </span><span class="S3">10</span><span class="S8">,</span><span class="S0"> </span><span class="S3">280</span><span class="S8">,</span><span class="S0"> </span><span class="S3">180</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUICtrlRegisterListViewSort</span><span class="S8">(-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"LVSort"</span><span class="S8">)</span><span class="S0"> </span><span class="S1">; ソートのコールバック用に関数"SortLV"を登録</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$lvi1</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICtrlCreateListViewItem</span><span class="S8">(</span><span class="S7">"ABC|666|10.05.2004"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$lv</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUICtrlSetImage</span><span class="S8">(-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"shell32.dll"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">7</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$lvi2</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICtrlCreateListViewItem</span><span class="S8">(</span><span class="S7">"DEF|444|11.05.2005"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$lv</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUICtrlSetImage</span><span class="S8">(-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"shell32.dll"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">12</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$lvi3</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICtrlCreateListViewItem</span><span class="S8">(</span><span class="S7">"CDE|444|12.05.2004"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$lv</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUICtrlSetImage</span><span class="S8">(-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"shell32.dll"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">3</span><span class="S8">)</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUISetState</span><span class="S8">()</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">While</span><span class="S0"> </span><span class="S3">1</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$msg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUIGetMsg</span><span class="S8">()</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Switch</span><span class="S0"> </span><span class="S9">$msg</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Case</span><span class="S0"> </span><span class="S9">$GUI_EVENT_CLOSE</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">ExitLoop</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Case</span><span class="S0"> </span><span class="S9">$lv</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$bSet</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$nCurCol</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$nCol</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S4">GUICtrlSendMsg</span><span class="S8">(</span><span class="S9">$lv</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$LVM_SETSELECTEDCOLUMN</span><span class="S8">,</span><span class="S0"> </span><span class="S4">GUICtrlGetState</span><span class="S8">(</span><span class="S9">$lv</span><span class="S8">),</span><span class="S0"> </span><span class="S3">0</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S4">DllCall</span><span class="S8">(</span><span class="S7">"user32.dll"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"int"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"InvalidateRect"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"hwnd"</span><span class="S8">,</span><span class="S0"> </span><span class="S4">GUICtrlGetHandle</span><span class="S8">(</span><span class="S9">$lv</span><span class="S8">),</span><span class="S0"> </span><span class="S7">"int"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"int"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">EndSwitch</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">WEnd</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUIDelete</span><span class="S8">()</span><br>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;example1</span><br>
+<br>
+<span class="S1">; 自前のソートコールバック関数</span><br>
+<span class="S5">Func</span><span class="S0"> LVSort</span><span class="S8">(</span><span class="S9">$hWnd</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nItem1</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nItem2</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nColumn</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$nSort</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$val1</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$val2</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nResult</span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; ソート方向を切り替え</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">If</span><span class="S0"> </span><span class="S9">$nColumn</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$nCurCol</span><span class="S0"> </span><span class="S5">Then</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">If</span><span class="S0"> </span><span class="S5">Not</span><span class="S0"> </span><span class="S9">$bSet</span><span class="S0"> </span><span class="S5">Then</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$nSortDir</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$nSortDir</span><span class="S0"> </span><span class="S8">*</span><span class="S0"> </span><span class="S8">-</span><span class="S0"> </span><span class="S3">1</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$bSet</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">1</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">EndIf</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Else</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$nSortDir</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">1</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">EndIf</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$nCol</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$nColumn</span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$val1</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> GetSubItemText</span><span class="S8">(</span><span class="S9">$hWnd</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nItem1</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nColumn</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$val2</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> GetSubItemText</span><span class="S8">(</span><span class="S9">$hWnd</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nItem2</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nColumn</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; 3列目(列は0始まり)の場合、日付を比較</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">If</span><span class="S0"> </span><span class="S9">$nColumn</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">2</span><span class="S0"> </span><span class="S5">Then</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$val1</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">StringRight</span><span class="S8">(</span><span class="S9">$val1</span><span class="S8">,</span><span class="S0"> </span><span class="S3">4</span><span class="S8">)</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S4">StringMid</span><span class="S8">(</span><span class="S9">$val1</span><span class="S8">,</span><span class="S0"> </span><span class="S3">4</span><span class="S8">,</span><span class="S0"> </span><span class="S3">2</span><span class="S8">)</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S4">StringLeft</span><span class="S8">(</span><span class="S9">$val1</span><span class="S8">,</span><span class="S0"> </span><span class="S3">2</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$val2</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">StringRight</span><span class="S8">(</span><span class="S9">$val2</span><span class="S8">,</span><span class="S0"> </span><span class="S3">4</span><span class="S8">)</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S4">StringMid</span><span class="S8">(</span><span class="S9">$val2</span><span class="S8">,</span><span class="S0"> </span><span class="S3">4</span><span class="S8">,</span><span class="S0"> </span><span class="S3">2</span><span class="S8">)</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S4">StringLeft</span><span class="S8">(</span><span class="S9">$val2</span><span class="S8">,</span><span class="S0"> </span><span class="S3">2</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">EndIf</span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$nResult</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><span class="S0"> &nbsp; &nbsp;</span><span class="S1">; アイテム1、アイテム2の位置に変更なし </span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">If</span><span class="S0"> </span><span class="S9">$val1</span><span class="S0"> </span><span class="S8">&lt;</span><span class="S0"> </span><span class="S9">$val2</span><span class="S0"> </span><span class="S5">Then</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$nResult</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S0">&nbsp; &nbsp;</span><span class="S1">; アイテム2をアイテム1の前に置く</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">ElseIf</span><span class="S0"> </span><span class="S9">$val1</span><span class="S0"> </span><span class="S8">&gt;</span><span class="S0"> </span><span class="S9">$val2</span><span class="S0"> </span><span class="S5">Then</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$nResult</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">1</span><span class="S0">&nbsp; &nbsp; </span><span class="S1">; アイテム2をアイテム1の後ろに置く</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">EndIf</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$nResult</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$nResult</span><span class="S0"> </span><span class="S8">*</span><span class="S0"> </span><span class="S9">$nSortDir</span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Return</span><span class="S0"> </span><span class="S9">$nResult</span><br>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;LVSort</span><br>
+<br>
+<br>
+<span class="S1">; 指定した列のリストビューアイテムのテキストを取得</span><br>
+<span class="S5">Func</span><span class="S0"> GetSubItemText</span><span class="S8">(</span><span class="S9">$nCtrlID</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nItemID</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nColumn</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$stLvfi</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">DllStructCreate</span><span class="S8">(</span><span class="S7">"uint;ptr;int;int[2];int"</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$nIndex</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$stBuffer</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$stLvi</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$sItemText</span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">DllStructSetData</span><span class="S8">(</span><span class="S9">$stLvfi</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$LVFI_PARAM</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">DllStructSetData</span><span class="S8">(</span><span class="S9">$stLvfi</span><span class="S8">,</span><span class="S0"> </span><span class="S3">3</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nItemID</span><span class="S8">)</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$stBuffer</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">DllStructCreate</span><span class="S8">(</span><span class="S7">"char[260]"</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$nIndex</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICtrlSendMsg</span><span class="S8">(</span><span class="S9">$nCtrlID</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$LVM_FINDITEM</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S4">DllStructGetPtr</span><span class="S8">(</span><span class="S9">$stLvfi</span><span class="S8">))</span><span class="S1">;</span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$stLvi</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">DllStructCreate</span><span class="S8">(</span><span class="S7">"uint;int;int;uint;uint;ptr;int;int;int;int"</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">DllStructSetData</span><span class="S8">(</span><span class="S9">$stLvi</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$LVIF_TEXT</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">DllStructSetData</span><span class="S8">(</span><span class="S9">$stLvi</span><span class="S8">,</span><span class="S0"> </span><span class="S3">2</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nIndex</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">DllStructSetData</span><span class="S8">(</span><span class="S9">$stLvi</span><span class="S8">,</span><span class="S0"> </span><span class="S3">3</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nColumn</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">DllStructSetData</span><span class="S8">(</span><span class="S9">$stLvi</span><span class="S8">,</span><span class="S0"> </span><span class="S3">6</span><span class="S8">,</span><span class="S0"> </span><span class="S4">DllStructGetPtr</span><span class="S8">(</span><span class="S9">$stBuffer</span><span class="S8">))</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">DllStructSetData</span><span class="S8">(</span><span class="S9">$stLvi</span><span class="S8">,</span><span class="S0"> </span><span class="S3">7</span><span class="S8">,</span><span class="S0"> </span><span class="S3">260</span><span class="S8">)</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUICtrlSendMsg</span><span class="S8">(</span><span class="S9">$nCtrlID</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$LVM_GETITEMA</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S4">DllStructGetPtr</span><span class="S8">(</span><span class="S9">$stLvi</span><span class="S8">))</span><span class="S1">;</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$sItemText</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">DllStructGetData</span><span class="S8">(</span><span class="S9">$stBuffer</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">)</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$stLvi</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$stLvfi</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$stBuffer</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Return</span><span class="S0"> </span><span class="S9">$sItemText</span><br>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;GetSubItemText</span><br>
+<br>
+<br>
+<span class="S1">; *******************************************************</span><br>
+<span class="S1">; 例2 - DllCallによる自作アイテムのソート</span><br>
+<span class="S1">; *******************************************************</span><br>
+<span class="S5">Func</span><span class="S0"> Example2</span><span class="S8">()</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$hGUI</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$lv</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$msg</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$nCurCol</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$nSortDir</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">1</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$bSet</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$nCol</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$hGUI</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICreate</span><span class="S8">(</span><span class="S7">"Test"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">300</span><span class="S8">,</span><span class="S0"> </span><span class="S3">200</span><span class="S8">)</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$lv</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICtrlCreateListView</span><span class="S8">(</span><span class="S7">"Column1|Col2|Col3"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">10</span><span class="S8">,</span><span class="S0"> </span><span class="S3">10</span><span class="S8">,</span><span class="S0"> </span><span class="S3">280</span><span class="S8">,</span><span class="S0"> </span><span class="S3">180</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUICtrlRegisterListViewSort</span><span class="S8">(-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"LVSort2"</span><span class="S8">)</span><span class="S0"> </span><span class="S1">; ソートのコールバック用に関数"SortLV"を登録</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; MyGUICtrlCreateListViewItem</span><span class="S8">(</span><span class="S7">"ABC|666|10.05.2004"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$lv</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; MyGUICtrlCreateListViewItem</span><span class="S8">(</span><span class="S7">"DEF|444|11.05.2005"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$lv</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; MyGUICtrlCreateListViewItem</span><span class="S8">(</span><span class="S7">"CDE|444|12.05.2004"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$lv</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S8">)</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUISetState</span><span class="S8">()</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">While</span><span class="S0"> </span><span class="S3">1</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$msg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUIGetMsg</span><span class="S8">()</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Switch</span><span class="S0"> </span><span class="S9">$msg</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Case</span><span class="S0"> </span><span class="S9">$GUI_EVENT_CLOSE</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">ExitLoop</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Case</span><span class="S0"> </span><span class="S9">$lv</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$bSet</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$nCurCol</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$nCol</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S4">GUICtrlSendMsg</span><span class="S8">(</span><span class="S9">$lv</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$LVM_SETSELECTEDCOLUMN</span><span class="S8">,</span><span class="S0"> </span><span class="S4">GUICtrlGetState</span><span class="S8">(</span><span class="S9">$lv</span><span class="S8">),</span><span class="S0"> </span><span class="S3">0</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S4">DllCall</span><span class="S8">(</span><span class="S7">"user32.dll"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"int"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"InvalidateRect"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"hwnd"</span><span class="S8">,</span><span class="S0"> </span><span class="S4">ControlGetHandle</span><span class="S8">(</span><span class="S9">$hGUI</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$lv</span><span class="S8">),</span><span class="S0"> </span><span class="S7">"int"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"int"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">EndSwitch</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">WEnd</span><br>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;Example2</span><br>
+<br>
+<span class="S1">; 自前のソートコールバック関数</span><br>
+<span class="S5">Func</span><span class="S0"> LVSort2</span><span class="S8">(</span><span class="S9">$hWnd</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nItem1</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nItem2</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nColumn</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$nSort</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$val1</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$val2</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nResult</span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; ソート方向を切り替え</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">If</span><span class="S0"> </span><span class="S9">$nColumn</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$nCurCol</span><span class="S0"> </span><span class="S5">Then</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">If</span><span class="S0"> </span><span class="S5">Not</span><span class="S0"> </span><span class="S9">$bSet</span><span class="S0"> </span><span class="S5">Then</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$nSortDir</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$nSortDir</span><span class="S0"> </span><span class="S8">*</span><span class="S0"> </span><span class="S8">-</span><span class="S0"> </span><span class="S3">1</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$bSet</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">1</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">EndIf</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Else</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$nSortDir</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">1</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">EndIf</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$nCol</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$nColumn</span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$val1</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> GetSubItemText</span><span class="S8">(</span><span class="S9">$hWnd</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nItem1</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nColumn</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$val2</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> GetSubItemText</span><span class="S8">(</span><span class="S9">$hWnd</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nItem2</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nColumn</span><span class="S8">)</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; 3列目(列は0始まり)の場合、日付を比較</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">If</span><span class="S0"> </span><span class="S9">$nColumn</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">2</span><span class="S0"> </span><span class="S5">Then</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$val1</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">StringRight</span><span class="S8">(</span><span class="S9">$val1</span><span class="S8">,</span><span class="S0"> </span><span class="S3">4</span><span class="S8">)</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S4">StringMid</span><span class="S8">(</span><span class="S9">$val1</span><span class="S8">,</span><span class="S0"> </span><span class="S3">4</span><span class="S8">,</span><span class="S0"> </span><span class="S3">2</span><span class="S8">)</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S4">StringLeft</span><span class="S8">(</span><span class="S9">$val1</span><span class="S8">,</span><span class="S0"> </span><span class="S3">2</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$val2</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">StringRight</span><span class="S8">(</span><span class="S9">$val2</span><span class="S8">,</span><span class="S0"> </span><span class="S3">4</span><span class="S8">)</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S4">StringMid</span><span class="S8">(</span><span class="S9">$val2</span><span class="S8">,</span><span class="S0"> </span><span class="S3">4</span><span class="S8">,</span><span class="S0"> </span><span class="S3">2</span><span class="S8">)</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S4">StringLeft</span><span class="S8">(</span><span class="S9">$val2</span><span class="S8">,</span><span class="S0"> </span><span class="S3">2</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">EndIf</span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$nResult</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><span class="S0"> &nbsp; &nbsp;</span><span class="S1">; アイテム1、アイテム2の位置に変更なし </span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">If</span><span class="S0"> </span><span class="S9">$val1</span><span class="S0"> </span><span class="S8">&lt;</span><span class="S0"> </span><span class="S9">$val2</span><span class="S0"> </span><span class="S5">Then</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$nResult</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S0">&nbsp; &nbsp;</span><span class="S1">; アイテム2をアイテム1の前に置く</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">ElseIf</span><span class="S0"> </span><span class="S9">$val1</span><span class="S0"> </span><span class="S8">&gt;</span><span class="S0"> </span><span class="S9">$val2</span><span class="S0"> </span><span class="S5">Then</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$nResult</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">1</span><span class="S0">&nbsp; &nbsp; </span><span class="S1">; アイテム2をアイテム1の後ろに置く</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">EndIf</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$nResult</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$nResult</span><span class="S0"> </span><span class="S8">*</span><span class="S0"> </span><span class="S9">$nSortDir</span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Return</span><span class="S0"> </span><span class="S9">$nResult</span><br>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;LVSort2</span><br>
+<br>
+<br>
+<span class="S1">; 指定した列のリストビューアイテムのテキストを取得</span><br>
+<span class="S5">Func</span><span class="S0"> GetSubItemText2</span><span class="S8">(</span><span class="S9">$nCtrlID</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nItemID</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nColumn</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$stLvfi</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">DllStructCreate</span><span class="S8">(</span><span class="S7">"uint;ptr;int;int[2];int"</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$stBuffer</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nIndex</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$stLvi</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$sItemText</span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">DllStructSetData</span><span class="S8">(</span><span class="S9">$stLvfi</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$LVFI_PARAM</span><span class="S8">)</span><span class="S0"> </span><span class="S1">; 保存したインデックスからアイテムを検索</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">DllStructSetData</span><span class="S8">(</span><span class="S9">$stLvfi</span><span class="S8">,</span><span class="S0"> </span><span class="S3">3</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nItemID</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$stBuffer</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">DllStructCreate</span><span class="S8">(</span><span class="S7">"char[260]"</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$nIndex</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICtrlSendMsg</span><span class="S8">(</span><span class="S9">$nCtrlID</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$LVM_FINDITEM</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S4">DllStructGetPtr</span><span class="S8">(</span><span class="S9">$stLvfi</span><span class="S8">))</span><span class="S1">;</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$stLvi</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">DllStructCreate</span><span class="S8">(</span><span class="S7">"uint;int;int;uint;uint;ptr;int;int;int;int"</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">DllStructSetData</span><span class="S8">(</span><span class="S9">$stLvi</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$LVIF_TEXT</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">DllStructSetData</span><span class="S8">(</span><span class="S9">$stLvi</span><span class="S8">,</span><span class="S0"> </span><span class="S3">2</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nIndex</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">DllStructSetData</span><span class="S8">(</span><span class="S9">$stLvi</span><span class="S8">,</span><span class="S0"> </span><span class="S3">3</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nColumn</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">DllStructSetData</span><span class="S8">(</span><span class="S9">$stLvi</span><span class="S8">,</span><span class="S0"> </span><span class="S3">6</span><span class="S8">,</span><span class="S0"> </span><span class="S4">DllStructGetPtr</span><span class="S8">(</span><span class="S9">$stBuffer</span><span class="S8">))</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">DllStructSetData</span><span class="S8">(</span><span class="S9">$stLvi</span><span class="S8">,</span><span class="S0"> </span><span class="S3">7</span><span class="S8">,</span><span class="S0"> </span><span class="S3">260</span><span class="S8">)</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUICtrlSendMsg</span><span class="S8">(</span><span class="S9">$nCtrlID</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$LVM_GETITEMA</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S4">DllStructGetPtr</span><span class="S8">(</span><span class="S9">$stLvi</span><span class="S8">))</span><span class="S1">;</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$sItemText</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">DllStructGetData</span><span class="S8">(</span><span class="S9">$stBuffer</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">)</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$stLvi</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$stLvfi</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$stBuffer</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Return</span><span class="S0"> </span><span class="S9">$sItemText</span><br>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;GetSubItemText2</span><br>
+<br>
+<br>
+<span class="S1">; アイテムを作成し、リスビューに直接挿入</span><br>
+<span class="S5">Func</span><span class="S0"> MyGUICtrlCreateListViewItem</span><span class="S8">(</span><span class="S9">$sText</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nCtrlID</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nIndex</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$stLvItem</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">DllStructCreate</span><span class="S8">(</span><span class="S7">"uint;int;int;uint;uint;ptr;int;int;int;int;"</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$stText</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">DllStructCreate</span><span class="S8">(</span><span class="S7">"char[260]"</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$arText</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">StringSplit</span><span class="S8">(</span><span class="S9">$sText</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"|"</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">If</span><span class="S0"> </span><span class="S9">$nIndex</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S0"> </span><span class="S5">Then</span><span class="S0"> </span><span class="S9">$nIndex</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICtrlSendMsg</span><span class="S8">(</span><span class="S9">$nCtrlID</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$LVM_GETITEMCOUNT</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">DllStructSetData</span><span class="S8">(</span><span class="S9">$stText</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$arText</span><span class="S8">[</span><span class="S3">1</span><span class="S8">])</span><span class="S0"> </span><span class="S1">; アイテムテキストを構造体に保存</span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">DllStructSetData</span><span class="S8">(</span><span class="S9">$stLvItem</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S4">BitOR</span><span class="S8">(</span><span class="S9">$LVIF_TEXT</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$LVIF_PARAM</span><span class="S8">))</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">DllStructSetData</span><span class="S8">(</span><span class="S9">$stLvItem</span><span class="S8">,</span><span class="S0"> </span><span class="S3">2</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nIndex</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">DllStructSetData</span><span class="S8">(</span><span class="S9">$stLvItem</span><span class="S8">,</span><span class="S0"> </span><span class="S3">6</span><span class="S8">,</span><span class="S0"> </span><span class="S4">DllStructGetPtr</span><span class="S8">(</span><span class="S9">$stText</span><span class="S8">))</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; 構造体のlParamを行インデックス(リストビュー内でユニーク)に設定</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">DllStructSetData</span><span class="S8">(</span><span class="S9">$stLvItem</span><span class="S8">,</span><span class="S0"> </span><span class="S3">9</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nIndex</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$nIndex</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICtrlSendMsg</span><span class="S8">(</span><span class="S9">$nCtrlID</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$LVM_INSERTITEMA</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S4">DllStructGetPtr</span><span class="S8">(</span><span class="S9">$stLvItem</span><span class="S8">))</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">If</span><span class="S0"> </span><span class="S9">$nIndex</span><span class="S0"> </span><span class="S8">&gt;</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S0"> </span><span class="S5">Then</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S1">; 現在の列テキストの残りを挿入</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">For</span><span class="S0"> </span><span class="S9">$i</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">2</span><span class="S0"> </span><span class="S5">To</span><span class="S0"> </span><span class="S9">$arText</span><span class="S8">[</span><span class="S3">0</span><span class="S8">]</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S4">DllStructSetData</span><span class="S8">(</span><span class="S9">$stText</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$arText</span><span class="S8">[</span><span class="S9">$i</span><span class="S8">])</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S4">DllStructSetData</span><span class="S8">(</span><span class="S9">$stLvItem</span><span class="S8">,</span><span class="S0"> </span><span class="S3">3</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$i</span><span class="S0"> </span><span class="S8">-</span><span class="S0"> </span><span class="S3">1</span><span class="S8">)</span><span class="S0"> </span><span class="S1"> ; サブアイテムのインデックスを保存</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S4">GUICtrlSendMsg</span><span class="S8">(</span><span class="S9">$nCtrlID</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$LVM_SETITEMTEXTA</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nIndex</span><span class="S8">,</span><span class="S0"> </span><span class="S4">DllStructGetPtr</span><span class="S8">(</span><span class="S9">$stLvItem</span><span class="S8">))</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Next</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">EndIf</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$stText</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$stLvItem</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; アイテムテキストにあわせて列の幅を変更</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">For</span><span class="S0"> </span><span class="S9">$i</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><span class="S0"> </span><span class="S5">To</span><span class="S0"> </span><span class="S3">2</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S4">GUICtrlSendMsg</span><span class="S8">(</span><span class="S9">$nCtrlID</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$LVM_SETCOLUMNWIDTH</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$i</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S4">GUICtrlSendMsg</span><span class="S8">(</span><span class="S9">$nCtrlID</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$LVM_SETCOLUMNWIDTH</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$i</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">2</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Next</span><br>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;MyGUICtrlCreateListViewItem</span></span><br>
+<script type="text/javascript">
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\GUICtrlRegisterListViewSort.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+</body>
+</html>

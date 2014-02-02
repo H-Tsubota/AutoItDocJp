@@ -1,0 +1,75 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Keyword For...To...Step...Next</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Keyword Reference</h1>
+<font size="+1">For...To...Step...Next</font>
+<hr size="2">
+<p>条件式に基づいてループします。<br></p>
+
+<p class="codeheader">
+<b>For</b> &lt;variable&gt; = &lt;start&gt; <b>To</b> &lt;stop&gt; [<b>Step</b> &lt;stepval&gt;]<br>
+&nbsp;&nbsp;&nbsp; <i>statements</i><br>
+&nbsp;&nbsp;&nbsp; ...<br>
+<b>Next</b><br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">variable</td>
+    <td width="85%">カウントに使う変数</td>
+  </tr>
+  <tr>
+   <td>start</td>
+   <td>カウントに使う変数の初期値</td>
+  </tr>
+  <tr>
+   <td>stop</td>
+   <td>カウントに使う変数の終了値</td>
+  </tr>
+  <tr>
+   <td>stepval</td>
+   <td><b>[オプション]</b> ループを1回まわすごとにいくつカウントを増やすかの値（分数も可能）。デフォルトは1</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+MustDeclareVarsがオンになっている場合でも、変数はLOCALで自動生成されます。<br>
+<br>
+For...Next文は入れ子構造にできます。Forループは<i>variable</i>が<i>stop</i>の値に達すると終了します。<i>stepVal</i> 、<i>stop</i> が変数の場合, その値は一番最初にループが実行される際に読み取られます。<br>
+<br>
+次の場合はForループ内の命令文は実行されません。<br>
+&nbsp;&nbsp;&nbsp;<i>start</i> &gt; <i>stop</i> かつ <i>step</i> <u>&gt;</u> 0, または<br>
+&nbsp;&nbsp;&nbsp;<i>start</i> &lt; <i>stop</i> かつ <i>step</i> がマイナスの値<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="ContinueLoop.htm">ContinueLoop</a>, <a href="ExitLoop.htm">ExitLoop</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S5">For</span><span class="S0"> </span><span class="S9">$i</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">5</span><span class="S0"> </span><span class="S5">to</span><span class="S0"> </span><span class="S3">1</span><span class="S0"> </span><span class="S5">Step</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Count down!"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$i</span><span class="S8">)</span><br>
+<span class="S5">Next</span><br>
+<span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Blast Off!"</span><span class="S8">)</span><br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\For.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

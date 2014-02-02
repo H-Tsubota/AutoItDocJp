@@ -1,0 +1,484 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function Send</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">Send</font>
+<hr size="2">
+<p>シミュレーションしたキーストロークをアクティブなウィンドウに送信します。<br></p>
+
+<p class="codeheader">
+Send ( "keys" [, flag] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">keys</td>
+    <td width="85%">送信するキー列</td>
+  </tr>
+  <tr>
+   <td>flag</td>
+   <td><b>[オプション]</b> どのように"キー"を送信するかを変更します。<br>
+       &nbsp;&nbsp;flag = 0 (デフォルト)： SHIFTやALTキーが押されていることを意味する+や!のような特殊な文字をテキストが含んでる場合。<br>
+       &nbsp;&nbsp;flag = 1：キーはそのまま送信されます。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+なし。<br>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+Sendに関するTIPSについては<a href="../appendix/SendKeys.htm">Appendix</a>を参照。AutoItでは全てのASCIIとExtended ASCII 文字(0-255)を送信することができます。UNICODE 文字を送信するには”ASC”オプションと送信したい文字コード を使用しなければなりません（下表の下の {ASC} を参照）。<br>
+<br>
+”send”コマンドの文法はScriptItやVisualBasicの”SendKeys”コマンドと同じです。次に示す文字を除いて、文字は書かれたとおりに送信されます。<br>
+<br>
+'!'<br>
+AutoItがALTキーを送信するよう指定します。従ってSend("This is text!a") は"This is text"と送信した後"ALT+a"を押します。<br>
+<br>
+注意：プログラムによってはALTキー+大文字で意味が変わることがあります。例えば"!A"と"!a"で意味が異なる場合があります。最初のものはALT+SHIFT+Aで2番目のものはALT+aという具合です。迷った場合は小文字を使いましょう！<br>
+<br>
+'+'<br>
+AutoItがSHIFTキーを送信するよう指定します。従ってSend("Hell+o")は"HellO"と送信し、Send("!+a")は"ALT+SHIFT+a"と送信します。<br>
+<br>
+'^'<br>
+AutoItがCONTROLキーを送信するよう指定します。従ってSend("^!a")は"CTRL+ALT+a"と送信します。<br>
+<br>
+注意：プログラムによってはCTRLキー+大文字で意味が変わることがあります。例えば"^A"と"^a"で意味が異なる場合があります。最初のものはCTRL+SHIFT+Aで2番目のものはCTRL+aという具合です。迷った場合は小文字を使いましょう！<br>
+<br>
+'#'<br>
+ハッシュはWindowsキーを送信します。従ってSend("#r")はWin+rと送信して”ファイル名を指定して実行”のダイアログボックスを立ち上げます。<br>
+<br>
+SendCapslockModeを設定することでSend操作の前にCAPS LOCKをはずし、Send操作終了後に元に戻すことができます。<br>
+しかし、もしユーザーがSend関数が実行されている際にShiftキーを押していた場合、テキストは大文字として送信されてしまいます。<br>
+回避策のひとつは他のSendの前にSend("{SHIFTDOWN}{SHIFTUP}")と記述することです。<br>
+<br>
+チェコ語キーボードなどではシフトキーが押されていたりやCAPS LOCKが有効になってる場合異なった文字が送信されてしまいます。SendのAutoItにおける仕様ではCAPS LOCK時の文字はShiftキーを押したものとして送信されるのでこの場合<b>正常動作しません</b>。<br>
+<br>
+中括弧で囲むことで特殊なキーを送信することができます。<br>
+<br>
+注意：ウィンドウズでは"CTRL-ALT-DEL"のキーの組み合わせはシミュレーションできません！<br>
+<table width="100%" border="1" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td style="border-bottom-style: solid; border-bottom-width: 1"><b>送信コマンド (flag=0の場合)</b></td>
+    <td style="border-bottom-style: solid; border-bottom-width: 1"><b>キー操作結果</b></td>
+  </tr>
+  <tr>
+    <td>{!}</td>
+    <td>!</td>
+  </tr>
+  <tr>
+    <td>{#}</td>
+    <td>#</td>
+  </tr>
+  <tr>
+    <td>{+}</td>
+    <td>+</td>
+  </tr>
+  <tr>
+    <td>{^}</td>
+    <td>^</td>
+  </tr>
+  <tr>
+    <td>{{}</td>
+    <td>{</td>
+  </tr>
+  <tr>
+    <td>{}}</td>
+    <td>}</td>
+  </tr>
+  <tr>
+    <td>{SPACE}</td>
+    <td>SPACE</td>
+  </tr>
+  <tr>
+    <td>{ENTER}</td>
+    <td>メインキーボードのENTER キー</td>
+  </tr>
+  <tr>
+    <td>{ALT}</td>
+    <td>ALT</td>
+  </tr>
+  <tr>
+    <td>{BACKSPACE} or {BS}</td>
+    <td>BACKSPACE</td>
+  </tr>
+  <tr>
+    <td>{DELETE} or {DEL}</td>
+    <td>DELETE</td>
+  </tr>
+  <tr>
+    <td>{UP}</td>
+    <td>↑</td>
+  </tr>
+  <tr>
+    <td>{DOWN}</td>
+    <td>↓</td>
+  </tr>
+  <tr>
+    <td>{LEFT}</td>
+    <td>←</td>
+  </tr>
+  <tr>
+    <td>{RIGHT}</td>
+    <td>→</td>
+  </tr>
+  <tr>
+    <td>{HOME}</td>
+    <td>HOME</td>
+  </tr>
+  <tr>
+    <td>{END}</td>
+    <td>END</td>
+  </tr>
+  <tr>
+    <td>{ESCAPE} or {ESC}</td>
+    <td>ESCAPE</td>
+  </tr>
+  <tr>
+    <td>{INSERT} or {INS}</td>
+    <td>INS</td>
+  </tr>
+  <tr>
+    <td>{PGUP}</td>
+    <td>PageUp</td>
+  </tr>
+  <tr>
+    <td>{PGDN}</td>
+    <td>PageDown</td>
+  </tr>
+  <tr>
+    <td>{F1} - {F12}</td>
+    <td>Function キー</td>
+  </tr>
+  <tr>
+    <td>{TAB}</td>
+    <td>TAB</td>
+  </tr>
+  <tr>
+    <td>{PRINTSCREEN}</td>
+    <td>Print Screen キー</td>
+  </tr>
+  <tr>
+    <td>{LWIN}</td>
+    <td>Left Windows キー</td>
+  </tr>
+  <tr>
+    <td>{RWIN}</td>
+    <td>Right Windows キー</td>
+  </tr>
+  <tr>
+    <td>{NUMLOCK on}</td>
+    <td>NUMLOCK (オン/オフ/切り替え)</td>
+  </tr>
+  <tr>
+    <td>{CAPSLOCK off}</td>
+    <td>CAPSLOCK (オン/オフ/切り替え)</td>
+  </tr>
+  <tr>
+    <td>{SCROLLLOCK toggle}</td>
+    <td>SCROLLLOCK (オン/オフ/切り替え)</td>
+  </tr>
+  <tr>
+    <td>{BREAK}</td>
+    <td>Ctrl+Break処理</td>
+  </tr>
+  <tr>
+    <td>{PAUSE}</td>
+    <td>PAUSE</td>
+  </tr>
+  <tr>
+    <td>{NUMPAD0} - {NUMPAD9}</td>
+    <td>テンキー　数字</td>
+  </tr>
+  <tr>
+    <td>{NUMPADMULT}</td>
+    <td>テンキー　*</td>
+  </tr>
+  <tr>
+    <td>{NUMPADADD}</td>
+    <td>テンキー　+</td>
+  </tr>
+  <tr>
+    <td>{NUMPADSUB}</td>
+    <td>テンキー　－</td>
+  </tr>
+  <tr>
+    <td>{NUMPADDIV}</td>
+    <td>テンキー　/</td>
+  </tr>
+  <tr>
+    <td>{NUMPADDOT}</td>
+    <td>テンキー　ピリオド</td>
+  </tr>
+  <tr>
+    <td>{NUMPADENTER}</td>
+    <td>テンキーのEnter キー</td>
+  </tr>
+  <tr>
+    <td>{APPSKEY}</td>
+    <td>Windows App キー</td>
+  </tr>
+  <tr>
+    <td>{LALT}</td>
+    <td>左 ALT キー</td>
+  </tr>
+  <tr>
+    <td>{RALT}</td>
+    <td>右 ALT キー</td>
+  </tr>
+  <tr>
+    <td>{LCTRL}</td>
+    <td>左 CTRL キー</td>
+  </tr>
+  <tr>
+    <td>{RCTRL}</td>
+    <td>右 CTRL キー</td>
+  </tr>
+  <tr>
+    <td>{LSHIFT}</td>
+    <td>左 Shift キー</td>
+  </tr>
+  <tr>
+    <td>{RSHIFT}</td>
+    <td>右 Shift キー</td>
+  </tr>
+  <tr>
+    <td>{SLEEP}</td>
+    <td>Computer SLEEP キー</td>
+  </tr>
+  <tr>
+    <td>{ALTDOWN}</td>
+    <td>{ALTUP}が送信されるまでALTキーを押し続けます。</td>
+  </tr>
+  <tr>
+    <td>{SHIFTDOWN}</td>
+    <td>{SHIFT}が送信されるまでSHIFTキーを押し続けます。</td>
+  </tr>
+  <tr>
+    <td>{CTRLDOWN}</td>
+    <td>{CTRL}が送信されるまでCTRLキーを押し続けます。</td>
+  </tr>
+  <tr>
+    <td>{LWINDOWN}</td>
+    <td>{LWINUP}が送信されるまで左Windowsキーを押し続けます。</td>
+  </tr>
+  <tr>
+    <td>{RWINDOWN}</td>
+    <td>{RWINUP}が送信されるまで右Windowsキーを押し続けます。</td>
+  </tr>
+  <tr>
+    <td>{ASC nnnn}</td>
+    <td>ALT+nnnn のキーの組み合わせを送信します。</td>
+  </tr>
+  <tr>
+    <td>{BROWSER_BACK}</td>
+    <td>2000/XP のみ: ブラウザの"戻る"ボタンを選択します。</td>
+  </tr>
+  <tr>
+    <td>{BROWSER_FORWARD}</td>
+    <td>2000/XP のみ: ブラウザの"進む"ボタンを選択します。</td>
+  </tr>
+  <tr>
+    <td>{BROWSER_REFRESH}</td>
+    <td>2000/XP のみ: ブラウザの"更新"ボタンを選択します。</td>
+  </tr>
+  <tr>
+    <td>{BROWSER_STOP}</td>
+    <td>2000/XP のみ: ブラウザの"中止"ボタンを選択します。</td>
+  </tr>
+  <tr>
+    <td>{BROWSER_SEARCH}</td>
+    <td>2000/XP のみ: ブラウザの"検索"ボタンを選択します。</td>
+  </tr>
+  <tr>
+    <td>{BROWSER_FAVORITES}</td>
+    <td>2000/XP のみ: ブラウザの"お気に入り"ボタンを選択します。</td>
+  </tr>
+  <tr>
+    <td>{BROWSER_HOME}</td>
+    <td>2000/XP のみ: ブラウザを起動しホームページに移動します。</td>
+  </tr>
+  <tr>
+    <td>{VOLUME_MUTE}</td>
+    <td>2000/XP のみ: 音声を消します。</td>
+  </tr>
+  <tr>
+    <td>{VOLUME_DOWN}</td>
+    <td>2000/XP のみ: 音声ボリュームを下げます。</td>
+  </tr>
+  <tr>
+    <td>{VOLUME_UP}</td>
+    <td>2000/XP のみ: 音声ボリュームを上げます。</td>
+  </tr>
+  <tr>
+    <td>{MEDIA_NEXT}</td>
+    <td>2000/XP のみ: メディアプレイヤーの次のトラックを選択します。</td>
+  </tr>
+  <tr>
+    <td>{MEDIA_PREV}</td>
+    <td>2000/XP のみ: メディアプレイヤーの前のトラックを選択します。</td>
+  </tr>
+  <tr>
+    <td>{MEDIA_STOP}</td>
+    <td>2000/XP のみ: メディアプレイヤーを停止します。</td>
+  </tr>
+  <tr>
+    <td>{MEDIA_PLAY_PAUSE}</td>
+    <td>2000/XP のみ: メディアプレイヤーの再生/一時停止をおこないます。</td>
+  </tr>
+  <tr>
+    <td>{LAUNCH_MAIL}</td>
+    <td>2000/XP のみ: eメールアプリケーションを起動します。</td>
+  </tr>
+  <tr>
+    <td>{LAUNCH_MEDIA}</td>
+    <td>2000/XP のみ: メディアプレイヤーを起動します。</td>
+  </tr>
+  <tr>
+    <td>{LAUNCH_APP1}</td>
+    <td>2000/XP のみ: ユーザー設定のアプリケーション1を起動します。</td>
+  </tr>
+  <tr>
+    <td>{LAUNCH_APP2}</td>
+    <td>2000/XP のみ: ユーザー設定のアプリケーション2を起動します。</td>
+  </tr>
+</table><br>
+ASCIIコードでAを送信（テンキーでALT+065）するためには次のようにします。<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Send("{ASC 065}")<br>
+<br>
+（2桁のASCIIコードを使用する場合、頭に0をつける必要があります。0をつけなかった場合 obsolete 437 code page が使用されます。）<br>
+<br>
+文字コード（10進数または16進数）でUNICODEを使って送信したい場合、例えば次のようにして漢字を送信します。<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Send("{ASC 2709}") または Send("{ASC 0xA95}")<br>
+<br>
+次のようにして同じキーを繰り返し送信することができます。<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Send("{DEL 4}")    ;DELキーを4回押す<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Send("{S 30}")      ;30個の文字'S'を送信する<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Send("+{TAB 4}")   ;SHIFT+TABを4回押す<br>
+<br>
+送信回数に0を指定してもキーは必ず1回は送信されます。<br>
+<br>
+キーを押し続ける場合（一般にはゲームでしか利用されません）<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Send("{a down}")    ;A キーを押し続けます<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Send("{a up}")        ;A キーを離します<br>
+<br>
+capslock、numlock、scrolllockキーの状態を設定します。<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Send("{NumLock on}")        ;NumLockキーをオンにします。<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Send("{CapsLock off}")      ;CapsLockキーをオフにします。<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Send("{ScrollLock toggle}") ;ScrollLockの状態を切り替えます。<br>
+<br>
+変数を回数に使いたい場合、次のようにしてください。<br>
+&nbsp;&nbsp;&nbsp;&nbsp;$n = 4<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Send("+{TAB " & $n & "}")<br>
+<br>
+ASCIIコードでAを4回送信したい場合、次のようにしてください。<br>
+&nbsp;&nbsp;&nbsp;&nbsp;$x = Chr(65)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Send("{" & $x & " 4}")<br>
+<br>
+ラップトップコンピュータのほとんどはspecialFnキーを持っています。このキーはシミュレートできません。<br>
+<br>
+注意：flagパラメータを1に設定することで 上記の"特別"な処理を無効にすることができます。これは変数を使って文を送信をする場合、また完全に入力した通りの文を送信する場合に使われます。<br>
+<br>
+例として（コントロールパネルの）フォルダオプションを開いて次の操作を試してみてください。<br>
+<table width="100%" border="1" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td style="border-bottom-style: solid; border-bottom-width: 1">Send("{TAB}")</td>
+    <td style="border-bottom-style: solid; border-bottom-width: 1">次のコントロール(button、checkboxなど)に移動します。 </td>
+  </tr>
+  <tr>
+    <td>Send("+{TAB}")</td>
+    <td>前のコントロールに移動します。</td>
+  </tr>
+  <tr>
+    <td>Send("^{TAB}")</td>
+    <td>（タブのあるウィンドウの場合）次のウィンドウタブに移動します。</td>
+  </tr>
+  <tr>
+    <td>Send("^+{TAB}")</td>
+    <td>前のウィンドウタブに移動します。</td>
+  </tr>
+  <tr>
+    <td>Send("{SPACE}")</td>
+    <td>チェックボックスのチェックの切り替え、ボタンのクリックに使えます。</td>
+  </tr>
+  <tr>
+    <td>Send("{+}")</td>
+    <td>（"本当"のチェックボックスであれば）チェックボックスをチェックします。</td>
+  </tr>
+  <tr>
+    <td>Send("{-}")</td>
+    <td>チェックボックスのチェックをはずします。 </td>
+  </tr>
+  <tr>
+    <td>Send("{NumPadMult}")</td>
+    <td>SysTreeView32 内のフォルダを開きます。</td>
+  </tr>
+</table><br>
+Altキーとの組み合わせを使えばメニューアイテムにアクセスできます。メモ帳を起動して次の操作を試してみてください。<br>
+Send("!f") はメモ帳のファイルメニューにへのアクセスキーである Alt+f を送信します。他の文字も試してみてください！<br>
+<br>
+<table width="100%" border="1" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td style="border-bottom-style: solid; border-bottom-width: 1">Send("{DOWN}")</td>
+    <td style="border-bottom-style: solid; border-bottom-width: 1">メニュー上を下に移動します。</td>
+  </tr>
+  <tr>
+    <td>Send("{UP}")</td>
+    <td>メニュー上を上に移動します。</td>
+  </tr>
+  <tr>
+    <td>Send("{LEFT}")</td>
+    <td>左方向に移動して次のメニューを開きます。またはサブメニューを閉じます。</td>
+  </tr>
+  <tr>
+    <td>Send("{RIGHT}")</td>
+    <td>右方向に移動して次のメニューを開きます。またはサブメニューを開きます。</td>
+  </tr>
+</table>
+Alt+F4、PrintScreen、Ctrl+Cなどの意味について知らない場合は、ウィンドウズヘルプ（Win+F1で起動）のキーボードショートカットのリストを参照。<br>
+<br>
+psexec (www.sysinternals.com)やbeyondexec (www.beyondlogic.org)のようなプログラムを通してスクリプトを遠隔のコンピュータで走らせる場合、
+特にRun関数で起動させたプログラムにキーストロークを送信する場合には
+コントロールを直接的に操作するために<b>ControlSend</b>やその他のControlXXX関数を使用することが必要です。
+SendはOpt("SendAttachMode",1)を設定していたとしても動作しません。<br>
+サブミット時の-sモードの使用は遠隔のコンピュータ上での正しい権限取得の助けになります。<br>
+<br>
+Opt("SendKeyDelay",...) はキーストロークのキーの間の時間間隔を変更します。<br>
+Opt("SendKeyDownDelay",...) はキーストロークのキーが押されてから離されるまでの時間の長さを変更します。<br>
+キーストローク送信の遅延を完全に無くすには"SendKeyDelay"と"SendKeyDownDelay"の両方を0に設定してください。
+これは特定の状況で必要になります。例えばシステムをロックする("#l")場合、WINキーが押したままになるのを防ぐために
+遅延をなくす必要があります。<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="AutoItSetOption.htm#SendAttachMode">SendAttachMode (Option)</a>, <a href="SendKeepActive.htm">SendKeepActive</a>, <a href="AutoItSetOption.htm#SendKeyDelay">SendKeyDelay (Option)</a>, <a href="AutoItSetOption.htm#SendKeyDownDelay">SendKeyDownDelay (Option)</a>, <a href="ControlSend.htm">ControlSend</a>, <a href="BlockInput.htm">BlockInput</a>, <a href="HotKeySet.htm">HotKeySet</a>, <a href="WinMenuSelectItem.htm">WinMenuSelectItem</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S4">Send</span><span class="S8">(</span><span class="S7">"#r"</span><span class="S8">)</span><br>
+<span class="S4">WinWaitActive</span><span class="S8">(</span><span class="S7">"Run"</span><span class="S8">)</span><br>
+<span class="S4">Send</span><span class="S8">(</span><span class="S7">"notepad.exe</span><span class="S10">{Enter}</span><span class="S7">"</span><span class="S8">)</span><br>
+<span class="S4">WinWaitActive</span><span class="S8">(</span><span class="S7">"[CLASS:Notepad]"</span><span class="S8">)</span><br>
+<span class="S4">Send</span><span class="S8">(</span><span class="S7">"Today's time/date is </span><span class="S10">{F5}</span><span class="S7">"</span><span class="S8">)</span><br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\Send.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

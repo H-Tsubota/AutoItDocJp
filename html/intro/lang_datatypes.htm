@@ -1,0 +1,197 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+		<title>Language Reference - Datatypes</title>
+		<META http-equiv=Content-Type content="text/html; charset=shift-jis">
+		<meta http-equiv="Content-Language" content="en-us">
+		<link href="../css/default.css" rel="stylesheet" type="text/css">
+	</head>
+	<body>
+		<h1>Language Reference - Datatypes</h1>
+		<p>
+			AutoItではデータ型は<strong>バリアント</strong>と呼ばれる1つしかありません。
+			バリアントは数値もしくは文字列データを保持することができ、データをどのように扱うか
+			は使用時の状況によって決められます。&nbsp;例えば、2つのバリアントを掛け合わせようとすれば
+			数値として取り扱われ、2つのバリアントを連結しようとすれば文字列として扱われます。
+		</p>
+		<p>いくつかの例：</p>
+		<p>&nbsp;&nbsp;&nbsp; 10 * 20 は<strong>数値</strong>の200になります。 (<strong>*</strong>
+			は2つの数を掛け合わせるのに使われます。)</p>
+		<p>&nbsp;&nbsp;&nbsp; 10 * "20" は<strong>数値</strong>の200になります。 </p>
+		<p>&nbsp;&nbsp;&nbsp; "10" * "20" は<strong>数値</strong>の200になります。 </p>
+		<p>&nbsp;&nbsp;&nbsp; 10 &amp; 20 は<strong>文字列</strong>の"1020"になります。  (<strong>&amp;</strong>
+			は文字列連結に使われます。)</p>
+		<p>&nbsp;</p>
+		<p>
+			文字列が数値として使用された場合は暗黙的に<b><a href="../functions/Number.htm">Number()</a></b>関数の呼び出しが行われます。			
+			さらにもし有効な数値が格納されていない時には0とみなされます。&nbsp;
+			例えば、
+		</p>
+		<p>&nbsp;&nbsp;&nbsp; 10 * "fgh" は数値の<strong>0</strong>になります。</p>
+		<p>
+			空文字列&quot;&quot; がブール値として扱われた場合、Falseとみなされます(下記参照)。&nbsp;
+			例えば
+		</p>
+		<p>&nbsp;&nbsp;&nbsp; NOT "&quot;はブール値の<b>true</b>になります。</p>
+		<p>&nbsp;</p>
+		<h2>数値</h2>
+		<p>
+			<strong>2</strong>、<strong>4.566</strong>、<strong>-7</strong>といった標準的な10進数。
+			&nbsp;
+		</p>
+		<p>
+			科学的表記法がサポートされています。<strong>1500</strong>と書くかわりに<strong>1.5e3</strong>と書くことができます。
+			&nbsp;
+		</p>
+		<p>
+		接頭辞<strong>0x</strong>によって<strong>0x409</strong>や<strong>0x4fff</strong>のように
+		整数を16進数表記で表現できます(16進数表記では32ビットの数までが有効です)。
+		&nbsp;
+		</p>
+		<p>&nbsp;</p>
+		<h2>文字列</h2>
+		<p>
+			文字列は<strong>"this"</strong>のようにダブルコーテーションで囲みます。&nbsp; 
+			ダブルコーテーションを含む文字列の場合は、<strong>"here is a ""double-quote"" - ok?"</strong>
+			のように2重に使います。
+		</p>
+		<p>
+			<strong>'this'</strong>や<strong>'here is a ' 'single-quote' ' - ok?'</strong>の
+			ようにして同様にシングルコーテーションを使用できます。
+		</p>
+		<p>&nbsp;</p>
+		<p>
+			2重のコーテーションを排除しより簡単にするために2種類のコーテーションを混ぜて使うことも
+			できます。&nbsp;例えば文字列でたくさんのダブルコーテーションを使いたい場合、
+			シングルコーテーションを文字列の宣言に使うことができます。
+			</p>
+		<p>&nbsp;&nbsp;&nbsp; <strong>'This "sentence" contains "lots" of "double-quotes" does 
+				it not?'</strong></p>
+		<p>は</p>
+		<p>&nbsp;&nbsp;&nbsp; <strong>"This ""sentence"" contains ""lots"" of ""double-quotes"" 
+				does it not?"</strong></p>
+		<p>よりシンプルです。</p>
+		<p>
+			<a href="../functions/AutoItSetOption.htm#ExpandEnvStrings">Opt()</a>での設定に従って
+			評価時に文字列内のEnv変数とVar変数は置換されます。
+		</p>
+		<p>&nbsp;</p>
+		<h2>ブール値</h2>
+		<p>ブール値とは<b>論理</b>値です。ブール値<b>true</b>と<b>false</b>の2種類のみです。<br>
+			<br>
+			<b> and</b>、<b>or</b>、<b>not</b>と併用して変数に代入することができます。<br>
+			<br>
+			例：<br>
+			$Boolean1 = true<br>
+			$Boolean2 = false<br>
+			$Boolean3 = $Boolean1 AND $Boolean2<br>
+			<br>
+			$Boolean3の結果は <b>false</b> になります。<br>
+			<br>
+			$Boolean1 = false<br>
+			$Boolean2 = not $boolean1<br>
+			<br>
+			$Boolean2の結果は <b>true</b> になります。<br>
+			<br>
+			<br>
+			ブール値が数値と一緒に使用された場合、次のルールが適用されます。<br>
+			<br>
+			値0はブール値<b>false</b>と同値<br>
+			その他の数値はブール値<b>true</b>と同値<br>
+			<br>
+			例：<br>
+			$Number1 = 0<br>
+			$Boolean1 = true<br>
+			$Boolean2 = $Number1 and $Boolean1<br>
+			<br>
+			$Boolean2の結果は <b>false</b> になります。<br>
+			<br>
+			<br>
+			ブール値を計算で使用した場合(<b>おすすめしません!</b>)、次のルールが適用されます。<br>
+			<br>
+			ブール値trueは数値<b>1</b>に変換されます。<br>
+			ブール値falseは数値<b>0</b>に変換されます。<br>
+			<br>
+			例：<br>
+			$Boolean1 = true<br>
+			$Number1 = 100<br>
+			$Number2 = $Boolean1 + $Number1<br>
+			<br>
+			$Number2の結果は数値<b>101</b> になります。<br>
+			<br>
+			<br>
+			文字列をブール値と一緒に使用した場合、次の変換がおこなわれます。<br>
+			<br>
+			ブール値trueは文字列<b>&quot;True&quot;</b>になります。<br>
+			ブール値falseは文字列<b>&quot;False&quot;</b>になります。<br>
+			<br>
+			例：<br>
+			$Boolean1=true<br>
+			$String1="Test is: "<br>
+			$String2=$String1 &amp; $Boolean1<br>
+			<br>
+			$String2の結果は文字列&quot;Test is: True&quot;になります。<br>
+			<br>
+			反対は成り立ちません。文字列をブール値と比較する場合、次のルールが適用されます。<br>
+			空文字列("")&nbsp;はブール値<b>false</b>となります。<br>
+			その他の文字列は("0"を含め)ブール値<b>true</b>になります。<br>
+			<br>
+			&nbsp;</p>
+		<h2>	バイナリ</h2>
+		<p>
+		バイナリ型は任意のバイト値を保持できます。これらは文字列変数に格納される際には
+		16進数表現に変換されます。<br>
+		例:<br>
+		$bin = Binary(&quot;abc&quot;)<br>$str = String($bin)&nbsp;&nbsp;&nbsp; 
+        ; &quot;0x616263&quot;</p>
+<br>
+		<h2>ポインタ</h2>
+		<p>
+		ポインタ型は32ビットまたは64ビットのメモリアドレスを保持します。どちらになるかはAutoItの32ビット版が使用されているか、64ビット版が使用されているかに依存します。
+		これらは文字列変数に格納される際には16進数表現に変換されます。
+		<a href="../functions/WinGetHandle.htm">WinGetHandle</a>から返されるウィンドウハンドル(HWnd)はポインタ型です。</p>
+		<p>&nbsp;</p>
+		<h2>データ型と範囲</h2>
+		<p>以下の表に内部バリアントのデータ型とその範囲を示します。</p>
+		<table width="100%" border="1" cellspacing="0" cellpadding="3">
+			<tr bgcolor="#000066">
+				<td width="12%" nowrap><font color="#ffffff"><strong>サブデータ型</strong></font></td>
+				<td width="88%"><font color="#ffffff"><strong>範囲と注意</strong></font></td>
+			</tr>
+			<tr>
+				<td nowrap>Int32</td>
+				<td>32ビット単精度整数</td>
+			</tr>
+			<tr>
+				<td nowrap>Int64</td>
+				<td>64ビット単精度整数</td>
+			</tr>
+			<tr>
+				<td nowrap>Double</td>
+				<td>倍精度浮動小数点数</td>
+			</tr>
+			<tr>
+				<td nowrap>文字列</td>
+				<td>文字列には2147483647文字まで保持可能。</td>
+			</tr>
+			<tr>
+				<td nowrap>バイナリ</td>
+				<td>バイナリデータ。2147483647バイトまで保持可能。</td>
+			</tr>
+			<tr>
+				<td nowrap>ポインタ</td>
+				<td>メモリアドレスポインタ。&nbsp; 32ビットまたは64ビット。使用されているAutoItのバージョンに依存します。</td>
+			</tr>
+		</table>
+		<p>&nbsp;</p>
+		<p>
+			いくつかのAutoItの関数(例えば<a href="../functions/BitAND.htm">BitAND</a>)
+			は32ビット数に対してしか機能せず、自動で変換がおこなわれます。
+			これらの関数についてはドキュメントに記載されています。
+		</p>
+		<p>&nbsp;</p>
+		<p>&nbsp;</p>
+		<p>&nbsp;</p>
+		<p>&nbsp;</p>
+	</body>
+</html>

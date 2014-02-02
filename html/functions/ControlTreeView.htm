@@ -1,0 +1,186 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function ControlTreeView</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">ControlTreeView</font>
+<hr size="2">
+<p>TreeView32コントロールにコマンドを送信します。<br></p>
+
+<p class="codeheader">
+ControlTreeView ( "title", "text", controlID, "command" [, option1 [, option2]] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">title</td>
+    <td width="85%">アクセスするウィンドウのタイトル</td>
+  </tr>
+  <tr>
+   <td>text</td>
+   <td>アクセスするウィンドウのテキスト</td>
+  </tr>
+  <tr>
+   <td>controlID</td>
+   <td>操作するコントロール。<a href="../intro/controls.htm">Controls</a>を参照。</td>
+  </tr>
+  <tr>
+   <td>command</td>
+   <td>コントロールに送信するコマンド（下記を参照）。</td>
+  </tr>
+  <tr>
+   <td>option1</td>
+   <td>	<b>[オプション]</b> コマンドに依存して要求される追加パラメータ</td>
+  </tr>
+  <tr>
+   <td>option2</td>
+   <td>	<b>[オプション]</b> コマンドに依存して要求される追加パラメータ</td>
+  </tr>
+</table>
+
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+下の表に示すコマンドに依存します。エラー（無効なコマンド、ウィンドウ/コントロールが見つからないなど）の場合には@errorを1に設定します。<br>
+<br><br>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="40%"><b>コマンド、オプション1、オプション2</b></td>
+    <td width="60%"><b>動作</b></td>
+  </tr>
+  <tr>
+   <td>"Check", "item"</td>
+   <td> (アイテムがサポートしている場合) アイテムをチェックします。</td>
+  </tr>
+  <tr>
+   <td>"Collapse", "item"</td>
+   <td>アイテムをたたんで子アイテムを非表示にします。</td>
+  </tr>
+  <tr>
+   <td>"Exists", "item"</td>
+   <td>アイテムが存在する場合、1を返します。それ以外の場合は0。</td>
+  </tr>
+  <tr>
+   <td>"Expand", "item"</td>
+   <td>アイテムを展開して子アイテムを表示します。</td>
+  </tr>
+  <tr>
+   <td>"GetItemCount", "item"</td>
+   <td>選択されたアイテムの子アイテムの数を返します。</td>
+  </tr>
+  <tr>
+   <td>"GetSelected" [, UseIndex]</td>
+   <td>アイテムのテキスト（UseIndexが1の場合はインデックス）を使って現在選択されているアイテムの参照を返します。</td>
+  </tr>
+  <tr>
+   <td>"GetText", "item"</td>
+   <td>アイテムのテキストを返します。</td>
+  </tr>
+  <tr>
+   <td>"IsChecked"</td>
+   <td>アイテムの状態を返します。1:チェックされている、0:チェックされていない、-1:チェックボックスではない</td>
+  </tr>
+  <tr>
+   <td>"Select", "item"</td>
+   <td>アイテムを選択します。</td>
+  </tr>
+  <tr>
+   <td>"Uncheck", "item"</td>
+   <td>（アイテムがサポートしている場合）アイテムを非選択にします。</td>
+  </tr>
+</table><br><br>
+"item"パラメータは文字列ベースのパラメータで、テキストとインデックスの組み合わせを使用して特定のツリービューアイテムを参照するのに使用されます:<br>
+<br>Heading1<br>
+----> H1SubItem1<br>
+----> H1SubItem2<br>
+----> H1SubItem3<br>
+----> ----> H1S1SubItem1<br>
+Heading2<br>
+Heading3<br>
+<br>各レベルは | で分けられます。インデックスの戦闘には#をつけます。例:<br>
+<br><br>
+<table width="100%" border="1" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td style="border-bottom-style: solid; border-bottom-width: 1"><b>アイテム</b></td>
+    <td style="border-bottom-style: solid; border-bottom-width: 1"><b>アイテムの参照</b></td>
+  </tr>
+  <tr>
+    <td>Heading2</td>
+    <td>"Heading2" または "#1"</td>
+  </tr>
+  <tr>
+    <td>H1SubItem2</td>
+    <td>"Heading1|H1SubItem2" または "#0|#1"</td>
+  </tr>
+  <tr>
+    <td>H1S1SubItem1</td>
+    <td>"Heading1|H1SubItem3|H1S1SubItem1" または "#0|#2|#0"</td>
+  </tr>
+</table><br><br>
+"Heading1|#1"などのように参照を混ぜることも可能です。<br>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+AutoItは32ビットアプリケーションなので64ビットWindowsで実行する場合、エクスプローラなどの64ビットアプリケーションを参照するときに使用できないコマンドがいくつかあります。<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="ControlCommand.htm">ControlCommand</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S1">; 作成者: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Zedna</span><br>
+<br>
+<span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;GUIConstantsEx.au3&gt;</span><br>
+<span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;TreeviewConstants.au3&gt;</span><br>
+<span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;WindowsConstants.au3&gt;</span><br>
+<br>
+<span class="S9">$gui</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICreate</span><span class="S8">(</span><span class="S7">"ControlTreeview test"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">212</span><span class="S8">,</span><span class="S0"> </span><span class="S3">212</span><span class="S8">)</span><br>
+<span class="S9">$treeview</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICtrlCreateTreeView</span><span class="S8">(</span><span class="S3">6</span><span class="S8">,</span><span class="S0"> </span><span class="S3">6</span><span class="S8">,</span><span class="S0"> </span><span class="S3">200</span><span class="S8">,</span><span class="S0"> </span><span class="S3">160</span><span class="S8">,</span><span class="S0"> </span><span class="S4">BitOR</span><span class="S8">(</span><span class="S9">$TVS_HASBUTTONS</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$TVS_HASLINES</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$TVS_LINESATROOT</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$TVS_CHECKBOXES</span><span class="S8">),</span><span class="S0"> </span><span class="S9">$WS_EX_CLIENTEDGE</span><span class="S8">)</span><br>
+<span class="S9">$h_tree</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">ControlGetHandle</span><span class="S8">(</span><span class="S9">$gui</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$treeview</span><span class="S8">)</span><br>
+<br>
+<span class="S9">$root</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICtrlCreateTreeViewItem</span><span class="S8">(</span><span class="S7">"Root"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$treeview</span><span class="S8">)</span><br>
+<span class="S9">$item1</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICtrlCreateTreeViewItem</span><span class="S8">(</span><span class="S7">"Item 1"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$root</span><span class="S8">)</span><br>
+<span class="S9">$item2</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICtrlCreateTreeViewItem</span><span class="S8">(</span><span class="S7">"Item 2"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$root</span><span class="S8">)</span><br>
+<span class="S9">$item3</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICtrlCreateTreeViewItem</span><span class="S8">(</span><span class="S7">"Item 3"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$root</span><span class="S8">)</span><br>
+<span class="S9">$item4</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICtrlCreateTreeViewItem</span><span class="S8">(</span><span class="S7">"Item 4"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$root</span><span class="S8">)</span><br>
+<span class="S9">$item41</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICtrlCreateTreeViewItem</span><span class="S8">(</span><span class="S7">"Item 41"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$item4</span><span class="S8">)</span><br>
+<span class="S9">$item42</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICtrlCreateTreeViewItem</span><span class="S8">(</span><span class="S7">"Item 42"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$item4</span><span class="S8">)</span><br>
+<span class="S9">$item5</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICtrlCreateTreeViewItem</span><span class="S8">(</span><span class="S7">"Item 5"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$root</span><span class="S8">)</span><br>
+<br>
+<span class="S4">GUISetState</span><span class="S8">(</span><span class="S6">@SW_SHOW</span><span class="S8">)</span><br>
+<br>
+<span class="S1">; いくつかの例</span><br>
+<span class="S4">ControlTreeView</span><span class="S0"> </span><span class="S8">(</span><span class="S9">$gui</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$h_tree</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Expand"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Root"</span><span class="S8">)</span><br>
+<br>
+<span class="S4">ControlTreeView</span><span class="S0"> </span><span class="S8">(</span><span class="S9">$gui</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$h_tree</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Exists"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Root|Item 4"</span><span class="S8">)</span><br>
+<span class="S4">ControlTreeView</span><span class="S0"> </span><span class="S8">(</span><span class="S9">$gui</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$h_tree</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Check"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Root|Item 4"</span><span class="S8">)</span><br>
+<span class="S4">ControlTreeView</span><span class="S0"> </span><span class="S8">(</span><span class="S9">$gui</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$h_tree</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Select"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Root|Item 4"</span><span class="S8">)</span><br>
+<span class="S4">ControlTreeView</span><span class="S0"> </span><span class="S8">(</span><span class="S9">$gui</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$h_tree</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Expand"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Root|Item 4"</span><span class="S8">)</span><br>
+<br>
+<span class="S5">While</span><span class="S0"> </span><span class="S3">1</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$msg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUIGetMsg</span><span class="S8">()</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Select</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Case</span><span class="S0"> </span><span class="S9">$msg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$GUI_EVENT_CLOSE</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">ExitLoop</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">EndSelect</span><br>
+<span class="S5">WEnd</span><br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\ControlTreeView.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

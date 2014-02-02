@@ -1,0 +1,57 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Language Reference - User Functions</title>
+  <META http-equiv=Content-Type content="text/html; charset=shift-jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Language Reference - User Functions</h1>
+
+  
+<p>
+関数とは特定の&quot;機能&quot;をおこなうためにスクリプトから呼び出すことができる一連のコードを指します。
+&nbsp; AutoItには2種類の関数があります。<strong> 
+組み込み関数</strong>と<strong>ユーザー関数</strong>です。</p>
+<p>&nbsp;</p>
+<h2>組み込み関数</h2>
+<p>
+全ての組み込み関数のリストは<a href="../functions.htm">こちら</a>。
+また使い方に関する説明は<a href="../function_notes.htm">こちら</a>。</p>
+<p>&nbsp;</p>
+<h2>ユーザー関数</h2>
+<p>
+ユーザー関数は<a href="../keywords/Func.htm">Func...EndFunc</a>を使用して作成します。
+</p>
+<p>関数はパラメータを受け取ったり、値を返したりすることができます。</p>
+<p>
+関数名はアルファベットまたはアンダーラインではじめなければいけません。2文字目以降は
+全てのアルファベット、数字、アンダーラインが使用できます。&nbsp; 
+  適切な関数名の例：</p>
+<p>&nbsp;&nbsp;&nbsp; MyFunc</p>
+<p>&nbsp;&nbsp;&nbsp; Func1</p>
+<p>&nbsp;&nbsp;&nbsp; _My_Func1</p>
+<p>&nbsp;</p>
+<p>関数の使用方法の例(2を10回かける)。</p>
+<p class="codebox">$val = 10&nbsp; <br>
+  For $i = 1 To 10<br>
+  &nbsp;&nbsp;&nbsp;&nbsp; $doubled = MyDouble($val)<br>
+  &nbsp;&nbsp;&nbsp;&nbsp; MsgBox(0, &quot;&quot;, $val &amp; &quot; doubled is 
+  &quot; &amp; $doubled)<br>
+  &nbsp;&nbsp;&nbsp;&nbsp; $val = $doubled<br>
+  Next<br>
+  <br>
+  Exit<br>
+  <br>
+  <br>
+  Func MyDouble($value)<br>
+  &nbsp;&nbsp;&nbsp;&nbsp; $value = $value * 2<br>
+  &nbsp;&nbsp;&nbsp;&nbsp; Return $value<br>
+EndFunc</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</body>
+</html>

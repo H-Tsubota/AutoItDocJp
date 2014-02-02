@@ -1,0 +1,62 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Keyword ContinueLoop</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Keyword Reference</h1>
+<font size="+1">ContinueLoop</font>
+<hr size="2">
+<p>While/Do/For ループを継続します。<br></p>
+
+<p class="codeheader">
+<b>ContinueLoop</b> [level]<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">level</td>
+    <td width="85%"><b>[オプション]</b> 再開するループのレベル。 デフォルトは 1 (現在のループ)です。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+ContinueLoop は条件判定式の位置(While、Until、Next句)からループの実行を継続します。<br>
+<br>
+負またはゼロの <i>level</i> は無効です。<br>
+<br>
+ContinueLoopを使用したプログラムは全てIf-ElseIf-EndIfを使用して書き直すことができますが、ContinueLoopを使用することで長いスクリプトをより理解しやすいものにすることができます。<br>
+While/Doループでの使用には注意が必要です。ContinueLoopの不適切な使用は無限ループを生む可能性があります。<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="ExitLoop.htm">ExitLoop</a>, <a href="For.htm">For</a>, <a href="While.htm">While</a>, <a href="Do.htm">Do</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S1">;7を除いた1から10までの数を表示</span><br>
+<span class="S5">For</span><span class="S0"> </span><span class="S9">$i</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">1</span><span class="S0"> </span><span class="S5">to</span><span class="S0"> </span><span class="S3">10</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">If</span><span class="S0"> </span><span class="S9">$i</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">7</span><span class="S0"> </span><span class="S5">Then</span><span class="S0"> </span><span class="S5">ContinueLoop</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"The value of $i is:"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$i</span><span class="S8">)</span><br>
+<span class="S5">Next</span><br>
+<br>
+<span class="S1">;レベルオプションを使用した例が必要。</span><br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\ContinueLoop.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

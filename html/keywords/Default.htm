@@ -1,0 +1,61 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Keyword Default</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Keyword Reference</h1>
+<font size="+1">Default</font>
+<hr size="2">
+<p>関数呼び出し時に使用されるキーワード値<br></p>
+
+<p class="codeheader">
+&nbsp;&nbsp;&nbsp; $var = <b>Default</b><br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+なし<br>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+このキーワードは通常の計算式内で使用できません。AutoItはパフォーマンス上の理由からそのようなエラーを<b>検出しません</b>。<br>
+<br>
+パラメータ渡しの際に使用した場合、その動作は対応するAutoItの関数ドキュメントで指定されたものになります。<br>
+UDFの場合、ラメータにDefaultが設定されたかどうか、またその際に希望どおりの動作が行われているかどうかのチェックはスクリプト作成者の責任となります。<br>
+使用した場合、渡されたパラメータはDefaultキーワードに設定され、定義されている場合でもオプションパラメータ値にはなりません。<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="../../html/functions/IsKeyword.htm">IsKeyWord</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S4">WinMove</span><span class="S8">(</span><span class="S7">"[active]"</span><span class="S8">,</span><span class="S7">""</span><span class="S8">,</span><span class="S5">default</span><span class="S8">,</span><span class="S0"> </span><span class="S5">default</span><span class="S8">,</span><span class="S0"> </span><span class="S3">200</span><span class="S8">,</span><span class="S3">300</span><span class="S8">)</span><span class="S0">&nbsp; &nbsp; </span><span class="S1">; アクティブなウィンドウのサイズ変更をおこなう(移動はしない)</span><br>
+<br>
+<span class="S0">MyFunc2</span><span class="S8">(</span><span class="S5">Default</span><span class="S8">,</span><span class="S5">Default</span><span class="S8">)</span><br>
+<br>
+<span class="S5">Func</span><span class="S0"> MyFunc2</span><span class="S8">(</span><span class="S9">$Param1</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S5">Default</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$Param2</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S7">'Two'</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$Param3</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S5">Default</span><span class="S8">)</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">If</span><span class="S0"> </span><span class="S9">$Param1</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S5">Default</span><span class="S0"> </span><span class="S5">Then</span><span class="S0"> </span><span class="S9">$Param1</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S7">'One'</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">If</span><span class="S0"> </span><span class="S9">$Param3</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S5">Default</span><span class="S0"> </span><span class="S5">Then</span><span class="S0"> </span><span class="S9">$Param3</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S7">'Three'</span><br>
+<br>
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">'Params'</span><span class="S8">,</span><span class="S0"> </span><span class="S7">'1 = '</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$Param1</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@LF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S8">_</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S7">'2 = '</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$Param2</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@LF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S8">_</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S7">'3 = '</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$Param3</span><span class="S8">)</span><br>
+<span class="S5">EndFunc</span><br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\Default.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

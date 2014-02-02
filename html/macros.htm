@@ -1,0 +1,434 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Macros</title>
+  <meta content="text/html; charset=shift_jis" http-equiv="Content-Type">
+  <link href="css/default.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<h1>Macro Reference</h1>
+<p>AutoItで使用可能な全てのマクロ変数のリスト(アルファベット順)です。</p>
+<p>&nbsp;</p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#c0c0c0">
+<tr>
+  <td width="25%" bgcolor="#000099"><font color="#ffffff"><strong>マクロ</strong></font></td>
+  <td width="75%" bgcolor="#000099"><font color="#ffffff"><strong>説明</strong></font></td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@AppDataCommonDir</td>
+  <td>アプリケーションデータのパス</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@AppDataDir</td>
+  <td>現在のユーザーのアプリケーションデータのパス</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@AutoItExe</td>
+  <td>現在実行中のAutoItランタイムのフルパスとファイル名。コンパイル済みスクリプトではスクリプトのパスとなります。</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@AutoItPID</td>
+  <td>実行中スクリプトのプロセスのPID</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@AutoItVersion</td>
+  <td>AutoItのバージョン。例）3.0.81.0</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@AutoItX64</td>
+  <td>AutoItのネイティブx64版でスクリプトが実行されている場合、1を返します。</td>
+</tr>
+<tr>
+<tr>
+  <td style="font-weight: bold;">@COM_EventObj</td>
+  <td>fire中のCOMイベントのオブジェクト。イベント関数でのみ有効。</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@CommonFilesDir</td>
+  <td>共有ファイルフォルダのパス</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@Compiled</td>
+  <td>スクリプトが実行可能ファイルにコンパイルされている場合1を返します。それ以外の場合0を返します。</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@ComputerName</td>
+  <td>コンピュータのネットワーク上での名前</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@ComSpec</td>
+  <td>%comspec%の値, the SPECified secondary COMmand interpreterの略<br>主にコマンドラインで使用する。使用例:&nbsp; <i>Run(@ComSpec &amp; " /k help | more")</i></td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@CPUArch</td>
+  <td>CPUが32ビットCPUの場合は"x86"を、64ビットCPUの場合は"X64"を返します。</td>
+</tr>
+<tr>
+<tr>
+  <td style="font-weight: bold;">@CR<br></td>
+  <td>キャリッジリターン、 Chr(13); 改行コードとして使われます。<br></td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@CRLF<br></td>
+  <td>= @CR &amp; @LF&nbsp; ;改行コードとして使われます。<br></td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@DesktopCommonDir</td>
+  <td>デスクトップのパス</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@DesktopDir</td>
+  <td>現在のユーザーのデスクトップのパス</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@DesktopHeight<br></td>
+  <td>デスクトップスクリーンの高さ方向のピクセル数。&nbsp; (垂直方向の分解能)<br>
+  </td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@DesktopWidth<br>
+  </td>
+  <td>デスクトップスクリーンの幅方向のピクセル数。&nbsp; (水平方向の分解能)<br>
+  </td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@DesktopDepth</td>
+  <td>デスクトップスクリーンの1ピクセルあたりのビットの深さ。</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@DesktopRefresh</td>
+  <td>デスクトップスクリーンのリフレッシュレート(Hz)</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@DocumentsCommonDir</td>
+  <td>共有ドキュメントのパス</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@error</td>
+  <td>エラーフラグ&nbsp; SetError関数参照。</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@exitCode</td>
+  <td>Exit命令で設定された終了コード</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@exitMethod</td>
+  <td>Exit メソッド.&nbsp; OnAutoItExitRegister()関数参照</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@extended</td>
+  <td>関数の返し値の拡張 - StringReplaceのような関数で使用されます。</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@FavoritesCommonDir</td>
+  <td>Favoritesのパス</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@FavoritesDir</td>
+  <td>現在のユーザーのFavoritesのパス</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@GUI_CtrlId</td>
+  <td>最後にクリックしたGUI コントロールのID。イベント関数でのみ有効。</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@GUI_CtrlHandle</td>
+  <td>最後にクリックしたGUI コントロールのハンドル。イベント関数でのみ有効。</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;"> @GUI_DragID</td>
+  <td>ドラッグGUIコントロールのID。ドロップイベントでのみ有効。GUISetOnEvent関数を参照。</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;"> @GUI_DragFile</td>
+  <td>ドロップされたファイルのファイル名。ドロップイベントでのみ有効。GUISetOnEvent関数を参照。</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;"> @GUI_DropID</td>
+  <td>ドロップGUIコントロールのID。ドロップイベントでのみ有効。GUISetOnEvent関数を参照。</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;"> @GUI_WinHandle</td>
+  <td>最後にクリックされたGUI ウィンドウのハンドル。イベント関数でのみ有効。</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@HomeDrive</td>
+  <td>現在のユーザーのホームディレクトリがあるドライブのドライブ名</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@HomePath</td>
+  <td>現在のユーザーのホームディレクトリのディレクトリ部分。フルパスを取得するためには@HomeDriveとつなげて使います。</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@HomeShare</td>
+  <td>現在のユーザーのホームディレクトリがあるサーバーと共有フォルダ名</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@HOUR</td>
+  <td>24時間表示でのクロックの時刻：&nbsp;00-23</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@HotKeyPressed</td>
+  <td>最後に押されたHotKey。HotkeySet関数を参照。</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@IPAddress1</td>
+  <td>1つ目のネットワークアダプタのIPアドレス。&nbsp; コンピュータによっては127.0.0.1となります。<br>
+  </td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@IPAddress2<br>
+  </td>
+  <td>2つ目のネットワークアダプタのIPアドレス。&nbsp; 利用不可な場合 0.0.0.0 となります。<br>
+  </td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@IPAddress3</td>
+  <td>3つ目のネットワークアダプタのIPアドレス。&nbsp; 利用不可な場合 0.0.0.0 となります。</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@IPAddress4</td>
+  <td>4つ目のネットワークアダプタのIPアドレス。&nbsp; 利用不可な場合 0.0.0.0 となります。</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@KBLayout</td>
+    <td>キーボードレイアウトを表すコード。とり得る値については<a href="./appendix/OSLangCodes.htm">Appendix</a> を参照。</td></tr>
+<tr>
+  <td style="font-weight: bold;">@LF<br></td>
+  <td>ラインフィード、 Chr(10); 改行コードとしてよく使われます。<br></td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@LogonDNSDomain</td>
+  <td>ログオン DNSドメイン</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@LogonDomain</td>
+  <td>ログオン ドメイン</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@LogonServer</td>
+  <td>ログオン サーバー</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@MDAY</td>
+  <td>現在の日付：&nbsp;01-31</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@MIN</td>
+  <td>クロックの分数&nbsp;：00-59</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@MON</td>
+  <td>現在の月：&nbsp;01-12</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@MSEC</td>
+  <td>クロックのミリ秒値。&nbsp; 00から999の範囲。</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@MUILang</td>
+  <td>マルチ言語が利用可能かどうかを表すコードを返します（Vistaではデフォルトで利用可能）。
+  実際の値については<a href="appendix/OSLangCodes.htm">Appendix</a>を参照。</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@MyDocumentsDir</td>
+  <td>マイ ドキュメントのターゲットのパス</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@NumParams</td>
+  <td>ユーザー設定関数の呼び出し時に使われた引数の数</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@OSArch</td>
+  <td>次のいずれか:&quot;X86&quot;, &quot;IA64&quot;, &quot;X64&quot; - これは現在実行されているOSのアーキテクチャのタイプです。</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@OSBuild</td>
+  <td>OSのビルドナンバー。&nbsp; 例えば Windows 2003 Server では 3790。</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@OSLang</td>
+  <td>OSの言語を表すコード。&nbsp; とり得る値については<a href="./appendix/OSLangCodes.htm">Appendix</a> を参照。</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@OSServicePack</td>
+  <td>サービスパック情報(&quot;Service Pack 3&quot;など)。</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@OSTYPE</td>
+  <td>NT/2000/XP/2003//Vista/2008/Win7/2008R2では"WIN32_NT"</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@OSVersion</td>
+    <td>次のいずれか: &quot;WIN_2008R2&quot;, &quot;WIN_7&quot;, &quot;WIN_2008&quot;, &quot;WIN_VISTA&quot;, &quot;WIN_2003&quot;,
+	&quot;WIN_XP&quot;, &quot;WIN_XPe&quot;, &quot;WIN_2000&quot;。</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@ProgramFilesDir</td>
+  <td>プログラムファイルフォルダのパス</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@ProgramsCommonDir</td>
+  <td>スタートメニューのプログラムフォルダのパス</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@ProgramsDir</td>
+  <td>現在のユーザーのプログラム(スタートメニューフォルダ内)のパス</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@ScriptDir</td>
+  <td>実行中のスクリプトの存在するフォルダ(バックスラッシュを含みません)。 </td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@ScriptFullPath</td>
+  <td>”@ScriptDir &amp; "\" &amp; @ScriptName”と同じ</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@ScriptLineNumber</td>
+  <td>現在実行されている行番号。 デバグの際、関数呼び出し側の行番号をパスしたい場合に特に有効。(コンパイルしたスクリプトでは無効)</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@ScriptName</td>
+  <td>実行中のスクリプトのファイル名</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@SEC</td>
+  <td>クロックの秒数： 00-59</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@StartMenuCommonDir</td>
+  <td>スタートメニューフォルダのパス</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@StartMenuDir</td>
+  <td>現在のユーザーのスタートメニューのパス</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@StartupCommonDir</td>
+  <td>スタートアップフォルダのパス</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@StartupDir</td>
+  <td>現在のユーザーのスタートアップフォルダのパス</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@SW_DISABLE</td>
+  <td>ウィンドウへの操作を無効にします。</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@SW_ENABLE</td>
+  <td>ウィンドウへの操作を有効にします。</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;"> @SW_HIDE </td>
+  <td>ウィンドウを隠し、他のウィンドウをアクティブにします。</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;"> @SW_LOCK</td>
+  <td>ウィンドウ描画できないようロックします。</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;"> @SW_MAXIMIZE </td>
+  <td>指定したウィンドウを最大化します。</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;"> @SW_MINIMIZE </td>
+  <td>指定したウィンドウを最小化し、次に最前面にあるウィンドウをアクティブにします。</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;"> @SW_RESTORE </td>
+  <td>ウィンドウをアクティブ化し表示します。ウィンドウが最小化・最大化されている場合、システムはそれをもとの大きさ・位置に戻します。アプリケーションの最小化したウィンドウをもとに戻す場合このフラグを指定します。</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;"> @SW_SHOW </td>
+  <td>現在の大きさ・位置でウィンドウをアクティブ化し表示します。</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;"> @SW_SHOWDEFAULT </td>
+  <td>プログラムが指定したアプリケーションが開始された時点でのSW_値に基づいてウィンドウの表示状態を設定します。</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;"> @SW_SHOWMAXIMIZED </td>
+  <td>ウィンドウをアクティブ化し、最大化して表示します。</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;"> @SW_SHOWMINIMIZED </td>
+  <td>ウィンドウをアクティブ化し、最小化して表示します。</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;"> @SW_SHOWMINNOACTIVE </td>
+  <td>ウィンドウを最小化して表示します。ウィンドウをアクティブ化しないことを除いては@SW_SHOWMINIMIZEDと同様です。</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;"> @SW_SHOWNA </td>
+  <td>現在の大きさ・位置でウィンドウを表示します。この値はウィンドウをアクティブ化しない以外は@SW_SHOWと同様です。</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;"> @SW_SHOWNOACTIVATE </td>
+  <td>ウィンドウを直近の大きさ・位置で表示します。この値はウィンドウをアクティブ化しない以外は@SW_SHOWNORMALと同様です。</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;"> @SW_SHOWNORMAL </td>
+  <td>ウィンドウをアクティブ化し表示します。ウィンドウが最小化・最大化されている場合、システムはそれをもとの大きさ・位置に戻します。アプリケーションは一番最初にウィンドウを表示するときこのフラグを指定します。</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;"> @SW_UNLOCK</td>
+  <td>ウィンドウ描画できるようロックを解除します。</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@SystemDir</td>
+  <td>ウィンドウズシステム(もしくはSystem32)フォルダのパス</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@TAB<br></td>
+  <td>Tab文字, Chr(9)<br></td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@TempDir</td>
+  <td>テンポラリーファイルフォルダのパス</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@TRAY_ID</td>
+  <td>TraySet(Item)OnEventの動作中、最後にクリックされたアイテムのID。</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@TrayIconFlashing</td>
+  <td>トレイアイコンが点滅している場合1、それ以外の場合0。</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@TrayIconVisible</td>
+  <td>トレイアイコンが可視の場合1、それ以外の場合0。</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@UserProfileDir</td>
+  <td>現在のユーザーのプロフィールフォルダのパス</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@UserName</td>
+  <td>現在ログインしているユーザーのID</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@WDAY</td>
+  <td>曜日：&nbsp;1から7までの数値が日曜から土曜日までと対応している。</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@WindowsDir</td>
+  <td>ウィンドウズフォルダのパス</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@WorkingDir</td>
+  <td>現在アクティブな作業フォルダ。&nbsp; (バックスラッシュを含みません) </td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@YDAY</td>
+  <td>1年における日付：&nbsp;001-366 (うるう年でない場合、001-365)</td>
+</tr>
+<tr>
+  <td style="font-weight: bold;">@YEAR</td>
+  <td>現在の年（西暦で4桁）</td>
+</tr>
+</table>
+
+<p>&nbsp;</p>
+</body>
+</html>

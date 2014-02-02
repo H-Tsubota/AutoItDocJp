@@ -1,0 +1,151 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function ObjEvent</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">ObjEvent</font>
+<hr size="2">
+<p>与えられたオブジェクトから得られるイベントをハンドルします。<br></p>
+
+<p class="codeheader">
+ObjEvent ( $ObjectVar, "functionprefix" [, "interface name"] )<br>
+ObjEvent ( "AutoIt.Error" [, "function name"] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">$ObjectVar</td>
+    <td width="85%">イベントを取得したいオブジェクトを格納している変数</td>
+  </tr>
+  <tr>
+   <td>"functionprefix"</td>
+   <td>取得したイベントをハンドルするために定義した関数の接頭辞。<br>
+		接頭辞はオブジェクトのメソッド名によって追加されます
+   </td>
+  </tr>
+  <tr>
+   <td>"interface name"</td>
+   <td><b>[オプション]</b>使用するイベントのインターフェイス名<br>
+   注意：オブジェクトがoutgoingをサポートしている、またDISPATCH型である必要があります。
+	</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">成功</td>
+    <td width="90%">オブジェクトまたは関数名を返します。</td>
+  </tr>
+  <tr>
+    <td valign="top">失敗</td>
+    <td>""を返し、@errorを1に設定します。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+最初のフォーマットはオブジェクトからイベントを取得するために使用します。<br>
+指定したイベントを取得するためには、指定したイベント名の接頭辞を使用したAutoIt関数名を作成しなければなりません。<br>
+<br>
+2番目のフォーマットはCOMのエラーをハンドリングするために使用します。COMのエラーが発生すると、指定した関数が呼び出されます。<br>
+2番目のパラメータを省略すると、(存在する場合は)現在のエラーハンドリング関数を返します。<br>
+<br>
+オブジェクトについてのより詳しい説明については<a href="../intro/ComRef.htm">Obj/COM Reference</a>を参照してください。<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="ObjGet.htm">ObjGet</a>, <a href="IsObj.htm">IsObj</a>, <a href="ObjCreate.htm">ObjCreate</a>, <a href="GUICtrlCreateObj.htm">GUICtrlCreateObj</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S1">; ObjEvent サンプル</span><br>
+<br>
+<span class="S4">ProgressOn</span><span class="S8">(</span><span class="S7">"Example"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Loading page..."</span><span class="S8">)</span><br>
+<span class="S9">$oIE</span><span class="S8">=</span><span class="S4">ObjCreate</span><span class="S8">(</span><span class="S7">"InternetExplorer.Application.1"</span><span class="S8">)</span><span class="S0">&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S1">; インターネットエクスプローラ アプリケーションを作成</span><br>
+<span class="S9">$SinkObject</span><span class="S8">=</span><span class="S4">ObjEvent</span><span class="S8">(</span><span class="S9">$oIE</span><span class="S8">,</span><span class="S7">"IEEvent_"</span><span class="S8">,</span><span class="S7">"DWebBrowserEvents2"</span><span class="S8">)</span><span class="S0"> </span><span class="S1">; UDFのIEEvent_で始まる関数にイベントを代入</span><br>
+<br>
+<span class="S1">; ブラウジングをおこなう</span><br>
+<span class="S9">$oIE</span><span class="S8">.</span><span class="S14">Visible</span><span class="S8">=</span><span class="S3">1</span><br>
+<span class="S9">$oIE</span><span class="S8">.</span><span class="S14">RegisterAsDropTarget</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">1</span><br>
+<span class="S9">$oIE</span><span class="S8">.</span><span class="S14">RegisterAsBrowser</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">1</span><br>
+<span class="S9">$oIE</span><span class="S8">.</span><span class="S14">Navigate</span><span class="S8">(</span><span class="S0"> </span><span class="S7">"http://www.AutoItScript.com/"</span><span class="S0"> </span><span class="S8">)</span><br>
+<br>
+<span class="S4">sleep</span><span class="S8">(</span><span class="S3">3000</span><span class="S8">)</span><span class="S0">&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S1">; ウェブページロード待機</span><br>
+<br>
+<span class="S9">$SinkObject</span><span class="S8">=</span><span class="S3">0</span><span class="S0">&nbsp; &nbsp;&nbsp; &nbsp; </span><span class="S1">; IEイベント停止</span><br>
+<span class="S9">$oIE</span><span class="S8">.</span><span class="S14">Quit</span><span class="S0">&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S1">; IE終了</span><br>
+<span class="S9">$oIE</span><span class="S8">=</span><span class="S3">0</span><br>
+<span class="S5">exit</span><br>
+<br>
+<span class="S1">; インターネットエクスプローラ イベント関数のひとつ</span><br>
+<br>
+<span class="S5">Func</span><span class="S0"> IEEvent_ProgressChange</span><span class="S8">(</span><span class="S9">$Progress</span><span class="S8">,</span><span class="S9">$ProgressMax</span><span class="S8">)</span><br>
+<span class="S0">&nbsp;&nbsp;</span><span class="S9">$percent</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">Int</span><span class="S8">(</span><span class="S0"> </span><span class="S8">(</span><span class="S9">$Progress</span><span class="S0"> </span><span class="S8">*</span><span class="S0"> </span><span class="S3">100</span><span class="S8">)</span><span class="S0"> </span><span class="S8">/</span><span class="S0"> </span><span class="S9">$ProgressMax</span><span class="S0"> </span><span class="S8">)</span><br>
+<span class="S0">&nbsp;&nbsp;</span><span class="S5">If</span><span class="S0"> </span><span class="S9">$percent</span><span class="S0"> </span><span class="S8">&gt;=</span><span class="S0"> </span><span class="S3">0</span><span class="S0"> </span><span class="S5">And</span><span class="S0"> </span><span class="S9">$percent</span><span class="S0"> </span><span class="S8">&lt;=</span><span class="S0"> </span><span class="S3">100</span><span class="S0"> </span><span class="S5">Then</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S4">ProgressSet</span><span class="S0"> </span><span class="S8">(</span><span class="S0"> </span><span class="S9">$percent</span><span class="S0"> </span><span class="S8">,</span><span class="S0"> </span><span class="S9">$percent</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">" percent to go."</span><span class="S0"> </span><span class="S8">,</span><span class="S0"> </span><span class="S7">"loading web page"</span><span class="S0"> </span><span class="S8">)</span><br>
+<span class="S0">&nbsp;&nbsp;</span><span class="S5">EndIf</span><br>
+<br>
+<span class="S5">EndFunc</span><br>
+<br>
+<span class="S5">Exit</span><br>
+<br>
+<span class="S1">; COMエラーハンドリング サンプル</span><br>
+<span class="S1">; ------------------------- </span><br>
+<br>
+<span class="S9">$oIE</span><span class="S8">=</span><span class="S4">ObjCreate</span><span class="S8">(</span><span class="S7">"InternetExplorer.Application.1"</span><span class="S8">)</span><span class="S0">&nbsp; &nbsp; </span><span class="S1">; インターネットエクスプローラ アプリケーションを作成</span><br>
+<br>
+<span class="S5">Global</span><span class="S0"> </span><span class="S9">$g_eventerror</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><span class="S0">&nbsp; &nbsp; </span><span class="S1">; COMエラーが起きたかどうか知るためのチェック用。ハンドリング後にリセットする必要がある。</span><br>
+<br>
+<span class="S9">$oMyError</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">ObjEvent</span><span class="S8">(</span><span class="S7">"AutoIt.Error"</span><span class="S8">,</span><span class="S7">"MyErrFunc"</span><span class="S8">)</span><span class="S0">&nbsp; &nbsp; </span><span class="S1">; COMエラーハンドラ初期化</span><br>
+<br>
+<span class="S9">$oIE</span><span class="S8">.</span><span class="S14">UnknownMethod</span><span class="S0">&nbsp; &nbsp; &nbsp; </span><span class="S1">; わざと未定義メソッドを呼び出す</span><br>
+<br>
+<span class="S5">If</span><span class="S0"> </span><span class="S9">$g_eventerror</span><span class="S0"> </span><span class="S5">then</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$g_eventerror</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><br>
+<span class="S0">&nbsp;&nbsp;</span><span class="S4">Msgbox</span><span class="S0"> </span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S7">"AutoItCOM test"</span><span class="S8">,</span><span class="S7">"Test passed: We got an error number: "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@error</span><span class="S8">)</span><br>
+<span class="S5">Else</span><br>
+<span class="S0">&nbsp;&nbsp;</span><span class="S4">Msgbox</span><span class="S0"> </span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S7">"AutoItCOM test"</span><span class="S8">,</span><span class="S7">"Test failed!"</span><span class="S8">)</span><br>
+<span class="S5">Endif</span><br>
+<br>
+<span class="S5">Exit</span><br>
+<br>
+<span class="S1">; カスタム定義したエラーハンドラ</span><br>
+<span class="S5">Func</span><span class="S0"> MyErrFunc</span><span class="S8">()</span><br>
+<br>
+<span class="S0">&nbsp;&nbsp;</span><span class="S4">Msgbox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S7">"AutoItCOM Test"</span><span class="S8">,</span><span class="S7">"We intercepted a COM Error !"</span><span class="S0"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> &nbsp;</span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S8">_</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;</span><span class="S7">"err.description is: "</span><span class="S0"> &nbsp;&nbsp;&nbsp;</span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@TAB</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$oMyError</span><span class="S8">.</span><span class="S14">description</span><span class="S0"> &nbsp;&nbsp;&nbsp;</span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S8">_</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;</span><span class="S7">"err.windescription:"</span><span class="S0"> &nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@TAB</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$oMyError</span><span class="S8">.</span><span class="S14">windescription</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S8">_</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;</span><span class="S7">"err.number is: "</span><span class="S0"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@TAB</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S4">hex</span><span class="S8">(</span><span class="S9">$oMyError</span><span class="S8">.</span><span class="S14">number</span><span class="S8">,</span><span class="S3">8</span><span class="S8">)</span><span class="S0"> &nbsp;</span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S8">_</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;</span><span class="S7">"err.lastdllerror is: "</span><span class="S0"> &nbsp;&nbsp;</span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@TAB</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$oMyError</span><span class="S8">.</span><span class="S14">lastdllerror</span><span class="S0"> &nbsp;&nbsp;</span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S8">_</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;</span><span class="S7">"err.scriptline is: "</span><span class="S0"> &nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@TAB</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$oMyError</span><span class="S8">.</span><span class="S14">scriptline</span><span class="S0"> &nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S8">_</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;</span><span class="S7">"err.source is: "</span><span class="S0"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@TAB</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$oMyError</span><span class="S8">.</span><span class="S14">source</span><span class="S0"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S8">_</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;</span><span class="S7">"err.helpfile is: "</span><span class="S0"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@TAB</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$oMyError</span><span class="S8">.</span><span class="S14">helpfile</span><span class="S0"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S8">_</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;</span><span class="S7">"err.helpcontext is: "</span><span class="S0"> &nbsp;&nbsp;&nbsp;</span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@TAB</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$oMyError</span><span class="S8">.</span><span class="S14">helpcontext</span><span class="S0"> </span><span class="S8">_</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$err</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$oMyError</span><span class="S8">.</span><span class="S14">number</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">If</span><span class="S0"> </span><span class="S9">$err</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><span class="S0"> </span><span class="S5">Then</span><span class="S0"> </span><span class="S9">$err</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$g_eventerror</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$err</span><span class="S0"> &nbsp;</span><span class="S1">; この関数終了後のチェック用</span><br>
+<span class="S5">Endfunc</span><br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\ObjEvent.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

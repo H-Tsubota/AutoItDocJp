@@ -1,0 +1,50 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Tutorial - HelloWorld</title>
+  <meta http-equiv="Content-Type"
+ content="text/html; charset=shift-jis">
+  <link href="../../css/default.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<h1>Tutorial - HelloWorld</h1>
+<p>このチュートリアルではAutoItスクリプト作成とその実行方法の基本について説明します。このチュートリアルでは既にインストーラを使用してAutoIt v3がフルインストールされているものとします。</p>
+<p>&nbsp;</p>
+<p>まずスクリプトを作成したいフォルダを開きます。フォルダ上で右クリックをし<strong>New / AutoIt v3 Script</strong>を選択します。</p>
+<p><img src="filenew.png" width="336" height="262" border="1"></p>
+<p>&nbsp;</p>
+<p>新しいファイルが作成された後、より適切なファイル名に変更することができます。
+'New AutoIt v3 Script'から<strong>'helloworld'</strong>に変更してください。
+拡張子が表示されている場合はファイル名の後ろに'.au3'をつけてください。</p>
+<p><img src="folderview.png" width="312" height="248" border="1"></p>
+<p>&nbsp;</p>
+<p>さあ、スクリプトファイルが作成されました。これを使っていろいろ便利なことができるようにファイルを編集しましょう。<em>helloworld.au3</em>の上で右クリックして<strong>Edit Script</strong>を選択します。</p>
+<p><img src="fileedit.png" width="241" height="231" border="1"> </p>
+<p>&nbsp;</p>
+<p>SciTE エディタが起動し、このような表示がされます。</p>
+<p><img src="template.png" width="661" height="363" border="1"> </p>
+<p>&nbsp;</p>
+<p>見えているコードはスクリプト作成時に使用できる単なるコメントです。セミコロン<strong>;</strong>で開始される行はコメント（無視）として扱われます。; はDOSバッチファイルの<strong>REM</strong>宣言と同じです。</p>
+<p>&nbsp;</p>
+<p>まずAutoItにメッセージボックスを表示するように指示してみましょう―これは<a href="../../functions/MsgBox.htm">MsgBox</a>関数によっておこなわれます。</p>
+<p>ファイルの一番下に次のように書いてください。</p>
+<p>&nbsp;</p>
+<p class="codebox">MsgBox(0, &quot;Tutorial&quot;, &quot;Hello World!&quot;)</p>
+<p>&nbsp;</p>
+<p>関数は全てパラメータをとります。MsgBoxは３つ - フラグ、タイトル、メッセージです。フラグはMsgBox表示を変える数字です - とりあえず<strong>0</strong>を使用します。タイトルとメッセージは両方とも<strong>string</strong>パラメータです - 文字列を使う時、AutoItではテキストをダブルクオーテーションまたはシングルクオーテーションで囲みます。&quot;This is some text&quot; 、'This is some text' - 両方とも可能です。</p>
+<p>さてスクリプトを保存してエディタを閉じます。あなたの１番最初のAutoItスクリプトの完成です！スクリプトを実行するためには<em>helloworld.au3</em>ファイルをダブルクリックするだけです（またはファイルを右クリックして<strong>Run Script</strong>を選びます）。</p>
+<p>次のように表示されるでしょう。</p>
+<p><img src="msgbox.png" width="104" height="107"> </p>
+<p>&nbsp;</p>
+<p>もう一度<a href="../../functions/MsgBox.htm">MsgBox</a>関数の<em>flag</em>パラメータを見てみましょう。マニュアルページにはMsgBox表示形式を変える値のリストを見ることができます。<strong>0 </strong>は<strong>OK</strong>ボタン１つのシンプルなメッセージボックスを表示します。<strong> 64</strong>は<em>インフォメーションアイコン</em>のあるメッセージボックスを表示します。</p>
+<p>スクリプトを編集して次のように0を64に変更します。</p>
+<p class="codebox">MsgBox(64, &quot;Tutorial&quot;, &quot;Hello World!&quot;)</p>
+<p>&nbsp;</p>
+<p>実行すると次のようになるでしょう。</p>
+<p><img src="msgbox2.png" width="134" height="126"> </p>
+<p>&nbsp;</p>
+<p>いろいろな値をフラグに設定してどのような結果になるか実験してみてください。注意ですが、もし1つ以上の値をフラグに設定したい場合は単にそれらを足し合わせてください。</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</body>
+</html>

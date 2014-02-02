@@ -1,0 +1,1982 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>ASCII Characters</title>
+  <meta content="text/html; charset=shift_jis" http-equiv="Content-Type">
+  <link type="text/css" rel="stylesheet" href="../css/default.css">
+</head>
+
+<body>
+<h1>ASCII Character Codes</h1>
+<p>
+<a href="../functions/Asc.htm">Asc</a>関数、<a href="../functions/Chr.htm">Chr</a>関数のためのリスト。
+出典は<a href="http://www.robelle.com/library/smugbook/ascii.html">ASCII Character Set</a>。
+</p><br>
+</p>
+<b>制御文字 (ほとんどは表示されません。よく利用するものは黄色でハイライトしてあります。)</b><br>
+<br>
+<table border="1" style="width: 100%;" cellspacing="0" cellpadding="3" bordercolor="#c0c0c0">
+<tr style="color: rgb(255, 255, 255);">
+  <th style="background-color: rgb(0, 0, 153); width: 10%;">文字...</th>
+  <th style="background-color: rgb(0, 0, 153); width: 10%;">10進数</th>
+  <th style="background-color: rgb(0, 0, 153); width: 10%;">16進数</th>
+  <th style="background-color: rgb(0, 0, 153); width: 10%;">8進数</th>
+  <th style="background-color: rgb(0, 0, 153);"><b>説明</b></th>
+</tr>
+<tr>
+  <td style="background-color: rgb(255, 255, 153);">NUL</td>
+  <td style="background-color: rgb(255, 255, 153);">0</td>
+  <td style="background-color: rgb(255, 255, 153);">00</td>
+  <td style="background-color: rgb(255, 255, 153);">000</td>
+  <td style="background-color: rgb(255, 255, 153);">Null文字</td>
+</tr>
+<tr>
+  <td>SOH</td>
+  <td>1</td>
+  <td>01</td>
+  <td>001</td>
+  <td>ヘッダ開始 = コンソール割り込み</td>
+</tr>
+<tr>
+  <td>STX</td>
+  <td>2</td>
+  <td>02</td>
+  <td>002</td>
+  <td>テキスト開始。 HPコンソールでのメンテナンスモード。</td>
+</tr>
+<tr>
+  <td>ETX</td>
+  <td>3</td>
+  <td>03</td>
+  <td>003</td>
+  <td>テキスト終了</td>
+</tr>
+<tr>
+  <td>EOT</td>
+  <td>4</td>
+  <td>04</td>
+  <td>004</td>
+  <td>転送終了。ETBとは異なる。</td>
+</tr>
+<tr>
+  <td>ENQ</td>
+  <td>5</td>
+  <td>05</td>
+  <td>005</td>
+  <td>照会(Enquiry)。ACKと使用。古いHPフロー制御。</td>
+</tr>
+<tr>
+  <td>ACK</td>
+  <td>6</td>
+  <td>06</td>
+  <td>006</td>
+  <td>受信可(Acknowledge)。ENQログオンハンドのクリア。</td>
+</tr>
+<tr>
+  <td style="background-color: rgb(255, 255, 153);">BEL</td>
+  <td style="background-color: rgb(255, 255, 153);">7</td>
+  <td style="background-color: rgb(255, 255, 153);">07</td>
+  <td style="background-color: rgb(255, 255, 153);">007</td>
+  <td style="background-color: rgb(255, 255, 153);">ベル。ベルを鳴らす(Windowsのデフォルトビープ音を鳴らす)。<br>
+  </td>
+</tr>
+<tr>
+  <td>BS</td>
+  <td>8</td>
+  <td>08</td>
+  <td>010</td>
+  <td>バックスペース。HPターミナル/コンピュータで動作。</td>
+</tr>
+<tr>
+  <td style="background-color: rgb(255, 255, 153);">HT</td>
+  <td style="background-color: rgb(255, 255, 153);">9</td>
+  <td style="background-color: rgb(255, 255, 153);">09</td>
+  <td style="background-color: rgb(255, 255, 153);">011</td>
+  <td style="background-color: rgb(255, 255, 153);">水平タブ。次のタブストップへ移動。</td>
+</tr>
+<tr>
+  <td style="background-color: rgb(255, 255, 153);">LF</td>
+  <td style="background-color: rgb(255, 255, 153);">10</td>
+  <td style="background-color: rgb(255, 255, 153);">0a</td>
+  <td style="background-color: rgb(255, 255, 153);">012</td>
+  <td style="background-color: rgb(255, 255, 153);">ラインフィード</td>
+</tr>
+<tr>
+  <td>VT</td>
+  <td>11</td>
+  <td>0b</td>
+  <td>013</td>
+  <td>垂直タブ</td>
+</tr>
+<tr>
+  <td>FF</td>
+  <td>12</td>
+  <td>0c</td>
+  <td>014</td>
+  <td>フォームフィード。改ページ。</td>
+</tr>
+<tr>
+  <td style="background-color: rgb(255, 255, 153);">CR</td>
+  <td style="background-color: rgb(255, 255, 153);">13</td>
+  <td style="background-color: rgb(255, 255, 153);">0d</td>
+  <td style="background-color: rgb(255, 255, 153);">015</td>
+  <td style="background-color: rgb(255, 255, 153);">キャリッジリターン</td>
+</tr>
+<tr>
+  <td>SO</td>
+  <td>14</td>
+  <td>0e</td>
+  <td>016</td>
+  <td>シフトアウト。文字セットの切り替え。</td>
+</tr>
+<tr>
+  <td>SI</td>
+  <td>15</td>
+  <td>0f</td>
+    <td>017</td>
+    <td>シフトイン。デフォルトの文字セットへ復帰。</td>
+</tr>
+<tr>
+  <td>DLE</td>
+  <td>16</td>
+  <td>10</td>
+  <td>020</td>
+  <td>データリンクエスケープ</td>
+</tr>
+<tr>
+  <td>DC1</td>
+  <td>17</td>
+  <td>11</td>
+  <td>021</td>
+  <td>XON。XOFFでリスティングの停止。"送信可能"。</td>
+</tr>
+<tr>
+  <td>DC2</td>
+  <td>18</td>
+  <td>12</td>
+  <td>022</td>
+  <td>デバイス制御2。ブロックモードフロー制御。</td>
+</tr>
+<tr>
+  <td>DC3</td>
+  <td>19</td>
+  <td>13</td>
+  <td>023</td>
+  <td>XOFF。XONでTERM=18フロー制御。</td>
+</tr>
+<tr>
+  <td>DC4</td>
+  <td>20</td>
+  <td>14</td>
+  <td>024</td>
+  <td>デバイス制御4。</td>
+</tr>
+<tr>
+  <td>NAK</td>
+  <td>21</td>
+  <td>15</td>
+  <td>025</td>
+  <td>受信失敗</td>
+</tr>
+<tr>
+  <td>SYN</td>
+  <td>22</td>
+  <td>16</td>
+  <td>026</td>
+  <td>同期信号</td>
+</tr>
+<tr>
+  <td>ETB</td>
+  <td>23</td>
+  <td>17</td>
+  <td>027</td>
+  <td>転送ブロック終了。EOTとは異なる。</td>
+</tr>
+<tr>
+  <td>CAN</td>
+  <td>24</td>
+  <td>18</td>
+  <td>030</td>
+  <td>キャンセル。MPE エコー!!! </td>
+</tr>
+<tr>
+  <td>EM</td>
+  <td>25</td>
+  <td>19</td>
+  <td>031</td>
+  <td>メディア終了。Y 割り込み制御。</td>
+</tr>
+<tr>
+  <td>SUB</td>
+  <td>26</td>
+  <td>1a</td>
+  <td>032</td>
+  <td>置換 </td>
+</tr>
+<tr>
+  <td>ESC</td>
+  <td>27</td>
+  <td>1b</td>
+  <td>033</td>
+  <td>エスケープ。次の文字はエコーされません。</td>
+</tr>
+<tr>
+  <td>FS</td>
+  <td>28</td>
+  <td>1c</td>
+  <td>034</td>
+  <td>ファイルセパレータ</td>
+</tr>
+<tr>
+  <td>GS</td>
+  <td>29</td>
+  <td>1d</td>
+  <td>035</td>
+  <td>グループセパレータ</td>
+</tr>
+<tr>
+  <td>RS</td>
+  <td>30</td>
+  <td>1e</td>
+  <td>036</td>
+  <td>レコードセパレータ。ブロックモード終了。</td>
+</tr>
+<tr>
+  <td>US</td>
+  <td>31</td>
+  <td>1f</td>
+  <td>037</td>
+  <td>ユニットセパレータ</td>
+</tr>
+</table>
+
+<p>
+<br>
+<br>
+<b>表示文字(標準文字)</b><br>
+<br>
+</p>
+<table border="1" style="width: 100%;" cellspacing="0" cellpadding="3" bordercolor="#c0c0c0">
+<tr style="color: rgb(255, 255, 255);">
+  <th style="background-color: rgb(0, 0, 153); width: 10%;">文字...</th>
+  <th style="background-color: rgb(0, 0, 153); width: 10%;">10進数</th>
+  <th style="background-color: rgb(0, 0, 153); width: 10%;">16進数</th>
+  <th style="background-color: rgb(0, 0, 153); width: 10%;">8進数</th>
+  <th style="background-color: rgb(0, 0, 153);"><b>説明</b></th>
+</tr>
+<tr>
+  <td>&nbsp;</td>
+  <td>32</td>
+  <td>20</td>
+  <td>040</td>
+  <td>スペース</td>
+</tr>
+<tr>
+  <td>!</td>
+  <td>33</td>
+  <td>21</td>
+  <td>041</td>
+  <td>エクスクラメーションマーク</td>
+</tr>
+<tr>
+  <td>"</td>
+  <td>34</td>
+  <td>22</td>
+  <td>042</td>
+  <td>クォーテーションマーク(HTMLでは&amp;quot;)</td>
+</tr>
+<tr>
+  <td>#</td>
+  <td>35</td>
+  <td>23</td>
+  <td>043</td>
+  <td>シャープ (数字記号)</td>
+</tr>
+<tr>
+  <td>$</td>
+  <td>36</td>
+  <td>24</td>
+  <td>044</td>
+  <td>ドル記号 </td>
+</tr>
+<tr>
+  <td>%</td>
+  <td>37</td>
+  <td>25</td>
+  <td>045</td>
+  <td>パーセント記号</td>
+</tr>
+<tr>
+  <td>&amp;</td>
+  <td>38</td>
+  <td>26</td>
+  <td>046</td>
+  <td>アンド記号</td>
+</tr>
+<tr>
+  <td>`</td>
+  <td>39</td>
+  <td>27</td>
+  <td>047</td>
+  <td>シングルクォーテーション閉じ (アポストロフィー) </td>
+</tr>
+<tr>
+  <td>(</td>
+  <td>40</td>
+  <td>28</td>
+  <td>050</td>
+  <td>丸カッコ開き</td>
+</tr>
+<tr>
+  <td>)</td>
+  <td>41</td>
+  <td>29</td>
+  <td>051</td>
+  <td>丸カッコ閉じ</td>
+</tr>
+<tr>
+  <td>*</td>
+  <td>42</td>
+  <td>2a</td>
+  <td>052</td>
+  <td>アスタリスク (スター、乗算記号) </td>
+</tr>
+<tr>
+  <td>+</td>
+  <td>43</td>
+  <td>2b</td>
+  <td>053</td>
+  <td>プラス </td>
+</tr>
+<tr>
+  <td>,</td>
+  <td>44</td>
+  <td>2c</td>
+  <td>054</td>
+  <td>カンマ</td>
+</tr>
+<tr>
+  <td>-</td>
+  <td>45</td>
+  <td>2d</td>
+  <td>055</td>
+  <td>ハイフン、ダッシュ、マイナス</td>
+</tr>
+<tr>
+  <td>.</td>
+  <td>46</td>
+  <td>2e</td>
+  <td>056</td>
+  <td>ピリオド </td>
+</tr>
+<tr>
+  <td>/</td>
+  <td>47</td>
+  <td>2f</td>
+  <td>057</td>
+  <td>スラント (スラッシュ、除算記号) </td>
+</tr>
+<tr>
+  <td>0</td>
+  <td>48</td>
+  <td>30</td>
+  <td>060</td>
+  <td>零</td>
+</tr>
+<tr>
+  <td>1</td>
+  <td>49</td>
+  <td>31</td>
+  <td>061</td>
+  <td>一</td>
+</tr>
+<tr>
+  <td>2</td>
+  <td>50</td>
+  <td>32</td>
+  <td>062</td>
+  <td>二</td>
+</tr>
+<tr>
+  <td>3</td>
+  <td>51</td>
+  <td>33</td>
+  <td>063</td>
+  <td>三</td>
+</tr>
+<tr>
+  <td>4</td>
+  <td>52</td>
+  <td>34</td>
+  <td>064</td>
+  <td>四</td>
+</tr>
+<tr>
+  <td>5</td>
+  <td>53</td>
+  <td>35</td>
+  <td>065</td>
+  <td>五</td>
+</tr>
+<tr>
+  <td>6</td>
+  <td>54</td>
+  <td>36</td>
+  <td>066</td>
+  <td>六 </td>
+</tr>
+<tr>
+  <td>7</td>
+  <td>55</td>
+  <td>37</td>
+  <td>067</td>
+  <td>七 </td>
+</tr>
+<tr>
+  <td>8</td>
+  <td>56</td>
+  <td>38</td>
+  <td>070</td>
+  <td>八 </td>
+</tr>
+<tr>
+  <td>9</td>
+  <td>57</td>
+  <td>39</td>
+  <td>071</td>
+  <td>九 </td>
+</tr>
+<tr>
+  <td>:</td>
+  <td>58</td>
+  <td>3a</td>
+  <td>072</td>
+  <td>コロン</td>
+</tr>
+<tr>
+  <td>;</td>
+  <td>59</td>
+  <td>3b</td>
+  <td>073</td>
+  <td>セミコロン</td>
+</tr>
+<tr>
+  <td>&lt;</td>
+  <td>60</td>
+  <td>3c</td>
+  <td>074</td>
+  <td>小なり記号</td>
+</tr>
+<tr>
+  <td>=</td>
+  <td>61</td>
+  <td>3d</td>
+  <td>075</td>
+  <td>等号</td>
+</tr>
+<tr>
+  <td>&gt;</td>
+  <td>62</td>
+  <td>3e</td>
+  <td>076</td>
+  <td>大なり記号</td>
+</tr>
+<tr>
+  <td>?</td>
+  <td>63</td>
+  <td>3f</td>
+  <td>077</td>
+  <td>クエスチョン記号</td>
+</tr>
+<tr>
+  <td>@</td>
+  <td>64</td>
+  <td>40</td>
+  <td>100</td>
+  <td>アットマーク</td>
+</tr>
+<tr>
+  <td>A</td>
+  <td>65</td>
+  <td>41</td>
+  <td>101</td>
+  <td>大文字のA </td>
+</tr>
+<tr>
+  <td>B</td>
+  <td>66</td>
+  <td>42</td>
+  <td>102</td>
+  <td>大文字のB </td>
+</tr>
+<tr>
+  <td>C</td>
+  <td>67</td>
+  <td>43</td>
+  <td>103</td>
+  <td>大文字のC </td>
+</tr>
+<tr>
+  <td>D</td>
+  <td>68</td>
+  <td>44</td>
+  <td>104</td>
+  <td>大文字のD </td>
+</tr>
+<tr>
+  <td>E</td>
+  <td>69</td>
+  <td>45</td>
+  <td>105</td>
+  <td>大文字のE </td>
+</tr>
+<tr>
+  <td>F</td>
+  <td>70</td>
+  <td>46</td>
+  <td>106</td>
+  <td>大文字のF </td>
+</tr>
+<tr>
+  <td>G</td>
+  <td>71</td>
+  <td>47</td>
+  <td>107</td>
+  <td>大文字のG </td>
+</tr>
+<tr>
+  <td>H</td>
+  <td>72</td>
+  <td>48</td>
+  <td>110</td>
+  <td>大文字のH </td>
+</tr>
+<tr>
+  <td>I</td>
+  <td>73</td>
+  <td>49</td>
+  <td>111</td>
+  <td>大文字のI </td>
+</tr>
+<tr>
+  <td>J</td>
+  <td>74</td>
+  <td>4a</td>
+  <td>112</td>
+  <td>大文字のJ </td>
+</tr>
+<tr>
+  <td>K</td>
+  <td>75</td>
+  <td>4b</td>
+  <td>113</td>
+  <td>大文字のK </td>
+</tr>
+<tr>
+  <td>L</td>
+  <td>76</td>
+  <td>4c</td>
+  <td>114</td>
+  <td>大文字のL </td>
+</tr>
+<tr>
+  <td>M</td>
+  <td>77</td>
+  <td>4d</td>
+  <td>115</td>
+  <td>大文字のM </td>
+</tr>
+<tr>
+  <td>N</td>
+  <td>78</td>
+  <td>4e</td>
+  <td>116</td>
+  <td>大文字のN </td>
+</tr>
+<tr>
+  <td>O</td>
+  <td>79</td>
+  <td>4f</td>
+  <td>117</td>
+  <td>大文字のO </td>
+</tr>
+<tr>
+  <td>P</td>
+  <td>80</td>
+  <td>50</td>
+  <td>120</td>
+  <td>大文字のP </td>
+</tr>
+<tr>
+  <td>Q</td>
+  <td>81</td>
+  <td>51</td>
+  <td>121</td>
+  <td>大文字のQ </td>
+</tr>
+<tr>
+  <td>R</td>
+  <td>82</td>
+  <td>52</td>
+  <td>122</td>
+  <td>大文字のR </td>
+</tr>
+<tr>
+  <td>S</td>
+  <td>83</td>
+  <td>53</td>
+  <td>123</td>
+  <td>大文字のS </td>
+</tr>
+<tr>
+  <td>T</td>
+  <td>84</td>
+  <td>54</td>
+  <td>124</td>
+  <td>大文字のT </td>
+</tr>
+<tr>
+  <td>U</td>
+  <td>85</td>
+  <td>55</td>
+  <td>125</td>
+  <td>大文字のU </td>
+</tr>
+<tr>
+  <td>V</td>
+  <td>86</td>
+  <td>56</td>
+  <td>126</td>
+  <td>大文字のV </td>
+</tr>
+<tr>
+  <td>W</td>
+  <td>87</td>
+  <td>57</td>
+  <td>127</td>
+  <td>大文字のW </td>
+</tr>
+<tr>
+  <td>X</td>
+  <td>88</td>
+  <td>58</td>
+  <td>130</td>
+  <td>大文字のX </td>
+</tr>
+<tr>
+  <td>Y</td>
+  <td>89</td>
+  <td>59</td>
+  <td>131</td>
+  <td>大文字のY </td>
+</tr>
+<tr>
+  <td>Z</td>
+  <td>90</td>
+  <td>5a</td>
+  <td>132</td>
+  <td>大文字のZ </td>
+</tr>
+<tr>
+  <td>[</td>
+  <td>91</td>
+  <td>5b</td>
+  <td>133</td>
+  <td>角カッコ開き</td>
+</tr>
+<tr>
+  <td>\</td>
+  <td>92</td>
+  <td>5c</td>
+  <td>134</td>
+  <td>逆スラント (バックスラッシュ) </td>
+</tr>
+<tr>
+  <td>]</td>
+  <td>93</td>
+  <td>5d</td>
+  <td>135</td>
+  <td>角カッコ閉じ</td>
+</tr>
+<tr>
+  <td>^</td>
+  <td>94</td>
+  <td>5e</td>
+  <td>136</td>
+  <td>キャレット (サーカムフレックス) </td>
+</tr>
+<tr>
+  <td>_</td>
+  <td>95</td>
+  <td>5f</td>
+  <td>137</td>
+  <td>アンダーバー </td>
+</tr>
+<tr>
+  <td>`</td>
+  <td>96</td>
+  <td>60</td>
+  <td>140</td>
+  <td>シングルコーテーション開き</td>
+</tr>
+<tr>
+  <td>a</td>
+  <td>97</td>
+  <td>61</td>
+  <td>141</td>
+  <td>小文字のa </td>
+</tr>
+<tr>
+  <td>b</td>
+  <td>98</td>
+  <td>62</td>
+  <td>142</td>
+  <td>小文字のb </td>
+</tr>
+<tr>
+  <td>c</td>
+  <td>99</td>
+  <td>63</td>
+  <td>143</td>
+  <td>小文字のc </td>
+</tr>
+<tr>
+  <td>d</td>
+  <td>100</td>
+  <td>64</td>
+  <td>144</td>
+  <td>小文字のd </td>
+</tr>
+<tr>
+  <td>e</td>
+  <td>101</td>
+  <td>65</td>
+  <td>145</td>
+  <td>小文字のe </td>
+</tr>
+<tr>
+  <td>f</td>
+  <td>102</td>
+  <td>66</td>
+  <td>146</td>
+  <td>小文字のf </td>
+</tr>
+<tr>
+  <td>g</td>
+  <td>103</td>
+  <td>67</td>
+  <td>147</td>
+  <td>小文字のg </td>
+</tr>
+<tr>
+  <td>h</td>
+  <td>104</td>
+  <td>68</td>
+  <td>150</td>
+  <td>小文字のh </td>
+</tr>
+<tr>
+  <td>i</td>
+  <td>105</td>
+  <td>69</td>
+  <td>151</td>
+  <td>小文字のi </td>
+</tr>
+<tr>
+  <td>j</td>
+  <td>106</td>
+  <td>6a</td>
+  <td>152</td>
+  <td>小文字のj </td>
+</tr>
+<tr>
+  <td>k</td>
+  <td>107</td>
+  <td>6b</td>
+  <td>153</td>
+  <td>小文字のk </td>
+</tr>
+<tr>
+  <td>l</td>
+  <td>108</td>
+  <td>6c</td>
+  <td>154</td>
+  <td>小文字のl </td>
+</tr>
+<tr>
+  <td>m</td>
+  <td>109</td>
+  <td>6d</td>
+  <td>155</td>
+  <td>小文字のm </td>
+</tr>
+<tr>
+  <td>n</td>
+  <td>110</td>
+  <td>6e</td>
+  <td>156</td>
+  <td>小文字のn </td>
+</tr>
+<tr>
+  <td>o</td>
+  <td>111</td>
+  <td>6f</td>
+  <td>157</td>
+  <td>小文字のo </td>
+</tr>
+<tr>
+  <td>p</td>
+  <td>112</td>
+  <td>70</td>
+  <td>160</td>
+  <td>小文字のp </td>
+</tr>
+<tr>
+  <td>q</td>
+  <td>113</td>
+  <td>71</td>
+  <td>161</td>
+  <td>小文字のq </td>
+</tr>
+<tr>
+  <td>r</td>
+  <td>114</td>
+  <td>72</td>
+  <td>162</td>
+  <td>小文字のr </td>
+</tr>
+<tr>
+  <td>s</td>
+  <td>115</td>
+  <td>73</td>
+  <td>163</td>
+  <td>小文字のs </td>
+</tr>
+<tr>
+  <td>t</td>
+  <td>116</td>
+  <td>74</td>
+  <td>164</td>
+  <td>小文字のt </td>
+</tr>
+<tr>
+  <td>u</td>
+  <td>117</td>
+  <td>75</td>
+  <td>165</td>
+  <td>小文字のu </td>
+</tr>
+<tr>
+  <td>v</td>
+  <td>118</td>
+  <td>76</td>
+  <td>166</td>
+  <td>小文字のv </td>
+</tr>
+<tr>
+  <td>w</td>
+  <td>119</td>
+  <td>77</td>
+  <td>167</td>
+  <td>小文字のw </td>
+</tr>
+<tr>
+  <td>x</td>
+  <td>120</td>
+  <td>78</td>
+  <td>170</td>
+  <td>小文字のx </td>
+</tr>
+<tr>
+  <td>y</td>
+  <td>121</td>
+  <td>79</td>
+  <td>171</td>
+  <td>小文字のy </td>
+</tr>
+<tr>
+  <td>z</td>
+  <td>122</td>
+  <td>7a</td>
+  <td>172</td>
+  <td>小文字のz </td>
+</tr>
+<tr>
+  <td>{</td>
+  <td>123</td>
+  <td>7b</td>
+  <td>173</td>
+  <td>波カッコ開き</td>
+</tr>
+<tr>
+  <td>|</td>
+  <td>124</td>
+  <td>7c</td>
+  <td>174</td>
+  <td>垂直ライン</td>
+</tr>
+<tr>
+  <td>}</td>
+  <td>125</td>
+  <td>7d</td>
+  <td>175</td>
+  <td>波カッコ閉じ</td>
+</tr>
+<tr>
+  <td>~</td>
+  <td>126</td>
+  <td>7e</td>
+  <td>176</td>
+  <td>チルダ (近似) </td>
+</tr>
+<tr>
+  <td>&#127;</td>
+  <td>127</td>
+  <td>7f</td>
+  <td>177</td>
+  <td>デリート (消去)、クロスハッチボックス。</td>
+</tr>
+</table>
+
+<br>
+<br>
+<br>
+<b>拡張文字セット(ANSI)</b><br>
+<br>
+<p>
+<table border="1" style="width: 100%;" cellspacing="0" cellpadding="3" bordercolor="#c0c0c0">
+<tr style="color: rgb(255, 255, 255);">
+  <th style="background-color: rgb(0, 0, 153); width: 10%;">文字...</th>
+  <th style="background-color: rgb(0, 0, 153); width: 10%;">10進数</th>
+  <th style="background-color: rgb(0, 0, 153); width: 10%;">16進数</th>
+  <th style="background-color: rgb(0, 0, 153); width: 10%;">8進数</th>
+  <th style="background-color: rgb(0, 0, 153);"><b>説明</b></th>
+</tr>
+<tr>
+  <td>&#8364;</td>
+  <td>128</td>
+  <td>80</td>
+  <td>200</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td><br>
+  </td>
+  <td>129</td>
+  <td>81</td>
+  <td>201</td>
+  <td>注意：このhtmlヘルプファイルでは表示されない。</td>
+</tr>
+<tr>
+  <td>&#8218;</td>
+  <td>130</td>
+  <td>82</td>
+  <td>202</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&#402;</td>
+  <td>131</td>
+  <td>83</td>
+  <td>203</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&#8222;</td>
+  <td>132</td>
+  <td>84</td>
+  <td>204</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&#8230;</td>
+  <td>133</td>
+  <td>85</td>
+  <td>205</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&#8224;</td>
+  <td>134</td>
+  <td>86</td>
+  <td>206</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&#8225;</td>
+  <td>135</td>
+  <td>87</td>
+  <td>207</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&#710;</td>
+  <td>136</td>
+  <td>88</td>
+  <td>210</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&#8240;</td>
+  <td>137</td>
+  <td>89</td>
+  <td>211</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&#352;</td>
+  <td>138</td>
+  <td>8A</td>
+  <td>212</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&#8249;</td>
+  <td>139</td>
+  <td>8B</td>
+  <td>213</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&#338;</td>
+  <td>140</td>
+  <td>8C</td>
+  <td>214</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td><br>
+  </td>
+  <td>141</td>
+  <td>8D</td>
+  <td>215</td>
+  <td>注意：このhtmlヘルプファイルでは表示されない。</td>
+</tr>
+<tr>
+  <td>&#381;</td>
+  <td>142</td>
+  <td>8E</td>
+  <td>216</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td><br>
+  </td>
+  <td>143</td>
+  <td>8F</td>
+  <td>217</td>
+  <td>注意：このhtmlヘルプファイルでは表示されない。</td>
+</tr>
+<tr>
+  <td>&#65533;</td>
+  <td>144</td>
+  <td>90</td>
+  <td>220</td>
+  <td>注意：このhtmlヘルプファイルでは表示されない。</td>
+</tr>
+<tr>
+  <td>&#8216;</td>
+  <td>145</td>
+  <td>91</td>
+  <td>221</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&#8217;</td>
+  <td>146</td>
+  <td>92</td>
+  <td>222</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&#8220;</td>
+  <td>147</td>
+  <td>93</td>
+  <td>223</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&#8221;</td>
+  <td>148</td>
+  <td>94</td>
+  <td>224</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&#8226;</td>
+  <td>149</td>
+  <td>95</td>
+  <td>225</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&#8211;</td>
+  <td>150</td>
+  <td>96</td>
+  <td>226</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&#8212;</td>
+  <td>151</td>
+  <td>97</td>
+  <td>227</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&#732;</td>
+  <td>152</td>
+  <td>98</td>
+  <td>230</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&#8482;</td>
+  <td>153</td>
+  <td>99</td>
+  <td>231</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&#353;</td>
+  <td>154</td>
+  <td>9A</td>
+  <td>232</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&#8250;</td>
+  <td>155</td>
+  <td>9B</td>
+  <td>233</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&#339;</td>
+  <td>156</td>
+  <td>9C</td>
+  <td>234</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td><br>
+  </td>
+  <td>157</td>
+  <td>9D</td>
+  <td>235</td>
+  <td>注意：このhtmlヘルプファイルでは表示されない。</td>
+</tr>
+<tr>
+  <td>&#382;</td>
+  <td>158</td>
+  <td>9E</td>
+  <td>236</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&#376;</td>
+  <td>159</td>
+  <td>9F</td>
+  <td>237</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&nbsp;</td>
+  <td>160</td>
+  <td>A0</td>
+  <td>240</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&iexcl;</td>
+  <td>161</td>
+  <td>A1</td>
+  <td>241</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&cent;</td>
+  <td>162</td>
+  <td>A2</td>
+  <td>242</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&pound;</td>
+  <td>163</td>
+  <td>A3</td>
+  <td>243</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&curren;</td>
+  <td>164</td>
+  <td>A4</td>
+  <td>244</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&yen;</td>
+  <td>165</td>
+  <td>A5</td>
+  <td>245</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&brvbar;</td>
+  <td>166</td>
+  <td>A6</td>
+  <td>246</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&sect;</td>
+  <td>167</td>
+  <td>A7</td>
+  <td>247</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&uml;</td>
+  <td>168</td>
+  <td>A8</td>
+  <td>250</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&copy;</td>
+  <td>169</td>
+  <td>A9</td>
+  <td>251</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&ordf;</td>
+  <td>170</td>
+  <td>AA</td>
+  <td>252</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&laquo;</td>
+  <td>171</td>
+  <td>AB</td>
+  <td>253</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&not;</td>
+  <td>172</td>
+  <td>AC</td>
+  <td>254</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&shy;<br>
+  </td>
+  <td>173</td>
+  <td>AD</td>
+  <td>255</td>
+  <td>注意：このhtmlヘルプファイルでは表示されない可能性がある。</td>
+</tr>
+<tr>
+  <td>&reg;</td>
+  <td>174</td>
+  <td>AE</td>
+  <td>256</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&macr;</td>
+  <td>175</td>
+  <td>AF</td>
+  <td>257</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&deg;</td>
+  <td>176</td>
+  <td>B0</td>
+  <td>260</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&plusmn;</td>
+  <td>177</td>
+  <td>B1</td>
+  <td>261</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&sup2;</td>
+  <td>178</td>
+  <td>B2</td>
+  <td>262</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&sup3;</td>
+  <td>179</td>
+  <td>B3</td>
+  <td>263</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&acute;</td>
+  <td>180</td>
+  <td>B4</td>
+  <td>264</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&micro;</td>
+  <td>181</td>
+  <td>B5</td>
+  <td>265</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&para;</td>
+  <td>182</td>
+  <td>B6</td>
+  <td>266</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&middot;</td>
+  <td>183</td>
+  <td>B7</td>
+  <td>267</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&cedil;</td>
+  <td>184</td>
+  <td>B8</td>
+  <td>270</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&sup1;</td>
+  <td>185</td>
+  <td>B9</td>
+  <td>271</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&ordm;</td>
+  <td>186</td>
+  <td>BA</td>
+  <td>272</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&raquo;</td>
+  <td>187</td>
+  <td>BB</td>
+  <td>273</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&frac14;</td>
+  <td>188</td>
+  <td>BC</td>
+  <td>274</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&frac12;</td>
+  <td>189</td>
+  <td>BD</td>
+  <td>275</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&frac34;</td>
+  <td>190</td>
+  <td>BE</td>
+  <td>276</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&iquest;</td>
+  <td>191</td>
+  <td>BF</td>
+  <td>277</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&Agrave;</td>
+  <td>192</td>
+  <td>C0</td>
+  <td>300</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&Aacute;</td>
+  <td>193</td>
+  <td>C1</td>
+  <td>301</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&Acirc;</td>
+  <td>194</td>
+  <td>C2</td>
+  <td>302</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&Atilde;</td>
+  <td>195</td>
+  <td>C3</td>
+  <td>303</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&Auml;</td>
+  <td>196</td>
+  <td>C4</td>
+  <td>304</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&Aring;</td>
+  <td>197</td>
+  <td>C5</td>
+  <td>305</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&AElig;</td>
+  <td>198</td>
+  <td>C6</td>
+  <td>306</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&Ccedil;</td>
+  <td>199</td>
+  <td>C7</td>
+  <td>307</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&Egrave;</td>
+  <td>200</td>
+  <td>C8</td>
+  <td>310</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&Eacute;</td>
+  <td>201</td>
+  <td>C9</td>
+  <td>311</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&Ecirc;</td>
+  <td>202</td>
+  <td>CA</td>
+  <td>312</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&Euml;</td>
+  <td>203</td>
+  <td>CB</td>
+  <td>313</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&Igrave;</td>
+  <td>204</td>
+  <td>CC</td>
+  <td>314</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&Iacute;</td>
+  <td>205</td>
+  <td>CD</td>
+  <td>315</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&Icirc;</td>
+  <td>206</td>
+  <td>CE</td>
+  <td>316</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&Iuml;</td>
+  <td>207</td>
+  <td>CF</td>
+  <td>317</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&ETH;</td>
+  <td>208</td>
+  <td>D0</td>
+  <td>320</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&Ntilde;</td>
+  <td>209</td>
+  <td>D1</td>
+  <td>321</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&Ograve;</td>
+  <td>210</td>
+  <td>D2</td>
+  <td>322</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&Oacute;</td>
+  <td>211</td>
+  <td>D3</td>
+  <td>323</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&Ocirc;</td>
+  <td>212</td>
+  <td>D4</td>
+  <td>324</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&Otilde;</td>
+  <td>213</td>
+  <td>D5</td>
+  <td>325</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&Ouml;</td>
+  <td>214</td>
+  <td>D6</td>
+  <td>326</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&times;</td>
+  <td>215</td>
+  <td>D7</td>
+  <td>327</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&Oslash;</td>
+  <td>216</td>
+  <td>D8</td>
+  <td>330</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&Ugrave;</td>
+  <td>217</td>
+  <td>D9</td>
+  <td>331</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&Uacute;</td>
+  <td>218</td>
+  <td>DA</td>
+  <td>332</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&Ucirc;</td>
+  <td>219</td>
+  <td>DB</td>
+  <td>333</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&Uuml;</td>
+  <td>220</td>
+  <td>DC</td>
+  <td>334</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&Yacute;</td>
+  <td>221</td>
+  <td>DD</td>
+  <td>335</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&THORN;</td>
+  <td>222</td>
+  <td>DE</td>
+  <td>336</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&szlig;</td>
+  <td>223</td>
+  <td>DF</td>
+  <td>337</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&agrave;</td>
+  <td>224</td>
+  <td>E0</td>
+  <td>340</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&aacute;</td>
+  <td>225</td>
+  <td>E1</td>
+  <td>341</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&acirc;</td>
+  <td>226</td>
+  <td>E2</td>
+  <td>342</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&atilde;</td>
+  <td>227</td>
+  <td>E3</td>
+  <td>343</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&auml;</td>
+  <td>228</td>
+  <td>E4</td>
+  <td>344</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&aring;</td>
+  <td>229</td>
+  <td>E5</td>
+  <td>345</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&aelig;</td>
+  <td>230</td>
+  <td>E6</td>
+  <td>346</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&ccedil;</td>
+  <td>231</td>
+  <td>E7</td>
+  <td>347</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&egrave;</td>
+  <td>232</td>
+  <td>E8</td>
+  <td>350</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&eacute;</td>
+  <td>233</td>
+  <td>E9</td>
+  <td>351</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&ecirc;</td>
+  <td>234</td>
+  <td>EA</td>
+  <td>352</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&euml;</td>
+  <td>235</td>
+  <td>EB</td>
+  <td>353</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&igrave;</td>
+  <td>236</td>
+  <td>EC</td>
+  <td>354</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&iacute;</td>
+  <td>237</td>
+  <td>ED</td>
+  <td>355</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&icirc;</td>
+  <td>238</td>
+  <td>EE</td>
+  <td>356</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&iuml;</td>
+  <td>239</td>
+  <td>EF</td>
+  <td>357</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&eth;</td>
+  <td>240</td>
+  <td>F0</td>
+  <td>360</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&ntilde;</td>
+  <td>241</td>
+  <td>F1</td>
+  <td>361</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&ograve;</td>
+  <td>242</td>
+  <td>F2</td>
+  <td>362</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&oacute;</td>
+  <td>243</td>
+  <td>F3</td>
+  <td>363</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&ocirc;</td>
+  <td>244</td>
+  <td>F4</td>
+  <td>364</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&otilde;</td>
+  <td>245</td>
+  <td>F5</td>
+  <td>365</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&ouml;</td>
+  <td>246</td>
+  <td>F6</td>
+  <td>366</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&divide;</td>
+  <td>247</td>
+  <td>F7</td>
+  <td>367</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&oslash;</td>
+  <td>248</td>
+  <td>F8</td>
+  <td>370</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&ugrave;</td>
+  <td>249</td>
+  <td>F9</td>
+  <td>371</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&uacute;</td>
+  <td>250</td>
+  <td>FA</td>
+  <td>372</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&ucirc;</td>
+  <td>251</td>
+  <td>FB</td>
+  <td>373</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&uuml;</td>
+  <td>252</td>
+  <td>FC</td>
+  <td>374</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&yacute;</td>
+  <td>253</td>
+  <td>FD</td>
+  <td>375</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&thorn;</td>
+  <td>254</td>
+  <td>FE</td>
+  <td>376</td>
+  <td><br>
+  </td>
+</tr>
+<tr>
+  <td>&yuml;</td>
+  <td>255</td>
+  <td>FF</td>
+  <td>377</td>
+  <td><br>
+  </td>
+</tr>
+</table>
+</p>
+
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Keyword Exit</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Keyword Reference</h1>
+<font size="+1">Exit</font>
+<hr size="2">
+<p>スクリプトを終了します。<br></p>
+
+<p class="codeheader">
+<b>Exit</b> [return code]<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">return code</td>
+    <td width="85%"><b>[オプション]</b> スクリプトの返す整数の終了コード。このコードはWindowsやDOSの%ERRORLEVEL%変数で取り扱うことができます。デフォルトは0。スクリプトは普通、正常終了した場合エラーレベルを0に設定します。 エラーレベル1以上は一般にスクリプトが正常に終了しなかったことを示します。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+パラメータがある場合はかっこで囲うことができます。次の表現はすべておなじ意味になります。<b>Exit</b>、<b>Exit 0</b>、<b> Exit(0)</b>。ただし<b>Exit()</b>は使えません。<br>
+<br>
+終了コードはOnAutoItExitRegister関数内で@EXITCODEとして扱うことができます。<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="ExitLoop.htm">ExitLoop</a>, <a href="../../html/functions/OnAutoItExitRegister.htm">OnAutoItExitRegister</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S1">;1番目の例</span><br>
+<span class="S5">Exit</span><br>
+<br>
+<span class="S1">; 2番目の例</span><br>
+<span class="S1">; コマンドラインからの引値がない場合終了します。</span><br>
+<span class="S5">If</span><span class="S0"> </span><span class="S9">$CmdLine</span><span class="S8">[</span><span class="S3">0</span><span class="S8">]</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><span class="S0"> </span><span class="S5">Then</span><span class="S0"> </span><span class="S5">Exit</span><span class="S8">(</span><span class="S3">1</span><span class="S8">)</span><br>
+<br>
+<span class="S1">; 3番目の例</span><br>
+<span class="S1">; コマンドラインからの1番目の引値で指定されたファイルを開きます。</span><br>
+<span class="S9">$file</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">FileOpen</span><span class="S8">(</span><span class="S9">$CmdLine</span><span class="S8">[</span><span class="S3">1</span><span class="S8">],</span><span class="S0"> </span><span class="S3">0</span><span class="S8">)</span><br>
+<br>
+<span class="S1">; 開かれたファイルが読み取り可能かをチェックします。</span><br>
+<span class="S5">If</span><span class="S0"> </span><span class="S9">$file</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S0"> </span><span class="S5">Then</span><span class="S0"> </span><span class="S5">Exit</span><span class="S8">(</span><span class="S3">2</span><span class="S8">)</span><br>
+<br>
+<span class="S1">; ファイルが空の場合終了します（正常終）</span><br>
+<span class="S9">$line</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">FileReadLine</span><span class="S8">(</span><span class="S9">$file</span><span class="S8">)</span><br>
+<span class="S5">If</span><span class="S0"> </span><span class="S6">@error</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S0"> </span><span class="S5">Then</span><span class="S0"> </span><span class="S5">Exit</span><br>
+<br>
+<span class="S1">;code to process file goes here</span><br>
+<span class="S4">FileClose</span><span class="S8">(</span><span class="S9">$file</span><span class="S8">)</span><br>
+<span class="S5">Exit</span><span class="S0"> </span><span class="S1">;はスクリプトの最終行には書いても書かなくてもかまいません。</span><br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\Exit.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function IniDelete</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">IniDelete</font>
+<hr size="2">
+<p>標準形式の.iniファイルから値を削除します。<br></p>
+
+<p class="codeheader">
+IniDelete ( "filename", "section" [, "key"] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">filename</td>
+    <td width="85%">.iniファイルのファイル名</td>
+  </tr>
+  <tr>
+   <td>section</td>
+   <td>.iniファイル内のセクション名</td>
+  </tr>
+  <tr>
+   <td>key</td>
+   <td><b>[オプション]</b>.iniファイル内の削除するキー名。キー名を指定しない場合、セクション全体が削除されます。またDefaultキーワードを使用した場合もセクション全体が削除されます。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">成功</td>
+    <td width="90%">1を返します。</td>
+  </tr>
+  <tr>
+    <td valign="top">失敗</td>
+    <td>INIファイルが存在しない場合、読み取り専用の場合は0を返します。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+標準的なINIファイルは次のようになっています。<br>
+<i>[Section名]<br>
+Key=Value</i><br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="IniRead.htm">IniRead</a>, <a href="IniWrite.htm">IniWrite</a>, <a href="IniReadSection.htm">IniReadSection</a>, <a href="IniReadSectionNames.htm">IniReadSectionNames</a>, <a href="IniRenameSection.htm">IniRenameSection</a>, <a href="IniWriteSection.htm">IniWriteSection</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S4">IniDelete</span><span class="S8">(</span><span class="S7">"C:\Temp\myfile.ini"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"section2"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"key"</span><span class="S8">)</span><br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\IniDelete.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

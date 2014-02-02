@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function HWnd</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">HWnd</font>
+<hr size="2">
+<p>値をHWNDハンドルに変換します。<br></p>
+
+<p class="codeheader">
+HWnd ( expression )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">expression</td>
+    <td width="85%">HWNDハンドルに変換する値</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">成功:</td>
+    <td width="90%">HWNDへの変換ができた場合、HWND表現での値が返されます。<br></td>
+  </tr>
+  <tr>
+    <td valign="top">失敗:</td>
+    <td>HWNDが有効なウィンドウを表していない場合、0(NULL) HWNDが返され@errorが1に設定されます。</td>
+  </tr>
+</table>
+
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+Doubleの数値はHWNDに変換できません。<br>
+リテラル文字列をHWNDに変換しようとすべきではありません。ウィンドウが常に同じHWNDを持つわけではないからです。この行為は禁じられているわけではありませんがプログラミング上の間違いであり、好ましくありません。<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="Int.htm">Int</a>, <a href="String.htm">String</a>, <a href="Number.htm">Number</a>, <a href="Ptr.htm">Ptr</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S4">Run</span><span class="S8">(</span><span class="S7">"notepad.exe"</span><span class="S8">)</span><br>
+<span class="S4">WinWait</span><span class="S8">(</span><span class="S7">"[CLASS:Notepad]"</span><span class="S8">)</span><br>
+<span class="S5">Local</span><span class="S0"> </span><span class="S9">$hWnd</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">WinGetHandle</span><span class="S8">(</span><span class="S7">"[CLASS:Notepad]"</span><span class="S8">)</span><br>
+<span class="S5">Local</span><span class="S0"> </span><span class="S9">$sHWND</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">String</span><span class="S8">(</span><span class="S9">$hWnd</span><span class="S8">)</span><span class="S0">&nbsp; &nbsp; </span><span class="S1">; 文字列に変換</span><br>
+<span class="S4">WinSetState</span><span class="S8">(</span><span class="S4">HWnd</span><span class="S8">(</span><span class="S9">$sHWND</span><span class="S8">),</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S6">@SW_MINIMIZE</span><span class="S8">)</span><br>
+<span class="S4">Sleep</span><span class="S8">(</span><span class="S3">5000</span><span class="S8">)</span><span class="S0">&nbsp;</span><span class="S1">; メモ帳は最小化される</span><br>
+<span class="S4">WinClose</span><span class="S8">(</span><span class="S4">HWnd</span><span class="S8">(</span><span class="S9">$sHWND</span><span class="S8">))</span><br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\HWnd.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

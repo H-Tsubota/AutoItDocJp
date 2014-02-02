@@ -1,0 +1,66 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function Sqrt</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">Sqrt</font>
+<hr size="2">
+<p>平方根を計算します。<br></p>
+
+<p class="codeheader">
+Sqrt ( expression )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">expression</td>
+    <td width="85%">平方根を計算したい負でない値</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">成功</td>
+    <td width="90%">平方根が返されます。</td>
+  </tr>
+  <tr>
+    <td valign="top">失敗</td>
+    <td>パラメータが負の値の場合、-1.#INDを返します。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+n乗根を計算したい場合は累乗演算子を使用してください。 x ^ (1/n)<br>
+MsgBox(0,"The cube root of 27 is", 27 ^ (1/3) )<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+なし。
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S9">$x</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">Sqrt</span><span class="S8">(</span><span class="S3">2</span><span class="S8">)</span><span class="S0"> &nbsp;</span><span class="S1">;1.4142135623731を返します。</span><br>
+<span class="S9">$y</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">sqrt</span><span class="S8">(</span><span class="S3">9</span><span class="S8">)</span><span class="S0"> &nbsp;</span><span class="S1">;3を返します。</span><br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\Sqrt.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function StringInStr</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">StringInStr</font>
+<hr size="2">
+<p>文字列（string）が指定した文字列（substring）を含むかどうかを調べます。<br></p>
+
+<p class="codeheader">
+StringInStr ( "string", "substring" [, casesense [, occurrence [, start [, count]]]] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">string</td>
+    <td width="85%">検索対象の文字列</td>
+  </tr>
+  <tr>
+   <td>substring</td>
+   <td>検索する文字列</td>
+  </tr>
+  <tr>
+   <td>casesense</td>
+   <td><b>[オプション]</b> 大文字小文字の区別を指定するフラグ<br>
+       0 = 区別しません。ユーザーのロケールを使用します。(デフォルト)<br>
+       1 = 区別します。<br>
+	   2 = 区別しません。基本的/高速な比較を使用します。</td>
+  </tr>
+  <tr>
+   <td>occurrence</td>
+   <td><b>[オプション]</b>文字列の何語目から検索を開始するかを指定します。0以下を指定した場合、検索対象の文字列の右から検索します。デフォルトは1(1語目から検索)。</td>
+  </tr>
+  <tr>
+   <td>start</td>
+   <td><b>[オプション]</b> 検索開始位置</td>
+  </tr>
+  <tr>
+   <td>count</td>
+   <td><b>[オプション]</b> 被検索対象の文字数。これによって文字列の一部に限定して効果的に検索することができます。注意を参照してください。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">成功</td>
+    <td width="90%">検索文字列の位置を返します。</td>
+  </tr>
+  <tr>
+    <td valign="top">失敗</td>
+    <td>見つからなかった場合0を返します。</td>
+  </tr>
+  <tr>
+    <td valign="top">@Error</td>
+    <td>0 - 通常の場合</td>
+  </tr>
+  <tr>
+    <td valign="top"></td>
+	<td>1 - 無効な"start"パラメータまたは"occurence"パラメータが指定されました。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+1文字目の位置は”1”です。<br>
+<br>
+countパラメータは検索される部分文字列よりも長い必要があります。
+countパラメータ(とstartパラメータの組み合わせ)によって検索を文字列の一部を限定して効果的におこなうことができます。
+次の二つの命令は同じです:<br>
+StringInStr("the string to search", "string", 0, 1, 1, 11)<br>
+StringInStr(StringMid("the string to search", 1, 11), "string")<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="StringCompare.htm">StringCompare</a>, <a href="StringLeft.htm">StringLeft</a>, <a href="StringLen.htm">StringLen</a>, <a href="StringLower.htm">StringLower</a>, <a href="StringMid.htm">StringMid</a>, <a href="StringRight.htm">StringRight</a>, <a href="StringTrimLeft.htm">StringTrimLeft</a>, <a href="StringTrimRight.htm">StringTrimRight</a>, <a href="StringUpper.htm">StringUpper</a>, <a href="StringRegExp.htm">StringRegExp</a>, <a href="StringSplit.htm">StringSplit</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S9">$result</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">StringInStr</span><span class="S8">(</span><span class="S7">"I am a String"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"RING"</span><span class="S8">)</span><br>
+<span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Search result:"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$result</span><span class="S8">)</span><br>
+<br>
+<span class="S9">$location</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">StringInStr</span><span class="S8">(</span><span class="S7">"How much wood could a woodchuck chuck is a woodchuck could chuck wood?"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"wood"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S3">3</span><span class="S8">)</span><span class="S0"> </span><span class="S1">; 3語目の"wood"を見つけます。</span><br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\StringInStr.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

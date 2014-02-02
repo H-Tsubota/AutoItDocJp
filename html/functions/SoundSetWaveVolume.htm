@@ -1,0 +1,66 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function SoundSetWaveVolume</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">SoundSetWaveVolume</font>
+<hr size="2">
+<p>システムのWAVEボリュームをパーセント数で設定します。<br></p>
+
+<p class="codeheader">
+SoundSetWaveVolume ( percent ) <br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">percent</td>
+    <td width="85%">0から100の間のパーセント数</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">成功</td>
+    <td width="90%">1を返します。</td>
+  </tr>
+  <tr>
+    <td valign="top">失敗</td>
+    <td>percentパラメータが不正な場合0を返し、@errorを1に設定します。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+この関数はWAVEボリュームを操作するもので、マスターボリュームを操作するものではありません。またパラメータを0にしてもミュート状態には設定されません。<br>
+<br>
+Windows Vistaにはシステム全体のWAVEボリュームがありません。この関数はスクリプト用のWAVEボリュームしか変更できず、他のプログラムのWAVEボリュームを変更することはできません。<br>
+
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="SoundPlay.htm">SoundPlay</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S4">SoundSetWaveVolume</span><span class="S8">(</span><span class="S3">50</span><span class="S8">)</span><br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\SoundSetWaveVolume.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

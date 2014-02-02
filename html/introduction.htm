@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>AutoIt</title>
+<meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+<link href="css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<p align="center"><img src="images/autoit_10_240x100.jpg" width="240" height="100" border="1"></p>
+<p align="center"><strong>v3.3.6.1</strong></p>
+<p align="center">&copy;1999-2010 Jonathan Bennett &amp; <a href="credits.htm">AutoIt Team</a></p>
+<p align="center"><a class="ext" href="http://www.autoitscript.com/autoit3/">AutoIt v3 Homepage</a></p>
+<H1>Introduction</H1>
+			AutoIt v3はWindowsGUIの自動化と一般的なスクリプト処理を目的として設計されたフリーウェアのBASICライクなスクリプト言語です。他の言語(VBScriptやSendKeys)では不可能/信頼性の低いタスク自動化のためのキーストロークとマウス動作のシミュレーション、ウィンドウ/コントロール操作を可能にします。 またAutoItはとても小さく、十分な機能があり、&quot;ランタイム&quot;の存在を心配することなくWindowsの全てのバージョンですぐに実行できます！
+			<br>
+			<br>
+AutoItは初め数千台規模のPCで高い信頼性での自動化や設定をおこなう状況を想定されて設計されました。時間が経ちAutoItは複雑な式評価やユーザー関数、ループ、それ以外にも熟練したスクリプト作成者が期待する全てをサポートした強力な言語に成長しました。
+<p>特徴:
+            <ul>
+              <li>BASICライクな文法で習得が簡単</li>
+				<li>キーストロークとマウス操作をシミュレート</li>
+				<li>ウィンドウとプロセスの操作</li>
+				<li>全ての標準ウィンドウコントロールと連携</li>
+				<li>スクリプトをスタンドアローンな実行形式にコンパイル可能</li>
+				<li>グラフィックユーザーインターフェイス(GUI)の作成</li>
+				<li>COMをサポート</li>
+				<li>正規表現</li>
+				<li>外部DLLとWindwsAPI関数の直接呼出し</li>
+				<li>スクリプト化可能なRunAs関数</li>
+				<li>詳細なヘルプファイルと巨大なコミュニティベースのサポートフォーラム</li>
+				<li>Windows 95 / 98 / ME / NT4 / 2000 / XP / 2003 / Vista 
+				/ 2008 で動作</li>
+				<li>Unicodeとx64をサポート</li>
+				<li>デジタル署名されており安心</li>
+				<li>Windows Vistaのユーザーアカウント制御(UAC)の下で動作可能</li>
+            </ul>
+            <p>
+AutoItは可能な限り小さくなるように設計されています。またサーバー上で安全に使用できるように外部DLLやレジストリエントリーなしのスタンドアローンになっています。スクリプトは<strong>Aut2Exe</strong>を使用することでスタンドアローンの実行形式にコンパイルすることが可能です。
+			</p>
+			<p>
+またAutoItのCOMバージョンとDLLバージョンを統合したAutoItXが提供されており、これを使用すればAutoIt独自の機能をあなたのお気に入りのスクリプト言語やプログラミング言語に追加することができます！
+			</p>
+			<p>
+幸いなことにAutoItは<strong>FREE</strong>であり続けます ・・・が、もしあなたが時間面、金銭面、あるいはwebホスティングで情熱をプロジェクトのために提供していただけるのであればAutoItの<a class="ext" href="http://www.autoitscript.com/autoit3/">ホームページ</a>での寄付をお願いします。 
+			</p>
+<p>&nbsp;</p>
+<h1>特徴の詳細な説明</h1>
+<p><strong>Basicライクな文法と豊富な関数群</strong></p>
+<p>
+AutoItの文法はBASICライクです。つまり今までスクリプトを書いたことがある人や高級言語を使ったことのある人は簡単にこつをつかむことができます。
+</p>
+<p>
+始めは単純な自動化ツールでしたが、今ではAutoItは汎用目的のスクリプト言語として使用可能なだけの関数と機能を持っています(もちろん素晴らしい自動化機能はそのまま！)。次の言語機能を持っています:</p>
+<ul>
+	<li>関数用の通常の高レベル要素、ループ、式の構文解析</li>
+	<li>
+	膨大な量の文字列処理関数<strong>と</strong>Perl互換の正規表現エンジン
+	(<a href="http://www.pcre.org/">PCRE</a>ライブラリを使用)。
+	</li>
+	<li>COMサポート</li>
+	<li>Win32とサードパーティのDLL APIの呼び出し</li>
+</ul>
+<p>&nbsp;</p>
+<p><strong>構文のハイライト機能を持った組み込みエディタ</strong></p>
+<p>
+AutoItにはカスタマイズされた&quot;ライト&quot;バージョンのSciTeが付属しており、これはスクリプトの編集を簡単にしてくれます。
+ユーザーは<a href="http://www.autoitscript.com/autoit3/scite/">Sciteの完全なバージョンをダウンロード</a>することも可能です。これには作業をより簡単にしてくれるツールが追加されています。
+</p>
+<p>&nbsp;</p>
+
+<p><strong>スタンドアローン・小型</strong></p>
+<p>
+AutoItは.NETやVBのように巨大なランタイムを必要としないとても小さいスタンドアローンのアプリケーションです。AutoItスクリプトを実行するために必要なものはメインAutoIt実行ファイル(AutoIt3.exe)とスクリプトだけです。スクリプトは組み込みのスクリプトコンパイラである<strong>Aut2Exe</strong>によってスタンドアローンの実行形式にエンコードすることも可能です。
+</p>
+<p>&nbsp;</p>
+<p><strong>国際化と64ビットサポート</strong></p>
+<p>
+AutoItは完全にUnicodeに対応しています。また全てのメインコンポーネントのx64バージョンが存在します！他のフリーなスクリプト言語のいくつがそれに対応しているでしょうか？
+</p>
+<p>&nbsp;</p>
+<p><strong>キーとマウスのシミュレート</strong></p>
+<p>
+全てのWindowsのバージョンでできるだけ処理が正確になるようにキーストロークとマウスのシミュレーション機能の最適化に多くの時間が費やされました。全てのマウス・キーボード処理はシミュレーション&quot;スピード&quot;とその機能の両方に関して詳細な設定が可能です。
+</p>
+<p>&nbsp;</p>
+<p><strong>ウィンドウ管理</strong></p>
+<p>
+ウィンドウに対する移動、非表示、表示、サイズ変更、アクティブ化、閉じる、そしてそれ以外のやりたいと思う動作の多くを行うことができると思っていいでしょう。ウィンドウのタイトル、テキスト、サイズ、位置、クラスさらには内部のWin32APIハンドルを使用してウィンドウを参照することが可能です。</p>
+<p>&nbsp;</p>
+<p><strong>コントロール</strong></p>
+<p>
+エディットボックス、チェックボックス、リストボックス、コンボ、ボタン、ステータスバーに対してキーストローク誤動作のリスクなしに直接、情報取得したり操作したりできます。たとえアクティブでないウィンドウのコントロールであっても操作できます! 
+</p>
+<p>&nbsp;</p>
+<p><strong>グラフィックユーザーインターフェイス(GUI)</strong></p>
+            <p align="left">
+			AutoIt v3である程度複雑なGUIを作ることも可能です。下に示すようなものを作成できます！
+			</p>
+            <p align="center">
+			<img src="images/gui_eg1.png" width="284" height="302" alt="GUI Example 1">&nbsp; 
+			<img src="images/gui_eg2.png" width="274" height="302" alt="GUI Example 2"></p>
+            <p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>ほかにも多くの新しい点があります。</p>
+<p>&nbsp;</p>
+<p><img src="images/blue_gradient_1024x24.jpg" width="1024" height="1"></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</body>
+</html>

@@ -1,0 +1,246 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>GUI Reference</title>
+  <META http-equiv=Content-Type content="text/html; charset=shift-jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>GUI Reference</h1>
+
+
+<p>
+
+AutoItにはウィンドウとコントロールで構成されたシンプルなグラフィカルユーザーインターフェイス(GUI)を作成する機能があります。</p>
+<p>&nbsp;</p>
+<h2>GUI コンセプト</h2>
+<p>
+GUIはひとつ以上の<em>ウィンドウ</em>で構成され、ウィンドウは1つ以上の<em>コントロール</em>を持ちます。
+GUIは「イベントドリブン」です。つまりボタンをクリックするなどのイベントに反応するということです。
+ほとんどの時間はアイドリング状態でなにかイベントが起きるのを待ちます - これはいつ、なにが起きるか
+制御できる通常のスクリプトとは多少ことなります! ドアの前で郵便配達を待っていると考えてください。 
+あなたは郵便受けに手紙が届くまでそこに座っています。手紙が来たらそれを読み何をおこなうか決定します。
+これこそがGUIの動作なのです - 郵便配達がやってくるの待つのです。
+</p>
+<p>
+もちろん同時に別の仕事をすることもできます。例えばGUI関数を使って凝ったプログレスボックスを作って
+スクリプトが複雑な仕事をしている間にそれを更新することもできます。
+</p>
+<p>&nbsp;</p>
+<h2>GUI コントロール</h2>
+<p>
+ユーザーの皆さんはコントロールについてご存知のはずです。クリックしたりしてウィンドウを操作するための全てのものがコントロールの一種です。AutoItで作成できるコントロールのリストを次に示します。他のWindowsプログラムで使えるほとんどのものが使用できます。
+</p>
+<table border="0" cellpadding="0" cellspacing="0" valign="top" style="border-collapse: collapse" bordercolor="#111111" width="82%" id="AutoNumber2">
+  <tr>
+    <td width="20%"><li>Label</li></td>
+    <td width="80%">テキスト表示</td>
+  </tr>
+  <tr>
+    <td><li>Button</li></td>
+    <td>シンプルなボタン</td>
+  </tr>
+  <tr>
+    <td><li>Input</li></td>
+    <td>一行のテキスト入力欄</td>
+  </tr>
+  <tr>
+    <td><li>Edit</li></td>
+    <td>複数行のテキスト入力欄</td>
+  </tr>
+  <tr>
+    <td><li>Checkbox</li></td>
+    <td>「チェック」/「アンチェック」のできるボックス</td>
+  </tr>
+  <tr>
+    <td><li>Radio</li></td>
+    <td>丸いボタンのセット。一度に1つしか選べない。</td>
+  </tr>
+  <tr>
+    <td><li>Combo</li></td>
+    <td>ドロップダウンできるリスト</td>
+  </tr>
+  <tr>
+    <td><li>List</li></td>
+    <td>リスト</td>
+  </tr>
+  <tr>
+    <td><li>Date</li></td>
+    <td>日付選択欄</td>
+  </tr>
+  <tr>
+    <td><li>Pic</li></td>
+    <td>画像</td>
+  </tr>
+  <tr>
+    <td><li>Icon</li></td>
+    <td>アイコン</td>
+  </tr>
+  <tr>
+    <td><li>Progress</li></td>
+    <td>プログレスバー</td>
+  </tr>
+  <tr>
+    <td><li>Tab</li></td>
+    <td>複数のタブを持ったコントロールのグループ</td>
+  </tr>
+  <tr>
+    <td><li>UpDown</li></td>
+    <td>入力欄に付け足せるコントロール</td>
+  </tr>
+  <tr>
+    <td><li>Avi</li></td>
+    <td>AVIフォーマットの動画を表示する</td>
+  </tr>
+  <tr>
+    <td><li>Menu</li></td>
+    <td>ウィンドウ上部に設置できるメニュー</td>
+  </tr>
+  <tr>
+    <td><li>ContextMenu</li></td>
+    <td>ウィンドウ上で右クリックすると表示されるメニュー</td>
+  </tr>
+  <tr>
+    <td><li>TreeView</li></td>
+    <td>Windowsのエクスプローラでおなじみのコントロール</td>
+  </tr>
+  <tr>
+    <td><li>Slider</li></td>
+    <td>Windowsの音量調整でおなじみのコントロール</td>
+  </tr>
+  <tr>
+    <td><li>ListView</li></td>
+    <td>列情報表示用コントロール</td>
+  </tr>
+  <tr>
+    <td><li>ListViewItem</li></td>
+    <td>リストビューコントロール内のアイテムを表示するコントロール</td>
+  </tr>
+  <tr>
+    <td><li>Graphic</li></td>
+    <td>GUICtrlSetGraphicで描画されるグラフを表示するコントロール</td>
+  </tr>
+  <tr>
+    <td><li>Dummy</li></td>
+    <td>ダミーユーザーコントロール</td>
+  </tr>
+</table>
+
+<p>&nbsp;</p>
+<p>
+利用できるいろいろなコントロールをもったウィンドウGUIの例です。ここに示したものは全て細かく作成することができます! 
+</p>
+<p> <img src="../images/SampleGuiScreenshot.png" width="406" height="425"> </p>
+<p>&nbsp;</p>
+<p>
+コントロールは<a href="GUICtrlCreate.htm">GUICtrlCreate...</a>系の関数を使用して作成できます。コントロールを作成すると<strong>コントロールID</strong>が返されます。&nbsp;コントロールIDについての憶えておかなければならないもっとも大切なことは
+</p>
+<p>
+<li>コントロールIDは正の数である(つまり0より大きい)</li>
+<li>コントロールIDはユニークである(たとえウィンドウが複数あっても)</li>
+<li>コントロールIDは<a href="../intro/au3spy.htm">AutoItWindowInfoTool</a>で見えるコントロールIDの値と同じ値である</li>
+<br>
+ということです。
+</p>
+<p>&nbsp;</p>
+<h2>GUI 基本関数</h2>
+<p>GUIを作成する場合に必要となる主要な関数があります。これらはほんの基本的なものでより応用的なGUIを作成するためにはより多くの関数が必要になります。</p>
+<table width="100%" border="1" cellspacing="0" cellpadding="3">
+  <tr bgcolor="#000066">
+    <td width="12%" nowrap><strong><font color="#FFFFFF">Function</font></strong></td>
+    <td width="88%"><strong><font color="#FFFFFF">Explanation</font></strong></td>
+  </tr>
+  <tr>
+    <td nowrap><a href="../functions/GUICreate.htm">GUICreate</a></td>
+    <td>ウィンドウを作成</td>
+  </tr>
+  <tr>
+    <td nowrap><a href="../functions/GUICtrlCreate%20Management.htm">GUICtrlCreate...</a></td>
+    <td>ウィンドウ内のさまざまなコントロールを作成</td>
+  </tr>
+  <tr>
+    <td nowrap><a href="../functions/GUISetState.htm">GUISetState</a></td>
+    <td>ウィンドウの表示/非表示の切り替え</td>
+  </tr>
+  <tr>
+    <td nowrap><a href="../functions/GUIGetMsg.htm">GUIGetMsg</a></td>
+    <td>イベントが起きていないか確認するためにポーリングする(MessageLoopモード時のみ) </td>
+  </tr>
+  <tr>
+    <td nowrap><a href="../functions/GUICtrlRead.htm">GUICtrlRead</a></td>
+    <td>コントロール内の情報を読み込む</td>
+  </tr>
+  <tr>
+    <td nowrap><a href="../functions/GUICtrlSetData.htm">GUICtrlSetData</a></td>
+    <td>コントロール内の情報を設定/変更する</td>
+  </tr>
+  <tr>
+    <td nowrap><a href="../functions/GUICtrlUpdate%20Management.htm">GUICtrlUpdate...</a></td>
+    <td>コントロールのいろいろなオプションを変更する(色、スタイルなど) </td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<p>
+<p>
+基本的なGUIに関連する定数用の#include &lt;GUIConstantsEx.au3&gt;が必要です。これ以外にもGUIで作成することのできるさまざまなコントロールに関連した定数が格納された<a href="GUIConstants.htm">別のファイル</a>があります。</p>
+<p>&nbsp; </p>
+<p>
+最初に「Hello World」という名前の200×100ピクセルのウィンドウ作ってみましょう。新しいウィンドウは非表示状態で作成されます。したがって「表示(show)」しなければいけません。
+</p>
+<p class="codebox">
+#include &lt;GUIConstantsEx.au3&gt;<br>
+<br>
+GUICreate(&quot;Hello World&quot;, 200, 100) <br>
+GUISetState(@SW_SHOW)<br>
+Sleep(2000)</p>
+<p>&nbsp;</p>
+<p>
+上のスクリプトを実行するとウィンドウが開き、2秒後に閉じます。あまり面白くありません・・・テキストとOKボタンを付け加えてみましょう。テキストは位置(30, 10)に、ボタンは位置に(70, 50)、幅60ピクセルで取り付けましょう。
+</p>
+<p class="codebox">#include &lt;GUIConstantsEx.au3&gt;<br>
+    <br>
+GUICreate(&quot;Hello World&quot;, 200, 100) <br>
+GUICtrlCreateLabel("Hello world!  How are you?", 30, 10)<br>
+GUICtrlCreateButton("OK", 70, 50, 60)<br>
+
+GUISetState(@SW_SHOW)<br>
+Sleep(2000)</p>
+<p>&nbsp;</p>
+<p>
+すこし良くなりました。しかしどうやってボタンをクリックするとGUIが反応するようにするのでしょう?ここにきてどうやってイベント処理をおこなうのか決断する時が来ました。<strong>MessageLoop</strong>か、<strong>OnEvent</strong>か。
+</p>
+<p>&nbsp;</p>
+<h2>GUI イベントモード</h2>
+<p>
+上で述べたように2つの基本GUIモードがあります。<strong>MessageLoop</strong>モードと<strong>OnEvent</strong>モードです。このモードは2種類の異なるGUIイベントへの反応の仕方を意味します。モードの選択は<em>個人の好み</em>とどのようなGUIを作りたいかによって変わります。どちらのモードでもあなたの作りたいGUIを作れます。ただし場合によってはどちらか一方が他方よりも作りたいスクリプトの目的に合っている場合があります。
+</p>
+<p>
+デフォルトのモードはMessageLoopモードです。OnEventモードに切り替えるためには<a href="../functions/AutoItSetOption.htm#GUIOnEventMode">Opt(&quot;GUIOnEventMode&quot;, 1)</a>を使います。
+</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><strong>Message-loopモード(デフォルト)</strong></p>
+<p>
+Message-loopモードではスクリプトはほとんどの時間をループで使います。このループでは<a href="../functions/GUIGetMsg.htm">GUIGetMsg関数</a> を使って単純にGUIのポーリングがおこなわれます。イベントが起きるとGUIGetMsg関数の返し値がその詳細(ボタンが押された、GUIが閉じられたなど)を教えてくれます。
+</p>
+<p>このモードではGUIGetMsg関数を使ってポーリングすることでイベントを受け取ります。従って1秒間に何度もGUIGetMsg関数を呼ばなければなりません。さもなければGUIは反応してくれません。
+</p>
+<p><em>
+このモードはGUIが「王様」である場合にもっとも適しています。あなたはユーザーイベントを待つだけです。
+</em></p>
+<p>
+<a href="GUIRef_MessageLoopMode.htm">MessageLoop</a>モードの詳細な説明は<a href="GUIRef_MessageLoopMode.htm">このページ</a>を参照してください。
+</p>
+<p>&nbsp;</p>
+<p><strong>OnEventモード</strong></p>
+<p>
+OnEventモードでは、何が起きているか知るためにGUIをポーリングする代わりにGUIにスクリプトの一時停止と事前に定義した関数の呼び出しをおこなわせます。例えば、ユーザーがボタン1を押すとGUIはメインスクリプトを停止して事前に定義したボタン1用のユーザー関数を呼び出します。関数が終了するとメインスクリプトが再開します。このモードはVisualBasicの形式と同じものです。
+</p>
+<p><em>このモードはGUIがあまり重要でなく、GUI表示の後スクリプトが別のタスクをおこなう場合にもっとも適しています。</em></p>
+<p>
+<a href="GUIRef_OnEventMode.htm">OnEvent</a>モードの詳細な説明は<a href="GUIRef_OnEventMode.htm">このページ</a>を参照してください。
+</p>
+<p>&nbsp;</p>
+</body>
+</html>

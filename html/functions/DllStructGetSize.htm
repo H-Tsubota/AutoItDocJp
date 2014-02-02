@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function DllStructGetSize</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">DllStructGetSize</font>
+<hr size="2">
+<p>構造体のサイズをbyte単位で返します。<br></p>
+
+<p class="codeheader">
+DllStructGetSize ( Struct )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">Struct</td>
+    <td width="85%">DllStructCreateが返す構造体</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">成功</td>
+    <td width="90%">byte単位での構造体のサイズ</td>
+  </tr>
+  <tr>
+    <td valign="top">失敗</td>
+    <td>0</td>
+  </tr>
+  <tr>
+    <td valign="top">@Error:</td>
+    <td>0 = エラーなし。</td>
+  </tr>
+  <tr>
+    <td valign="top"></td>
+    <td>1 = 構造体がDllStructCreateによって返された正常な構造体ではない。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+構造体内のデータが構造体のサイズを保持する必要がある場合使用されます。<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="DllStructCreate.htm">DllStructCreate</a>, <a href="DllStructSetData.htm">DllStructSetData</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S1">;=========================================================</span><br>
+<span class="S1">;&nbsp; &nbsp;構造体作成</span><br>
+<span class="S1">;&nbsp; &nbsp;struct {</span><br>
+<span class="S1">;&nbsp; &nbsp;&nbsp; &nbsp; int&nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; var1;</span><br>
+<span class="S1">;&nbsp; &nbsp;&nbsp; &nbsp; unsigned char&nbsp; &nbsp;var2;</span><br>
+<span class="S1">;&nbsp; &nbsp;&nbsp; &nbsp; unsigned int&nbsp; &nbsp; var3;</span><br>
+<span class="S1">;&nbsp; &nbsp;&nbsp; &nbsp; char&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; var4[128];</span><br>
+<span class="S1">;&nbsp; &nbsp;}</span><br>
+<span class="S1">;=========================================================</span><br>
+<span class="S9">$str</span><span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S8">=</span><span class="S0"> </span><span class="S7">"int;ubyte;uint;char[128]"</span><br>
+<span class="S9">$a</span><span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S8">=</span><span class="S0"> </span><span class="S4">DllStructCreate</span><span class="S8">(</span><span class="S9">$str</span><span class="S8">)</span><br>
+<span class="S5">if</span><span class="S0"> </span><span class="S6">@error</span><span class="S0"> </span><span class="S5">Then</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S7">""</span><span class="S8">,</span><span class="S7">"Error in DllStructCreate "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@error</span><span class="S8">)</span><span class="S1">;</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">exit</span><br>
+<span class="S5">endif</span><br>
+<br>
+<span class="S1">;=========================================================</span><br>
+<span class="S1">;&nbsp; &nbsp;構造体にデータを設定</span><br>
+<span class="S1">;&nbsp; &nbsp;struct.var1&nbsp;= -1;</span><br>
+<span class="S1">;&nbsp; &nbsp;struct.var2&nbsp;= 255;</span><br>
+<span class="S1">;&nbsp; &nbsp;struct.var3&nbsp;= INT_MAX; -1 は(unsigned int に)型キャストされる</span><br>
+<span class="S1">;&nbsp; &nbsp;strcpy(struct.var4,"Hello");</span><br>
+<span class="S1">;&nbsp; &nbsp;struct.var4[0]&nbsp; = 'h';</span><br>
+<span class="S1">;=========================================================</span><br>
+<span class="S4">DllStructSetData</span><span class="S8">(</span><span class="S9">$a</span><span class="S8">,</span><span class="S3">1</span><span class="S8">,-</span><span class="S3">1</span><span class="S8">)</span><br>
+<span class="S4">DllStructSetData</span><span class="S8">(</span><span class="S9">$a</span><span class="S8">,</span><span class="S3">2</span><span class="S8">,</span><span class="S3">255</span><span class="S8">)</span><br>
+<span class="S4">DllStructSetData</span><span class="S8">(</span><span class="S9">$a</span><span class="S8">,</span><span class="S3">3</span><span class="S8">,-</span><span class="S3">1</span><span class="S8">)</span><br>
+<span class="S4">DllStructSetData</span><span class="S8">(</span><span class="S9">$a</span><span class="S8">,</span><span class="S3">4</span><span class="S8">,</span><span class="S7">"Hello"</span><span class="S8">)</span><br>
+<span class="S4">DllStructSetData</span><span class="S8">(</span><span class="S9">$a</span><span class="S8">,</span><span class="S3">4</span><span class="S8">,</span><span class="S4">Asc</span><span class="S8">(</span><span class="S7">"h"</span><span class="S8">),</span><span class="S3">1</span><span class="S8">)</span><br>
+<br>
+<span class="S1">;=========================================================</span><br>
+<span class="S1">;&nbsp; &nbsp;構造体の情報を表示</span><br>
+<span class="S1">;=========================================================</span><br>
+<span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S7">"DllStruct"</span><span class="S8">,</span><span class="S7">"Struct Size: "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S4">DllStructGetSize</span><span class="S8">(</span><span class="S9">$a</span><span class="S8">)</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S8">_</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S7">"Struct pointer: "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S4">DllStructGetPtr</span><span class="S8">(</span><span class="S9">$a</span><span class="S8">)</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S8">_</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S7">"Data:"</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S8">_</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S4">DllStructGetData</span><span class="S8">(</span><span class="S9">$a</span><span class="S8">,</span><span class="S3">1</span><span class="S8">)</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S8">_</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S4">DllStructGetData</span><span class="S8">(</span><span class="S9">$a</span><span class="S8">,</span><span class="S3">2</span><span class="S8">)</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S8">_</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S4">DllStructGetData</span><span class="S8">(</span><span class="S9">$a</span><span class="S8">,</span><span class="S3">3</span><span class="S8">)</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S8">_</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S4">DllStructGetData</span><span class="S8">(</span><span class="S9">$a</span><span class="S8">,</span><span class="S3">4</span><span class="S8">))</span><br>
+<br>
+<span class="S1">;=========================================================</span><br>
+<span class="S1">;&nbsp; &nbsp;構造体に割り当てられたメモリを解放</span><br>
+<span class="S1">;=========================================================</span><br>
+<span class="S9">$a</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\DllStructGetSize.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function StdinWrite</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">StdinWrite</font>
+<hr size="2">
+<p>実行した子プロセスのSTDINストリームに指定された文字を書き込みます。<br></p>
+
+<p class="codeheader">
+StdinWrite ( process_id[, data] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">process_id</td>
+    <td width="85%">
+	Run実行時に返される子プロセスのプロセスID。</td>
+  </tr>
+  <tr>
+   <td>data</td>
+   <td><b>[オプション]</b>出力したいデータ。テキストまたはバイナリです。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">成功</td>
+    <td width="90%">書き込んだ文字数を返します。</td>
+  </tr>
+  <tr>
+    <td valign="top">失敗</td>
+    <td>STDINがプロセス、その他のエラーをリダイレクトしなかった場合、@errorを非ゼロに設定します。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+StdinWriteは子プロセスのコンソール標準入力ストリームに書き込みをおこないます。コンソール標準入力ストリームは通常はコンソールアプリケーションがキーボード入力などユーザーによる入力を読み取るために使用されます。この関数が正常に動作するためには、書き込みたい子プロセスをRunで実行する際にSTD I/Oパラメータに値 $STDIN_CHILD (1)を設定する必要があります(<a href="Run.htm">Run</a>関数を参照)。<br>
+<br>
+2番目のパラメータはStdinWriteでストリームに書き込みたい文字列です。もし2番目のパラメータを省略するとStdinWriteはストリームを閉じ、書き込みを無効にします。<br>
+<br>
+ストリームは任意サイズの先入れ先出し方式バッファです。この関数呼び出し時(ストリームを閉じるための呼び出しを除く)にストリームに文字を書き込むためのスペースが無い場合、StdinWriteはブロック(一時停止)され子プロセスがストリームを閉じるか、書き込み処理完了に必要な文字数分ストリームから読み取るまで処理を返しません。これは子プロセスがSTDINストリームを読み取るまでAutoItプロセスが停止し、キーシミュレーション、GUIメッセージ処理などがおこなわれないことを意味します。<br>
+<br>
+文字は書き込まれる前にANSIに変換されます。<br>
+<br>
+バイナリデータはそのままｍ書き込まれます。文字列に変換されることはありません。
+バイナリデータを16進数表記で表示したい場合はString()関数を使って明示的にデータを文字列にキャストしてください。<br>
+<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="StdoutRead.htm">StdoutRead</a>, <a href="StderrRead.htm">StderrRead</a>, <a href="StdioClose.htm">StdioClose</a>, <a href="Run.htm">Run</a>, <a href="RunAs.htm">RunAs</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S1">; StdinWrite()使用のデモ</span><br>
+<span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;Constants.au3&gt;</span><br>
+<br>
+<span class="S5">Local</span><span class="S0"> </span><span class="S9">$foo</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">Run</span><span class="S8">(</span><span class="S7">"sort.exe"</span><span class="S8">,</span><span class="S0"> </span><span class="S6">@SystemDir</span><span class="S8">,</span><span class="S0"> </span><span class="S6">@SW_HIDE</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$STDIN_CHILD</span><span class="S0"> </span><span class="S8">+</span><span class="S0"> </span><span class="S9">$STDOUT_CHILD</span><span class="S8">)</span><br>
+<span class="S1">; sort.exeのSTDINにソートしたい文字列を書き込む</span><br>
+<span class="S4">StdinWrite</span><span class="S8">(</span><span class="S9">$foo</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"rat"</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">"cat"</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">"bat"</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S8">)</span><br>
+<span class="S1">; 2nd argの省略でストリームを閉じる</span><br>
+<span class="S4">StdinWrite</span><span class="S8">(</span><span class="S9">$foo</span><span class="S8">)</span><br>
+<br>
+<span class="S1">; 子プロセスのSTDOUTを読み取り、表示</span><br>
+<span class="S5">Local</span><span class="S0"> </span><span class="S9">$data</span><br>
+<span class="S5">While</span><span class="S0"> </span><span class="S5">True</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$data</span><span class="S0"> </span><span class="S8">&amp;=</span><span class="S0"> </span><span class="S4">StdoutRead</span><span class="S8">(</span><span class="S9">$foo</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">If</span><span class="S0"> </span><span class="S6">@error</span><span class="S0"> </span><span class="S5">Then</span><span class="S0"> </span><span class="S5">ExitLoop</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">Sleep</span><span class="S8">(</span><span class="S3">25</span><span class="S8">)</span><br>
+<span class="S5">WEnd</span><br>
+<span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Debug"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$data</span><span class="S8">)</span><br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\StdinWrite.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Controls</title>
+　<META http-equiv=Content-Type content="text/html; charset=shift-jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<h1>Controls</h1>
+<p>
+AutoIt v3の新しい特徴の1つは特定のタイプのウィンドウ<em>コントロール</em>を直接操作する機能です。&nbsp;
+ウィンドウ上に見えるほとんど全てのものは何らかの種類のコントロールです。ボタン、リストボックス、エディットフィールド、スタティックテキストは全てコントロールです。&nbsp;メモ帳は実際のところ単なる大きな「エディット」コントロールなのです!&nbsp;AutoItのコントロール直接操作により、ただキーストロークを送信するよりもより信頼性の高い自動化が実現されます。
+</p>
+<p>&nbsp;</p>
+<p>
+<strong><em>注意</em></strong>
+<em>：AutoItは標準のMicrosoftのコントロールのみ操作できます。一見、標準のMSコントロールのように見える独自のカスタムコントロールで書かれたアプリケーションは操作できません。試してみてください!
+</em></p>
+<p>&nbsp;</p>
+<p>
+<a href="au3spy.htm">AutoItWindowInfoTool</a>を使って興味のあるウィンドウにマウスをあてると、現在マウスが指しているコントロールの情報が得られます。&nbsp;</p>
+<p>ほとんどの<a href="../functions/ControlClick.htm">Control...()</a>関数が持つ<strong>controlID</strong>パラメータで特別な記法を使用することができます。この記法を使うと次の<em>プロパティ</em>を使ってコントロールを識別することができます:</p>
+<ul>
+  <li><strong>ID - </strong>内部的なコントロールID。コントロールIDはウィンドウが各コントロールに与える内部の数値的識別子です。一般的にはコントロールを識別するためのもっとも良い方法です。AutoIt Window Info Tool以外にも視覚障害者用のスクリーンリーダーやMicrosoft製のツール/APIでコントロールIDを取得することができます。</li>
+  <li><strong>TEXT - </strong>コントロール上のテキスト。例えばボタンの&quot;&amp;次へ&quot;などがあげられます。</li>
+  <li><strong>CLASS - </strong>&quot;Edit&quot;や&quot;Button&quot;などの内部的なコントロールクラス名。</li>
+  <li><strong>CLASSNN -</strong>以前のバージョンのAutoItで使用されていたClassnameNN値。&quot;Edit1&quot;など。</li>
+	<li><b>NAME</b> - 内部的な .NET Framework WinForms名 (利用可能な場合)。</li>
+	<li><strong>REGEXPCLASS -</strong><a href="../functions/StringRegExp.htm">正規表現</a>を使用したコントロールクラス名。</li>
+	<li><strong>X</strong> \ <strong>Y</strong> \ <strong>W</strong> \ <strong>H</strong> 
+	- コントロールの位置とサイズ。</li>
+	<li><strong>INSTANCE - </strong>指定されたプロパティが全て一致する場合1始まりのインスタンス。</li>
+</ul>
+<p>コントロールコマンドの<em> controlID </em>パラメータには1つ以上のプロパティを次のフォーマットで使用できます:</p>
+<p class="codebox"> [PROPERTY1:Value1; PROPERTY2:Value2]</p>
+<p><strong>ノート: </strong>
+この特別な記法を使用しない場合、そのパラメータはコントロールのコントロールID(数値の場合)またはClassnameNN/テキスト(文字列の場合)として扱われます。特別な記法はそれらの方法よりも長い記述になりますがより明確です。</p>
+<p>Value部分に&quot;;&quot;が含まれる場合は、2回記述してください。</p>
+<p>&nbsp;</p>
+<p>例: メモ帳ウィンドウの1つ目のEditコントロールにテキストを送信します。</p>
+<p class="codebox"> ControlSend(&quot;Untitled - Notepad&quot;, &quot;&quot;, &quot;[CLASS:Edit; INSTANCE:1]&quot;, &quot;This is some text&quot;)</p>
+<p>または</p>
+<p class="codebox"> ControlSend(&quot;Untitled - Notepad&quot;, &quot;&quot;, &quot;[CLASSNN:Edit1]&quot;, &quot;This is some text&quot;)</p>
+<p>または</p>
+<p class="codebox"> ControlSend(&quot;Untitled - Notepad&quot;, &quot;&quot;, &quot;Edit1&quot;, &quot;This is some text&quot;)</p>
+<p>&nbsp;</p>
+<p>例: &quot;My Window&quot;のコントロールID 254をクリックします。</p>
+<p class="codebox"> ControlClick(&quot;My Window&quot;, &quot;&quot;, &quot;[ID:254]&quot;)</p>
+<p>または</p>
+<p class="codebox">ControlClick(&quot;My Window&quot;, &quot;&quot;, 254)</p>
+<p>&nbsp;</p>
+<p>例: .NET Winformsの&quot;textBoxFolder&quot;コントロールに&quot;C:\Some\Folder&quot;を設定します。</p>
+<p class="codebox">ControlSetText(&quot;My Window&quot;, &quot;&quot;, &quot;[NAME:textBoxFolder]&quot;, 
+&quot;C:\Some\Folder&quot;)</p>
+<p>&nbsp;</p>
+<p>例: &quot;Finish&quot;というテキストを含む&quot;Button&quot;コントロールの2番目のインスタンスをクリックします。</p>
+<p class="codebox">ControlClick(&quot;My Window&quot;, &quot;&quot;, &quot;[CLASS:Button; TEXT:Finish; INSTANCE:2]&quot;)</p>
+<p>&nbsp;</p>
+<h2>コントロールハンドル (HWND)</h2>
+<p>
+<a href="../functions/ControlGetHandle.htm">ControlGetHandle</a>関数を使用してコントロールの<em>ハンドル</em>、<em>HWND</em>を取得することができます。ハンドルとはWindowsがコントロールに与える固有の識別子です。ハンドルはその<em>コントロールが作成されるたびに</em>変わります。この方法によるコントロールへのアクセスはハンドルの動作をよく知っているユーザーのためだけに用意されています。
+</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>コントロール操作のための関数一覧については<strong><a href="../functions/ControlCommand.htm">Function Reference \ Window Management \ Controls</a></strong>の下部を参照。</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</body>
+</html>

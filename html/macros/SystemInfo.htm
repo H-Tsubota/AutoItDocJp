@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Macro Reference - System Info</title>
+  <meta http-equiv="Content-Type"
+ content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<h1>Macro Reference - System Info</h1>
+<p>システム情報のマクロは下表の通りです。</p>
+<p>全てのマクロの表は<a href="../macros.htm">こちら</a>。</p>
+<p>&nbsp;</p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#c0c0c0" height="490">
+<tr>
+	<td width="25%" bgcolor="#000099"><font color="#ffffff"><strong>マクロ</strong></font></td>
+	<td width="75%" bgcolor="#000099"><font color="#ffffff"><strong>説明</strong></font></td>
+<tr>
+<tr>
+	<td style="font-weight: bold;">@CPUArch</td>
+	<td>CPUが32ビットCPUの場合は"x86"を、64ビットCPUの場合は"X64"を返します。</td>
+</tr>
+<tr>
+	<td style="font-weight: bold;">@KBLayout</td>
+	<td>キーボードレイアウトを表すコード。とり得る値については<a href="../appendix/OSLangCodes.htm">Appendix</a>を参照。</td>
+</tr>
+<tr>
+	<td style="font-weight: bold;">@MUILang</td>
+	<td>マルチ言語が利用可能かどうかを表すコードを返します（Vistaではデフォルトで利用可能）。 実際の値については<a href="../appendix/OSLangCodes.htm">Appendix</a>を参照。</td>
+</tr>
+<tr>
+	<td style="font-weight: bold;">@OSArch</td>
+	<td>次のいずれか:"X86", "IA64", "X64" - これは現在実行されているOSのアーキテクチャのタイプです。</td>
+</tr>
+<tr>
+	<td style="font-weight: bold;">@OSLang</td>
+	<td>OSの言語を表すコード。  とり得る値については<a href="../appendix/OSLangCodes.htm">Appendix</a>を参照。</td>
+</tr>
+<tr>
+	<td style="font-weight: bold;">@OSType</td>
+	<td>NT/2000/XP/2003//Vista/2008/Win7/2008R2では"WIN32_NT"。</td>
+</tr>
+<tr>
+	<td style="font-weight: bold;">@OSVersion</td>
+	<td>次のいずれか: &quot;WIN_2008R2&quot;, &quot;WIN_7&quot;, &quot;WIN_2008&quot;, &quot;WIN_VISTA&quot;, &quot;WIN_2003&quot;,
+	&quot;WIN_XP&quot;, &quot;WIN_XPe&quot;, &quot;WIN_2000&quot;。</td>
+</tr>
+<tr>
+	<td style="font-weight: bold;">@OSBuild</td>
+	<td>OSのビルドナンバー。  例えば Windows 2003 Server では 3790。</td>
+</tr>
+<tr>
+	<td style="font-weight: bold;">@OSServicePack</td>
+	<td>サービスパック情報("Service Pack 3"など)。</td>
+</tr>
+<tr>
+	<td style="font-weight: bold;">@ComputerName</td>
+	<td>コンピュータのネットワーク上での名前</td>
+</tr>
+<tr>
+	<td style="font-weight: bold;">@UserName</td>
+	<td>現在ログインしているユーザーのID</td>
+</tr>
+<tr>
+	<td style="font-weight: bold;">@IPAddress1</td>
+	<td>1つ目のネットワークアダプタのIPアドレス。  コンピュータによっては127.0.0.1となります。</td>
+</tr>
+<tr>
+	<td style="font-weight: bold;">@IPAddress2</td>
+	<td>2つ目のネットワークアダプタのIPアドレス。  利用不可な場合 0.0.0.0 となります。</td>
+</tr>
+<tr>
+	<td style="font-weight: bold;">@IPAddress3</td>
+	<td>3つ目のネットワークアダプタのIPアドレス。  利用不可な場合 0.0.0.0 となります。</td>
+</tr>
+<tr>
+	<td style="font-weight: bold;">@IPAddress4</td>
+	<td>4つ目のネットワークアダプタのIPアドレス。  利用不可な場合 0.0.0.0 となります。</td>
+</tr>
+<tr>
+    <td height="16" colspan="2"></td>
+</tr>
+<tr>
+	<td style="font-weight: bold;">@DesktopHeight</td>
+	<td>デスクトップスクリーンの高さ方向のピクセル数。  (垂直方向の分解能)</td>
+</tr>
+<tr>
+	<td style="font-weight: bold;">@DesktopWidth</td>
+	<td>デスクトップスクリーンの幅方向のピクセル数。  (水平方向の分解能)</td>
+</tr>
+<tr>
+	<td style="font-weight: bold;">@DesktopDepth</td>
+	<td>デスクトップスクリーンの1ピクセルあたりのビットの深さ。</td>
+</tr>
+<tr>
+	<td style="font-weight: bold;">@DesktopRefresh</td>
+	<td>デスクトップスクリーンのリフレッシュレート(Hz)</td>
+</tr>
+</table>
+
+<p>&nbsp;</p>
+</body>
+</html>

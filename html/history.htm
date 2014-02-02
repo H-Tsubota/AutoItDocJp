@@ -1,0 +1,1249 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+
+<head>
+  <title>History</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift-jis">
+  <link href="css/default.css" rel="stylesheet" type="text/css">
+	<style type="text/css">
+	</style>
+</head>
+
+<body>
+<h1>History</h1>
+<p style="font-size: large"><strong>重要:</strong>
+スクリプトの変更を必要とする最近の変更点については
+<a href="script_breaking_changes.htm">こちらを参照</a>。</p>
+<p>&nbsp;</p>
+<p>AutoIt v3の変更点についての要約履歴です。</p>
+<p style="font-size: xx-small">(完全な技術履歴については
+<a href="autoit_changelog.txt">ここ</a>をクリックしてください。
+<b>ベータバージョン中の全ての変更点</b>を含む完全な履歴については<a href="autoit_changelog_complete.txt">ここ</a>をクリックしてください。)</p>
+<p>&nbsp;</p>
+<p style="font-size: small"><b><u>16th April, 2010  - v3.3.6.1</u></b></p>
+<p><strong>AutoIt:</strong></p>
+<ul>
+    <li>修正 #1515: 一部の状況でFileOpen()が排他モードで開いていた。</li>
+	</ul>
+	<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p style="font-size: small"><b><u>7th March, 2010  - v3.3.6.0</u></b></p>
+<p><strong>AutoIt:</strong></p>
+<ul>
+    <li>追加 #1376: FileOpen() modeパラメータがオプションになった。デフォルトのモードは読み取り。</li>
+	<li>追加 #1054: FileGetEncoding()を追加。</li>
+	<li>追加: ControlCommand() &quot;SendCommandID&quot; - 
+	コントロールIDメッセージのWM_COMMANDを送信するために使用。
+	ToolBarWindow32(やその他の)コントロールの自動化を可能にしてくれる。
+	例えばインターネットエクスプローラの&quot;Back&quot;ボタンなど。
+	ToolBarタブからコマンドIDを取得するにはAu3Infoを使用すること。</li>
+	</ul>
+	<ul>
+	<li>修正 #1428: AdlibRegister/Unregister()が大文字小文字を区別する関数名を不正に使用していた。</li>
+	<li>修正 #1448: コンパイル済みスクリプトで#OnAutoItStartRegisterが動作していなかった。</li>
+	<li>修正 #961: 32ビット版のAutoItとHKLM64を使用した場合に64ビットキーに対するRegDelete()が動作していなかった。</li>
+	<li>修正: 書き込みモードで開いたファイルで開かれていたファイルを読み取りモードで開くことができなかったのでFileOpen()を元に戻した。</li>
+	<li>修正 #1449: GUICtrlCreateDummy()型でGUICtrlDelete()が動作していなかった。</li>
+	<li>修正 #1458: Inetのサイズが32ビットに制限されていた。</li>
+	<li>修正 #1459: 再帰を多数回繰り返すと深刻なクラッシュが起きる。</li>
+	<li>修正 #1464: 最初のNULLマッチ後の1文字の*のパターンを使用した正規表現で処理が止まっていた。</li>
+	<li>修正 #1463: StringToASCIIArray() UTF8の文字で不正な動作をしていた。</li>
+	<li>修正 #1475: TrayItemSetState($Value, $Tray_Checked) 無効なトレイアイテムを不正に有効にしていた。</li>
+	</ul>
+	<ul>
+	<li>変更: もっと多くのUnicode文字が使えるようにSend()とControlSend()のコードでの再作業。</li>
+	<li>変更: FileWriteLine()のパフォーマンスの改善。</li>
+</ul>
+	<p><strong>Aut2Exe</strong></p>
+<ul>
+  <li>修正 #1409: Ctrl+C は変換(Convert)のショートカットで無くなった。Ctrl+Cによるコピー処理との衝突が起きないようにこのショートカットはCtrl+G (Go)になった。</li>
+</ul>
+	<p><strong>Au3Info</strong></p>
+<ul>
+  <li>修正 #1444: アプリケーション内のRegEditなどのコントロールのハイライトが消えない。</li>
+	<li>修正 #1391: ToolbarWindow32情報が最初のツールバーでしか表示されていなかった。</li>
+</ul>
+	<p><strong>AutoIt3Help</strong></p>
+<ul>
+  <li>修正 #1423: &quot;Open Script&quot;ボタンの動作停止。</li>
+</ul>
+	<p><strong>AutoItX</strong></p>
+<ul>
+  <li>&nbsp;修正: 消えていた .lib ファイルを再追加。</li>
+</ul>
+<p><strong>UDFs:</strong></p>
+<ul>
+	<li>修正 #1438: _ArrayCombinations()使用時のAUtoItエラー。</li>
+	<li>修正 #1454: StringBetween()が正しく動作していなかった。</li>
+	<li>修正 #1441: _GUICtrlRichEdit_GetText()で不正な長さのバッファを使用していた。</li>
+	<li>修正 #1446: _ScreenCapture_Capture()で1ピクセル少ない高さ/幅が使用されていた。</li>
+	<li>修正 #1445: _MemGlobalFree()のドキュメントを更新。</li>
+	<li>修正 #1469: _GDIPlus_BitmapCloneArea()のドキュメントを更新。</li>
+	<li>修正 #1466: _GUICtrlEdit_GetLine()が予期しない文字を返す。</li>
+	<li>修正 #1487: _DateToDayOfWeekIsoが0-6を返していたが月曜日を1とした1-7が正しかった。</li>
+  </ul>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p style="font-size: small"><b><u>15th January, 2010  - v3.3.4.0</u></b></p>
+<p><strong>AutoIt:</strong></p>
+<ul>
+	<li>追加: 読み取り中の自動検知を含めたBOM付きのUTF-8ファイルでの読み書きが可能になった。</li>
+	<li>追加 #682: FileReadLine()での64KBの制限をなくした。</li>
+	<li>追加: 行継続文字 &quot;_&quot;  を使用したAutoItスクリプトでの結合した行の長さ4095文字の制限をなくした。</li>
+	<li>追加: FileRead() 読み取った文字数/バイト数を@extendedで返すようになった。</li>
+	<li>追加 #1311: MouseGetCursor()で手の形のカーソルを返せるようになった。</li>
+</ul>
+
+<ul>
+    <li>修正 #384: 特定の環境下においてネットワークの認証フラグが原因でRunAs()、RunAsWait()で起動したプロセスが開始しないことがあった。</li>
+	<li>修正 #1370: occurrenceが負の場合、開始点が文字列の長さより大きい場合にStringInStr()がクラッシュする。</li>
+	<li>修正 #1367: GUIRegisterMsg()のコールバックで$GUI_RUNDEFMSGを返すGUIDelete()を呼ぶとAutoItがクラッシュすることがあった。</li>
+	<li>修正 #1363: FileSetPos() 開始点が現在の位置だと動作しなかった。</li>
+	<li>修正 #1355: DllCall()が返ってきた際に符号なしの数字を表示する方法を元に戻した。</li>
+	<li>修正 #1396: 無効なハンドルを使用するとDllCallbackGetPtr()がクラッシュする。</li>
+	<li>修正 #1352: StringSplit()でバイナリデータを使用すると深刻なクラッシュが起きる。</li>
+	<li>修正 #1398: GuiRichEdit.au3の$tagPARAFORMAT2の宣言を修正。</li>
+</ul>
+
+<ul>
+    <li>削除: FileOpen()の&quot;RAW&quot;読み取りモードを削除。</li>
+	<li>削除: InetGet(&quot;abort&quot;)、@InetGetActive、@InetGetBytesReadを削除。</li>
+	<li>削除: AdlibEnable()とAdlibDisable()を削除。</li>
+	<li>削除: OnAutoItStarとOnAutoItExitを削除。</li>
+</ul>
+	<p><strong>AutoIt3Help</strong></p>
+<ul>
+  <li>&nbsp;修正 #1327: 極まれにいくつかのキーワードでファイルオープンが失敗していた。</li>
+</ul>
+<p><strong>UDFs:</strong></p>
+<ul>
+	<li>変更: _SQLite 3.6.19 -&gt; 3.6.22</li>
+	<li>修正 #1338: 不正な_ArrayDisplay()のGUIの位置エラー</li>
+	<li>修正 #1362: _WinAPI_WindowFromPoint()が64ビットで動作しなかった。</li>
+	<li>修正 #1389: _IEAttach()を複数回呼ぶと失敗する場合があった。</li>
+	<li>修正 #1353: _FileWriteToLine() の過度な入力テキスト型の制限。</li>
+	<li>修正: SQLite.au3の_SQLite_FetchData、$iCharSize、_SQLite_QuerySingleRow、
+	_SQLite_GetTable2d、_SQLite_Display2DResultでのさまざまなエラー。 jchdが修正。</li>
+  </ul>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p style="font-size: small"><b><u>18th December, 2009  - v3.3.2.0</u></b></p>
+<p><strong>AutoIt:</strong></p>
+<ul>
+  <li>追加 #529: .NET WinFormコントロール名を検索するための&quot;NAME&quot;プロパティを追加。</li>
+	<li>追加 #757: MouseClick()のx/yパラメータにデフォルトを設定。</li>
+	<li>追加 #764: 成功時にProcessWait()ではPIDを返し、WinWait()、 
+	WinWaitActive、 WinActivate()、 WinActive()、 WinMove()ではハンドルを返すようにした。</li>
+	<li>追加 #414: OnAutoItStart/OnAutoItExitの取り扱いを改善。#OnAutoItStartRegister、
+	OnAutoItExitRegister()、OnAutoItExitUnRegister()とした。</li>
+	<li>追加: AdlibEnable/AdlibDisableの取り扱いを改善。AdlibRegister()、AdlibUnRegister()、AdlibDisable()とした。</li>
+	<li>追加 #351: PixelSearch()の逆方向処理。</li>
+	<li>追加 #769: FileFlush()関数。</li>
+	<li>追加 #333: /AutoIt3ExecuteScript、/AutoIt3ExecuteLineを無効化するための#NoAutoIt3Execute ディレクティブ。</li>
+	<li>追加 #604: $GUI_BKCOLOR_TRANSPARENTをラベル、グループ、ラジオ、チェックボックスのコントロールで使用できるようにした。</li>
+	<li>追加 #135: ファイルポインタを移動するためのFileSetPos()関数、FileGetPos()関数。</li>
+	<li>追加 #582: タブアイテムコントロールでGUICtrlSetTip()を使えるようにした。</li>
+	<li>追加 #699: Shutdown()で失敗時に@error=GetLastError()を返すようになった。</li>
+	<li>追加 #461: StringInStr()と同様にoccurrence &lt;0の場合、StringReplace()を右から左に実行する。</li>
+	<li>追加: コンボコントロール用のGUICtrlSetColor()とGUICtrlSetBkColor()。</li>
+	<li>追加: タイトルバーの無いGUI($WS_CAPTION非設定)をマウスで動かせるようになった。</li>
+	<li>追加 #815: 一時変数を参照渡しできるようになった。</li>
+	<li>追加 #837: FileFindNextFile() ディレクトリが返された場合、@extendedを設定する。</li>
+	<li>追加 #839: Shutdown() 書き直し、非インタラクティブなユーザーによる実行時にも正しく動作するようになった。</li>
+	<li>追加: Shutdown() オプションで理由コードを設定できるようになった。</li>
+	<li>追加 #846: _PathFull()で末尾のスラッシュが無いドライブでの珍しいが有効な構文をサポート。</li>
+	<li>追加 #869: MUI環境のスクリプトを補助するための@MUILangマクロ</li>
+	<li>追加 #918: GUICtrlSetFont()とGUISetFont()にQualityパラメータを追加。</li>
+	<li>追加: ProcessClose() エラー情報を返す。</li>
+	<li>追加: PixelChecksum() ADLERの代わりにCRC32を選択するための追加パラメータ。</li>
+	<li>追加 #984: WindowsXP組み込みでは@OSVersionは&quot;WIN_XPe&quot;を返すようになった。</li>
+	<li>追加 #938: UDPOpen() 255.255.255.255でのブロードキャストを許可するフラグ。</li>
+	<li>追加: MSDNの説明による混乱を避けるためにDllCallとDllStructに新しい型を追加。
+	これによって特にX64エラーを避けることができる。</li>
+	<li>追加 #351: PixelSearch()で右から左、下から上への検索をサポート。</li>
+	<li>追加 #508: Staticキーワード。</li>
+	<li>追加 #1056: オンライン接続を避けるための新しいInetオプション。</li>
+	<li>追加: DllStructSetData()、DllStructGetData()のインデックスパラメータでDefaultキーワードをサポート。</li>
+	<li>追加 #1270: GuiSetIcon() now finds suitable large and small icons.</li>
+	<li>追加: HttpSetUserAgent()関数、InetClose()関数、InetGetInfo()関数、InetRead()関数</li>
+	<li>追加: InetGet()を使用して同時に複数のダウンロードをバックグラウンドで実行できるようにした。</li>
+	<li>追加 #408: HTTPS接続時にSSLエラーを無視するための新しいフラグ。</li>
+	<li>追加 #884: モード0によるプロクシサポートの改善。</li>
+	<li>追加 #949: ユーザーエージェントを変更できるようにした。</li>
+</ul>
+
+<ul>
+    <li>修正: CtrlSetStyle 選択されていないタブ上のリストビュー。</li>
+	<li>修正 #763: GUICtrlCreateIcon() エラー時に空のアイコンを作成する。</li>
+	<li>修正: MouseClick()、MouseClickDrag()で無効なボタンが使用されるとマウスが動かなくなる。</li>
+	<li>修正 #779: GUICreate()が子を不正に作成することによるExitでの無限ループ</li>
+	<li>修正 #774: GuiCtrlSetBkColor() 不正なラベル表示。</li>
+	<li>修正 #790: Windowsのリージョン定数$ERRORを$ERRORREGIONに名称変更。</li>
+	<li>修正: StringInStr(&quot;aaa&quot;, &quot;aa&quot;, 2) が0を返さない。</li>
+	<li>修正 #802: Heightプロパティによるコントロールの検索。</li>
+	<li>修正: タブ上のチェックボックスラジオボタンの描画。</li>
+	<li>修正 #816: GUIの日付けコントロールのデータに関するドキュメントを分かりやすくした。</li>
+	<li>修正 #819: EventLog関数のクラッシュ。</li>
+	<li>修正 #814: 認証を求めるプロクシを使用した場合にInetGet() が動作しなかった。</li>
+	<li>修正 #813: X64版でのWindowsアドバンスマッチ [HANDLE:...] の不正な処理。</li>
+	<li>修正 #863: DirMove() 余分なドット。</li>
+	<li>修正 #867: UDPRecv()がIP/Portからでも返るようにした。</li>
+	<li>修正 #886: ==演算子が文字列比較用であることをドキュメントに明示した。</li>
+	<li>修正 #885: DefaultをFalseと比較した場合の結果をFalseからTrueに変更。</li>
+	<li>修正 #888: Send(&quot;{}}&quot;) 余分なNULL文字。</li>
+	<li>修正: DllCall() returning 64-bit int.</li>
+	<li>修正: GuiCtrlSetImage() after GUI resized.</li>
+	<li>修正: DirMove() return code wrong 
+	under XP.</li>
+	<li>修正 #931: グラフィックコントロールでの不正なGUICtrlSetResizing()。</li>
+	<li>修正 #934: マウスのダブルクリック時にMouseGetCursor()がフリーズする。</li>
+	<li>修正 #615: ライセンスの制限を緩めた。</li>
+	<li>修正 #919: ConsoleWrite()、ConsoleWriteError()、StdinWrite()がバイナリデータと非ANSI文字をどのように処理しているのかについての注意事項を追加。</li>
+	<li>修正 #897: StringToASCIIArray()がバイナリの入力を受け付けないことをドキュメント化(まず文字列に変換する)。</li>
+	<li>修正 #937: Opt(&quot;TrayMenuMode&quot;,1)での不正なイベントハンドリング</li>
+	<li>修正 #969: FileFindNextFile()で最初に見つけたものがディレクトリの場合に@extendsを設定していない。</li>
+	<li>修正 #1006: @MSECで値が100未満の場合に不正な値が返されていた。</li>
+	<li>修正 #1010: BOM付きのUTF8ファイルでFileRead()が多すぎる文字を返していた。</li>
+	<li>修正 #1013: 子MDIが親ウィンドウのクライント領域に収まっていなかった。</li>
+	<li>修正 #1005: TraySetClick(64) = ホバリング。</li>
+	<li>修正: ClipPut(&quot;&quot;) 空になっていなかった。</li>
+	<li>修正 #1068: バイナリからIntへの変換。</li>
+	<li>修正: labelラベルに対してGUICtrlSetPos()を2回おこなうと不正な描画がされる。</li>
+	<li>修正 #1094: 
+	Send(&quot;{LSHIFT UP}&quot;)が動作していなかった。</li>
+	<li>修正 #1074: 複数モニター時のInputbox()の位置。</li>
+	<li>修正 #1105: 無効な色つきの複数行ボタンが正しく表示されていなかった。</li>
+	<li>修正 #1077: GUICtrlSetBkColor()での不正な再カラーリング。</li>
+	<li>修正 #1116: GUICtrlCreateGraphicがResizeModeに従わない。</li>
+	<li>修正 
+	#1102: StringInStr()のcountパラメータに関するドキュメントを改善。</li>
+	<li>修正 
+	#1161: ColorModeを参照している全てのドキュメントを削除。</li>
+	<li>修正 #1156: AutoItSetOption()/Optで() 無効な入力に対して致命的なエラーを起こさないよう@errorを設定するようにした。</li>
+	<li>修正: ポインタの比較が正しく動作するようにした。</li>
+	<li>修正 #906: ActiveXコントロールで初期サイズがいくらかを知ることができなかった。</li>
+	<li>修正: Boolean tests on binary strings now behaves properly.</li>
+	<li>修正 #1234: ブーリアン引数を変更するCOMメソッドでintへの変換がおこなわれることがあった。</li>
+	<li>修正 #1258: コントロールメニューを破棄しようとするとシステムメニューが表示されることがあった。</li>
+	<li>修正 #1288: インデックスパラメータ省略時にDllStructSetData()とDllStructGetData()がどのように配列を処理するのかをドキュメント化した。</li>
+	<li>修正 #1300: 無効な関数でDllCall()呼ぶとDLLがアンロードされることがあった。</li>
+	<li>修正 #1295: 特定の状況でUnicodeからANSIへの変換がクラッシュしていた。</li>
+	<li>修正 #1304: _GDIPlus_BitmapLockBits()でパラメータとしてRight、Bottomの代わりにWidthとHeightを取るよう修正。</li>
+	<li>修正 #1294: 次の関数をフリーズしたウィンドウに対して使用すると引き起こされるAutoItのデッドロックを修正: WinGetTitle、WinSetTitle、WinGetText、WinFlash、WinSetOnTop</li>
+	<li>修正 #1332: Mod()で浮動小数点数を変換していたが、それが必要ない場合に予期しない出力を引き起こしていた。</li>
+	<li>修正 #1321: DllStructCreate()でデータ名として _ をサポートしていなかった。データ名として有効な文字をドキュメント化した。</li>
+	<li>修正 #1322: 非エディットコントロールでControlCommand(&quot;GetSelected&quot;)を使用するとクラッシュする。</li>
+	<li>修正 #1325: 一部の日付け関数で無効な配列にアクセスしようとしていた。</li>
+	<li>修正 #1345: Number()で末尾に小数点が付く数字を扱えなかった。</li>
+</ul>
+
+<ul>
+    <li>変更: 書き込み用に開いたファイルから読み取りをおこなえるようになった。</li>
+	<li>変更: PCRE正規表現エンジンを8.00に更新。</li>
+	<li>変更 #899: ShellExecute[Wait]() でデフォルトの動作として&quot;open&quot;を使用しなくなった。詳細に関してはこれらの関数の注意の項を参照。</li>
+	<li>変更: Inet関数を下記の追加・変更を含めて書き直した:</li>
+	<li>削除: URLDownloadToFile()の名称が長いの別名としてInetGet()を設けた。</li>
+	<li>変更: InetGet()がハンドルを返すようになった。このハンドルは必ず閉じなければならない。</li>
+	<li>変更: @InetGetBytes、@InetGetActive、InetGet(&quot;abort&quot;)が非推奨になった。将来的には削除される。</li>
+	<li>変更 #968: AutoUpdateItで新しいInet機能を使用するようにProgAndyによって更新された。</li>
+	<li>変更: @YDAYで1 - 366の代わりに001 - 366を返すようにした。これによってマクロは他の言語(C/C++など)とより一貫性が取れたものになった。また0埋めされた他の全てのマクロ関連の日付け文字列とも一貫性が取れたものになった。これはスクリプトの修正を必要とする変更である。</li>
+	<li>変更 #1080: InetGetのバックグラウンドでのダウンロード時にまずリモートのホストに接続するのではなく、直ちに処理を返すようにした。</li>
+	<li>変更 #1137: RegEnumKey()とRegEnumVal()でエラー時にエラーメッセージ文字列の代わりにちゃんと空文字列を返すようになった。</li>
+	<li>変更: PixelChecksum()で右から左、下から上に向かってのチェックサムを計算できるようになった。</li>
+	<li>変更: InputBox()でx、y、w、hを渡す必要が無くなった。</li>
+	<li>変更 #1056: オンライン接続を回避するための新しいInetオプションを追加。</li>
+</ul>
+<p><strong>AutoItX:</strong></p>
+<ul>
+  <li>削除: AutoItSetOption()からColorModeオプションを削除。</li>
+</ul>
+<p><strong>Au3info:</strong></p>
+<ul>
+  <li>削除: AutoItでBGRモードを使用するオプションをサポートしなくなったのでColorMode BGRオプションを削除。</li>
+	<li>追加: 可能な場合にコントロール情報として.NET WinFormを出力。</li>
+	<li>追加 #140: ツールバーボタン情報。</li>
+</ul>
+<p><strong>Aut2Exe:</strong></p>
+<ul>
+  <li>修正 #1283: 
+  32ビットビルドをおこなうための新オプション /x86 の追加と同じく32ビットビルドをおこなうための /unicode の再追加。</li>
+</ul>
+	<p><strong>Au3check</strong></p>
+<ul>
+  <li>修正 #1239: 不正なライブラリ検索順。</li>
+</ul>
+	<p><strong>その他</strong></p>
+<ul>
+  <li>追加 #1050: TextPad v5 文法ファイルをインストール。</li>
+</ul>
+<p><strong>UDFs:</strong></p>
+<ul>
+  <li>追加: _GDIPlus_BrushGetSolidColor、_GDIPlus_BrushSetSolidColor。</li>
+	<li>追加: $tagWIN32_FIND_DATAと対応する属性定数。</li>
+	<li>追加 #868: _WinAPI_GetLayeredWindowAttributes()、_WinAPI_SetLayeredWindowAttributes()。</li>
+	<li>追加: _Date_Time_ ... Str()でyyyy/mm/dd形式の日付けを返せるようにした。</li>
+	<li>追加 #271: _FTP_...()用のFTPEx.au3。</li>
+	<li>追加 #932: WinDowsConstants.au3のマウスイベント定数。</li>
+	<li>追加 #952: _ArrayDisplay() 追加パラメータとして列のヘッダーテキストを追加。</li>
+	<li>追加 #957: Debug.au3の_Assert()。</li>
+	<li>追加: _WinAPI_GetGuiResources()。</li>
+	<li>追加 #981: _WinAPI_WideCharToMultiByte()、_WinAPI_MultiByteToWideChar()で&quot;文字列&quot;のIN/OUTをサポート。</li>
+	<li>追加 #1157: Crypt.au3の暗号化関数。</li>
+	<li>追加 #1128: WinAPI.au3の_WinAPI_PathFindOnPath()。</li>
+	<li>追加 #1228: FTPEx.au3の_FTP_SetStatusCallback()、_FTP_DecodeInternetStatus()。</li>
+  </ul>
+
+<ul>
+    <li>修正 #755: _FileReadToArray()で最後の行が空白になる。</li>
+	<li>修正 #773: _GUICtrlStatusBar_SetPartsのドキュメント。</li>
+	<li>修正 #786: _SQLite_Exec()が@errorを返さない。</li>
+	<li>修正 #809: _Soundxxx()の1番目のパラメータのファイル名。</li>
+	<li>修正 #887: Tweakyの動作に関係する部分。</li>
+	<li>修正 #951: _ArrayDisplay()でエントリー数が4000以上の場合のスピードを改善。</li>
+	<li>修正: MCIエラー時に_SoundOpen()で@errorを設定する。</li>
+	<li>修正 #1015: _SQLite_SaveMode()を_SQLite_SafeMode()に名称変更。</li>
+	<li>修正 #1016: エラーハンドリングについての_WordDocSaveAs()のドキュメント</li>
+	<li>修正: VBR形式の音声の場合の音声再生位置。</li>
+	<li>修正 #1028: _Clipboard_GetData()を修正。</li>
+	<li>修正 #1031: _Clipboard_SetData()を修正。</li>
+	<li>修正 #1040: _ScreenCapture_Capture()でのメモリリーク。</li>
+	<li>修正 #1026: _Gdiplus_BitmapCreate*()のドキュメントの例。</li>
+	<li>修正 #1092: X64の_Timer_...()データ型。</li>
+	<li>修正 #1059: _FileListToArray()での不正なエラーハンドリング。</li>
+	<li>修正 #1101: _NowTime()、_NowDate()のドキュメント。</li>
+	<li>修正: _WinAPI_GetWindowLong()、_WinAPI_SetWindowLongでX64をサポート。</li>
+	<li>修正 #1111: DateAdd()のコメントの文法の間違い。</li>
+	<li>修正: UDFライブラリでは#include &lt;&gt;の代わりに#include &quot;&quot;を使用。</li>
+	<li>修正 #1033: UDFライブラリでDllCall()使用時のエラーハンドリングを一貫性のあるものに改善した。</li>
+	<li>修正 #1215: _ArraySearch()で2次元配列を検索できない。</li>
+	<li>修正 #1168: _ExcelBookOpen() COMエラー起きないように表示されている最初のワークシートを選択するようになった。</li>
+	<li>修正 #1247: _GUICtrlComboBoxEx_* 関数が特定のComboBoxスタイルで動作しないことをドキュメント化。</li>
+	<li>修正 #1260: _WinAPI_GetLastErrorMessage()でバッファオーバーフローの可能性があった。</li>
+	<li>修正 #1276: _TicksToTime()の不正な秒数切り上げ。</li>
+	<li>修正 #1277: _GDIPlus_ImageGetGraphicsContextの例のスクリプトでのリソースのクリーンアップ.</li>
+	<li>修正 #1290: _GUICtrlTreeView_DisplayRectEx()使用時の無効なLeft座標。</li>
+	<li>修正 #1296: _GUICtrlTreeView_ClickItem()がコントロール親ウィンドウの外側をクリックすることがあった。</li>
+	<li>修正 #1312: _GUIImageList_BeginDrag()の例のエラー。</li>
+	<li>修正 #1320: _GUIImageList_DragMove()のドキュメントに存在しないパラメータが載っていた。</li>
+	<li>変更: _StringBetweenの最後のオプションパラメータを削除(最新版では不要)(SmOke_N)</li>
+  </ul>
+<ul>
+    <li>変更: _StringToHex()、_HexToString()、_StringReverse()を書き直して速くした。</li>
+	<li>変更: _SQLite 3.6.7 -&gt; 3.6.19 (SQL文はUNICODE文字をサポートしている)。</li>
+	<li>変更: _InetGetSource() InetRead()を使用するようにした。</li>
+  </ul>
+<ul>
+    <li>削除: _StringAddThousandsSep()を削除した。この関数を使うためには大量のオプションが必要で誰のためにもならない。</li>
+	<li>削除: #1112: 全てで呼ぶので__WinAPI_Checkを削除した。</li>
+  </ul>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p style="font-size: small"><b><u>24th December, 2008  - v3.3.0.0</u></b></p>
+<p><strong>AutoIt:</strong></p>
+<ul>
+  <li>Windows9x系オペレーティングシステムとWindowsNT4.0オペレーティングシステムのサポートを解除。</li>
+</ul>
+<ul>
+  <li>追加: StringSplit()要素0に総数を入れないための新しいフラグ。</li>
+  <li>追加 #328: StringToASCIIArray()、StringFromASCIIArray()。</li>
+  <li>追加: #415の問題を修正するためのRun()/RunAs()の新しいフラグ (新しいConstants.au3定数を追加: $STDIO_INHERIT_PARENT).</li>
+  <li>追加: 全てのRun関数にCUI互換性を考慮した新しいフラグを設定(新しいConstants.au3定数を追加: $RUN_CREATE_NEW_CONSOLE)。</li>
+  <li>追加 #481: SplashTextOn()でのテキストの周りに11ピクセルの余白を作成 (VistaのUIガイドラインに準拠)。</li>
+  <li>追加 #468: クロックの現在のミリ秒数を取得するための@MSecマクロを追加。</li>
+  <li>追加 #277: @CPUArchマクロでプロセッサのアーキテクチャを返せるようになった。</li>
+  <li>追加 #454: $FO_UTF8によってBOMなしのUTF8ファイルを読み取るためのReadモードがFileOpen()で使用できるようになった。</li>
+  <li>追加: $FO_UTF16_LE、$FO_UTF16_BEによってBOMなしのUTF16ファイルを読み取るためのReadモードがFileOpen()で使用できるようになった。</li>
+  <li>追加 #407: For...In loopsでは読み取りしかできないことをドキュメント化。</li>
+  <li>追加 #645: IniDelete()の3番目のパラメータでDefaultキーワードをサポート。</li>
+</ul>
+<ul>
+  <li>修正: {ASC 0xNNNN}形式を使用した際にSend()によって冒頭にゼロが誤って挿入されてしまう。</li>
+  <li>修正 #305: コンボのGUICtrlSetFont()によってハイライトされてしまう。</li>
+  <li>修正 #318: TreeViewItemでGUICtrlSetTip()が必ず0を返す。</li>
+  <li>修正 #339: GUICtrlDelete()がクラッシュする。</li>
+  <li>修正 #345: Windows2008での@OSVersion。</li>
+  <li>修正 #366: 不正な文法でAutoItがクラッシュする。</li>
+  <li>修正 #380: WindowsXP64ビットエディションでの@OSVersion。</li>
+  <li>修正 #346: FileOpenDialog()/FileSaveDialog()のフィルターの長さ制限。</li>
+  <li>修正 #387: 無効なハンドルを使用するとDllClose()とDllCallbackFree()がクラッシュする。</li>
+  <li>修正 #449: 32ビットモードのX64で@SystemDirがSysWOW64を返さない。</li>
+  <li>修正 #440: スクリプトの最後がEOF (0x1A)の場合の致命的エラー。</li>
+  <li>修正 #464: GUICtrlCreateAvi()の例のスクリプトがVista上で動作しない。</li>
+  <li>修正 #484: 無効なファイルが指定されるとObjGet()がクラッシュする。</li>
+  <li>修正 #501: ProcessGetStats()が他のユーザー(SYSTEMを含む)が実行したプロセスで失敗する。</li>
+  <li>修正 #92: DllStructのchar[]/wchar[]でデータの丸め込みがおこなわれる。</li>
+  <li>修正: GuiCtrlSetState($graphic, $GUI_HIDE)で非表示にならない。</li>
+  <li>修正: GuiCtrlSetResizing($graphic, )で移動が起きない。</li>
+  <li>修正: GuiCreate(...,Style without caption)がプロパティのサイズ変更をおこなわない。</li>
+  <li>修正: GuiSetStyle(caption change)がプロパティのサイズ変更をおこなわない。</li>
+  <li>修正: GuiCtrlSetState($listviewitem)がエラーを返さない。</li>
+  <li>修正 #562: TITLEプロパティを指定すると他の全てのプロパティが消える(ウィンドウタイトル検索)。</li>
+  <li>修正 #569 TCPRecv()のドキュメントの例。</li>
+  <li>修正 #589: 一部の比較演算子がブール値を返していなかった。</li>
+  <li>修正 #583: ドキュメントの@MSECの形式が間違っていた。</li>
+  <li>修正 #574: SendKeyDelayまたはSendKeyDownDelayで0を使用するとSend()使用時の遅延に正しく反映されない。</li>
+  <li>修正 #542: 正規表現使用時にクラッシュする。</li>
+  <li>修正 #531: GUICtrlSetGraphic()の説明の分かりにくい部分を修正。</li>
+  <li>修正 #539: フラグ2でStringSplit()を使い、デリミッタに一致するものがない場合、文字列全体が返される。</li>
+  <li>修正 #601: 長さが99以上のときにTooltipが0を返す。</li>
+  <li>修正 #608: リストビューに対するGUICtrlSetBkColor()で再描画されない。</li>
+  <li>修正 #628: GuiCtrlRead($ctxmenu, $adv)の返し値が不正。</li>
+  <li>修正 #640: PCREは\L、\l、\N、\U、\uをサポートしていない : ドキュメントの更新</li>
+  <li>修正 #642: インストーラがAutoItのみのヘルプファイルの代わりにマージされたヘルプファイルの履歴ページを正しく開くように修正した。</li>
+  <li>修正 #646: Call()で関数が見つからなかった場合に特定の@error値と@extended値を設定するようにした。</li>
+  <li>修正 #669: Dec()の例の誤植。</li>
+  <li>修正 #659:  FileSelectFolder()使用時にUNCパスはサポートされないことをドキュメント化。</li>
+  <li>修正 #671: 有効な親を指定せずに$WS_EX_MDICHILDを使用するとクラッシュする。</li>
+  <li>修正: 無効なUTF16の入力文字列をBinaryToString()で使用すると起きるクラッシュ。BinaryToString()に無効な入力を知らせるために新しい@errorコードを追加した。</li>
+  <li>修正 #743: Tray関数で無効なIDを使用するとAutoItがクラッシュする。</li>
+  <li>修正 #748: DllCall(0,...)でAutoItがクラッシュする。</li>
+</ul>
+<ul>
+  <li>変更 #393: Windows VistaでSoundSetWaveVolume()が異なる動作をすることをドキュメント化した。</li>
+  <li>変更: PCRE正規表現エンジンを7.8に更新。</li>
+  <li>変更: 間違えやすかったので@ProcessorArchを@OSArchに変更した。</li>
+  <li>変更: RegRead()とRegWrite()でサイズ制限が取り除かれた(以前は一部のレジストリキーで64KBの制限があった)。</li>
+  <li>変更: RegRead()とRegWrite()でREG_BINARY型に16進数文字列を使わなくなった。ネィティブバイナリデータ型が使用される。</li>
+</ul>
+<p><strong>AutoItX:</strong></p>
+<ul>
+  <li>変更: ネイティブDLL: ネィティブAPIの全ての文字列メソッドをUnicodeに対応。ほとんど関数でANSIバージョンが無くなった。</li>
+  <li>追加: COM: WinListメソッド。</li>
+  <li>修正: ネイティブDLL: 返す文字列が不正な終わり方をしていた。</li>
+  <li>修正: PixelChecksum()は正しい値を返していなかった。</li>
+</ul>
+<p><strong>Aut2Exe:</strong></p>
+<ul>
+  <li>修正 #436: GUIからコンパイルをおこなった場合、圧縮レベルが無視される。</li>
+  <li>追加 #460: たくさんのUPXエラー。</li>
+</ul>
+<p><strong>UDFs:</strong></p>
+<ul>
+  <li>追加: _GDIPlus_StringFormatSetAlign。</li>
+  <li>追加: _StringExplode()。</li>
+  <li>追加: _GDIPlus_ImageGetFlags、_GDIPlus_ImageGetHorizontalResolution、_GDIPlus_ImageGetPixelFormat、_GDIPlus_ImageGetRawFormat<br>
+    _GDIPlus_ImageGetType、_GDIPlus_ImageGetVerticalResolution。</li>
+  <li>追加: _PathGetRelative。</li>
+  <li>追加: _ArrayCombinations、_ArrayPermute、_ArrayUnique。</li>
+  <li>追加: _WinAPI_CreatePen、_WinAPI_DrawLine、_WinAPI_LineTo、_WinAPI_MoveTo、_WinAPI_GetBkMode、_WinAPI_SetBkMode。</li>
+  <li>追加: _WinAPI_CombineRgn、_WinAPI_CreateRectRgn、_WinAPI_CreateRoundRectRgn、_WinAPI_SetWindowRgn。</li>
+  <li>追加: _ExcelHorizontalAlignSet、_ExcelFontSetProperties、_ExcelBookAttach。</li>
+  <li>追加: _WinAPI_SetEndOfFile、_WinAPI_SetFilePointer。</li>
+  <li>追加: 消えていたFrameConstants.au3</li>
+  <li>追加: Excel UDFs</li>
+  <li>追加: _Timer_GetIdleTime、_WinAPI_GetWindowPlacement、_WinAPI_SetWindowPlacement。</li>
+  <li>追加 #332: _GUICtrlStatusBar_Createの記述。</li>
+  <li>追加 #275: _GDIPlus_GraphicsFillPolygon。</li>
+  <li>追加: _GUICtrlTab_ClickTab。</li>
+  <li>追加: _GUICtrlComboBoxEx_GetUnicode、_GUICtrlComboBoxEx_SetUnicode。</li>
+  </ul>
+<ul>
+  <li>削除: _StringSplit 不要になった。</li>
+</ul>
+<ul>
+  <li>修正 #693: _DateTimeFormat() 時刻の形式</li>
+  <li>修正 #701: _GUICtrlListView_ClickItem()  $fMove = Trueの際に不正な位置をクリックする。</li>
+  <li>修正 #700: _GUICtrlTreeView_ClickItem()  $fMove = Trueの際に不正な位置をクリックする。</li>
+  <li>修正 #703: _GUICtrlListBox_ClickItem()  $fMove = Trueの際に不正な位置をクリックする。</li>
+  <li>修正 #705: _GUICtrlToolbar_ClickButton()  $fMove = Trueの際に不正な位置をクリックする。</li>
+  <li>修正 #707: _GUICtrlMonthCal_Create() 幅と高さ。</li>
+  <li>修正 #674: _GUICtrlTab_ClickTab() $fMove = Trueの際に不正な位置をクリックする。</li>
+  <li>修正 #610: _WinAPI_CreateFile() 失敗時の不正な返し値。</li>
+  <li>修正 #619: _GUICtrlListView_SetItemSelectedのメモリ割り当て。</li>
+  <li>修正 #617: GDI+ ImageGetのヘルプファイルの例を6つ訂正。</li>
+  <li>修正 #621: _StringAddThousandsSepが負の数で動作しない。</li>
+  <li>修正 #635: _GuiCtrlTab_ClickTab()のドキュメントに不要な$fPopupScanパラメータが載っていた。</li>
+  <li>修正 #650: BorderConstants.au3が消えていた。</li>
+  <li>修正 #656: _FileCountLinesがファイルの内容が1行だけの場合に0を返す。</li>
+  <li>修正 #600: _ArraySearchが2次元配列の場合に失敗する。</li>
+  <li>修正 #603: _FileReadToArray()がファイルの内容が1行だけの場合に配列を返さない。</li>
+  <li>修正 #495: _GUICtrlTreeView_GetTreeが親を1つだけ返す。</li>
+  <li>修正 #503: _Date_Time_FileTimeToLocalFileTimeの例。</li>
+  <li>修正 #510: _GUICtrlListView_ClickItem: リストビュー内の列が表示領域を超えた場合、コントロールの外部をクリックする。</li>
+  <li>修正 #500: _ChooseColorの64ビットでの実行</li>
+  <li>修正 #517: WinAPI UDF - DllCall()後の不正エラーチェック。</li>
+  <li>修正 #533: Array関数の次元チェック。</li>
+  <li>修正: たくさんのTimer関数。</li>
+  <li>修正 #506: _FileCountLinesで一般的な行終了文字を扱えるようになった。</li>
+  <li>修正 #485: WinAPIでヘルプファイルの関連のリンクが消えていた。</li>
+  <li>修正 #571: _GUICtrlListBox_FindString、 _GUICtrlListBox_GetAnchorIndex、_GUICtrlListBox_GetTextの返し値についてのドキュメントの記述。</li>
+  <li>修正 #586: _GuiCtrlListView_SetGroupInfo()がグループIDを破壊していた。</li>
+  <li>修正 #516: _ChooseFontの64ビットでの実行。</li>
+  <li>修正 #595: _WinAPI_SetWindowsHookEx $WH_KEYBOARD_LLについてのヘルプファイルでの記述。</li>
+  <li>修正 #465: _DateTimeSplit 秒が省略された場合のデフォルトが-1だったがデフォルトを0に変更。</li>
+  <li>修正: Excelの例</li>
+  <li>修正 #422: _GDIPlus_GraphicsSetSmoothingModeの$iSmoothは0 - 4のみ受け付ける。ドキュメントを更新。</li>
+  <li>修正 #388: _GUICtrlToolbar_SetButtonSizeの例。</li>
+  <li>修正 #400: SQLite.dll.au3 @ProcessorArchを@OSArchで置き換え。</li>
+  <li>修正 #390: _viPrintf replacedの返し値。</li>
+  <li>修正 #371: _GDIPlus_Startupの返し値。</li>
+  <li>修正 #368: _ArrayToClipの返し値。</li>
+  <li>修正 #361, #362: _GUICtrlListView_InsertItemのドキュメント。</li>
+  <li>修正 #285: _ChooseColorの例。</li>
+  <li>修正 #299: Unicodeでの_GUICtrlTab_SetItemTextのバッファの長さ。</li>
+  <li>修正 #292: バックアップパラメータが指定されていない場合、_EventLog__Clearがログを削除していなかった。</li>
+  <li>修正 #258: _ClipBoard_GetData。</li>
+  <li>修正 #294: @LFを含まないファイルでの_FileReadToArray。</li>
+  <li>修正 #303: Examples\GUI\AdvancedにあるClock.au3。</li>
+  <li>修正: _GUICtrlListView_SetItemExのテキストバッファ。</li>
+  <li>修正 #320: _WinNet_EnumResourceの構造体ポインタ。</li>
+  <li>修正 #321: Unicodeでの_GUICtrlStatusBar_GetTextのバッファの長さ。</li>
+</ul>
+<ul>
+  <li>変更: #442に関係するStringAddThousandsSepのパラメータ</li>
+  <li>変更 #733: _GUICtrlButton_SetImageListのドキュメント</li>
+  <li>変更: _SQLite -&gt; 3.6.7</li>
+  <li>変更 #442: _StringAddThousandsSep()で領域設定を可能にした。</li>
+  <li>変更 #290: _GDIPlus_DrawImagePoints </li>
+  <li>変更: _Soundxxxx関数</li>
+  <li> 変更 #599: _FileListToArrayの速度を改善</li>
+</ul>
+<p>&nbsp;</p>
+<p style="font-size: small"><b><u>12th June, 2008  - v3.2.12.1</u></b></p>
+<p><strong>AutoIt:</strong></p>
+<ul>
+	<li>修正:
+	<a href="../../../../../branch_3.2.12/docs/autoit/english/html/functions/RunAs.htm">RunAs()</a>と
+	<a href="../../../../../branch_3.2.12/docs/autoit/english/html/functions/RunAsWait.htm">RunAsWait()</a>
+	でユーザーが作業ディレクトリを指定しなかった場合、作業ディレクトリとして@WorkingDirではなく@SystemDirが
+	使用されるようになった。</li>
+	<li>修正: コンテキストメニューアイテムがイベント時に通知を発生しなかった。</li>
+	<li>修正: タブが後ろに回った際のアイコンの透過度の更新。</li>
+	<li>修正:
+	Windows 2000での<a href="../../../../../branch_3.2.12/docs/autoit/english/html/functions/RunAs.htm">RunAs()</a>。</li>
+</ul>
+
+<p>&nbsp;</p>
+<p style="font-size: small"><b><u>16th May, 2008  - v3.2.12.0</u></b></p>
+<p><strong>AutoIt:</strong></p>
+<ul>
+	<li>削除: <a href="functions/ProcessClose.htm">ProcessClose()</a>の不要なオプションパラメータ。</li>
+	<li>削除: RunAsSet()。(<a href="functions/RunAs.htm">RunAs()</a>と
+	<a href="functions/RunAsWait.htm">RunAsWait()</a>に置き換えられた)。</li>
+	<li>削除: RunErrorsFatalオプション(<a href="functions/AutoItSetOption.htm">Opt()</a> )。</li>
+	<li>削除: ColorModeオプション(<a href="functions/AutoItSetOption.htm">Opt()</a> )。</li>
+</ul>
+
+<ul>
+	<li>変更: @Unicodeを<a href="macros/AutoItRelated.htm">@AutoItUnicode</a>に名称変更。
+	@Unicodeは別名として使用できるが&gt; 3.2.14.0以降で削除される。</li>
+	<li>変更: The behavior of <a href="functions/StdoutRead.htm">StdoutRead()</a>、
+	<a href="functions/StderrRead.htm">StderrRead()</a>、
+	<a href="functions/StdinWrite.htm">StdinWrite()</a>、
+	<a href="functions/ConsoleRead.htm">ConsoleRead()</a>を変更。</li>
+	<li>変更: PCRE正規表現エンジンを7.6に更新。</li>
+	<li>変更: 
+	AutoItのインターネット関数(例: <a href="functions/InetGet.htm">InetGet()</a>)がユーザーエージェントとして
+	&quot;AutoIt&quot;を使えるようになった。以前はなにも設定されておらず多くのウェブサイトでブロックされていた。<br>
+	which was blocked by many websites.</li>
+	<li>変更: <a href="functions/ControlClick.htm">ControlClick()</a>で
+	<a href="functions/MouseClick.htm">MouseClick()</a>と同様にleft/right/middle/primary/secondary/main/menuの表記が使えるようになった。</li>
+	<li>変更: GUIウィンドウでの最大コントロール数を4093 -&gt; 65532に変更。</li>
+	<li>変更: <a href="macros/SystemInfo.htm">@OSVersion</a> Windows Server 2008では&quot;WIN_2008&quot;を返すよう変更。</li>
+</ul>
+
+<ul>
+	<li>追加: <a href="functions/RunAs.htm">RunAs()</a>、
+	<a href="functions/RunAsWait.htm">RunAsWait()</a>。</li>
+	<li>追加: <a href="functions/GUISetAccelerators.htm">GUISetAccelerators()</a>。</li>
+	<li>追加: アドバンスウィンドウ/コントロール参照方法での<a href="intro/windowsadvanced.htm">REGEXPCLASS</a>。</li>
+	<li>追加: アドバンスウィンドウ/コントロール参照方法での<a href="intro/windowsadvanced.htm">X, Y, W, H</a></li>
+	<li>追加: <a href="functions/DllCall.htm">DllCall()</a>用の新しい型、int_ptr、uint_ptr、long_ptr、ulong_ptr。
+	x86/x64でサイズが変わる特別な型。</li>
+	<li>追加: <a href="functions/RegWrite.htm">RegWrite()</a>用の&quot;REG_QWORD&quot;型。</li>
+	<li>追加: <a href="functions/HotKeySet.htm">HotKeySet()</a>で{}表記を使えるよう変更。</li>
+	<li>追加: <a href="functions/FileReadLine.htm">FileReadLine( ,-1)</a>で最後の行を読めるようにした。</li>
+	<li>追加: Std I/OリダイレクションがRunAs...()で動作するようにした。</li>
+	<li>追加: Std I/Oでstdout/stderrが同じストリーム使用するためにフラグをマージした。</li>
+	<li>追加: Std I/Oでバイナリデータをサポート</li>
+	<li>追加: <a href="functions/ConsoleWrite.htm">ConsoleWrite()</a>/<a href="functions/ConsoleWriteError.htm">ConsoleWriteError()</a>が書き込んだデータ量を返すようにした。</li>
+	<li>追加: STDIOに関連付けられたストリームの閉じ方/リソースの解放の仕方についてを<a href="functions/Run.htm">Run()</a>の注意に書いた。</li>
+	<li>追加: プロセスのSTDIOデータを強制的に閉じるための<a href="functions/StdioClose.htm">StdioClose()</a>関数。</li>
+	<li>追加: <a href="functions/ProcessClose.htm">ProcessClose()</a>が他のユーザによって開始されたプロセスも閉じられるようにした。</li>
+	<li>追加: <a href="functions/ProcessWaitClose.htm">ProcessWaitClose()</a>が終了コードを@extendedで返すようにした。</li>
+	<li>追加: <a href="functions/PixelChecksum.htm">Pixel...()</a>の最後のパラメータとしてウィンドウハンドルを指定できるようにした。</li>
+	<li>追加: <a href="functions/StringInStr.htm">StringInStr()</a>に&quot;start&quot;パラメータと&quot;count&quot;パラメータを追加。</li>
+	<li>追加: <a href="functions/GUICtrlSetDefColor.htm">GUICtrlSetDefColor()</a>、
+	<a href="functions/GUICtrlSetDefBkColor.htm">GUICtrlSetDefBkColor()</a>。</li>
+	<li>追加: <a href="functions/MsgBox.htm">MsgBox()</a>へ親ウィンドウパラメータを追加、
+	<a href="functions/FileSelectFolder.htm">FileSelectFolder()</a>、
+	<a href="functions/FileOpenDialog.htm">FileOpenDialog()</a>、
+	<a href="functions/FileSaveDialog.htm">FileSaveDialog()</a>。</li>
+</ul>
+
+<ul>
+	<li>修正: <a href="functions/DllCall.htm">DllCall()</a>が不正な@error値を設定する。</li>
+	<li>修正: <a href="functions/BlockInput.htm">BlockInput()</a>がエラーを返す。</li>
+	<li>修正: <a href="functions/WinWaitActive.htm">WinWaitActive()</a>でウィンドウが正しくない(Windows Vistaで頻繁に起きる)。</li>
+	<li>修正: アクティブなタブ上の非表示のラジオボタンに対する<a href="functions/GUICtrlSetState.htm">GUICtrlSetState</a>($GUI_SHOW)。</li>
+	<li>修正: AutoItが選択した公開ディレクトリにSciTe Liteがインストールされない。</li>
+	<li>修正: <a href="functions/WinMove.htm">WinMove()</a>でSpeed = 0とするとスクリプトがクラッシュする。</li>
+	<li>修正: 明示的な値が設定されていない場合、UDFが値1を返す。原因不明。</li>
+	<li>修正: <a href="functions/ControlCommand.htm">ControlCommand()</a>、&quot;GetLineCount&quot;。</li>
+	<li>修正: Windows Vistaでの<a href="functions/TraySetState.htm">TraySetState</a>(4) によるトレイアイコンの点滅動作。</li>
+	<li>修正: <a href="functions/ProcessExists.htm">ProcessExists()</a>が不正な値を返す問題。</li>
+	<li>修正: Win95で<a href="functions/StringRegExp.htm">StringRegExp()</a>がクラッシュする問題。</li>
+	<li>修正: I/Oリダイレクションと一緒に<a href="functions/Run.htm">Run()</a>を使用した際ハンドルがリークしていた。</li>
+	<li>修正: タブコントロールの後ろのインプットコントロールを無効にした。</li>
+	<li>修正: 2つのGUIウィンドウが使用されている場合のタブの<a href="functions/GUICtrlDelete.htm">GUICtrlDelete()</a>。</li>
+	<li>修正: 範囲が2^31を超える場合、<a href="functions/Random.htm">Random()</a>でAutoItがクラッシュする問題。</li>
+	<li>修正 #includeの構文解析でのエラー検知。</li>
+	<li>修正: UDFへ参照渡しされた配列要素。</li>
+	<li>修正: 非NTFSパーティションの場合、<a href="functions/FileSetTime.htm">FileSetTime()</a>が誤って切りあがっていた。</li>
+	<li>修正: Windows 9xでSTDIOリダイレクションが失敗することがあった。</li>
+	<li>修正: Win9x下で<a href="functions/IniReadSectionNames.htm">IniReadSectionNames()</a>が不正なセクション数を返していた。</li>
+	<li>修正: スクリプト存在時にAutoItトレイアイコンが消えてしまう問題。</li>
+	<li>修正: <a href="functions/ObjEvent.htm">ObjEvent()</a>オブジェクト削除時にAutoItがクラッシュする問題。</li>
+	<li>修正: <a href="functions/ObjEvent.htm">ObjEvent()</a>ハンドラがAutoIt関数の返し値を破壊していた。例えばwinwait(&quot;title&quot;)が0を返す。</li>
+	<li>修正: 異なるボリュームでの<a href="functions/DirMove.htm">DirMove()</a>。</li>
+	<li>修正: <a href="functions/RegRead.htm">RegRead()</a>でのクラッシュとx64上でのREG_MULTI_SZ 。</li>
+	<li>修正: EditコントロールとDefPushButtonに関連したいくつかの問題。</li>
+	<li>修正: <a href="functions/ControlTreeView.htm">ControlTreeview()</a>が成功時に@error=1としていた。</li>
+	<li>修正: COMオブジェクトで数値精度が落ちていた。</li>
+	<li>修正: 浮動小数点数で開始する<a href="functions/StringReplace.htm">StringReplace()</a>。</li>
+	<li>修正: <a href="functions/ControlCommand.htm">ControlCommand()</a> &quot;SelectString&quot; での選択間違い。</li>
+	<li>修正: <a href="functions/StringSplit.htm">StringSplit()</a> flag=1 でデリミッタの大文字小文字が区別されていなかった。</li>
+	<li>修正: アドバンスモードでのウィンドウ参照方法でセミコロンはエスケープする必要がある。</li>
+	<li>修正: <a href="functions/ObjGet.htm">ObjGet()</a>のメモリリーク</li>
+	<li>修正: AutoUpdateIt.au3をx64下で動作するように変更。</li>
+	<li>修正: <a href="functions/GUISetState.htm">GUISetState()</a>前のGUIのサイズ変更。</li>
+	<li>修正: GUIの再アクティブ化時にラジオイベントが発生していた。</li>
+	<li>修正: コンテキストメニューアイテムに対する<a href="functions/GUICtrlDelete.htm">GUICtrlDelete()</a>。</li>
+	<li>修正: <a href="functions/RunWait.htm">RunWait()</a>直後に
+	ファイルを<a href="functions/FileDelete.htm">FileDelete()</a>使用しようとすると失敗する場合があった。</li>
+	<li>修正: ウィンドウを大量に作成した場合のGUIのパフォーマンス上の問題。</li>
+	<li>修正: マウスボタン入れ換え時の<a href="functions/GUIGetCursorInfo.htm">GuiGetCursorInfo()</a>。</li>
+</ul>
+<p>&nbsp;</p>
+
+	<p><strong>AutoItX:</strong></p>
+<ul>
+	<li>追加: ControlTreeView()。</li>
+	<li>修正: ネイティブDLLバージョンのControlListView()。</li>
+</ul>
+<p><strong>Aut2Exe:</strong></p>
+<ul>
+	<li>追加: スクリプトをコンソールアプリケーションにコンパイルするオプション。</li>
+</ul>
+<p><strong>AU3Info:</strong></p>
+<ul>
+	<li>変更: ファインダーツール使用時に常にコントロールがハイライトされる。</li>
+	<li>変更: デフォルトではコントロールはハイライトされない。</li>
+	<li>変更: コントロールの参照方法にクラスとインスタンスのアドアバンスバージョンを追加。</li>
+</ul>
+<p><strong>SciTe &quot;lite&quot;:</strong></p>
+<ul>
+	<li>ソースをバージョン1.75に更新</li>
+	<li>セーブダイアログに拡張子を追加</li>
+</ul>
+<p><strong>UDFs:</strong></p>
+<ul>
+	<li>
+	<a href="script_breaking_changes.htm">スクリプトの変更を必要とする変更点</a>ページを参照。<br>
+	</li>
+</ul>
+<p>&nbsp;</p>
+<p style="font-size: small"><b><u>25th November, 2007  - v3.2.10.0</u></b></p>
+<ul>
+	<li>変更: <a href="functions/DllCall.htm">DllCall()</a> *を使った参照による型渡しの新しい方法。</li>
+	<li>変更: <a href="functions/DllCall.htm">DllCall()</a>: short_ptr型、long_ptr型、int_ptr型は廃止予定。
+	代わりにshort*、long*、int* を使用してください。</li>
+	<li>変更: <a href="functions/Execute.htm">Execute()</a>の制限を廃止。</li>
+	<li>変更: PCRE <a href="functions/StringRegExp.htm">正規表現エンジン</a>を7.4に更新。</li>
+</ul>
+<ul>
+	<li>追加: AutoIt、Aut2Exe、Au3Info、AutoItXの64ビット(x64)バージョン(
+	<a href="intro/64-bit_support.htm">こちら</a>を参照)。</li>
+	<li>追加: <a href="functions/DllCallbackRegister.htm">DllCallbackRegister()</a>、
+	<a href="functions/DllCallbackGetPtr.htm">DllCallbackGetPtr()</a>、
+	<a href="functions/DllCallbackFree.htm">DllCallbackFree()</a></li>
+	<li>追加: <a href="functions/DllCall.htm">DllCall()</a>でdouble型、int64型、uint64型、wparam型、lparam型をサポート</li>
+	<li>追加: <a href="functions/SendKeepActive.htm">SendKeepActive()</a>。<li>
+	<li>追加: <a href="functions/ControlTreeView.htm">ControlTreeView()</a>。<li>
+	<li>追加: <a href="functions/ProcessGetStats.htm">ProcessGetStats()</a>。<li>
+	<li>追加: <a href="functions/VarGetType.htm">VarGetType()</a>。<li>
+	<li>追加: <a href="macros/AutoItRelated.htm">@AutoItX64</a>マクロ。<li>
+	<li>追加: Au3Info: ウィンドウとコントロールのハンドル情報。</li>
+	<li>追加: <a href="functions/DllStructCreate.htm">DllStructCreate()</a>に構造の整列を設定するための&quot;align&quot;キーワードを追加。</li>
+</ul>
+<ul>
+	<li>修正: CLASSとTEXTを同時に使用するControl...()関数で問題が起きることがあった。</li>
+	<li>修正: CLASSNNを使用するControl...()関数で問題が起きることがあった。</li>
+	<li>修正: WindowsVistaのタスクバーがウィンドウ検索時に問題を引き起こしていた。</li>
+	<li>修正: $varが存在しない場合でも$var = $varがエラーを返さない。</li>
+	<li>修正: <a href="functions/GUICtrlSetImage.htm">GUICtrlSetImage()</a>サイズ処理を3.2.4.9に戻した。</li>
+	<li>修正: 列なしでの<a href="functions/GUICtrlCreateListView.htm">GUICtrlCreateListView()</a>。</li>
+	<li>修正: 色つきボタンへの通知の追加。</li>
+	<li>修正: []セクションでの<a href="functions/IniReadSectionNames.htm">IniReadSectionNames()</a>。</li>
+	<li>修正: Opt(&quot;WinTitleMatchMode&quot;, Default)での致命的エラー。</li>
+	<li>修正: <a href="functions/GUICtrlSetStyle.htm">GUICtrlSetStyle()</a>による$ES_READONLY指定での不正な$WS_TABSTOP。</li>
+	<li>修正: Win...()のTitleにComオブジェクトを使用するとAutoItが終了時にクラッシュする。</li>
+	<li>修正: Win2Kでのサービスプロセスに対する<a href="functions/ProcessExists.htm">ProcessExists()</a>。</li>
+	<li>修正: DefPushButtonの動作。</li>
+	<li>修正: <a href="functions/ControlCommand.htm">ControlCommand</a>の(文字列選択)選択順序。</li>
+	<li>修正: 配列は2^24個のエントリーをもてない。</li>
+	<li>修正: タイトルとクライアント領域が無いウィンドウでの<a href="functions/GUICtrlCreateMenu.htm">GuiCreateMenu()</a>。</li>
+	<li>修正: <a href="functions/WinWaitActive.htm">WinWaitActive()</a>がWinActivate()後に失敗する場合がある。</li>
+	<li>修正: ループしている<a href="functions/GUIRegisterMsg.htm">GUIRegisterMsg()</a>で登録が解除されない。</li>
+	<li>修正: ES_READONLYのエディットコントロールへのフォーカス。</li>
+	<li>修正: たくさんのUDFを修正。<br>
+	</li>
+</ul>
+
+<p>&nbsp;</p>
+<p><b><u>10th September, 2007  - v3.2.8.1</u></b></p>
+<ul>
+	<li>修正: StringRegExp()でクラッシュする可能性があった。</li>
+</ul>
+
+<p>&nbsp;</p>
+<p><b><u>8th September, 2007  - v3.2.8.0</u></b></p>
+<ul>
+	<li>変更: 全般的な速度の改善 (3.2.6.0と比較して最大で24%向上)。</li>
+	<li>変更: PCRE正規表現エンジンを7.3に更新。</li>
+	<li>変更: 再帰ベースのコードに対する制限を緩めた。</li>
+</ul>
+
+<ul>
+	<li>追加: DllStructCreate()へのwchar型の追加。</li>
+	<li>追加: WinMove() のspeedパラメータ。</li>
+</ul>
+<ul>
+	<li>修正: TrayCreateItem()がない場合、AutoIt終了時にクラッシュする。</li>
+	<li>修正: TrayCreateMenu()呼び出し時の不正なパラメータによってAutoItがクラッシュする。</li>
+	<li>修正: 127以上の文字コード(アクセント、非西欧)の文字でStringRegExp()での文字位置が不正だった。</li>
+	<li>修正: Windows 9x下でのProcessExist()。</li>
+	<li>修正: GUISetState(@SW_DISABLE)によってキーボード入力ができなくなる。</li>
+	<li>修正: char[]型をDllStructGetData()で使用する際、AutoItがクラッシュする場合があった。</li>
+	<li>修正: Au3Info開始時に前回の設定が復元される。</li>
+	<li>修正: 色つきボタンをしようしている際の通知のハンドリング改善。</li>
+	<li>修正: SciteウィンドウでのControlGetText()のクラッシュ。</li>
+	<li>修正: $LVSCW_AUTOSIZEでの表示文字列の列に対する切り詰め。</li>
+	<li>修正: GUICtrlCreateListView()での不正なリストビュー作成。</li>
+	<li>修正: AutoItで長いファイル名を取得する必要がある際のメモリリーク。</li>
+	<li>修正: 他の子ウィンドウの作成/削除後にリストビューアイテムが作成できない問題。</li>
+	<li>修正: ControlGetFocus()で不正なClassNN値が返されていた。</li>
+	<li>修正: 無効なCONTINUELOOP文の検知。</li>
+</ul>
+<p>&nbsp;</p>
+<p><b><u>24th August, 2007  - v3.2.6.0</u></b></p>
+<ul>
+	<li>変更: 全てのGUI関数のアイコンIDをGUICtrlSetImage()と同じにした。<br>
+	<br>
+	警告: 以前のスクリプトでGUICtrlSetImage()、GUISetIcon()、TraySetIcon()、TraySetPauseIcon() を使用しているもの<br>
+	では不正なアイコンが表示されます。同じアイコンを取得するためには&quot;if nId &gt; 0 Then newId = -
+	nId - 1&quot;としてください。</li>
+</ul>
+
+<ul>
+	<li>変更: AutoIt .a3x とコンパイル済みスクリプトの形式。
+	3.2.5.1以前のファイルのみExe2Autで逆コンパイル可能。<br>
+	これからのバージョンではExeAutユーティリティは提供されない。</li>
+	<li>変更: 全般的なパフォーマンスの改善 (3.2.4.9と比較して30-40%の向上)</li>
+	<li>変更: 正規表現に制限つきのUnicodeサポートを追加</li>
+	<li>変更: X=Y=Defaultの場合、ControlMove()ではWinMove()と同様にサイズ変更のみ行う。</li>
+	<li>変更: PCREエンジンを7.0から7.1に更新</li>
+	<li>変更: speed=0時のMouseMove()の遅延を減らした。</li>
+</ul>
+<ul>
+	<li>追加: GUIGetStyle()。</li>
+	<li>追加: DllCall()でのbyteとubyte。</li>
+	<li>追加: Au3InfoでのコントロールのClassnameNNとサマリー情報。</li>
+	<li>追加: DLLCallでのFloat型。(PaulIAに感謝)</li>
+	<li>追加: AU3Check v1.54.8 が&quot;#AutoIt3Wrapper_plugin_funcs&quot;
+	と &quot;#Compiler_plugin_funcs&quot;の両方をサポート。</li>
+	<li>追加: ストリームハンドルを閉じるためのProcessClose()への追加パラメータ。</li>
+</ul>
+<ul>
+	<li>修正: Sciteが開かれる際にWinWait(&quot;&quot;,&quot;text&quot;)でAutoItがクラッシュする。</li>
+	<li>修正: Unicode/ANSI変換中に中国語システムでクラッシュが起きる。</li>
+	<li>修正: ANSIで実行している際に中国語システムでAut2Exeがクラッシュする。</li>
+	<li>修正: リストビューアイテムに対するクリック後、{ENTER}通知が不正になる。</li>
+	<li>修正: 画像がリストビューに設定された場合、リストビューアイテムでの画像リセットが間違っていた。</li>
+	<li>修正: リスビューコントロールのサイズ変更。</li>
+	<li>修正: 不正なWinGetPos()で@errorが設定されない。</li>
+	<li>修正: LVM_EDITLABELによってCPUがハングする。</li>
+	<li>修正: AutoIt (UNICODEバージョンを含まない)が一部のCOMオブジェクトでクラッシュする。</li>
+	<li>修正: W=0またはH=0のGUIでのGUISetState()。</li>
+	<li>修正: GUIコントロールチップがクリック後、タイムアウト後に再表示されない。</li>
+	<li>修正: コントロールメニューが使用されている場合、GUIコントロールが正しい位置に表示されていなかった。</li>
+	<li>修正: EnvUpdate()がAutoItのUnicodeバージョンで3.2.3.3から動作していなかった。</li>
+	<li>修正: FileRead(..., count)がcount-1文字を返す。</li>
+	<li>修正: FileInstall()でのUnicodeファイル名。</li>
+	<li>修正: LVS_EX_HEADERDRAGDROP拡張スタイル。</li>
+	<li>修正: アップダウンコントロールがタブページで正しく表示されていなかった。</li>
+	<li>修正: アップダウンコントロールに対するGUICtrlSetStateが動作していなかった。</li>
+	<li>修正: FileInstall()を使ったコンパイル済みスクリプトでGUI上の問題が起きていた。</li>
+	<li>修正: ControlGetFocus()がAutoIt GUIで作成したコントロールに対して動作しなかった。</li>
+	<li>修正: Win9x下で@AutoItPIDとprocesslistの一貫性が取れていなかった。</li>
+	<li>修正: GUICtrlSetResizingがサイズ変更不可なコントロールでエラーを返していなかった。</li>
+	<li>修正: ControlSend SHIFTDOWN/UPを3.2.3.13での状態に戻した。</li>
+	<li>修正: ヘッダーをクリック後のリストビューコントロールのドラッグ&amp;ドロップ。</li>
+	<li>修正: GUISetImage()で&quot;リソースのみ&quot;のDLLをサポート。</li>
+	<li>修正: GUICtrlSetLimit()のデフォルト最小値を0に設定。</li>
+	<li>修正: エディットコントロールまたはインプットコントロールでのGUICtrlSetStyle()後のZオーダー。</li>
+	<li>修正: FileReadLine()でファイルハンドルを使って特定の行番号を読むと不正なキャッシュデータを取得してしまっていた。</li></li>
+	<li>修正: 特定の環境下でのGUIGetMsg()の微妙な遅延。</li>
+	<li>修正: StringReplace()とoccurancesパラメータ。</li>
+	<li>修正: TabコントロールでのGuiCtrlSetFont()。</li>
+	<li>修正 #includeの前に空白があるとコンパイルできない問題。</li>
+	<li>修正: 色つきボタンでのENTERの通知。</li>
+	<li>修正: RegWrite()が特定の状況下で不正なレジストリエントリを設定する問題。</li>
+	<li>修正: テキストメッセージボックスが大きすぎるとAutoItによってCPUがハングする問題。</li>
+	<li>修正: ControlSend()で空のコントロールIDを使用すると不正なコントロールになることがあった。</li>
+	<li>修正: Win2K下でのProcessExists()でのプロセス名&gt;15文字。</li>
+	<li>修正: Int()を使った文字列比較での誤一致。</li>
+	<li>修正: InetGetSize()はUnicodeバージョンでは0を返す。</li>
+	<li>修正: 254列以上のGUICtrlCreateListview()</li>
+	<li>修正: RegExpの再帰でAutoItがクラッシュしていた。</li>
+	<li>修正: 左ビットセットでのBitRotate()。</li>
+	<li>修正: 移動がなかった場合、Filemove()は1を返す。</li>
+	<li>修正: ANSIモードでFileRead()はchr(0)を返す。</li>
+	<li>修正: Au3Infoでのコントロールのクライアント相対座標</li>
+	<li>修正: バックスラッシュを検知した場合、検索の長さが文字列より長かった場合にStringInStr()が0を返していなかった。</li>
+</ul>
+<p>&nbsp;</p>
+<p><b><u>25th May, 2007  - v3.2.4.9</u></b></p>
+<ul>
+  <li>追加: StringCompare()</li>
+</ul>
+<ul>
+  <li>修正: 基本的な文字列比較が以前のバージョンのロケールでは動作していなかった。</li>
+</ul>
+<p>&nbsp;</p>
+<p><b><u>23rd May, 2007  - v3.2.4.8</u></b></p>
+<ul>
+  <li>修正: 非西欧コードページとANSI形式のスクリプトでのエラー。</li>
+</ul>
+<p>&nbsp;</p>
+<p><b><u>22nd May, 2007  - v3.2.4.7</u></b></p>
+<ul>
+  <li>追加: Aut2ExeのANSIモード互換オプション(/ansi と /unicode)</li>
+  <li>追加: StringToBinary()</li>
+  <li>追加: BinaryToString()へのUnicodeに関連したオプションの追加</li>
+</ul>
+<p>&nbsp;</p>
+<p><b><u>20th May, 2007  - v3.2.4.6</u></b></p>
+<ul>
+  <li>修正: StringReplace()とoccurancesパラメータ。</li>
+</ul>
+<p>&nbsp;</p>
+<p><b><u>20th May, 2007  - v3.2.4.5</u></b></p>
+<ul>
+  <li>追加: バイナリバッファをANSI文字列に高速で変換するためのBinaryToString()。</li>
+  <li>追加: AutoItがUnicodeモードで実行されているのかANSIモードで実行されているのかを表示する@Unicode マクロ。</li>
+</ul>
+<ul>
+  <li>変更: StringReplace()の大幅な高速化。</li>
+  <li>変更: Au3Infoのサイズを変更できるようにした。</li>
+</ul>
+<ul>
+  <li>修正: Chr(0)がBinary()で正常に動作するようにした。</li>
+</ul>
+<p>&nbsp;</p>
+<p><b><u>17th May, 2007  - v3.2.4.4</u></b></p>
+<ul>
+  <li> 修正: Chr(0)をより適切な方法で動作するようにした(VBScriptと同じ方法)。</li>
+</ul>
+<p>&nbsp;</p>
+<p><b><u>17th May, 2007  - v3.2.4.3</u></b></p>
+<ul>
+  <li>修正: FileRead()がUnicodeファイルで正常に動作していなかった。</li>
+</ul>
+<p>&nbsp;</p>
+<p><b><u>15th May, 2007  - v3.2.4.2</u></b></p>
+<ul>
+  <li>変更: Au3Infoの表示の微調整とSummaryタブ。</li>
+</ul>
+<ul>
+  <li>修正: FileReadLine()でファイルハンドルを使って特定の行番号を読むと不正なキャッシュデータを取得してしまっていた。</li>
+  <li>修正: 特定の環境下でのGUIGetMsg()の微妙な遅延。</li>
+</ul>
+<p>&nbsp;</p>
+<p><b><u>13th May, 2007  - v3.2.4.1</u></b></p>
+<ul>
+  <li>追加: Unicode操作用のChrW()とAscW()。</li>
+</ul>
+<ul>
+  <li>修正: UnicodeモードでのChr()とAsc()の文字コード128-255。</li>
+  <li>修正: ファイルが空の場合、ファイル追加モードのファイルにUnicode BOMを書くよう修正。</li>
+  <li>修正: Include\GuiCombo.au3とInclude\IE.au3のエラー。</li>
+</ul>
+<p>&nbsp;</p>
+<p><b><u>10th May, 2007  - v3.2.4.0</u></b></p>
+<p>&nbsp;</p>
+<p>大きな変更: </p>
+<ul>
+  <li> AutoItをUnicodeでコンパイルするようになった！AutoIt3.exeはUnicode、AutoIt3A.exeはANSI。詳細についてはこの<a href="intro/unicode.htm">ページ</a>を参照。</li>
+  <li> Au3Infoツールの書き直し。</li>
+  <li> バイナリデータ関数を完全に書き直し - これらの関数を使用したスクリプトは変更をおこなう必要がある。</li>
+</ul>
+<p>その他の変更: </p>
+<ul>
+  <li>追加: FileOpen()にUnicodeとバイナリ操作用の新しいモードを追加。</li>
+  <li>追加: BinaryLen()、BinaryMid()</li>
+  <li>追加: 色つきGUIボタン。</li>
+  <li>追加: DllStruct...()でインデックスだけでなく名前でも要素を参照できるようにした。</li>
+</ul>
+<ul>
+  <li>変更: #includeディレクティブの上限を撤廃。</li>
+  <li>変更: DllOpen()のハンドルの上限を撤廃。</li>
+  <li>変更: 開けるファイルの上限を撤廃。</li>
+  <li>変更: ホットキーの上限を撤廃。</li>
+  <li>変更: StringStripWS()のパフォーマンス向上。</li>
+  <li>変更: 変数内のバイナリデータを通常の文字列とは別の特別な型として扱うようにした。</li>
+  <li>変更: BinaryString()をBinary()に名称変更。</li>
+  <li>変更: IsBinaryString()をIsBinary()に名称変更。</li>
+  <li>変更: ControlClick()でコントロールの特定の場所をクリックできるように変更。</li>
+  <li>変更: ControlClick()で正確にダブルクリックをシミュレートできるように変更。</li>
+  <li>変更: ControlClick()で親ウィンドウがアクティブ化されないよう変更(ユーザーのところまで)。</li>
+  <li>変更: ControlClick()用の相対座標をAu3Infoに追加。</li>
+  <li>変更: ウィンドウ/コントロール/インスタンスの検索を改善。</li>
+  <li>変更: Change/Set Font関数でDEFAULT_QUALITYをPROOF_QUALITYに変更。</li>
+  <li>変更: x^yをC99標準互換に変更。</li>
+</ul>
+<ul>
+  <li>修正: フラグ4で空文字列の場合にStringStripWS()を使うとクラッシュする可能性があった。</li>
+  <li>修正: UpDownコントロールのmin = max時のGUICtrlSetLimit()。</li>
+  <li>修正: GuiCtrlSetTip()が正常に動かない時があった。</li>
+  <li>修正: Windows Vista下でのGUIタブ再描画が遅かった問題を修正。</li>
+  <li>修正: HotKeySetの不正な通知。</li>
+  <li>修正: pagefile.sysでのFileGetAttrib()。</li>
+  <li>修正: GUICtrlSetData()での不正なデフォルトパラメータを検知していなかった。</li>
+  <li>修正: 配列要素に対するAssignがエラーを返す。</li>
+  <li>修正: FileOpen(&quot;test.txt&quot;, 2+8)がエラーを返す。</li>
+  <li>修正: Enum文でのエラー検知。</li>
+  <li>修正: Opt(&quot;WinTitleMatchMode&quot;).</li>
+  <li>修正: 不適切なDllCall()使用の結果、スタックが破壊された際に深刻なクラッシュが起きる代わりにスクリプトを正常に中止するようにした。</li>
+  <li>修正: 空のREG_MULTI_SZを読んだ際のクラッシュ。</li>
+  <li>修正: Round()が整数を返さない。</li>
+  <li>修正: ControlSend()の空文字列&quot;&quot;ctrlで非アクティブウィンドウを戻す。shiftも同様。</li>
+  <li>修正 : O^(-1)。</li>
+  <li>修正: 不正な文の検知ができていなかった。</li>
+  <li>修正: HotKeySet(&quot;^{PAUSE]&quot;,... 通知。</li>
+  <li>修正: CTRLをユーザーが指定できるよう{CTRLBREAK} -&gt;{BREAK}に変更。</li>
+  <li>修正: Comオブジェクトにパラメータとして$var = Defaultを渡す。</li>
+  <li>修正: GUI表示時に設定によらず常にエディットコントロールがフォーカスされていた。また$GUI_FOCUSが効いていなかった。</li>
+  <li>修正: SRandom()でのシード数の範囲。</li>
+  <li>修正: RAWモードでcountがない場合、Filereadがクラッシュしていた。</li>
+  <li>修正: Opt(&quot;WinTitleMatchMode&quot;, &lt;0)がちゃんと大文字小文字を区別しないように修正。</li>
+  <li>修正: FileSetAttrib/FileSetTimeの不正な設定。</li>
+  <li>修正: Execute/Callの再帰がオーバーフローした場合、エラーメッセージを出す</li>
+  <li>修正: アイコンが見つからない場合、Aut2exeは警告メッセージを出す。</li>
+  <li>修正: エラー時にWinGetTitle()は1を返す。</li>
+  <li>修正: キーワード変数破棄時のメモリーリーク。</li>
+</ul>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><b><u>23rd December, 2006  - v3.2.2.0</u></b></p>
+<ul>
+  	<li> 追加: StringRegExp()、StringRegExpReplace() 正規表現をサポート(Perl互換)</li>
+    <li> 追加: ウィンドウタイトル一致での正規表現をサポート。</li>
+    <li> 追加: ShellExecute()、ShellExecuteWait()関数。</li>
+    <li> 追加: UAC/Windows Vistaのための#RequireAdmin</li>
+    <li> 追加: Windows Vistaヘルプファイルの追加。</li>
+</ul>
+<ul>
+    <li> 追加: GuiCtrlSetState() $GUI_DROPNOTACCEPTED。</li>
+    <li> 追加: リストビューアイテムコントロール用の$GUI_FOCUS、$GUINOFOCUS。</li>
+    <li> 追加: IsDllStruct()</li>
+    <li> 追加: 乱数発生用のシードを設定するためのSRandom()。</li>
+    <li> 追加: 大文字小文字の区別しない一致検索用のWinTitleMatchMode。</li>
+    <li> 追加: $GUI_BKCOLOR_LV_ALTERNATEによるリストビューの色変更。</li>
+    <li> 追加: -1始まりのインデックスが使用された場合にアイコンIDが序数値として参照される。</li>
+    <li> 追加: コンパイル済みスクリプト用のCompiledScript文字列ファイル情報。</li>
+    <li> 追加: GUICtrlCreateIcon、GUICtrlSetImageでの.exe/.dll内の32x32以上のアイコンのサポート。</li>
+    <li> 追加: GUICtrlSetTip()の機能拡張によってツールチップ作成時のタイトル、アイコン、バルーンチップスタイルの使用が可能になった。</li>
+    <li> 追加: ツールチップでのDefaultキーワードのサポート。</li>
+    <li> 追加: 注意に_PathSplit()がパスのみ受け付け、コマンドラインは受け付けないことを記載。</li>
+    <li> 追加: 2つのUDF'sをGUIStatusBar.au3に追加。</li>
+    <li> 追加: GUICtrlCreateIcon、GUICtrlSetImageで名前によって複数のアイコンファイルを選択できるよう変更。</li>
+    <li> 追加: 現在のキーボード設定を取得するための@KBLayout。</li>
+    <li> 追加: ToolTip() 常にツールチップがモニター上に表示されるようにするオプションの追加。</li>
+    <li> 追加: IniWriteSection()関数。</li>
+    <li> 追加: DriveMapAddエラー時の@extendedエラーコード。</li>
+</ul>
+<ul>
+  <li> 変更: パフォーマンスの向上(スクリプトによっては100%の向上!)。</li>
+  <li> 変更: Run()のために@errorをWinAPIのGetLastError()に設定。</li>
+  <li> 変更: 浮動小数点精度エラーの影響を受けにくくするためにFloor()を微調整。</li>
+  <li> 変更: 浮動小数点精度エラーの影響を受けにくくするためにCeiling()を微調整。</li>
+  <li> 変更: PixelChecksum()を30倍以上高速化。</li>
+  <li> 変更: FileGetVersion()に文字列のファイル情報を取り扱うための新たなパラメータを追加。</li>
+</ul>
+<ul>
+	<li> 修正: WindowsVistaでのMsgBox()のタイムアウト。</li>
+	<li> 修正: ソートされている場合のリストビューコントロールでのGuiCtrlRead。</li>
+	<li> 修正: Windows9x系での@OSVERSION。</li>
+	<li> 修正: GuiGetCursorInfo()でハンドルを使用した場合マウスクリック情報が取得できない不具合。</li>
+	<li> 修正: DllCall()でuint、ushortを使用した場合クラッシュする不具合。</li>
+	<li> 修正: フォントサイズを変更した場合のリストコントロールの高さ。</li>
+	<li> 修正: GUICtrlSetImage()でアイコンのエラーテストをおこなわない不具合。</li>
+	<li> 修正: ルートディレクトリ(x:\)で@ScriptDirと@WorkingDirが同じになる。</li>
+	<li> 修正: 子ウィンドウがアクティブでないときのGUIGetCursorInfo() (ウィンドウハンドル)。</li>
+	<li> 修正: _StringAddComma()。</li>
+	<li> 修正: エディットコントロールへのドラッグ&amp;ドロップ時の$GUI_EVENT_DROPPED通知。</li>
+	<li> 修正: DLLCall()とDLLSructCreate()でのtypeパラメーターの一貫性</li>
+	<li> 修正: DefaultキーワードがCOMオブジェクトでの使用時に正常動作しないことがある不具合。</li>
+	<li> 修正: 引数使用時にCOMのプロパティへの書き込みが失敗する不具合。</li>
+	<li> 修正: US国際キーボードでのSend/ControlSend。</li>
+	<li> 修正: 英語キーボードでchar&gt;chr(128)をSend/ControlSendで使用した時の動作。</li>
+	<li> 修正: GUIに対するMsgBox()のモーダルフラグがタイムアウトによって無効になるt。</li>
+	<li> 修正: /ErrorStdOut使用時でもエラーレポートがメッセージボックスによっておこなわれる不具合。</li>
+	<li> 修正: GUICtrlSetImage アイコンコントロールでのデフォルトアイコン値。</li>
+	<li> 修正: GUIRegisterMSG()による@errorの破壊。</li>
+	<li> 修正: GUICtrlSetImageの$LVS_SORTASCENDINGでのアイコンの表示不具合。</li>
+	<li> 修正: いくつかのオブジェクトコレクションが1つのAutoIt文で解析できなかった不具合。</li>
+	<li> 修正: チェックが既に外されているラジオボタンの表示更新の不具合。</li>
+	<li> 修正: コンパイルした場合、トレイアイコンのツールチップにスクリプト名が表示されない不具合。</li>
+	<li> 修正: UDP... エラー時にコードを返す。</li>
+	<li> 修正: UDPRecv() 不正なパラメータの場合クラッシュしていた。</li>
+	<li> 修正: COMが浮動小数点値を破壊していた。</li>
+	<li> 修正: GUICtrlSetState メニューコントロールに関するドキュメントの注意の項。</li>
+	<li> 修正: GUICtrlSetBkColor()後、リフレッシュする。</li>
+	<li> 修正: ~で始まる行でのクラッシュ : &quot;Unable to parse line&quot;。</li>
+	<li> 修正: INIファイルが空、または存在しない場合にWindows 98でIniReadSectionNames()がバグデータを返していた。</li>
+	<li> 修正: スクリプトがコンパイルされている場合の@compiled。</li>
+	<li> 修正: イタリア語キーボードでのSend()。</li>
+	<li> 修正: 2つめのスクリーンでのMouseMove()。</li>
+	<li> 修正: StringInStr() 文字列検索パラメータに変換しない。</li>
+	<li> 修正: バイナリ列のInt()。</li>
+	<li> 修正: ControlSend 特殊文字の送信。</li>
+	<li> 修正: FileInstall()で不正な形式の入力ファイルがあった場合、Au3exeがクラッシュしていた。</li>
+	<li> 修正: #CS-#CE内にFileInstall()があった場合のコンパイル済みスクリプトの異常実行。</li>
+	<li> 修正:  コンパイル済みスクリプトとの一貫性をとるため、パス指定なしのファイルを参照しているFileInstall()はScriptDirから参照することになる。</li>
+	<li> 修正: 短縮名でAut2exeをコマンドラインで使用した場合クラッシュしていた。</li>
+	<li> 修正: 
+	ツールチップの状態(アイコンかタイトルかなど)がそれらのアイテムを要求していない後続のチップ上に表示されていた。ToolTip()とGUICtrlSetTip()の両方に影響。</li>
+	<li> 修正: _ArrayToString()での不正なデフォルト引数。</li>
+	<li> 修正: 不正な&quot;#&quot;命令によるスクリプト全体の無効化。</li>
+</ul>
+<p>&nbsp;</p>
+<p><b><u>13th August, 2006  - v3.2.0.1</u></b></p>
+<ul>
+  <li>修正: (AU3INFO)制御コードでのバッファオーバーラン。</li>
+  <li>修正: Exe2Aut.exeがデジタル署名されていなかった。</li>
+</ul>
+<p>&nbsp;</p>
+<p><b><u>12th August, 2006  - v3.2.0</u></b></p>
+<ul><li>追加: COMオブジェクトのサポート。</li>
+    <li>追加: AutoItインストーラーに&quot;軽量&quot;バージョンのSciTeエディタを追加。</li>
+	<li>追加: Aut2Exeが。a3xエンコードファイル(。au3の。zipと同じ)を作成できるようになった。</li>
+	<li>追加: カスタムトレイアイコンのサポート。</li>
+	<li>追加: &quot;default&quot;キーワード。</li>
+	<li>追加: ユーザー関数呼び出しで&quot;default&quot;キーワードを使用できるようIsKeyword()を追加。</li>
+	<li>追加: Booleanのサポートとキーワード'false'、'true'。</li>
+	<li>追加: IsBool()</li>
+	<li>追加: +=、-=、*=、/=演算子。</li>
+	<li>追加: DLLCall()のcdecl、stdcallのサポート。</li>
+	<li>追加: DLLStruct...関数。</li>
+	<li>追加: TCP、UDP関数の制限。</li>
+	<li>追加: stdioの読み込み、書き出しサポートを追加。</li>
+	<li>追加: ConsoleRead()、ConsoleWriteError()。</li>
+	<li>追加: DIM、CONSTキーワードの配列初期化機能。</li>
+	<li>追加: Switch、EndSwitch構造。</li>
+	<li>追加: HWnd()、IsHWnd()関数。</li>
+	<li>追加: BinaryString()、IsBinaryString()関数。</li>
+	<li>追加: FileCreateNTFSLink()。</li>
+	<li>追加: コマンドラインオプション /AutoIt3ExecuteScript</li>
+	<li>追加: Call()のパラメータサポート</li>
+	<li>追加: Execute()</li>
+	<li>追加: @HotKeyPressedマクロ</li>
+	<li>追加: 文字列に対する単項演算NOTの使用を許可。空でない文字列に対するNOT演算はFALSEを返す。</li>
+	<li>追加: Beep()、WinFlash()関数。</li>
+	<li>追加: Floor()、Ceiling()関数。</li>
+	<li>追加: SetErrorでオプションとして@extendedを設定できるようになった。</li>
+	<li>追加: RegRead、RegEnumValが値の種類を@extendedで返すようになった。</li>
+	<li>追加: FileSaveDialog()、FileOpenDialog()が複数のファイルフィルタグループをサポート。</li>
+	<li>追加: @ScriptLineNumber、@ProcessorArch、@AutoItPID。</li>
+	<li>追加: BitRotate()。</li>
+	<li>追加: Fileopen()、FileCopy()、FileMove()に存在しないサブフォルダを作成するためのフラグを追加。</li>
+	<li>追加: FileRead()、FileWrite()でバイナリファイルを取り扱えるようになった。</li>
+	<li>追加: (GUI) GUICtrlSetData　Treeviewのためのテキスト。</li>
+    <li>追加: (GUI) $WS_EX_MDICHILD GUICreate()のサポート。</li>
+	<li>追加:  (GUI) GUICtrlCreateGraphic()、GUICtrlSetGraphic()。</li>
+    <li>追加: (GUI) Opt('GUIEventOptions',1)で最小化、復元、最大化ボタンがクリックされた場合のウィンドウアクションをサポート。</li>
+    <li>追加: (GUI) List/Treeview GUIコントロールでの右クリックのサポート。</li>
+    <li>追加: (GUI) Opt(&quot;GUIEventCompatibilityMode',2)の場合、GuiCtrlReadはコントロールIDを返す。</li>
+    <li>追加: (GUI) GUICtrlCreateMonthCal()。</li>
+    <li>追加: (GUI) Opt(&quot;GUIDataSeparatorChar&quot;,...)。</li>
+    <li>追加: (GUI) GUICtrlCreateObj()。</li>
+	<li>追加:  (GUI) ListviewItemコントロール用にGUICtrlSetColor()、GUICtrlSetBkColor()、GUICtrlSetImage()。</li>
+	<li>追加: (GUI) タブアイテムでの動的なコントロール作成のためのGuiSwitchのオプションパラメータtabitemID。</li>
+    <li>追加: (GUI) GuiCtrlListViewのIconビューのサポート。</li>
+	<li>追加: (GUI) $GUI_WS_EX_PARENTDRAGによって親ウィンドウ全体をドラッグするためのタイトルバーとしてlabel、picコントロールを使用できるようになった。</li>
+    <li>追加: (GUI) GUICtrlGetHandle()。</li>
+    <li>追加: (GUI) $GUI_EVENT_DROPPED @GUI_DRAGID、@GUI_DROPID。</li>
+    <li>追加: (GUI) GuiSetCursor(16)、GuiCtrlSetCursor(16)によるカーソル非表示機能。</li>
+    <li>追加: (GUI) 全てのコントロールでのファイルドラッグが可能になった。@GUI_DRAGFILE内に$GUI_EVENT_DROPPEDで使用されるファイル名が格納される。</li>
+    <li>追加: (GUI) ランタイム時、GUIのWM_Messageルーチンで使用するGUIRegisterMsg()。</li>
+    <li>追加: (GUI) 実際のListViewGUI用ソートルーチンを作成するためのGUICtrlRegisterListViewSort()。</li>
+    <li>追加: (GUI) タブアイテム用アイコン。</li>
+    <li>追加: (AU3INFO) AutoIt Windows Info : コントロールのStyle値とexStyle値を表示できるようになった。</li>
+</ul>
+<ul>
+    <li> 変更: #include検索アルゴリズムの修正。</li>
+    <li> 変更: コマンドラインオプション/cを/AutoIt3ExecuteLineに変更。</li>
+    <li> 変更: RegEnumKeyとRegEnumValの返す診断を支援するための@errorをより正確なものに修正。</li>
+    <li> 変更: UDFが明示的にReturn、@error、@extendedを返さなければならないように変更。</li>
+    <li> 変更: FileFindFirstFileが&quot;.&quot;、&quot;..&quot;を返さないように変更。</li>
+    <li> 変更:  _ をホワイトスペースのあとでのみ継続文字として扱うよう変更。</li>
+    <li> 変更: 無効なハンドルに対してFileCloseを使用した場合、AutoItランタイムエラーが起きないよう修正。</li>
+    <li> 変更: DLLCallが実行できなかった場合、致命的なエラーメッセージを表示するよう変更。</li>
+    <li> 変更: システムシャットダウン時、ユーザーログオフ時に&quot;OnAutoItExit&quot;機能が呼ばれるよう変更。</li>
+    <li> 変更: &quot;option&quot;のみでOpt() を使用した場合、現在のオプション値が返されるよう変更。</li>
+    <li> 変更: DllCallで関数が見つからなかった場合、@errorが設定されるよう変更。</li>
+    <li> 変更: SplashTextOn()での縦方向中央揃えのためのopt=32。</li>
+    <li> 変更: (GUI) GUICtrlCreateListでのLBS_NOTIFYスタイルの強制使用。</li>
+    <li> 変更: (GUI) GUICtrlCreateIconのデフォルトサイズを32x32に設定。</li>
+    <li> 変更: (AU3INFO) コントロールをハイライトしないようにAu3infoのデフォルト設定を変更。</li>
+</ul>
+<ul>
+  <li>修正: 多くの修正。技術<a href="autoit_changelog.txt">変更記録</a>を参照。</li>
+</ul>
+<p>&nbsp;</p>
+<p><b><u>7th Apr, 2005 - v3.1.1</u></b></p>
+<p>マイナーバグフィックスリリース</p>
+<ul>
+  <li>修正: Windows Server 2003での<a href="macros/SystemInfo.htm">@OSVersion</a>誤動作</li>
+  <li>修正: GUIConstants.au3の$LVS_EX_FULLROWSELECTが$LBS...として誤定義されていた。</li>
+  <li>修正: <a href="macros/TimeAndDate.htm">@YDAY</a>が誤っていた(1日)。</li>
+  <li>修正: SetError()、SetExtended() が値を返すようになった。</li>
+  <li>修正: GUICtrlCreateMonthCalの位置</li>
+  <li>修正: CmdLine[]を63パラメータに制限</li>
+  <li>修正: FileSetAttrib　ファイルが存在しない場合1を返す。</li>
+  <li>修正: Filecopy　Netwareシェア下のサブディレクトリを作成しない。</li>
+</ul>
+<p>&nbsp;</p>
+<p><b><u>7th Feb, 2005 - v3.1.0</u></b></p>
+<ul>
+  <li>追加: <a href="guiref/GUIRef.htm">GUI</a>の作成機能</li>
+  <li>追加: <a href="functions/DllCall.htm">DllCall()</a>, <a href="functions/DllOpen.htm">DllOpen()</a>, <a href="functions/DllClose.htm">DllClose()</a></li>
+  <li>追加: <a href="functions/ControlListView.htm">ControlListView()</a></li>
+  <li>追加: <a href="functions/WinList.htm">WinList()</a> </li>
+  <li>追加: <a href="functions/DirGetSize.htm">DirGetSize()</a></li>
+  <li>追加: <a href="functions/IniReadSectionNames.htm">IniReadSectionNames()</a>, <a href="functions/IniReadSection.htm">IniReadSection()</a></li>
+  <li>追加: <a href="functions/InetGet.htm">InetGet()</a>, <a href="functions/InetGetSize.htm">InetGetSize()</a></li>
+  <li>追加: <a href="functions/HttpSetProxy.htm">HttpSetProxy()</a>, <a href="functions/FtpSetProxy.htm">FtpSetProxy()</a></li>
+  <li>追加: <a href="functions/AutoItSetOption.htm#FtpBinaryMode">FtpBinaryMode (Option)</a></li>
+  <li>追加: <a href="functions/Ping.htm">Ping()</a></li>
+  <li>追加: <a href="functions/ControlGetHandle.htm">ControlGetHandle()</a></li>
+  <li>追加: <a href="functions/WinGetProcess.htm">WinGetProcess()</a>と<a href="functions/ProcessList.htm">ProcessList()</a></li>
+  <li>追加: <a href="functions/SetExtended.htm">SetExtended()</a></li>
+  <li>追加: <a href="functions/WinSetTrans.htm">WinSetTrans()</a></li>
+  <li>追加: <a href="functions/Assign.htm">Assign()</a></li>
+  <li>追加: <a href="functions/ConsoleWrite.htm">ConsoleWrite()</a></li>
+  <li>追加: <a href="macros/AutoItRelated.htm">@AutoItExe</a>マクロ</li>
+  <li>追加: <a href="keywords/Dim.htm">Const</a>キーワード</li>
+  <li>追加: <a href="keywords/Func.htm">Optional</a>パラメータのユーザー関数サポート</li>
+  <li>追加: &quot;main&quot;, &quot;primary&quot;, &quot;menu&quot;, &quot;secondary&quot; を有効な<a href="functions/MouseClick.htm">マウスボタンの種類</a>として追加</li>
+  <li>追加: <a href="functions/AutoItSetOption.htm#ExpandVarStrings">ExpandVarStrings (Option)</a></li>
+  <li>追加: ユーザー関数OnAutoItStart()、OnAutoItExit()が開始/終了時に呼ばれる</li>
+  <li>追加: <a href="functions/AutoItSetOption.htm#OnExitFunc">OnExitFunc (Option)</a></li>
+</ul>
+
+<ul><li>削除: URLDownloadToFile() (<a href="functions/InetGet.htm">InetGet()</a>に置き換え)</li>
+</ul>
+  <ul>
+    <li>変更: <a href="keywords/For.htm">For loops</a> Local変数としてカウンタ変数を自動初期化</li>
+    <li>変更: <a href="functions/IniDelete.htm">IniDelete()</a> セクション全体の削除も可能</li>
+    <li>変更: <a href="functions/StringReplace.htm">StringReplace()</a> @extendedマクロを使用して置換数も返す</li>
+    <li>変更: <a href="functions/StringMid.htm">StringMid()</a> &quot;count&quot;パラメータもオプションに(文字列の残りの部分を前提にする)</li>
+    <li>変更: <a href="functions/PixelChecksum.htm">PixelChecksum()</a> オプションのステップパラメータ追加</li>
+    <li>変更: <a href="intro/controls.htm">Control...()</a>関数 コントロール識別方法としてControlIDの使用が可能</li>
+    <li>変更: <a href="functions/InetGet.htm">InetGet()</a>関数 バックグラウンドでのダウンロードが可能</li>
+    <li>変更: <a href="functions/RegRead.htm">Reg...()</a>関数 未知のキーが使用された場合にハードエラーを起こさないように変更</li>
+    <li>変更: The <a href="functions/AutoItSetOption.htm#MouseCoordMode">mouse</a>、<a href="functions/AutoItSetOption.htm#PixelCoordMode">pixel</a>関数 &quot;client area&quot;モード追加</li>
+    <li>変更: <a href="macros/SystemInfo.htm">@OS_VERSION</a>のとり得る値としてにWIN_2003を追加</li>
+    <li>変更: AU3Spy.exeを<a href="intro/au3spy.htm">AU3Info.exe</a>に名称変更</li>
+    <li>変更: <a href="intro/au3spy.htm">AutoIt Window Info Tool </a>のメジャーアップグレード (	コントロールの強調表示、拡大表示、カーソルのID)</li>
+    <li>変更: <a href="functions/FileSelectFolder.htm">FileSelectFolder()</a> ルートディレクトリだけでなく初期ディレクトリをサポート</li>
+    <li>変更: File関数のhandleに-1を与えた場合に致命的なエラーとなる問題を解消</li>
+</ul>
+
+<ul>
+  <li>修正: <a href="functions/SplashImageOn.htm">SplashImageOn()</a>でのメモリリーク</li>
+  <li>修正: 変数が初期化されていても&quot;$var = $var&quot;といった式がエラーとなる問題の解消</li>
+  <li>修正: <a href="functions/StringFormat.htm">StringFormat()</a>での文字\\の使用 </li>
+  <li>修正: スクリプト終了後、まれにAutoIt3.exeがタスクマネージャに表示され続ける問題の解消</li>
+  <li>修正: <a href="macros/Directory.htm">@WindowsDir</a>など特定のパスがWindows Terminal Server下で誤っていた問題の解消</li>
+  <li>修正: <a href="functions/FileSetTime.htm">FileSetTime()</a> 非GMTタイムゾーンのシステムで誤った結果を返していた問題の解消</li>
+  <li>修正: <a href="functions/FileMove.htm">FileMove()</a>でのUNCパスの使用(同じフォルダの場合コピーではなく本当に移動させる)</li>
+  <li>修正: <a href="intro/lang_operators.htm">^ operator</a></li>
+  <li>修正: <a href="functions/Chr.htm">Chr()</a></li>
+  <li>修正: <a href="functions/StatusBarGetText.htm">StatusBarGetText()</a> &quot;Text&quot;パラメータがない場合失敗していた問題の解消</li>
+  <li>修正: <a href="functions/InputBox.htm">InputBox()</a> 前にアクティブだったウィンドウにフォーカスを帰さなかった問題の解消</li>
+  <li>修正: ACos() 誤った結果を返していた問題の解消</li>
+  <li>修正: 特定の状況下でGUICtrlSetPos()がラベルに複数回の描画を引き起こす問題の解消</li>
+</ul>
+
+<p>&nbsp;</p>
+<p><b><u>4th Aug, 2004 - v3.0.102</u></b></p>
+<br>
+<p><strong>主要変更点:</strong> デフォルトの色定義が以前のBGR形式から標準的なRGB形式になりました。これによって<a href="functions/PixelSearch.htm">PixelSearch()</a>と<a href="functions/PixelGetColor.htm">PixelGetColor()</a>が影響を受けます。
+</p>
+<p> BGRモードを使用している古いスクリプトの実行を可能にするために&quot;<a href="functions/AutoItSetOption.htm#ColorMode">ColorMode</a>&quot;オプションが追加されました。<br>次の行を古い手法を使用しているあなたのスクリプトの先頭行に書いてください。 </p>
+<p> <a href="functions/AutoItSetOption.htm#ColorMode">Opt</a>(&quot;ColorMode&quot;, 1)</p>
+<p><strong>
+あなたのコードで色関数を使用している場合、必ず上記の変更点をチェックしてコード内の色を変更するか、Opt ColorModeオプションを上記のように追加してください。この変更は特にゲームを操作するコードとBOTに影響を与えます。
+</strong></p>
+<ul>
+  <li>追加: <a href="functions/DriveMapAdd.htm">DriveMapAdd()</a>, <a href="functions/DriveMapDel.htm">DriveMapDel()</a>,<a href="functions/DriveMapGet.htm">DriveMapGet()</a></li>
+  <li>追加: <a href="macros/AutoItRelated.htm">@SW_SHOWDEFAULT, @SW_SHOWMAXIMIZED, @SW_SHOWMINIMIZED, @SW_SHOWMINNOACTIVE, <br>
+@SW_SHOWNA, @SW_SHOWNOACTIVATE, @SW_SHOWNORMAL</a></li>
+  <li>追加: <a href="functions/FileGetShortcut.htm">FileGetShortcut()</a></li>
+  <li>追加: 定義済み<a href="intro/running.htm">$CmdLineRaw</a>変数が完全な元のコマンドラインを保持する</li>
+  <li>追加: <a href="macros/AutoItRelated.htm">@DesktopDepth</a></li>
+  <li>追加: <a href="keywords/ReDim.htm">ReDim</a></li>
+  <li>追加: <a href="intro/compiler.htm">Aut2Exe.exe</a>用のコマンドラインパラメータ: /nodecompile と /comp 0-4 (圧縮レベル, 4=best)</li>
+  <li>追加: <a href="functions/ProcessExists.htm">Process...()</a>と<a href="functions/Run.htm">Run()</a>関数のプロセスID(PID)サポート </li>
+  <li>追加: <a href="functions/ProcessSetPriority.htm">ProcessSetPriority()</a></li>
+  <li>追加: 逆コンパイラ (Exe2Aut) 追加</li>
+  <li>追加: <a href="functions/PixelChecksum.htm">PixelChecksum()</a></li>
+  <li>追加: &quot;0x&quot;で始まる文字列が数値的に使用された場合は16進数に変換される</li>
+  <li>追加: <a href="functions/MouseWheel.htm">MouseWheel()</a></li>
+  <li>追加: <a href="functions/RegEnumKey.htm">RegEnumKey()</a>と<a href="functions/RegEnumVal.htm">RegEnumVal()</a></li>
+  <li>追加: <a href="functions/FileRecycleEmpty.htm">FileRecycleEmpty()</a></li>
+</ul>
+<ul>
+  <li>変更: TimerStart()を<a href="functions/TimerInit.htm">TimerInit()</a>。TimerStop()を<a href="functions/TimerDiff.htm">TimerDiff()</a>に名称変更</li>
+  <li>変更: <a href="functions/FileSelectFolder.htm">FileSelectFolder()</a>のflagパラメータ変更</li>
+  <li>変更: Reg...()関数での<a href="functions/RegRead.htm">REG_MULTI_SZ</a>値にdouble NULL値を許可</li>
+  <li>変更: <a href="functions/BitOR.htm">BitOr()</a>, <a href="functions/BitAND.htm">BitAnd()</a>、<a href="functions/BitXOR.htm">BitXOR()</a>で最大255のパラメータを取れるよう変更</li>
+  <li>変更: <a href="functions/FileCreateShortcut.htm">FileCreateShortcut()</a>にIconとwindowstateオプション追加</li>
+  <li>変更: <a href="functions/RunAsSet.htm">RunAsSet()</a>がエクストラプロファイリングハンドルオプションをサポート</li>
+  <li>変更: <a href="functions/RegWrite.htm">RegWrite()</a>で値なしのキー名を作るためのキー名を許可</li>
+  <li>変更: &quot;Allow Decompilation&quot;オプションを<a href="intro/compiler.htm">Aut2Exe</a>に追加</li>
+  <li>変更: <a href="intro/compiler.htm">Aut2Exe</a>がコンパイル中にフィードバック、キャンセルできるよう変更</li>
+  <li>変更: FileInstallで中規模/大規模ファイルを取り扱った場合のコンパイル済みスクリプトのrun/extractの高速化</li>
+  <li>変更: ユーザー関数の最大数廃止</li>
+  <li>変更: 変数の最大数廃止</li>
+  <li>変更: Send/Mouse待機(<a href="functions/AutoItSetOption.htm#SendKeyDelay">SendKeyDelay</a>, etc...)で-1の場合、まったくスリープしないよう変更</li>
+  <li>変更: <a href="functions/StringInStr.htm">StringInStr()</a>にオプションのoccuranceパラメータを追加</li>
+  <li>変更: <a href="functions/FileOpenDialog.htm">FileOpenDialog()</a> と <a href="functions/FileSaveDialog.htm">FileSaveDialog()</a>にオプションのデフォルトファイル名を追加</li>
+  <li>変更: レジストリ関数が4文字のキー(HKEY_LOCAL_MACHINEの代わりにHKLM、 etc)を受け付けるよう変更</li>
+  <li>変更: リモートのレジストリキー&quot;\\computername\key\subkey&quot;形式を受け付けるよう変更</li>
+  <li>変更: <a href="functions/AutoItSetOption.htm">AutoItSetOption</a>が以前の設定をリターンするよう変更</li>
+</ul>
+  <ul>
+  <li>修正: <a href="functions/FileGetSize.htm">FileGetSize()</a>を2GB以上のファイル、使用中のファイルに使用できる</li>
+  <li>修正: 式: If &quot;non-blank&quot; And 1 - を真と評価するようにした</li>
+  <li>修正: マウスがスクリーン下部付近にあった場合の<a href="functions/ToolTip.htm">ToolTip()</a></li>
+  <li>修正: <a href="functions/StringIsDigit.htm">StringIsDigit()</a></li>
+  <li>修正: NT4下でのProcess...()関数で特定のプロセスが不可視であった問題</li>
+  <li>修正: THENキーワード後のいくつかのキーワードの不正容認</li>
+</ul>
+<p>&nbsp;</p>
+<p><b><u>11th Mar, 2004 - v3.0.101</u></b></p>
+<ul>
+  <li>&nbsp;追加: <a href="functions/MemGetStats.htm">MemGetStats()</a></li>
+  <li>&nbsp;修正: Windows 95互換性</li>
+  <li>&nbsp;修正: ヘルプファイル誤植</li>
+</ul>
+<p>&nbsp;</p>
+<p><b><u>29th Feb, 2004 - v3.0.100</u></b></p>
+<ul>
+  <li>&nbsp;	最初のリリース</li>
+</ul>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function Shutdown</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">Shutdown</font>
+<hr size="2">
+<p>システムをシャットダウンします。<br></p>
+
+<p class="codeheader">
+Shutdown ( code [, reason] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">code</td>
+    <td width="85%">シャットダウンコードの組み合わせ。注意を参照。</td>
+  </tr>
+  <tr>
+   <td>reason</td>
+   <td><b>[オプション]</b> ユーザーシャットダウンの理由コード</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">成功</td>
+    <td width="90%">1を返します。</td>
+  </tr>
+  <tr>
+    <td valign="top">失敗</td>
+	<td>0を返し、@errorにGetLastError()を設定します。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+シャットダウンコードには次の値を組み合わせて使用することができます。<br>
+0 = ログオフ(Logoff)<br>
+1 = シャットダウン(Shutdown)<br>
+2 = 再起動(Reboot)<br>
+4 = 強制(Force)<br>
+8 = パワーダウン(Power down)<br>
+16= ハングアップ時の強制終了<br>
+32= スタンバイ(Standby)<br>
+64= 休止(Hibernate)<br>
+<br>
+使用したい値を足し合わせてください。例えばシャットダウンとパワーダウンをおこないたい場合はコードは9になります(シャットダウン + パワーダウン = 1 + 8 = 9)<br>
+<br>
+他のコードが設定されている場合、スタンバイと休止は無視されます。<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="ProcessClose.htm">ProcessClose</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S4">Shutdown</span><span class="S8">(</span><span class="S3">6</span><span class="S8">)</span><span class="S0"> &nbsp;</span><span class="S1">;強制再起動</span><br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\Shutdown.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

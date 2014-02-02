@@ -1,0 +1,81 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function Mod</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">Mod</font>
+<hr size="2">
+<p>mod演算子として働きます。<br></p>
+
+<p class="codeheader">
+Mod ( value1, value2 )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">value1</td>
+    <td width="85%">割られる数</td>
+  </tr>
+  <tr>
+   <td>value2</td>
+   <td>割る数</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">成功</td>
+    <td width="90%">value1 を value2 で割った余りを返します。</td>
+  </tr>
+  <tr>
+    <td valign="top">失敗</td>
+    <td>割る数が0の場合は定義されていないので-1を返します。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+この関数の結果は <i>被除数 = ( 被除数 / 除数 ) * 除数 + Mod(被除数, 除数)</i> を満たすことが保証されています。<br>
+<br>
+この関数は被除数または除数が正確に表現されていることを<b>保証しません</b> （特に浮動小数点を使用した際）。<br>
+<br>
+整数を渡した場合はこの関数は整数のモジュロ演算をおこないます。それ以外の場合は浮動小数点演算を行い、上で述べた問題により期待通りの出力がされないことがあります。<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+なし。
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S9">$n</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">18</span><br>
+<span class="S5">If</span><span class="S0"> </span><span class="S4">mod</span><span class="S8">(</span><span class="S9">$n</span><span class="S8">,</span><span class="S0"> </span><span class="S3">2</span><span class="S8">)</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><span class="S0"> </span><span class="S5">Then</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$n</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">" is an even number."</span><span class="S8">)</span><br>
+<span class="S5">Else</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$n</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">" is an odd number."</span><span class="S8">)</span><br>
+<span class="S5">EndIf</span><br>
+<br>
+<span class="S9">$x</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">mod</span><span class="S8">(</span><span class="S3">4</span><span class="S8">,</span><span class="S0"> </span><span class="S3">7</span><span class="S8">)</span><span class="S0"> &nbsp;</span><span class="S1">; 割る数 &gt; 割られる数なので $x == 4。</span><br>
+<br>
+<span class="S9">$y</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">mod</span><span class="S8">(</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S3">3</span><span class="S8">/</span><span class="S3">4</span><span class="S8">)</span><span class="S0"> &nbsp;</span><span class="S1">; 割る数が小数なので $y == 0.25。</span><br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\Mod.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

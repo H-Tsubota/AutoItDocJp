@@ -1,0 +1,130 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function DllStructGetData</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">DllStructGetData</font>
+<hr size="2">
+<p>構造体の要素のデータを返します。<br></p>
+
+<p class="codeheader">
+DllStructGetData ( Struct, Element [, index ] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">Struct</td>
+    <td width="85%">DllStructCreateが返す構造体</td>
+  </tr>
+  <tr>
+   <td>Element</td>
+   <td>構造体のアクセスしたい要素。1 始まり。またはDllStructCreateで定義された要素</td>
+  </tr>
+  <tr>
+   <td>index</td>
+   <td><b>[オプション]</b>
+	要素が配列の場合、1始まりのインデックスで取得する要素を指定します。
+	省略したりDefaultキーワードを使用した場合、配列全体が取得されます(すばやく文字列を取得するのに便利です)。
+	<b>非配列の要素には使ってはいけません。</b>
+   </td>
+  </tr>
+</table>* char[n]、byte[n]、ubyte[n]ではインデックスが省略された場合、全ての要素が返されます。<br>
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">成功</td>
+    <td width="90%">構造体の要素内のデータ。</td>
+  </tr>
+  <tr>
+    <td valign="top">失敗</td>
+    <td>0</td>
+  </tr>
+  <tr>
+    <td valign="top">@Error:</td>
+    <td>0 = エラーなし。</td>
+  </tr>
+  <tr>
+    <td valign="top"></td>
+    <td>1 = 構造体がDllStructCreateによって返された正常な構造体ではない。</td>
+  </tr>
+  <tr>
+    <td valign="top"></td>
+    <td>2 = Elementの値が範囲外。</td>
+  </tr>
+  <tr>
+    <td valign="top"></td>
+    <td>3 = indexが構造体の範囲外。</td>
+  </tr>
+  <tr>
+    <td valign="top"></td>
+    <td>4 = Elementのデータ型が不明。</td>
+  </tr>
+  <tr>
+    <td valign="top"></td>
+	<td>5 = index &lt;= 0.</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+要素がchar[n]でindexが省略された場合、返されるデータはStringです。<br>
+要素がbyte[n]、ubyte[n]でindexが省略された場合、返されるデータはバイナリ型です。<br>
+それ以外の場合は常に数値が返されます。<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="DllStructCreate.htm">DllStructCreate</a>, <a href="DllStructSetData.htm">DllStructSetData</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S9">$p</span><span class="S0">&nbsp; </span><span class="S8">=</span><span class="S0"> </span><span class="S4">DllStructCreate</span><span class="S8">(</span><span class="S7">"dword dwOSVersionInfoSize;dword dwMajorVersion;dword dwMinorVersion;dword dwBuildNumber;dword dwPlatformId;char szCSDVersion[128]"</span><span class="S8">)</span><br>
+<br>
+<span class="S1">;p-&gt;dwOSVersionInfoSize = sizeof(OSVERSIONINFO) だと考えてください。</span><br>
+<span class="S4">DllStructSetData</span><span class="S8">(</span><span class="S9">$p</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"dwOSVersionInfoSize"</span><span class="S8">,</span><span class="S0"> </span><span class="S4">DllStructGetSize</span><span class="S8">(</span><span class="S9">$p</span><span class="S8">))</span><br>
+<br>
+<span class="S1">;DllCall 実行</span><br>
+<span class="S9">$ret</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">DllCall</span><span class="S8">(</span><span class="S7">"kernel32.dll"</span><span class="S8">,</span><span class="S7">"int"</span><span class="S8">,</span><span class="S7">"GetVersionEx"</span><span class="S8">,</span><span class="S7">"ptr"</span><span class="S8">,</span><span class="S4">DllStructGetPtr</span><span class="S8">(</span><span class="S9">$p</span><span class="S8">))</span><br>
+<br>
+<span class="S5">if</span><span class="S0"> </span><span class="S5">Not</span><span class="S0"> </span><span class="S9">$ret</span><span class="S8">[</span><span class="S3">0</span><span class="S8">]</span><span class="S0"> </span><span class="S5">Then</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S7">"DllCall Error"</span><span class="S8">,</span><span class="S7">"DllCall Failed"</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">exit</span><br>
+<span class="S5">EndIf</span><br>
+<br>
+<span class="S1">;返し値を取得</span><br>
+<span class="S9">$major</span><span class="S0">&nbsp; &nbsp; &nbsp; </span><span class="S8">=</span><span class="S0"> </span><span class="S4">DllStructGetData</span><span class="S8">(</span><span class="S9">$p</span><span class="S8">,</span><span class="S7">"dwMajorVersion"</span><span class="S8">)</span><br>
+<span class="S9">$minor</span><span class="S0">&nbsp; &nbsp; &nbsp; </span><span class="S8">=</span><span class="S0"> </span><span class="S4">DllStructGetData</span><span class="S8">(</span><span class="S9">$p</span><span class="S8">,</span><span class="S7">"dwMinorVersion"</span><span class="S8">)</span><br>
+<span class="S9">$build</span><span class="S0">&nbsp; &nbsp; &nbsp; </span><span class="S8">=</span><span class="S0"> </span><span class="S4">DllStructGetData</span><span class="S8">(</span><span class="S9">$p</span><span class="S8">,</span><span class="S7">"dwBuildNumber"</span><span class="S8">)</span><br>
+<span class="S9">$platform</span><span class="S0">&nbsp; &nbsp;</span><span class="S8">=</span><span class="S0"> </span><span class="S4">DllStructGetData</span><span class="S8">(</span><span class="S9">$p</span><span class="S8">,</span><span class="S7">"dwPlatformId"</span><span class="S8">)</span><br>
+<span class="S9">$version</span><span class="S0">&nbsp; &nbsp; </span><span class="S8">=</span><span class="S0"> </span><span class="S4">DllStructGetData</span><span class="S8">(</span><span class="S9">$p</span><span class="S8">,</span><span class="S7">"szCSDVersion"</span><span class="S8">)</span><br>
+<br>
+<span class="S1">;構造体を解放</span><br>
+<span class="S9">$p</span><span class="S0"> </span><span class="S8">=</span><span class="S3">0</span><br>
+<br>
+<span class="S4">msgbox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S7">""</span><span class="S8">,</span><span class="S7">"Major: "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$major</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S8">_</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S7">"Minor: "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$minor</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S8">_</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S7">"Build: "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$build</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S8">_</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S7">"Platform ID: "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$platform</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S8">_</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S7">"Version: "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$version</span><span class="S8">)</span><br>
+<br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\DllStructGetData.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

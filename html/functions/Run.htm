@@ -1,0 +1,100 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function Run</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">Run</font>
+<hr size="2">
+<p>外部プログラムを起動します。<br></p>
+
+<p class="codeheader">
+Run ( "program" [, "workingdir" [, show_flag[, opt_flag ]]] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">program</td>
+    <td width="85%">実行するプログラム(EXE, BAT, COM, PIF)のフルパス (注意を参照)</td>
+  </tr>
+  <tr>
+   <td>workingdir</td>
+   <td><b>[オプション]</b>作業ディレクトリ名。プログラムのパスではありません。</td>
+  </tr>
+  <tr>
+   <td>show_flag</td>
+   <td><b>[オプション]</b>実行するプログラムの表示状態を切り替えます。<br>
+       &nbsp;&nbsp;  @SW_HIDE = ウィンドウを隠す  (Defaultキーワードの場合も同様)<br>
+       &nbsp;&nbsp;  @SW_MINIMIZE = ウィンドウを最小化<br>
+       &nbsp;&nbsp;  @SW_MAXIMIZE = ウィンドウを最大化</td>
+  </tr>
+  <tr>
+   <td>opt_flag</td>
+   <td><b>[オプション]</b>
+   親プロセスと子プロセスがどのように連携するかに関連するさまざまなオプションを制御<br>
+       &nbsp;&nbsp;0x1 ($STDIN_CHILD)  = 子プロセスのSTDINストリームにハンドルを渡します<br>
+       &nbsp;&nbsp;0x2 ($STDOUT_CHILD) = 子プロセスのSTDOUTストリームにハンドルを渡します<br>
+       &nbsp;&nbsp;0x4 ($STDERR_CHILD) = 子プロセスの STDERRストリームにハンドルを渡します</td>
+       &nbsp;&nbsp;0x8 ($STDERR_MERGED) = STDOUTとSTDERRに同じハンドルを渡します。
+	   $STDOUT_CHILDと$STDERR_CHILDを両方設定するのと同じです。<br>
+	   &nbsp;&nbsp;0x10 ($STDIO_INHERIT_PARENT) = 子プロセスに親プロセスのSTDIOストリームを渡します。
+	   このフラグは他のSTDIOと組み合わせることはできません。
+	   このフラグは親がコンソールアプリケーションとしてコンパイルされる場合にのみ使用できます。<br>
+       &nbsp;&nbsp;0x10000 ($RUN_CREATE_NEW_CONSOLE) = 
+	   子コンソールプロセスは親プロセスのウィンドウを使用する代わりに独自のウィンドウを作成します。
+	   このフラグは親がコンソールアプリケーションとしてコンパイルされる場合にのみ使用できます。</td>
+  </tr>  
+</table>
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">成功:</td>
+    <td width="90%">実行したプロセスのPID(プロセス識別値）。</td>
+  </tr>
+  <tr>
+    <td valign="top">失敗:</td>
+    <td>0を返し@errorに非ゼロを設定します。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+スペースを含むパスはコーテーションで囲む必要があります。<br>
+<br>
+DOSコマンド実行をするためには <i>Run(@ComSpec & " /c " & 'commandName', "", @SW_HIDE)</i>としてください。"/c"の前の" "を忘れないようにしてください。<br>
+<br>
+指定されたプログラムを開始後スクリプトは継続して実行されます。指定したプログラムが終了するのを待ってスクリプトの続きを実行する場合はRunWait関数を代わりに使って下さい。<br>
+<br>
+Standard I/Oパラメータに適切な値を設定することでStderrRead関数、StdinWrite関数、StdoutRead関数を通じて子プロセスと連携動作することができます。フラグの値を組み合わせることで(あるいはConstants.au3内で定義されている$STDERR_CHILD、$STDIN_CHILD、$STDOUT_CHILDを使用することで)複数のストリームを管理できます。<br>
+<br>
+ストリームを閉じるためには次の条件が満たされる必要があります: 1) 子プロセスがそのストリーム終端を閉じている。(これは子プロセスでの処理です)。 2) AutoItがキャプチャーしたストリームの全データを読み込んだ。 3) 子にSTDINが指定されている場合、ストリームを閉じるためのStdinWrite() が呼び出された。一度全てのストリームが不必要であることが判明すると、全内部リソースが自動的に解放されます。<br>
+StdioCloseを使用して強制的にSTDIOストリームを閉じることも可能です。<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="RunWait.htm">RunWait</a>, <a href="RunAs.htm">RunAs</a>, <a href="RunAsWait.htm">RunAsWait</a>, <a href="ShellExecute.htm">ShellExecute</a>, <a href="ShellExecuteWait.htm">ShellExecuteWait</a>, <a href="StderrRead.htm">StderrRead</a>, <a href="StdinWrite.htm">StdinWrite</a>, <a href="StdoutRead.htm">StdoutRead</a>, <a href="StdioClose.htm">StdioClose</a>, <a href="ProcessClose.htm">ProcessClose</a>, <a href="ConsoleRead.htm">ConsoleRead</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S4">Run</span><span class="S8">(</span><span class="S6">@WindowsDir</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">"\Notepad.exe"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S6">@SW_MAXIMIZE</span><span class="S8">)</span><br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\Run.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

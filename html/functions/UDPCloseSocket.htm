@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function UDPCloseSocket</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">UDPCloseSocket</font>
+<hr size="2">
+<p>UDPソケットを閉じます。<br></p>
+
+<p class="codeheader">
+UDPCloseSocket ( socketarray )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">socketarray</td>
+    <td width="85%">
+	<a href="UDPBind.htm">UDPBind</a>、<a href="UDPOpen.htm">UDPOpen</a>関数によって返されるソケット/配列。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">成功</td>
+    <td width="90%">1を返します。</td>
+  </tr>
+  <tr>
+    <td valign="top">失敗</td>
+    <td>0を返し、@errorを設定します。</td>
+  </tr>
+  <tr>
+    <td valign="top">@error:</td>
+    <td>無効なsocketarrayの場合、-1、-2または-3 。</td>
+  </tr>
+  <tr>
+    <td valign="top"></td>
+    <td>WindowsAPIのWSAGetErrorの返し値(<a href="http://msdn.microsoft.com/en-us/library/ms740668.aspx">MSDN</a>を参照)</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+なし。<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="UDPBind.htm">UDPBind</a>, <a href="UDPOpen.htm">UDPOpen</a>, <a href="TCPShutdown.htm">TCPShutdown</a>, <a href="TCPStartup.htm">TCPStartup</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S1">;サーバー!! 最初に実行!!!!!!!!!!!!!!!</span><br>
+<span class="S9">$g_IP</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S7">"127.0.0.1"</span><br>
+<br>
+<span class="S1">; UDPサービスを開始</span><br>
+<span class="S1">;==============================================</span><br>
+<span class="S4">UDPStartUp</span><span class="S8">()</span><br>
+<br>
+<span class="S1">; クリーンアップ関数を登録</span><br>
+<span class="S4">OnAutoItExitRegister</span><span class="S8">(</span><span class="S7">"Cleanup"</span><span class="S8">)</span><br>
+<br>
+<span class="S1">; リスニング用"ソケット"を作成</span><br>
+<span class="S1">;==============================================</span><br>
+<span class="S9">$socket</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">UDPBind</span><span class="S8">(</span><span class="S9">$g_IP</span><span class="S8">,</span><span class="S0"> </span><span class="S3">65432</span><span class="S8">)</span><br>
+<span class="S5">If</span><span class="S0"> </span><span class="S6">@error</span><span class="S0"> </span><span class="S8">&lt;&gt;</span><span class="S0"> </span><span class="S3">0</span><span class="S0"> </span><span class="S5">Then</span><span class="S0"> </span><span class="S5">Exit</span><br>
+<br>
+<span class="S1">;--- 行いたい処理をここに書く</span><br>
+<br>
+<span class="S5">Func</span><span class="S0"> Cleanup</span><span class="S8">()</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S4">UDPCloseSocket</span><span class="S8">(</span><span class="S9">$socket</span><span class="S8">)</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S4">UDPShutdown</span><span class="S8">()</span><br>
+<span class="S5">EndFunc</span><br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\UDPCloseSocket.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

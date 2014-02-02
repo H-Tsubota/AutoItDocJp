@@ -1,0 +1,126 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Tutorial - Regular Expression</title>
+  <meta http-equiv="Content-Type"
+ content="text/html; charset=shift-jis">
+  <link href="../../css/default.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<h1>Tutorial - Regular Expression</h1>
+<p>StringRegExp()の謎を解き明かすちょっとしたガイド。<br>
+  <br>
+  StringRegExp(
+  <!--coloro:#3333FF--><span style="color: #3333ff">
+  <!--/coloro-->&quot;test&quot;<!--colorc--></span><!--/colorc-->,
+  <!--coloro:#FF0000--><span style="color: #ff0000">
+  <!--/coloro-->&quot;pattern&quot;<!--colorc--></span><!--/colorc--> [,
+  <!--coloro:#009900--><span style="color: #009900">
+  <!--/coloro-->flag<!--colorc--></span><!--/colorc--> ] )<br>
+  <br>
+  <!--coloro:#3333FF--><span style="color: #3333ff">
+  <!--/coloro-->&quot;test&quot;<!--colorc--></span><!--/colorc--> = 検索対象の文字列。<br>
+  <!--coloro:#FF0000--><span style="color: #ff0000">
+  <!--/coloro-->&quot;pattern&quot;<!--colorc--></span><!--/colorc--> = 特定の文字キーからなる文字列で関数に<b>正確に</b>あなたが検索したいものを知らせます。もしも、かつ、ただし...はあり得ません。一致するか、それともしないかです。<br>
+  <!--coloro:#009900--><span style="color: #009900">
+  <!--/coloro-->flag<!--colorc--></span><!--/colorc-->[オプション] = &quot;pattern&quot;が見つかったことのみを通知するのか、最初の一致ヵ所を返すのか、&quot;test&quot;文字列内の全ての一致ヵ所返すのかを関数に設定します。<br>
+  <br>
+  <H2>基本</H2>
+  すでに判っているかもしれませんが、StringRegExp()(以下SRE)の呼び出しで難しい部分は &quot;pattern &quot;文字列だけです。関数に文字を使って検索文字列を教えることがパターンであると考えるのが一番いいでしょう。ある文字を見つける方法は色々あります。文字列 &quot;test &quot;を検索したいとしましょう。とても単純です。SREに最初に文字列から &quot;t &quot;を検索しろと命令します。もし見つかったら検索文字列が存在すると仮定して、不一致と判定されるまでパターンの残りが使用されます。つまりもし次の文字が &quot;e &quot;であればまだ一致しているということです。その次の文字が &quot;x &quot;だったとしましょう。SREはただちに一致していないことに気が付きます。検索する文字列の3文字目は &quot;s &quot;だからです。<br>
+  &nbsp;</p>
+<p>
+  <u><b>例 1</b></u></p>
+<p class="codebox">MsgBox(0, &quot;SRE Example 1 Result&quot;, StringRegExp(&quot;text&quot;, 'test'))</p>
+<p>この例ではメッセージボックスには&quot;0&quot;が表示されます。これはテスト文字列&quot;text&quot;の中にパターン&quot;test&quot;はみつからなかったということを表しています。ちょっと単純すぎますが、なぜみつからなかったはもうわかりますね。<br>
+  <br>
+次のパターン指定方法はセット(&quot;[ ... ]&quot;)の使用です。セットは論理関数ORと同じと考えていいでしょう。先ほどの例で使ってみましょう。文字列&quot;test&quot;、文字列&quot;text&quot;を検索したいとします。SREになったつもりでパターン検索を始めてみましょう。最初の検索文字は&quot;t&quot;、次は&quot;e&quot;で検索文字は両方の検索文字列で同じです。次に&quot;s&quot;もしくは&quot;x&quot;を検索したいので&quot;[sx]&quot;のセットを使用します。これは&quot;s&quot;または&quot;x&quot;を表します。そして最後の文字は再び&quot;t&quot;です。<br>
+  <br>
+  <u><b>例 2</b></u></p>
+<p class="codebox">MsgBox(0, &quot;SRE Example 2 Result&quot;, StringRegExp(&quot;text&quot;, 'te[sx]t'))<br>
+    MsgBox(0, &quot;SRE Example 2 Result&quot;, StringRegExp(&quot;test&quot;, 'te[sx]t'))</p>
+<p>これらは両方とも結果&quot;1&quot;を表示します。パターンが&quot;test&quot;と&quot;text&quot;の両方と一致するからです。<br>
+  <br>
+  同じように各文字が何回登場するかを&quot;{登場回数}&quot;または&quot;{最小, 最大}&quot;で範囲を指定できます。下に示すのは冗長ですが実例を示しています。<br>
+  <br>
+  <u><b>例 3</b></u></p>
+<p class="codebox">MsgBox(0, &quot;SRE Example 3 Result&quot;, StringRegExp(&quot;text&quot;, 't{1}e{1}[sx]{1}t{1}'))<br>
+    MsgBox(0, &quot;SRE Example 3 Result&quot;, StringRegExp(&quot;aaaabbbbcccc&quot;, 'b{4}'))</p>
+  <p><br>
+  <br>
+  <H2>ちょっとした応用</H2>
+  あなたは今、&quot;単なるStringInStr()関数の進化版じゃないのか?&quot;と考えているかもしれません。&quot;flag&quot;の値を0にして使用するとほとんどの場合でそれは正しいです。しかしSREはあなたが考えているよりももっとパワフルです。SREを使えば使うほどより少ない情報で文字列を探せることに気づくでしょう。またパターンで指定する各文字についてより少なく指定できることもわかります。例としてゲームチャットログの&quot;Gnarly Monster hits you for 18 damage.&quot;という文字列を考えて見ましょう。ここからGnarly Monsterがあなたにいくつのダメージを与えたかを知りたいとします。&quot;18&quot;を探しているわけではないのでStringInStr()は使えません。探しているのは&quot;????&quot;で、?には任意の数字がはいります。<br>
+  <br>
+ここに私がどのようにパターンを組み立てたかを示します。まず検索文字列についてわかっていることと、わかっていないことを整理しておきましょう。<br>
+1) 常に数字のみからなるということ<br>
+2) 2文字になることがあるということ<br>
+2a) ゲームプレイの経験からモンスターによる最大ダメージは999であるということ<br>
+2b) モンスターによる最小ダメージは0であるということ<br>
+3) 1文字から3文字の間であるということ<br>
+4) 検索対象文字列に他に数字が含まれていないということ<br>
+  <br>
+  この時点でフラグ値&quot;1&quot;とグループ指定文字&quot;()&quot;を使用することにしました。フラグ値&quot;1&quot;はパターン検索させるだけでなく、見つけた文字&quot;グループ&quot;を各要素に格納した配列を返すようにSREに指定することを意味します。すこし話がそれますがこの例を見てください。<br>
+  <br>
+  <u><b>例 4</b></u><!--c1--></p>
+<p class="codebox">$asResult = StringRegExp(&quot;This is a test example&quot;, '(test)', 1)<br>
+    If @error == 0 Then<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;MsgBox(0, &quot;SRE Example 4 Result&quot;, $asResult[0])<br>
+    EndIf<br>
+    $asResult = StringRegExp(&quot;This is a test example&quot;, '(te)(st)', 1)<br>
+    If @error == 0 Then<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;MsgBox(0, &quot;SRE Example 4 Result&quot;, $asResult[0] &amp; &quot;,&quot; &amp; $asResult[1])<br>
+    EndIf</p>
+<p>&nbsp;</p>
+<p>まずパターンは検索対象文字列の一部に一致します。するとSREは全てのグループ(&quot;()&quot;)を&quot;キャプチャ&quot;するように指定されているので、それらを返し値用配列に保存していきます。例4の2番目のコードのように複数のグループをキャプチャすることも可能です。<br>
+  <br>
+  Gnarly Monsterの話に戻りましょう。どのようにテキストを&quot;キャプチャ&quot;するのかはわかりました。パターンの作成を始めましょう。探しているのは数字だということがわかっています。&quot;任意の数字と一致&quot;を指定する方法には&quot;[:digit:]&quot;、&quot;[0-9]&quot;、&quot;\d&quot;の3つがあります。最初のものがおそらく1番理解しやすいでしょう。文字の種類指定のために使用できるクラス(digit、alnum、spaceなど。全クラスのリストはヘルプファイルを参照)があり、その1つがdigitです。&quot;[0-9]&quot;は数字の0から9までの全ての数字を範囲指定しているだけです。&quot;\d&quot;は前の2つと同じ意味を持つ特殊文字です。この3つに違いは無く、SREではそれぞれに通常少なくとも2つのパターン構成方法があります。<br>
+  <br>
+  検索したいのは数字であることがわかっています。まず左カッコ&quot;(&quot;を書きます。次に1文字から3文字であり、全て数字であることがわかっているのでパターンは&quot;([0-9]{1,3}&quot;のようになります。最後にグループの終わりを表すために右カッコで閉じて&quot;([0-9]{1,3})&quot;となります。やってみましょう。<br>
+  <br>
+  <u><b>例 5</b></u></p>
+<p class="codebox">$asResult = StringRegExp(&quot;Gnarly Monster hits you for 18 damage.&quot;, 
+_<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; '([0-9]{1,3})', 1)<br>
+    If @error == 0 Then<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;MsgBox(0, &quot;SRE Example 5 Result&quot;, $asResult[0])<br>
+    EndIf</p>
+<p>&nbsp;</p>
+<p>実行するとメッセージボックスに正しく&quot;18&quot;と表示されます。<br>
+  <br>
+  次に非キャプチャグループについて説明します。&quot;(&quot;の代わりに&quot;(?:&quot;を使用することで非キャプチャグループを定義できます。ログが&quot;You deflect 36 of Gnarly Monster's 279 damage.&quot;の場合を考えましょう。これに対して例5のSREを実行すると、&quot;279&quot;の代わりに&quot;36&quot;が返ってきます。ここでやりたいことは2つの数字の間の違いを定義することです。私が思いついたのは2つめの数字は常に後ろにスペースと&quot;damage&quot;という単語がつくということです。したがって先ほどのパターンを&quot;([0-9]{1,3} damage)&quot;と修正します。ただしスクリプトで検索したいのはダメージの値だけで数字の後に付属する&quot; damage&quot;は必要ありません。このような場合に非キャプチャグループを使用します。<br>
+  <br>
+  <u><b>例 6</b></u></p>
+<p class="codebox">$asResult = StringRegExp(&quot;You deflect 36 of Gnarly Monster's 279 damage.&quot;, 
+    '([0-9]{1,3})(?: damage)', 1)<br>
+    If @error == 0 Then<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;MsgBox(0, &quot;SRE Example 6 Result&quot;, $asResult[0])<br>
+    EndIf</p>
+<p>&nbsp;</p>
+  <p>すこし長くなりますが正規表現がどのように動作するのか、SREがどのように&quot;考える&quot;のかについての見取り図を描いてみましょう。いくつかのことを憶えておいてください。<br>
+- パターンについては1文字づつ考えます<br>
+- StringRegExp()がパターンの1文字目を見つけた後、それが本当に一致しているのかしていないのかの判定について指定するのはあなたの仕事です。例6はそれをよく表しています。<br>
+- [ ... ]はORを意味します([xyz] は&quot;x&quot;OR&quot;y&quot;OR&quot;z&quot;を意味します)<br>
+他に疑問点がある場合はまず最初にヘルプファイルを調べてください。SREの重要な構文についての詳細な説明があります。特に見ておく必要があるのは&quot;繰り返し文字&quot;についての章です。範囲指定を特定の文字で表すことでパターンがより読みやすくなります。例えば&quot;*&quot;は {0,}、つまり0以上の任意文字数と同等の意味を持ちます。<br>
+  <br>
+頑張って。正規表現はあなたのコードの量を大幅に減らしてくれ、後で修正することを容易にしてくれます。訂正とフィードバックは大歓迎です!
+  <H2>リソース</H2><br>
+<a href="http://en.wikipedia.org/wiki/Regular_expression" target="_blank">
+Wikipediaの記事 - Regular Expressions</a> - blindwigに感謝。<p>
+<a href="http://www.codeproject.com/dotnet/regextutorial.asp" target="_blank">
+The 30 Minute Regex Tutorial</a> - 著者:Jim Hollenhorst</p>
+<p><br>
+ さまざまなStringRegExp()のパターンのテスト用GUI - steve8tchに感謝。クレジット:w0uter</p>
+<p>&nbsp;
+<OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57>
+<PARAM name="Command" value="ShortCut">
+<PARAM name="Button" value="Text:Open StringRegExpGUI.au3">
+<PARAM name="Item1" value=",Examples\Helpfile\StringRegExpGUI.au3,">
+</OBJECT> </p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</p>
+
+<p>このチュートリアルに関してneogiaに感謝。</p>
+<p>&nbsp;</p>
+</h2>
+</body>
+</html>

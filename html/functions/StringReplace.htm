@@ -1,0 +1,80 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function StringReplace</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">StringReplace</font>
+<hr size="2">
+<p>文字列中の部分文字列を入れ換えます。<br></p>
+
+<p class="codeheader">
+StringReplace ( "string", "searchstring/start", "replacestring" [, occurrence [, casesense]] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">string</td>
+    <td width="85%">対象となる文字列</td>
+  </tr>
+  <tr>
+   <td>searchstring/start</td>
+   <td>検索対象の部分文字列もしくは入れ換え開始の文字位置</td>
+  </tr>
+  <tr>
+   <td>replacestring</td>
+   <td>入れ換え文字列</td>
+  </tr>
+  <tr>
+   <td>occurrence</td>
+   <td><b>[オプション]</b> 検索文字列の入れ換え回数。右側から置換をおこなうには負の数を使用してください。<br>
+       0 = 全ての検索文字列が入れ換えられます(デフォルト)。</td>
+  </tr>
+  <tr>
+   <td>casesense</td>
+   <td><b>[オプション]</b> 大文字小文字の区別を指定するフラグ<br>
+       0 = 区別しません。ユーザーのロケールを使用します。(デフォルト)<br>
+       1 = 区別します。<br>
+	   2 = 区別しません。基本的/高速な比較を使用します。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+新しい文字列が返されます。入れ換え回数は@extendedに代入されます。<br>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+デフォルトの場合、occurrenceが正の場合は検索・入れ換えは左から右に実行されます。従ってStringReplace("aaa", "aa", "bb")は"bba"を返します。<br>
+<br>
+startパラメータが指定された場合occurrenceパラメータとcasesenseパラメータは無視されます。入れ換えができなかった場合、空文字列が返され@errorが1に設定されます。<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="StringLeft.htm">StringLeft</a>, <a href="StringLen.htm">StringLen</a>, <a href="StringLower.htm">StringLower</a>, <a href="StringMid.htm">StringMid</a>, <a href="StringRight.htm">StringRight</a>, <a href="StringTrimLeft.htm">StringTrimLeft</a>, <a href="StringTrimRight.htm">StringTrimRight</a>, <a href="StringUpper.htm">StringUpper</a>, <a href="StringStripWS.htm">StringStripWS</a>, <a href="StringAddCR.htm">StringAddCR</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S9">$text</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">StringReplace</span><span class="S8">(</span><span class="S7">"this is a line of text"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">" "</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"-"</span><span class="S8">)</span><br>
+<span class="S9">$numreplacements</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S6">@extended</span><br>
+<span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"New string is"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$text</span><span class="S8">)</span><br>
+<span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"The number of replacements done was"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$numreplacements</span><span class="S8">)</span><br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\StringReplace.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

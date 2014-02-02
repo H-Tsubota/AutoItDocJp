@@ -1,0 +1,504 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function GUIRegisterMsg</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">GUIRegisterMsg</font>
+<hr size="2">
+<p>既知のWindowsメッセージID(WM_MSG)に対してユーザー定義関数を登録します。<br></p>
+
+<p class="codeheader">
+GUIRegisterMsg ( msgID, "function" )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">msgID</td>
+    <td width="85%">WindowsメッセージID (付録を参照：<a href="../appendix/WinMsgCodes.htm">Windowsメッセージコード</a>).</td>
+  </tr>
+  <tr>
+   <td>function</td>
+   <td>メッセージに対応して呼び出されるユーザー関数の名前、またはメッセージ登録を削除するための空文字列 ""。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">成功</td>
+    <td width="90%">1</td>
+  </tr>
+  <tr>
+    <td valign="top">失敗</td>
+    <td>0</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+!!! ユーザー関数を正常に動作させるためには<strong>最大で4つの関数パラメータを定義しなければいけません</strong>。
+パラメータの定義が不適切な場合、関数は呼び出されません !!!<br>
+例：<br>
+Func MyUserFunction($hWndGUI, $MsgID, $WParam, $LParam)<br>
+...<br>
+EndFunc<br>
+<br>
+または<br>
+<br>
+Func MyUserFunction($hWndGUI, $MsgID)<br>
+...<br>
+EndFunc<br>
+<br>
+ユーザー関数が呼び出し時、これら4つのパラメータは次の値を持ちます。<br>
+<table width="100%" border="1" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td style="border-bottom-style: solid; border-bottom-width: 1"><b>位置</b></td>
+    <td style="border-bottom-style: solid; border-bottom-width: 1"><b>パラメータ</b></td>
+    <td style="border-bottom-style: solid; border-bottom-width: 1"><b>意味</b></td>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>hWnd</td>
+    <td>メッセージを投げたGUIのウィンドウハンドル。</td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>Msg</td>
+    <td>WindowsメッセージID。</td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td>wParam</td>
+    <td>最初のメッセージパラメータ(16進数値)。</td>
+  </tr>
+  <tr>
+    <td>4</td>
+    <td>lParam</td>
+    <td>2番目のメッセージパラメータ(16進数値)。</td>
+  </tr>
+</table><br>
+メッセージIDに対してユーザー関数を256個まで登録できます。<br>
+<br>
+デフォルトではユーザー関数が終了するとAutoIt内部のメッセージハンドラが続行されます。<br>
+ユーザー関数から値を<strong>Return</strong>したり(例のWM_COMMANDを参照)、値の無い'Return'句を使用した場合はこれがおこなわれません。<br>
+値の無い'Return'句を使用した場合、AutoIt内部のメッセージハンドラが(Returnしたメッセージ用のものであっても)続行されません!<br>
+<br>
+ !!! AutoItにメッセージ用の内部のハンドラを実行させたい場合、関数から<strong>$GUI_RUNDEFMSG</strong>(GUIConstantsEx.au3内)を返してください(例を参照) !!!<br>
+(ユーザー関数の最終行到達前にReturnしてAutoIt内部のメッセージハンドラを続行したい場合)<br>
+<br>
+<strong>警告：</strong>"Msgbox()"のようなコマンドによるウィンドウメッセージを処理するユーザー関数の実行のブロックは予期しない動作を引き起こします。できるだけ早くシステムに処理を返してください !!!<br>
+<br>
+一部のコントロールは特定のWindowsメッセージIDを内部的に処理しており、それらの登録は効果がありません。例えばWM_CHAR、WM_KEYDOWN、WM_KEYUPがエディットコントロールのよって処理されています。<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="GUICtrlGetHandle.htm">GUICtrlGetHandle</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S1">; *******************************************************</span><br>
+<span class="S1">; 例 - 主描画/色 ボタンを作成</span><br>
+<span class="S1">; *******************************************************</span><br>
+<br>
+<span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;GUIConstantsEx.au3&gt;</span><br>
+<span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;WindowsConstants.au3&gt;</span><br>
+<span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;ButtonConstants.au3&gt;</span><br>
+<br>
+<span class="S0">Example</span><span class="S8">()</span><br>
+<br>
+<span class="S5">Func</span><span class="S0"> Example</span><span class="S8">()</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S5">Const</span><span class="S0"> </span><span class="S9">$BS_OWNERDRAW</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0x0000000B</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$hGUI</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nButton</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nButton2</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$GUIMsg</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$hGUI</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICreate</span><span class="S8">(</span><span class="S7">"My Ownerdrawn Created Button"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">300</span><span class="S8">,</span><span class="S0"> </span><span class="S3">200</span><span class="S8">)</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$nButton</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICtrlCreateButton</span><span class="S8">(</span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S3">90</span><span class="S8">,</span><span class="S0"> </span><span class="S3">50</span><span class="S8">,</span><span class="S0"> </span><span class="S3">120</span><span class="S8">,</span><span class="S0"> </span><span class="S3">30</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUICtrlSetStyle</span><span class="S8">(</span><span class="S9">$nButton</span><span class="S8">,</span><span class="S0"> </span><span class="S4">BitOR</span><span class="S8">(</span><span class="S9">$WS_TABSTOP</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$BS_NOTIFY</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$BS_OWNERDRAW</span><span class="S8">))</span><span class="S0"> </span><span class="S1">; 主描画フラグ設定</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$nButton2</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICtrlCreateButton</span><span class="S8">(</span><span class="S7">"Normal Button"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">90</span><span class="S8">,</span><span class="S0"> </span><span class="S3">110</span><span class="S8">,</span><span class="S0"> </span><span class="S3">120</span><span class="S8">,</span><span class="S0"> </span><span class="S3">30</span><span class="S8">)</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUIRegisterMsg</span><span class="S8">(</span><span class="S9">$WM_COMMAND</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"MY_WM_COMMAND"</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; WM_DRAWITEMはGUI表示前に登録する。さもないと初期描画がおこなわれない</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUIRegisterMsg</span><span class="S8">(</span><span class="S9">$WM_DRAWITEM</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"MY_WM_DRAWITEM"</span><span class="S8">)</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUISetState</span><span class="S8">()</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">While</span><span class="S0"> </span><span class="S3">1</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$GUIMsg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUIGetMsg</span><span class="S8">()</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Switch</span><span class="S0"> </span><span class="S9">$GUIMsg</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Case</span><span class="S0"> </span><span class="S9">$GUI_EVENT_CLOSE</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">ExitLoop</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Case</span><span class="S0"> </span><span class="S9">$nButton</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S1">; 通常、MY_WM_COMMAND関数によらずには実行されない</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Info"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Button pressed"</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Case</span><span class="S0"> </span><span class="S9">$nButton2</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S1">; 通常、MY_WM_COMMAND関数によらずには実行されない</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Info"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Button2 pressed"</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">EndSwitch</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">WEnd</span><br>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;Example</span><br>
+<br>
+<span class="S1">; ボタンクリックに反応</span><br>
+<span class="S5">Func</span><span class="S0"> MY_WM_COMMAND</span><span class="S8">(</span><span class="S9">$hWnd</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$Msg</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$wParam</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$lParam</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$nNotifyCode</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">BitShift</span><span class="S8">(</span><span class="S9">$wParam</span><span class="S8">,</span><span class="S0"> </span><span class="S3">16</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$nID</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">BitAND</span><span class="S8">(</span><span class="S9">$wParam</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0x0000FFFF</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$hCtrl</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$lParam</span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">If</span><span class="S0"> </span><span class="S9">$nID</span><span class="S0"> </span><span class="S8">&lt;&gt;</span><span class="S0"> </span><span class="S3">2</span><span class="S0"> </span><span class="S5">And</span><span class="S0"> </span><span class="S9">$nNotifyCode</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><span class="S0"> </span><span class="S5">Then</span><span class="S0"> </span><span class="S1">; IDCANCEL - 2 をチェック</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S1">; 主描画ボタンはENTER入力では何も送信しない</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S1">; IDOK - 1が来た場合、現在コントロールにフォーカスがあっているかどうかチェック</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">If</span><span class="S0"> </span><span class="S9">$nID</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">1</span><span class="S0"> </span><span class="S5">Then</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$hFocus</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">DllCall</span><span class="S8">(</span><span class="S7">"user32.dll"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"hwnd"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"GetFocus"</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$nCtrlID</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">DllCall</span><span class="S8">(</span><span class="S7">"user32.dll"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"int"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"GetDlgCtrlID"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"hwnd"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$hFocus</span><span class="S8">[</span><span class="S3">0</span><span class="S8">])</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; PostButtonClick</span><span class="S8">(</span><span class="S9">$hWnd</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nCtrlID</span><span class="S8">[</span><span class="S3">0</span><span class="S8">])</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Else</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"MY_WM_COMMAND"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"GUIHWnd"</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@TAB</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">":"</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$hWnd</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@LF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S8">_</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S7">"MsgID"</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@TAB</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">":"</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$Msg</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@LF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S8">_</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S7">"wParam"</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@TAB</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">":"</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$wParam</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@LF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S8">_</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S7">"lParam"</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@TAB</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">":"</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$lParam</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@LF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@LF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S8">_</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S7">"WM_COMMAND - Infos:"</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@LF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S8">_</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S7">"-----------------------------"</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@LF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S8">_</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S7">"Code"</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@TAB</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">":"</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$nNotifyCode</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@LF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S8">_</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S7">"CtrlID"</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@TAB</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">":"</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$nID</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@LF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S8">_</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S7">"CtrlHWnd"</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@TAB</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">":"</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$hCtrl</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">EndIf</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Return</span><span class="S0"> </span><span class="S3">0</span><span class="S0"> </span><span class="S1">; ボタンクリック時のみ動作</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">EndIf</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; デフォルトのAutoit3内部メッセージコマンドを続行</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; ラインアウトによって完了できる</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; !!! ただし値なしの'Return'句では</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; この後のデフォルトのAutoit3-メッセージを続行できない!!!</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Return</span><span class="S0"> </span><span class="S9">$GUI_RUNDEFMSG</span><br>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;MY_WM_COMMAND</span><br>
+<br>
+<br>
+<span class="S1">; GUIウィンドウのctrlにWM_COMMANDメッセージを再ポスト</span><br>
+<span class="S5">Func</span><span class="S0"> PostButtonClick</span><span class="S8">(</span><span class="S9">$hWnd</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nCtrlID</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">DllCall</span><span class="S8">(</span><span class="S7">"user32.dll"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"int"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"PostMessage"</span><span class="S8">,</span><span class="S0"> </span><span class="S8">_</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S7">"hwnd"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$hWnd</span><span class="S8">,</span><span class="S0"> </span><span class="S8">_</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S7">"int"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$WM_COMMAND</span><span class="S8">,</span><span class="S0"> </span><span class="S8">_</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S7">"int"</span><span class="S8">,</span><span class="S0"> </span><span class="S4">BitAND</span><span class="S8">(</span><span class="S9">$nCtrlID</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0x0000FFFF</span><span class="S8">),</span><span class="S0"> </span><span class="S8">_</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S7">"hwnd"</span><span class="S8">,</span><span class="S0"> </span><span class="S4">GUICtrlGetHandle</span><span class="S8">(</span><span class="S9">$nCtrlID</span><span class="S8">))</span><br>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;PostButtonClick</span><br>
+<br>
+<br>
+<span class="S1">; ボタン描画</span><br>
+<span class="S5">Func</span><span class="S0"> MY_WM_DRAWITEM</span><span class="S8">(</span><span class="S9">$hWnd</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$Msg</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$wParam</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$lParam</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$stDrawItem</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">DllStructCreate</span><span class="S8">(</span><span class="S7">"uint;uint;uint;uint;uint;uint;uint;int[4];dword"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$lParam</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S5">Const</span><span class="S0"> </span><span class="S9">$ODT_BUTTON</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">4</span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$nCtlType</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">DllStructGetData</span><span class="S8">(</span><span class="S9">$stDrawItem</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">If</span><span class="S0"> </span><span class="S9">$nCtlType</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$ODT_BUTTON</span><span class="S0"> </span><span class="S5">Then</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$nCtrlID</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">DllStructGetData</span><span class="S8">(</span><span class="S9">$stDrawItem</span><span class="S8">,</span><span class="S0"> </span><span class="S3">2</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$nItemState</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">DllStructGetData</span><span class="S8">(</span><span class="S9">$stDrawItem</span><span class="S8">,</span><span class="S0"> </span><span class="S3">5</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$hCtrl</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">DllStructGetData</span><span class="S8">(</span><span class="S9">$stDrawItem</span><span class="S8">,</span><span class="S0"> </span><span class="S3">6</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$hDC</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">DllStructGetData</span><span class="S8">(</span><span class="S9">$stDrawItem</span><span class="S8">,</span><span class="S0"> </span><span class="S3">7</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$nLeft</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">DllStructGetData</span><span class="S8">(</span><span class="S9">$stDrawItem</span><span class="S8">,</span><span class="S0"> </span><span class="S3">8</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$nTop</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">DllStructGetData</span><span class="S8">(</span><span class="S9">$stDrawItem</span><span class="S8">,</span><span class="S0"> </span><span class="S3">8</span><span class="S8">,</span><span class="S0"> </span><span class="S3">2</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$nRight</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">DllStructGetData</span><span class="S8">(</span><span class="S9">$stDrawItem</span><span class="S8">,</span><span class="S0"> </span><span class="S3">8</span><span class="S8">,</span><span class="S0"> </span><span class="S3">3</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$nBottom</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">DllStructGetData</span><span class="S8">(</span><span class="S9">$stDrawItem</span><span class="S8">,</span><span class="S0"> </span><span class="S3">8</span><span class="S8">,</span><span class="S0"> </span><span class="S3">4</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$sText</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S7">"Ownerdrawn Button"</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$nTextColor</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0x5555DD</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$nBackColor</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0xFFEEDD</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; DrawButton</span><span class="S8">(</span><span class="S9">$hWnd</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$hCtrl</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$hDC</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nLeft</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nTop</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nRight</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nBottom</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nItemState</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$sText</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nTextColor</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nBackColor</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$stDrawItem</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Return</span><span class="S0"> </span><span class="S3">1</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">EndIf</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$stDrawItem</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Return</span><span class="S0"> </span><span class="S9">$GUI_RUNDEFMSG</span><span class="S0"> </span><span class="S1">; デフォルトのAutoit3内部メッセージコマンドを続行</span><br>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;MY_WM_DRAWITEM</span><br>
+<br>
+<br>
+<span class="S1">; 主描画プロシージャ</span><br>
+<span class="S5">Func</span><span class="S0"> DrawButton</span><span class="S8">(</span><span class="S9">$hWnd</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$hCtrl</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$hDC</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nLeft</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nTop</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nRight</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nBottom</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nItemState</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$sText</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nTextColor</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nBackColor</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">;Local $bDefault&nbsp; &nbsp; = FALSE</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S5">Const</span><span class="S0"> </span><span class="S9">$GWL_STYLE</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S8">-</span><span class="S3">16</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S5">Const</span><span class="S0"> </span><span class="S9">$ODS_SELECTED</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0x0001</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S5">Const</span><span class="S0"> </span><span class="S9">$ODS_GRAYED</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0x0002</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S5">Const</span><span class="S0"> </span><span class="S9">$ODS_DISABLED</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0x0004</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S5">Const</span><span class="S0"> </span><span class="S9">$ODS_CHECKED</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0x0008</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S5">Const</span><span class="S0"> </span><span class="S9">$ODS_FOCUS</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0x0010</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S5">Const</span><span class="S0"> </span><span class="S9">$ODS_HOTLIGHT</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0x0040</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S5">Const</span><span class="S0"> </span><span class="S9">$ODS_INACTIVE</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0x0080</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S5">Const</span><span class="S0"> </span><span class="S9">$ODS_NOACCEL</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0x0100</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S5">Const</span><span class="S0"> </span><span class="S9">$ODS_NOFOCUSRECT</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0x0200</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S5">Const</span><span class="S0"> </span><span class="S9">$DFC_BUTTON</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">4</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S5">Const</span><span class="S0"> </span><span class="S9">$DFCS_BUTTONPUSH</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0x0010</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$bChecked</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">BitAND</span><span class="S8">(</span><span class="S9">$nItemState</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$ODS_CHECKED</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$bFocused</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">BitAND</span><span class="S8">(</span><span class="S9">$nItemState</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$ODS_FOCUS</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$bGrayed</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">BitAND</span><span class="S8">(</span><span class="S9">$nItemState</span><span class="S8">,</span><span class="S0"> </span><span class="S4">BitOR</span><span class="S8">(</span><span class="S9">$ODS_GRAYED</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$ODS_DISABLED</span><span class="S8">))</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$bSelected</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">BitAND</span><span class="S8">(</span><span class="S9">$nItemState</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$ODS_SELECTED</span><span class="S8">)</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$stRect</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">DllStructCreate</span><span class="S8">(</span><span class="S7">"int;int;int;int"</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">DllStructSetData</span><span class="S8">(</span><span class="S9">$stRect</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nLeft</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">DllStructSetData</span><span class="S8">(</span><span class="S9">$stRect</span><span class="S8">,</span><span class="S0"> </span><span class="S3">2</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nTop</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">DllStructSetData</span><span class="S8">(</span><span class="S9">$stRect</span><span class="S8">,</span><span class="S0"> </span><span class="S3">3</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nRight</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">DllStructSetData</span><span class="S8">(</span><span class="S9">$stRect</span><span class="S8">,</span><span class="S0"> </span><span class="S3">4</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nBottom</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">If</span><span class="S0"> </span><span class="S9">$bGrayed</span><span class="S0"> </span><span class="S5">Then</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$nClrTxt</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> SetTextColor</span><span class="S8">(</span><span class="S9">$hDC</span><span class="S8">,</span><span class="S0"> GetSysColor</span><span class="S8">(</span><span class="S9">$COLOR_HIGHLIGHTTEXT</span><span class="S8">))</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">ElseIf</span><span class="S0"> </span><span class="S9">$nTextColor</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S0"> </span><span class="S5">Then</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$nClrTxt</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> SetTextColor</span><span class="S8">(</span><span class="S9">$hDC</span><span class="S8">,</span><span class="S0"> GetSysColor</span><span class="S8">(</span><span class="S9">$COLOR_BTNTEXT</span><span class="S8">))</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Else</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$nClrTxt</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> SetTextColor</span><span class="S8">(</span><span class="S9">$hDC</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nTextColor</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">EndIf</span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">If</span><span class="S0"> </span><span class="S9">$nBackColor</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S0"> </span><span class="S5">Then</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$hBrush</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> GetSysColorBrush</span><span class="S8">(</span><span class="S9">$COLOR_BTNFACE</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$nClrSel</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> GetSysColor</span><span class="S8">(</span><span class="S9">$COLOR_BTNFACE</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Else</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$hBrush</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> CreateSolidBrush</span><span class="S8">(</span><span class="S9">$nBackColor</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$nClrSel</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$nBackColor</span><span class="S1">;</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">EndIf</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$nClrBk</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> SetBkColor</span><span class="S8">(</span><span class="S9">$hDC</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nClrSel</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$hOldBrush</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> SelectObject</span><span class="S8">(</span><span class="S9">$hDC</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$hBrush</span><span class="S8">)</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$nTmpLeft</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$nLeft</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$nTmpTop</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$nTop</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$nTmpRight</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$nRight</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$nTmpBottom</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$nBottom</span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">If</span><span class="S0"> </span><span class="S9">$bSelected</span><span class="S0"> </span><span class="S5">Then</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; InflateRect</span><span class="S8">(</span><span class="S9">$nTmpLeft</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nTmpTop</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nTmpRight</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nTmpBottom</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$hBrushSel</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> CreateSolidBrush</span><span class="S8">(</span><span class="S0">GetSysColor</span><span class="S8">(</span><span class="S9">$COLOR_BTNSHADOW</span><span class="S8">))</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; FrameRect</span><span class="S8">(</span><span class="S9">$hDC</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nTmpLeft</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nTmpTop</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nTmpRight</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nTmpBottom</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$hBrushSel</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; DeleteObject</span><span class="S8">(</span><span class="S9">$hBrushSel</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Else</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">If</span><span class="S0"> </span><span class="S9">$bFocused</span><span class="S0"> </span><span class="S5">And</span><span class="S0"> </span><span class="S5">Not</span><span class="S0"> </span><span class="S9">$bSelected</span><span class="S0"> </span><span class="S5">Then</span><span class="S0"> InflateRect</span><span class="S8">(</span><span class="S9">$nTmpLeft</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nTmpTop</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nTmpRight</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nTmpBottom</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; DrawFrameControl</span><span class="S8">(</span><span class="S9">$hDC</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nTmpLeft</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nTmpTop</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nTmpRight</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nTmpBottom</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$DFC_BUTTON</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$DFCS_BUTTONPUSH</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">EndIf</span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$nTmpLeft</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$nLeft</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$nTmpTop</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$nTop</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$nTmpRight</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$nRight</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$nTmpBottom</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$nBottom</span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">If</span><span class="S0"> </span><span class="S9">$bSelected</span><span class="S0"> </span><span class="S5">Then</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; InflateRect</span><span class="S8">(</span><span class="S9">$nTmpLeft</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nTmpTop</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nTmpRight</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nTmpBottom</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">2</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">2</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Else</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">If</span><span class="S0"> </span><span class="S9">$bFocused</span><span class="S0"> </span><span class="S5">And</span><span class="S0"> </span><span class="S5">Not</span><span class="S0"> </span><span class="S9">$bSelected</span><span class="S0"> </span><span class="S5">Then</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; InflateRect</span><span class="S8">(</span><span class="S9">$nTmpLeft</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nTmpTop</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nTmpRight</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nTmpBottom</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">3</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">3</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$nTmpLeft</span><span class="S0"> </span><span class="S8">-=</span><span class="S0"> </span><span class="S3">1</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$nTmpTop</span><span class="S0"> </span><span class="S8">-=</span><span class="S0"> </span><span class="S3">1</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Else</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; InflateRect</span><span class="S8">(</span><span class="S9">$nTmpLeft</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nTmpTop</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nTmpRight</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nTmpBottom</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">2</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">2</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$nTmpLeft</span><span class="S0"> </span><span class="S8">-=</span><span class="S0"> </span><span class="S3">1</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$nTmpTop</span><span class="S0"> </span><span class="S8">-=</span><span class="S0"> </span><span class="S3">1</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">EndIf</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">EndIf</span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; FillRect</span><span class="S8">(</span><span class="S9">$hDC</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nTmpLeft</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nTmpTop</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nTmpRight</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nTmpBottom</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$hBrush</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">If</span><span class="S0"> </span><span class="S9">$bSelected</span><span class="S0"> </span><span class="S5">Or</span><span class="S0"> </span><span class="S9">$bGrayed</span><span class="S0"> </span><span class="S5">Then</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$nTmpLeft</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$nTmpLeft</span><span class="S0"> </span><span class="S8">+</span><span class="S0"> </span><span class="S3">2</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$nTmpTop</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$nTmpTop</span><span class="S0"> </span><span class="S8">+</span><span class="S0"> </span><span class="S3">2</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">EndIf</span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$uFlags</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">BitOR</span><span class="S8">(</span><span class="S9">$DT_NOCLIP</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$DT_CENTER</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$DT_VCENTER</span><span class="S8">)</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">If</span><span class="S0"> </span><span class="S5">Not</span><span class="S0"> </span><span class="S4">BitAND</span><span class="S8">(</span><span class="S0">GetWindowLong</span><span class="S8">(</span><span class="S9">$hCtrl</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$GWL_STYLE</span><span class="S8">),</span><span class="S0"> </span><span class="S9">$BS_MULTILINE</span><span class="S8">)</span><span class="S0"> </span><span class="S5">Then</span><span class="S0"> </span><span class="S9">$uFlags</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">BitOR</span><span class="S8">(</span><span class="S9">$uFlags</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$DT_SINGLELINE</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; DrawText</span><span class="S8">(</span><span class="S9">$hDC</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$sText</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nTmpLeft</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nTmpTop</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nTmpRight</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nTmpBottom</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$uFlags</span><span class="S8">)</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">If</span><span class="S0"> </span><span class="S9">$bGrayed</span><span class="S0"> </span><span class="S5">Then</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$nTmpLeft</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$nLeft</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$nTmpTop</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$nTop</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$nTmpRight</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$nRight</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$nTmpBottom</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$nBottom</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$nTmpLeft</span><span class="S0"> </span><span class="S8">-=</span><span class="S0"> </span><span class="S3">1</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$nClrTxt</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> SetTextColor</span><span class="S8">(</span><span class="S9">$hDC</span><span class="S8">,</span><span class="S0"> GetSysColor</span><span class="S8">(</span><span class="S9">$COLOR_GRAYTEXT</span><span class="S8">))</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; DrawText</span><span class="S8">(</span><span class="S9">$hDC</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$sText</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nTmpLeft</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nTmpTop</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nTmpRight</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nTmpBottom</span><span class="S8">,</span><span class="S0"> </span><span class="S4">BitOR</span><span class="S8">(</span><span class="S9">$DT_NOCLIP</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$DT_CENTER</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$DT_VCENTER</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$DT_SINGLELINE</span><span class="S8">))</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">EndIf</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$nTmpLeft</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$nLeft</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$nTmpTop</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$nTop</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$nTmpRight</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$nRight</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$nTmpBottom</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$nBottom</span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">If</span><span class="S0"> </span><span class="S9">$bFocused</span><span class="S0"> </span><span class="S5">Then</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$hBrush</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> CreateSolidBrush</span><span class="S8">(</span><span class="S3">0</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; FrameRect</span><span class="S8">(</span><span class="S9">$hDC</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nTmpLeft</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nTmpTop</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nTmpRight</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nTmpBottom</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$hBrush</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$nTmpLeft</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$nLeft</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$nTmpTop</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$nTop</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$nTmpRight</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$nRight</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$nTmpBottom</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$nBottom</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; InflateRect</span><span class="S8">(</span><span class="S9">$nTmpLeft</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nTmpTop</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nTmpRight</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nTmpBottom</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">4</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">4</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; DrawFocusRect</span><span class="S8">(</span><span class="S9">$hDC</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nTmpLeft</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nTmpTop</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nTmpRight</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nTmpBottom</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">EndIf</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; SelectObject</span><span class="S8">(</span><span class="S9">$hDC</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$hOldBrush</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; DeleteObject</span><span class="S8">(</span><span class="S9">$hBrush</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; SetTextColor</span><span class="S8">(</span><span class="S9">$hDC</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nClrTxt</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; SetBkColor</span><span class="S8">(</span><span class="S9">$hDC</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nClrBk</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Return</span><span class="S0"> </span><span class="S3">1</span><br>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;DrawButton</span><br>
+<br>
+<br>
+<span class="S1">; Some graphic / windows functions</span><br>
+<span class="S5">Func</span><span class="S0"> CreateSolidBrush</span><span class="S8">(</span><span class="S9">$nColor</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$hBrush</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">DllCall</span><span class="S8">(</span><span class="S7">"gdi32.dll"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"hwnd"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"CreateSolidBrush"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"int"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nColor</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Return</span><span class="S0"> </span><span class="S9">$hBrush</span><span class="S8">[</span><span class="S3">0</span><span class="S8">]</span><br>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;CreateSolidBrush</span><br>
+<br>
+<br>
+<span class="S5">Func</span><span class="S0"> GetSysColor</span><span class="S8">(</span><span class="S9">$nIndex</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$nColor</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">DllCall</span><span class="S8">(</span><span class="S7">"user32.dll"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"int"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"GetSysColor"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"int"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nIndex</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Return</span><span class="S0"> </span><span class="S9">$nColor</span><span class="S8">[</span><span class="S3">0</span><span class="S8">]</span><br>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;GetSysColor</span><br>
+<br>
+<br>
+<span class="S5">Func</span><span class="S0"> GetSysColorBrush</span><span class="S8">(</span><span class="S9">$nIndex</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$hBrush</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">DllCall</span><span class="S8">(</span><span class="S7">"user32.dll"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"hwnd"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"GetSysColorBrush"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"int"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nIndex</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Return</span><span class="S0"> </span><span class="S9">$hBrush</span><span class="S8">[</span><span class="S3">0</span><span class="S8">]</span><br>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;GetSysColorBrush</span><br>
+<br>
+<br>
+<span class="S5">Func</span><span class="S0"> DrawFrameControl</span><span class="S8">(</span><span class="S9">$hDC</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nLeft</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nTop</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nRight</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nBottom</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nType</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nState</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$stRect</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">DllStructCreate</span><span class="S8">(</span><span class="S7">"int;int;int;int"</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">DllStructSetData</span><span class="S8">(</span><span class="S9">$stRect</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nLeft</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">DllStructSetData</span><span class="S8">(</span><span class="S9">$stRect</span><span class="S8">,</span><span class="S0"> </span><span class="S3">2</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nTop</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">DllStructSetData</span><span class="S8">(</span><span class="S9">$stRect</span><span class="S8">,</span><span class="S0"> </span><span class="S3">3</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nRight</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">DllStructSetData</span><span class="S8">(</span><span class="S9">$stRect</span><span class="S8">,</span><span class="S0"> </span><span class="S3">4</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nBottom</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">DllCall</span><span class="S8">(</span><span class="S7">"user32.dll"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"int"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"DrawFrameControl"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"hwnd"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$hDC</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"ptr"</span><span class="S8">,</span><span class="S0"> </span><span class="S4">DllStructGetPtr</span><span class="S8">(</span><span class="S9">$stRect</span><span class="S8">),</span><span class="S0"> </span><span class="S7">"int"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nType</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"int"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nState</span><span class="S8">)</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$stRect</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><br>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;DrawFrameControl</span><br>
+<br>
+<br>
+<span class="S5">Func</span><span class="S0"> DrawFocusRect</span><span class="S8">(</span><span class="S9">$hDC</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nLeft</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nTop</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nRight</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nBottom</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$stRect</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">DllStructCreate</span><span class="S8">(</span><span class="S7">"int;int;int;int"</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">DllStructSetData</span><span class="S8">(</span><span class="S9">$stRect</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nLeft</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">DllStructSetData</span><span class="S8">(</span><span class="S9">$stRect</span><span class="S8">,</span><span class="S0"> </span><span class="S3">2</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nTop</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">DllStructSetData</span><span class="S8">(</span><span class="S9">$stRect</span><span class="S8">,</span><span class="S0"> </span><span class="S3">3</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nRight</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">DllStructSetData</span><span class="S8">(</span><span class="S9">$stRect</span><span class="S8">,</span><span class="S0"> </span><span class="S3">4</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nBottom</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">DllCall</span><span class="S8">(</span><span class="S7">"user32.dll"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"int"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"DrawFocusRect"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"hwnd"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$hDC</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"ptr"</span><span class="S8">,</span><span class="S0"> </span><span class="S4">DllStructGetPtr</span><span class="S8">(</span><span class="S9">$stRect</span><span class="S8">))</span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$stRect</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><br>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;DrawFocusRect</span><br>
+<br>
+<br>
+<span class="S5">Func</span><span class="S0"> DrawText</span><span class="S8">(</span><span class="S9">$hDC</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$sText</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nLeft</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nTop</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nRight</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nBottom</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nFormat</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$nLen</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">StringLen</span><span class="S8">(</span><span class="S9">$sText</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$stRect</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">DllStructCreate</span><span class="S8">(</span><span class="S7">"int;int;int;int"</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">DllStructSetData</span><span class="S8">(</span><span class="S9">$stRect</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nLeft</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">DllStructSetData</span><span class="S8">(</span><span class="S9">$stRect</span><span class="S8">,</span><span class="S0"> </span><span class="S3">2</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nTop</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">DllStructSetData</span><span class="S8">(</span><span class="S9">$stRect</span><span class="S8">,</span><span class="S0"> </span><span class="S3">3</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nRight</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">DllStructSetData</span><span class="S8">(</span><span class="S9">$stRect</span><span class="S8">,</span><span class="S0"> </span><span class="S3">4</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nBottom</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$stText</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">DllStructCreate</span><span class="S8">(</span><span class="S7">"char[260]"</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">DllStructSetData</span><span class="S8">(</span><span class="S9">$stText</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$sText</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">DllCall</span><span class="S8">(</span><span class="S7">"user32.dll"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"int"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"DrawText"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"hwnd"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$hDC</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"ptr"</span><span class="S8">,</span><span class="S0"> </span><span class="S4">DllStructGetPtr</span><span class="S8">(</span><span class="S9">$stText</span><span class="S8">),</span><span class="S0"> </span><span class="S7">"int"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nLen</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"ptr"</span><span class="S8">,</span><span class="S0"> </span><span class="S4">DllStructGetPtr</span><span class="S8">(</span><span class="S9">$stRect</span><span class="S8">),</span><span class="S0"> </span><span class="S7">"int"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nFormat</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$stRect</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$stText</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><br>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;DrawText</span><br>
+<br>
+<br>
+<span class="S5">Func</span><span class="S0"> FillRect</span><span class="S8">(</span><span class="S9">$hDC</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nLeft</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nTop</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nRight</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nBottom</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$hBrush</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$stRect</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">DllStructCreate</span><span class="S8">(</span><span class="S7">"int;int;int;int"</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">DllStructSetData</span><span class="S8">(</span><span class="S9">$stRect</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nLeft</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">DllStructSetData</span><span class="S8">(</span><span class="S9">$stRect</span><span class="S8">,</span><span class="S0"> </span><span class="S3">2</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nTop</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">DllStructSetData</span><span class="S8">(</span><span class="S9">$stRect</span><span class="S8">,</span><span class="S0"> </span><span class="S3">3</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nRight</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">DllStructSetData</span><span class="S8">(</span><span class="S9">$stRect</span><span class="S8">,</span><span class="S0"> </span><span class="S3">4</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nBottom</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">DllCall</span><span class="S8">(</span><span class="S7">"user32.dll"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"int"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"FillRect"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"hwnd"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$hDC</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"ptr"</span><span class="S8">,</span><span class="S0"> </span><span class="S4">DllStructGetPtr</span><span class="S8">(</span><span class="S9">$stRect</span><span class="S8">),</span><span class="S0"> </span><span class="S7">"hwnd"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$hBrush</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$stRect</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><br>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;FillRect</span><br>
+<br>
+<br>
+<span class="S5">Func</span><span class="S0"> FrameRect</span><span class="S8">(</span><span class="S9">$hDC</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nLeft</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nTop</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nRight</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nBottom</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$hBrush</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$stRect</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">DllStructCreate</span><span class="S8">(</span><span class="S7">"int;int;int;int"</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">DllStructSetData</span><span class="S8">(</span><span class="S9">$stRect</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nLeft</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">DllStructSetData</span><span class="S8">(</span><span class="S9">$stRect</span><span class="S8">,</span><span class="S0"> </span><span class="S3">2</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nTop</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">DllStructSetData</span><span class="S8">(</span><span class="S9">$stRect</span><span class="S8">,</span><span class="S0"> </span><span class="S3">3</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nRight</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">DllStructSetData</span><span class="S8">(</span><span class="S9">$stRect</span><span class="S8">,</span><span class="S0"> </span><span class="S3">4</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nBottom</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">DllCall</span><span class="S8">(</span><span class="S7">"user32.dll"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"int"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"FrameRect"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"hwnd"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$hDC</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"ptr"</span><span class="S8">,</span><span class="S0"> </span><span class="S4">DllStructGetPtr</span><span class="S8">(</span><span class="S9">$stRect</span><span class="S8">),</span><span class="S0"> </span><span class="S7">"hwnd"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$hBrush</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$stRect</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><br>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;FrameRect</span><br>
+<br>
+<br>
+<span class="S5">Func</span><span class="S0"> InflateRect</span><span class="S8">(</span><span class="S5">ByRef</span><span class="S0"> </span><span class="S9">$nLeft</span><span class="S8">,</span><span class="S0"> </span><span class="S5">ByRef</span><span class="S0"> </span><span class="S9">$nTop</span><span class="S8">,</span><span class="S0"> </span><span class="S5">ByRef</span><span class="S0"> </span><span class="S9">$nRight</span><span class="S8">,</span><span class="S0"> </span><span class="S5">ByRef</span><span class="S0"> </span><span class="S9">$nBottom</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nX</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nY</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$stRect</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">DllStructCreate</span><span class="S8">(</span><span class="S7">"int;int;int;int"</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">DllStructSetData</span><span class="S8">(</span><span class="S9">$stRect</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nLeft</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">DllStructSetData</span><span class="S8">(</span><span class="S9">$stRect</span><span class="S8">,</span><span class="S0"> </span><span class="S3">2</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nTop</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">DllStructSetData</span><span class="S8">(</span><span class="S9">$stRect</span><span class="S8">,</span><span class="S0"> </span><span class="S3">3</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nRight</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">DllStructSetData</span><span class="S8">(</span><span class="S9">$stRect</span><span class="S8">,</span><span class="S0"> </span><span class="S3">4</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nBottom</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">DllCall</span><span class="S8">(</span><span class="S7">"user32.dll"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"int"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"InflateRect"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"ptr"</span><span class="S8">,</span><span class="S0"> </span><span class="S4">DllStructGetPtr</span><span class="S8">(</span><span class="S9">$stRect</span><span class="S8">),</span><span class="S0"> </span><span class="S7">"int"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nX</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"int"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nY</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$nLeft</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">DllStructGetData</span><span class="S8">(</span><span class="S9">$stRect</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$nTop</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">DllStructGetData</span><span class="S8">(</span><span class="S9">$stRect</span><span class="S8">,</span><span class="S0"> </span><span class="S3">2</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$nRight</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">DllStructGetData</span><span class="S8">(</span><span class="S9">$stRect</span><span class="S8">,</span><span class="S0"> </span><span class="S3">3</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$nBottom</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">DllStructGetData</span><span class="S8">(</span><span class="S9">$stRect</span><span class="S8">,</span><span class="S0"> </span><span class="S3">4</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$stRect</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><br>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;InflateRect</span><br>
+<br>
+<br>
+<span class="S5">Func</span><span class="S0"> SetBkColor</span><span class="S8">(</span><span class="S9">$hDC</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nColor</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$nOldColor</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">DllCall</span><span class="S8">(</span><span class="S7">"gdi32.dll"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"int"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"SetBkColor"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"hwnd"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$hDC</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"int"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nColor</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Return</span><span class="S0"> </span><span class="S9">$nOldColor</span><span class="S8">[</span><span class="S3">0</span><span class="S8">]</span><br>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;SetBkColor</span><br>
+<br>
+<br>
+<span class="S5">Func</span><span class="S0"> SetTextColor</span><span class="S8">(</span><span class="S9">$hDC</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nColor</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$nOldColor</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">DllCall</span><span class="S8">(</span><span class="S7">"gdi32.dll"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"int"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"SetTextColor"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"hwnd"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$hDC</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"int"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nColor</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Return</span><span class="S0"> </span><span class="S9">$nOldColor</span><span class="S8">[</span><span class="S3">0</span><span class="S8">]</span><br>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;SetTextColor</span><br>
+<br>
+<br>
+<span class="S5">Func</span><span class="S0"> SelectObject</span><span class="S8">(</span><span class="S9">$hDC</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$hObj</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$hOldObj</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">DllCall</span><span class="S8">(</span><span class="S7">"gdi32.dll"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"hwnd"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"SelectObject"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"hwnd"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$hDC</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"hwnd"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$hObj</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Return</span><span class="S0"> </span><span class="S9">$hOldObj</span><span class="S8">[</span><span class="S3">0</span><span class="S8">]</span><br>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;SelectObject</span><br>
+<br>
+<br>
+<span class="S5">Func</span><span class="S0"> DeleteObject</span><span class="S8">(</span><span class="S9">$hObj</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$nResult</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">DllCall</span><span class="S8">(</span><span class="S7">"gdi32.dll"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"hwnd"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"DeleteObject"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"hwnd"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$hObj</span><span class="S8">)</span><br>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;DeleteObject</span><br>
+<br>
+<br>
+<span class="S5">Func</span><span class="S0"> GetWindowLong</span><span class="S8">(</span><span class="S9">$hWnd</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nIndex</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$nVal</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">DllCall</span><span class="S8">(</span><span class="S7">"user32.dll"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"int"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"GetWindowLong"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"hwnd"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$hWnd</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"int"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nIndex</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Return</span><span class="S0"> </span><span class="S9">$nVal</span><span class="S8">[</span><span class="S3">0</span><span class="S8">]</span><br>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;GetWindowLong</span></span><br>
+<script type="text/javascript">
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\GUIRegisterMsg.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+</body>
+</html>

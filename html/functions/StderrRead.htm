@@ -1,0 +1,92 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function StderrRead</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">StderrRead</font>
+<hr size="2">
+<p>実行した子プロセスのSTDERRストリームを読み取ります。<br></p>
+
+<p class="codeheader">
+StderrRead ( process_id[, peek = false[, binary = false]] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">process_id</td>
+    <td width="85%">Run実行時に返される子プロセスのプロセスID。</td>
+  </tr>
+  <tr>
+   <td>peek</td>
+   <td><b>[オプション]</b>trueの場合、関数は読み取った文字をストリームから削除しません。</td>
+  </tr>
+  <tr>
+   <td>binary</td>
+   <td><b>[オプション]</b>trueの場合、関数はテキストではなくバイナリとしてデータを読み取ります(デフォルトではテキストです)。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">成功</td>
+	<td width="90%">読み取ったデータを返します。@extendedには読み取ったバイト数が格納されます。</td>
+  </tr>
+  <tr>
+    <td valign="top">失敗</td>
+    <td>EOFに到達した場合、@errorを非ゼロに設定します。STDERRはプロセス、その他のエラーをリダイレクトしません。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+StderrReadは子プロセスのコンソール標準出力ストリームを読み取ります。コンソール標準エラーストリームは通常はコンソールアプリケーションがスクリーンにエラーを表示するために使用されます。この関数が正常に動作するためには、読み取りたい子プロセスをRunで実行する際にSTD I/Oパラメータに値 $STDERR_CHILD (4)を設定する必要があります(<a href="Run.htm">Run</a>関数を参照)。<br>
+StderrReadは処理を止めず、直ちに返ります。全てのデータを取得するにはループ内で呼び出す必要があります。<br>
+ストリームのデータ取得ではバッファからデータは削除されませんが通常は利用可能なデータが返されます。<br>
+デフォルトではデータはテキスト形式で返されます。バイナリオプションを使用することによってデータはバイナリ形式で返されます。<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="StdoutRead.htm">StdoutRead</a>, <a href="StdinWrite.htm">StdinWrite</a>, <a href="StdioClose.htm">StdioClose</a>, <a href="Run.htm">Run</a>, <a href="RunAs.htm">RunAs</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S1">; StdoutRead()のデモ</span><br>
+<span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;Constants.au3&gt;</span><br>
+<br>
+<span class="S5">Local</span><span class="S0"> </span><span class="S9">$foo</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">Run</span><span class="S8">(</span><span class="S6">@ComSpec</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">" /c dir foo.bar"</span><span class="S8">,</span><span class="S0"> </span><span class="S6">@SystemDir</span><span class="S8">,</span><span class="S0"> </span><span class="S6">@SW_HIDE</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$STDERR_CHILD</span><span class="S0"> </span><span class="S8">+</span><span class="S0"> </span><span class="S9">$STDOUT_CHILD</span><span class="S8">)</span><br>
+<span class="S5">Local</span><span class="S0"> </span><span class="S9">$line</span><br>
+<span class="S5">While</span><span class="S0"> </span><span class="S3">1</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S9">$line</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">StdoutRead</span><span class="S8">(</span><span class="S9">$foo</span><span class="S8">)</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">If</span><span class="S0"> </span><span class="S6">@error</span><span class="S0"> </span><span class="S5">Then</span><span class="S0"> </span><span class="S5">ExitLoop</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"STDOUT read:"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$line</span><span class="S8">)</span><br>
+<span class="S5">Wend</span><br>
+<br>
+<span class="S5">While</span><span class="S0"> </span><span class="S3">1</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S9">$line</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">StderrRead</span><span class="S8">(</span><span class="S9">$foo</span><span class="S8">)</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">If</span><span class="S0"> </span><span class="S6">@error</span><span class="S0"> </span><span class="S5">Then</span><span class="S0"> </span><span class="S5">ExitLoop</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"STDERR read:"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$line</span><span class="S8">)</span><br>
+<span class="S5">Wend</span><br>
+<br>
+<span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Debug"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Exiting..."</span><span class="S8">)</span><br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\StderrRead.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

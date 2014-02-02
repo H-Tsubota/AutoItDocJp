@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function RegRead</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">RegRead</font>
+<hr size="2">
+<p>レジストリからデータを読み取ります。<br></p>
+
+<p class="codeheader">
+RegRead ( "keyname", "valuename" )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">keyname</td>
+    <td width="85%">読みとるレジストリキー</td>
+  </tr>
+  <tr>
+   <td>valuename</td>
+   <td>読みとる値</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">成功</td>
+    <td width="90%">要求されたレジストリのデータを返し、@EXTENDEDにレジ変数の種類$REG_...を格納します。これらの種類はインクルードファイル"Constants.au3"内で定義されています。</td>
+  </tr>
+  <tr>
+    <td valign="top">失敗</td>
+    <td>""を返し@errorを設定します。</td>
+  </tr>
+  <tr>
+    <td valign="top"></td>
+    <td>1 要求されたキーを開けなかった場合</td>
+  </tr>
+  <tr>
+    <td valign="top"></td>
+     <td>2 要求されたメインキーを開けなかった場合</td>
+  </tr>
+  <tr>
+    <td valign="top"></td>
+   <td>3 レジストリにリモート接続できなかった場合</td>
+  </tr>
+  <tr>
+    <td valign="top"></td>
+    <td>-1 要求された値を開けなかった場合</td>
+  </tr>
+  <tr>
+    <td valign="top"></td>
+    <td>-2 値の種類がサポートされていない場合</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+レジストリキーは "HKEY_LOCAL_MACHINE" ("HKLM")、"HKEY_USERS" ("HKU")、"HKEY_CURRENT_USER" ("HKCU")、"HKEY_CLASSES_ROOT" ("HKCR")、"HKEY_CURRENT_CONFIG" ("HKCC")のいずれかから開始されなければいけません。<br>
+<br>
+64ビットウィンドウズで実行時に64ビット環境特有のキーや値を削除したい場合、HK...の後ろに64を付ける必要があります。例）HKLM64。<br>
+<br>
+AutoItはREG_BINARY、REG_SZ、REG_MULTI_SZ、REG_EXPAND_SZ、REG_DWORDタイプのレジストリキーをサポートしています。<br>
+<br>
+<b>(既定)</b>値にアクセスするためには<b>""</b> (空の文字列) を値の名前に設定します。<br>
+<br>
+REG_BINARYキーを読み込んだ場合、返し値はバイナリデータ型になります（以前のバージョンでは16進数表現の文字列でした）。<br>
+<br>
+REG_MULTI_SZキーを読み込んだ場合、複数のエントリーは@LFによって分けられます。それぞれのエントリーを得るにはStringSplit(..., @LF)を使用してください。<br>
+<br>
+"\\computername\keyname"の書式を使うことで離れたコンピュータのレジストリにアクセスすることが可能です。この機能を使うためには適切なアクセス権限が必要です。<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="RegDelete.htm">RegDelete</a>, <a href="RegWrite.htm">RegWrite</a>, <a href="StringSplit.htm">StringSplit</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S9">$var</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">RegRead</span><span class="S8">(</span><span class="S7">"HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"ProgramFilesDir"</span><span class="S8">)</span><br>
+<span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">4096</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Program files are in:"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$var</span><span class="S8">)</span><br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\RegRead.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

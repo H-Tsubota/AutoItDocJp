@@ -1,0 +1,427 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Send key list</title>
+  <META http-equiv="Content-Type" content="text/html; charset=shift-jis">
+  <link type="text/css" rel="stylesheet" href="../css/default.css">
+</head>
+<body>
+<h1>Send key list</h1>
+<p><br>
+<b><a href="../functions/Send.htm">Send( "keys" [, flag] )</a></b>コマンドのためのクイックリファレンス。記号との対応は次の通り。
+  <b>^</b> Ctrl &nbsp;&nbsp; <b>!</b> Alt &nbsp;&nbsp; <b>+</b> Shift &nbsp;&nbsp; <b>#</b> Win。<br>
+</p>
+<p>
+AutoItはすべてのASCIIコードと拡張アスキーコード(0-255)を扱えます。UNICODE文字を扱う場合は&quot;ASC&quot;オプションと送信したい文字のコードを使用しなければいけません(下記の{ASC}を参照)。
+</p>
+<p>
+  <br>
+  <br>
+  ASCIIコード値のAを送信するためには次のようにします（数字パッドでALT+065と同様）。
+  </p>
+<p class="codebox">Send(&quot;{ASC 065}&quot;)</p>
+<p>
+(2桁のASCIIコードを使う場合にはゼロ埋めする必要があります。ゼロ埋めしないと古い437コードページが使用されてしまいます。)
+</p>
+<p>&nbsp;</p>
+<p>
+UNICODEの文字コードを送信する場合には次のようにします。例では漢字が送信されます。</p>
+<p class="codebox">Send(&quot;{ASC 2709}&quot;)</p>
+<p>&nbsp;</p>
+<p>シングルキーは繰り返すことができます。例えば次のようになります。</p>
+<p class="codebox">Send("{DEL 4}")    ;DELキーを4回押す<br>
+Send("{S 30}")      ;文字'S'を30回送信する<br>
+Send("+{TAB 4}&quot;)   ;SHIFT+TABを4回押す</p>
+
+<p>&nbsp;</p>
+<p> キーを長押しするためには次のようにします(ゲーム操作で便利です)。</p>
+<p class="codebox">Send("{a down}")    ;Aキーを長押し<br>
+Send("{a up}")        ;Aキーを離す</p>
+
+<p>&nbsp;</p>
+    <p>繰り返し回数に変数を使用したい場合次のようにしてみてください。
+<p class="codebox">$n = 4<br>
+Send("+{TAB " & $n & "}")</p>
+
+<p>&nbsp;</p>
+      <p>ASCIIコード値のAを4回送信したい場合は次のようにしてください。
+<p class="codebox">$x = Chr(65)<br>
+  Send("{" & $x & " 4}")</p>
+
+<p>&nbsp;</p>
+        <p>ほとんどのラップトップコンピュータには特別なFnキーがあります。それらはシミュレーションできません。<br>
+          <br>          注意：flagパラメータを1にすると"key"パラメータはRAWで送信されます。これは値からテキストをコピーし、そのまま送信したい場合に便利です。<br>
+          <br>
+          <br>
+          <b>Sendは非常に便利です。Windowsはマウスが無くても操作できるからです。</b><br>
+          <br>
+        例えば、(コントロールパネル内の)フォルダオプションを開いて次のものを試してみてください。<br>
+        <br>
+        </p>
+        </p>
+          </p>
+            </p>
+                </p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#c0c0c0">
+<tr>
+  <td>Send("{TAB}")</td>
+  <td>次のコントロール(ボタン、チェックボックスなど)に移動。</td>
+</tr>
+<tr>
+  <td>Send("+{TAB}")</td>
+  <td>前のコントロールに移動。</td>
+</tr>
+<tr>
+  <td>Send("^{TAB}")</td>
+  <td>次のウィンドウタブに移動(タブ付きダイアログの場合)。</td>
+</tr>
+<tr>
+  <td>Send("^+{TAB}")</td>
+  <td>前のウィンドウタブに移動。</td>
+</tr>
+<tr>
+  <td>Send("{SPACE}")</td>
+  <td>チェックボックスにチェックしたりボタンを押したりする。</td>
+</tr>
+<tr>
+  <td>Send("{+}")</td>
+  <td>チェックボックスにチェックする(「本物」のチェックボックスの場合)。</td>
+</tr>
+<tr>
+  <td>Send("{-}")</td>
+  <td>チェックボックスのチェックをはずす。</td>
+</tr>
+  <td>Send("{NumPadMult}")</td>
+  <td>再帰的にSysTreeView32内のフォルダを開く。
+<tr>
+</tr>
+</table>
+<br>
+<br>
+メニューアイテムにアクセスするにはAltキーを組み合わせて使います。&nbsp;メモ帳を開いて次のものを試してみてください。
+<br>
+<br>
+<table bordercolor="#c0c0c0" cellpadding="3" cellspacing="0" width="100%" border="1">
+  <tbody>
+    <tr>
+      <td>Send("!f")</td>
+      <td>Alt+fをSend。メモ帳のファイルメニューを開く。<i>他の文字でも試してみてください!</i><br>
+      </td>
+    </tr>
+    <tr>
+      <td>Send("{DOWN}")</td>
+      <td>メニューを下に移動。</td>
+    </tr>
+    <tr>
+      <td>Send("{UP}")</td>
+      <td>メニューを上に移動。</td>
+    </tr>
+    <tr>
+      <td>Send("{LEFT}")</td>
+      <td>左の別のメニューに移動、もしくはサブメニューを閉じる。</td>
+    </tr>
+    <tr>
+      <td>Send("{RIGHT}")</td>
+      <td>右の別のメニューに移動、もしくはサブメニューを開く。</td>
+    </tr>
+  </tbody>
+</table>
+<br>
+<br>
+Alt+F4、PrintScreen、Ctrl+Cなどの重要性について知らない場合はWindowsヘルプ(<i>Win+F1</i>で開く)のキーボードショートカットの一覧を参照してください。
+<br>
+<br>
+<br>
+<table bordercolor="#c0c0c0" cellpadding="3" cellspacing="0" width="100%" border="1">
+  <tbody>
+<tr>
+  <td align="center"><b>送信するコマンド(flagがゼロの場合)</b></td>
+  <td>
+  <p align="center"><b>シミュレーションされるキー</b></p>
+  </td>
+</tr>
+<tr>
+  <td align="center">{!}</td>
+  <td>!</td>
+</tr>
+<tr>
+  <td align="center">{#}</td>
+  <td>#</td>
+</tr>
+<tr>
+  <td align="center">{+}</td>
+  <td>+</td>
+</tr>
+<tr>
+  <td align="center">{^}</td>
+  <td>^</td>
+</tr>
+<tr>
+  <td align="center">{{}</td>
+  <td>{</td>
+</tr>
+<tr>
+  <td align="center">{}}</td>
+  <td>}</td>
+</tr>
+<tr>
+  <td align="center">{SPACE}</td>
+  <td>スペース</td>
+</tr>
+<tr>
+  <td align="center">{ENTER}</td>
+  <td>メインキーボードのENTERキー</td>
+</tr>
+<tr>
+  <td align="center">{ALT}</td>
+  <td>ALT</td>
+</tr>
+<tr>
+  <td align="center">{BACKSPACE} or {BS}</td>
+  <td>BACKSPACE</td>
+</tr>
+<tr>
+  <td align="center">{DELETE} or {DEL}</td>
+  <td>DELETE</td>
+</tr>
+<tr>
+  <td align="center">{UP}</td>
+  <td>上カーソルキー</td>
+</tr>
+<tr>
+  <td align="center">{DOWN}</td>
+  <td>下カーソルキー</td>
+</tr>
+<tr>
+  <td align="center">{LEFT}</td>
+  <td>左カーソルキー</td>
+</tr>
+<tr>
+  <td align="center">{RIGHT}</td>
+  <td>右カーソルキー</td>
+</tr>
+<tr>
+  <td align="center">{HOME}</td>
+  <td>HOME</td>
+</tr>
+<tr>
+  <td align="center">{END}</td>
+  <td>END</td>
+</tr>
+<tr>
+  <td align="center">{ESCAPE} or {ESC}</td>
+  <td>ESCAPE</td>
+</tr>
+<tr>
+  <td align="center">{INSERT} or {INS}</td>
+  <td>INS</td>
+</tr>
+<tr>
+  <td align="center">{PGUP}</td>
+  <td>PGUP</td>
+</tr>
+<tr>
+  <td align="center">{PGDN}</td>
+  <td>PGDN</td>
+</tr>
+<tr>
+  <td align="center">{F1} - {F12}</td>
+  <td>ファンクションキー</td>
+</tr>
+<tr>
+  <td align="center">{TAB}</td>
+  <td>TAB</td>
+</tr>
+<tr>
+  <td align="center">{PRINTSCREEN}</td>
+  <td>PRINTSCR</td>
+</tr>
+<tr>
+  <td align="center">{LWIN}</td>
+  <td>左Windowsキー</td>
+</tr>
+<tr>
+  <td align="center">{RWIN}</td>
+  <td>右Windowsキー</td>
+</tr>
+<tr>
+  <td align="center">{NUMLOCK}</td>
+  <td>NUMLOCK</td>
+</tr>
+<tr>
+  <td align="center">{BREAK}</td>
+  <td>Ctrl+Break処理用</td>
+</tr>
+<tr>
+  <td align="center">{PAUSE}</td>
+  <td>PAUSE</td>
+</tr>
+<tr>
+  <td align="center">{CAPSLOCK}</td>
+  <td>CAPSLOCK</td>
+</tr>
+<tr>
+  <td align="center">{NUMPAD0} - {NUMPAD9}</td>
+  <td>Numpad 0-9</td>
+</tr>
+<tr>
+  <td align="center">{NUMPADMULT}</td>
+  <td>Numpad 乗算</td>
+</tr>
+<tr>
+  <td align="center">{NUMPADADD}</td>
+  <td>Numpad 加算</td>
+</tr>
+<tr>
+  <td align="center">{NUMPADSUB}</td>
+  <td>Numpad 引算</td>
+</tr>
+<tr>
+  <td align="center">{NUMPADDIV}</td>
+  <td>Numpad 除算</td>
+</tr>
+<tr>
+  <td align="center">{NUMPADDOT}</td>
+  <td>Numpad ピリオド</td>
+</tr>
+<tr>
+  <td align="center">{NUMPADENTER}</td>
+  <td>NumpadのEnterキー</td>
+</tr>
+<tr>
+  <td align="center">{APPSKEY}</td>
+  <td>WindowsAppキー</td>
+</tr>
+<tr>
+  <td align="center">{LALT}</td>
+  <td>左ALTキー</td>
+</tr>
+<tr>
+  <td align="center">{RALT}</td>
+  <td>右ALTキー</td>
+</tr>
+<tr>
+  <td align="center">{LCTRL}</td>
+  <td>左CTRLキー</td>
+</tr>
+<tr>
+  <td align="center">{RCTRL}</td>
+  <td>右CTRLキー</td>
+</tr>
+<tr>
+  <td align="center">{LSHIFT}</td>
+  <td>左Shiftキー</td>
+</tr>
+<tr>
+  <td align="center">{RSHIFT}</td>
+  <td>右Shiftキー</td>
+</tr>
+<tr>
+  <td align="center">{SLEEP}</td>
+  <td>コンピュータ SLEEPキー</td>
+</tr>
+<tr>
+  <td align="center">{ALTDOWN}</td>
+  <td>{ALTUP}が送信されるまでALTキーを押し続ける。</td>
+</tr>
+<tr>
+  <td align="center">{SHIFTDOWN}</td>
+  <td>{SHIFTUP} が送信されるまでSHIFTキーを押し続ける。</td>
+</tr>
+<tr>
+  <td align="center">{CTRLDOWN}</td>
+  <td>{CTRLUP} が送信されるまでCTRLキーを押し続ける。</td>
+</tr>
+<tr>
+  <td align="center">{LWINDOWN}</td>
+  <td>{LWINUP} が送信されるまで左Windowsキーを押し続ける。</td>
+</tr>
+<tr>
+  <td align="center">{RWINDOWN}</td>
+  <td>{RWINUP} が送信されるまで右Windowsキーを押し続ける。</td>
+</tr>
+<tr>
+  <td align="center">{ASC nnnn}</td>
+  <td>ALT+nnnnキー の組み合わせを送信する。</td>
+</tr>
+<tr>
+  <td align="center">&nbsp;</td>
+  <td>&nbsp;</td>
+</tr>
+<tr>
+  <td align="center">{BROWSER_BACK}</td>
+  <td>2000/XPのみ: ブラウザの"back"ボタンを選択。</td>
+</tr>
+<tr>
+  <td align="center">{BROWSER_FORWARD}</td>
+  <td>2000/XPのみ: ブラウザの"forward"ボタンを選択。</td>
+</tr>
+<tr>
+  <td align="center">{BROWSER_REFRESH}</td>
+  <td>2000/XPのみ: ブラウザの"refresh"ボタンを選択。</td>
+</tr>
+<tr>
+  <td align="center">{BROWSER_STOP}</td>
+  <td>2000/XPのみ: ブラウザの"stop"ボタンを選択。</td>
+</tr>
+<tr>
+  <td align="center">{BROWSER_SEARCH}</td>
+  <td>2000/XPのみ: ブラウザの"search"ボタンを選択。</td>
+</tr>
+<tr>
+  <td align="center">{BROWSER_FAVORITES}</td>
+  <td>2000/XPのみ: ブラウザの"favorites"ボタンを選択。</td>
+</tr>
+<tr>
+  <td align="center">{BROWSER_HOME}</td>
+  <td>2000/XPのみ: ブラウザを立ち上げ、ホームページを表示する。</td>
+</tr>
+<tr>
+  <td align="center">{VOLUME_MUTE}</td>
+  <td>2000/XPのみ: 消音</td>
+</tr>
+<tr>
+  <td align="center">{VOLUME_DOWN}</td>
+  <td>2000/XPのみ: 音量を下げる。</td>
+</tr>
+<tr>
+  <td align="center">{VOLUME_UP}</td>
+  <td>2000/XPのみ: 音量を上げる。</td>
+</tr>
+<tr>
+  <td align="center">{MEDIA_NEXT}</td>
+  <td>2000/XPのみ: メディアプレーヤーの次のトラックを選択。</td>
+</tr>
+<tr>
+  <td align="center">{MEDIA_PREV}</td>
+  <td>2000/XPのみ: メディアプレーヤーの前のトラックを選択。</td>
+</tr>
+<tr>
+  <td align="center">{MEDIA_STOP}</td>
+  <td>2000/XPのみ: メディアプレーヤーの停止。</td>
+</tr>
+<tr>
+  <td align="center">{MEDIA_PLAY_PAUSE}</td>
+  <td>2000/XPのみ: メディアプレーヤーの再生/一時停止。</td>
+</tr>
+<tr>
+  <td align="center">{LAUNCH_MAIL}</td>
+  <td>2000/XPのみ: emailアプリケーションを立ち上げる。</td>
+</tr>
+<tr>
+  <td align="center">{LAUNCH_MEDIA}</td>
+  <td>2000/XPのみ: メディアプレーヤーを立ち上げる。</td>
+</tr>
+<tr>
+  <td align="center">{LAUNCH_APP1}</td>
+  <td>2000/XPのみ: ユーザーアプリケーション1を立ち上げる。</td>
+</tr>
+<tr>
+  <td align="center">{LAUNCH_APP2}</td>
+  <td>2000/XPのみ: ユーザーアプリケーション2を立ち上げる。</td>
+</tr>
+  </tbody>
+</table>
+<br>
+</body>
+</html>

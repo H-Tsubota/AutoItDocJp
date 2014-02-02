@@ -1,0 +1,71 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function ClipGet</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">ClipGet</font>
+<hr size="2">
+<p>クリップボードからテキストを取得します。<br></p>
+
+<p class="codeheader">
+ClipGet ( )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+なし。<br>
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">成功</td>
+    <td width="90%">クリップボード上のテキストを文字列として返します。</td>
+  </tr>
+  <tr>
+    <td valign="top">失敗</td>
+    <td>クリップボードが空の場合@errorを1に設定します。</td>
+  </tr>
+  <tr>
+    <td valign="top"></td>
+    <td>テキストでない内容の場合2に設定します。</td>
+  </tr>
+  <tr>
+    <td valign="top"></td>
+    <td>クリップボードにアクセスできない場合、3または4を返します。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+複数選択されたファイル/ディレクトリがクリップボード上にある場合、ファイル名/ディレクトリ名が@LFで区切られたテキストとして返されます。<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="ClipPut.htm">ClipPut</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S9">$bak</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">ClipGet</span><span class="S8">()</span><br>
+<span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Clipboard contains:"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$bak</span><span class="S8">)</span><br>
+<br>
+<span class="S4">ClipPut</span><span class="S8">(</span><span class="S9">$bak</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">"additional text"</span><span class="S8">)</span><br>
+<span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Clipboard contains:"</span><span class="S8">,</span><span class="S0"> </span><span class="S4">ClipGet</span><span class="S8">())</span><br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\ClipGet.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

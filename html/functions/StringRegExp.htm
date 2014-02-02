@@ -1,0 +1,497 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function StringRegExp</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">StringRegExp</font>
+<hr size="2">
+<p>文字列が与えられた正規表現パターンに一致するかどうかを調べます。<br></p>
+
+<p class="codeheader">
+StringRegExp ( "test", "pattern" [, flag ] [, offset ] ] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">test</td>
+    <td width="85%">調べる文字列</td>
+  </tr>
+  <tr>
+   <td>pattern</td>
+   <td>比較する正規表現</td>
+  </tr>
+  <tr>
+   <td>flag</td>
+   <td><b>[オプション]</b> 関数の動作の仕方を指定する数字。詳細は下記を参照。デフォルトは0。</td>
+  </tr>
+  <tr>
+   <td>offset</td>
+   <td><b>[オプション]</b> 文字列調査開始位置（1以上）。デフォルトは1。</td>
+  </tr>
+</table><br><br>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%"><b>フラグ</b> </td>
+    <td width="85%"><b>値</b></td>
+  </tr>
+  <tr>
+   <td>0</td>
+   <td>1(一致) 、0(不一致)を返します</td>
+  </tr>
+  <tr>
+   <td>1</td>
+   <td>一致情報の配列を返します。</td>
+  </tr>
+  <tr>
+   <td>2</td>
+   <td>完全一致(Perl/PHP スタイル)を含む一致情報の配列を返します。</td>
+  </tr>
+  <tr>
+   <td>3</td>
+   <td>グローバルマッチの配列を返します。</td>
+  </tr>
+  <tr>
+   <td>4</td>
+   <td>完全一致(Perl/PHP スタイル)を含むグローバルマッチの配列を格納した配列を返します。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+<i>Flag = 0 :</i><br>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">@Error</td>
+    <td width="90%">意味</td>
+  </tr>
+  <tr>
+    <td valign="top">2 </td>
+    <td>不正なパターン。@Extended = パターン内のエラー位置。</td>
+  </tr>
+</table><br><br>
+<i>Flag = 1、2 :</i><br>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">@Error</td>
+    <td width="90%">意味</td>
+  </tr>
+  <tr>
+    <td valign="top">0</td>
+    <td>配列が有効。@Extendedを使って次のオフセット位置を調べてください。</td>
+  </tr>
+  <tr>
+    <td valign="top">1</td>
+    <td>配列が無効。一致なし。</td>
+  </tr>
+  <tr>
+    <td valign="top">2</td>
+    <td>不正なパターン、配列が無効。@Extended = パターン内のエラー位置。</td>
+  </tr>
+</table><br><br>
+<i>Flag = 3、4 :</i><br>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">@Error</td>
+    <td width="90%">意味</td>
+  </tr>
+  <tr>
+    <td valign="top">0</td>
+    <td>配列が有効。</td>
+  </tr>
+  <tr>
+    <td valign="top">1</td>
+    <td>配列が無効。一致なし。</td>
+  </tr>
+  <tr>
+    <td valign="top">2</td>
+    <td>不正なパターン、配列が無効。@Extended = パターン内のエラー位置。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+flagパラメータには5つの値(0から4)のうちの1つを使用できます。
+0の場合、パターンが見つかったどうかによってTrue(1)、False(0)のいずれかを返します。
+1と2の場合、最初に見つかったものを配列で返します。
+3と4の場合、複数の一致結果を見つけ全ての一致テキストを配列に代入します。
+2と4の場合、flag 1と3によって取得できるキャプチャーグループだけでなく完全一致テキストを最初のレコードに含めます。.<br>
+<br>
+正規表現表記法は検索する文字列のパターンをコンパクトに指定するための方法です。
+正規表現は文字列で、ターゲット文字列を構成する通常の文字と、ターゲット文字列のパターンを表す特別な意味を持つ文字からできています。
+AutoItの正規表現は通常、大文字小文字を区別します。
+<br>
+<br>
+正規表現は次に示す正規表現指定子の組み合わせから構成されます。もし正規表現指定子を含まない場合、検索文字列そのものに一致するもののみが検索されます。<br>
+<br>
+反復文字(*, +, ?, {...})は、可能な限り大きなセットとのマッチングを試みます。これによって後ろの文字との一致が可能です。
+クエスチョンマークが直後に付く場合、もっとも小さいパターンを見つけます。これによって後ろの文字との一致が可能です。
+<br>
+<br>
+グループのネスト(入れ子構造)が使用できます。非キャプチャーグループを除く全てのグループは内側のグループから結果の配列に代入されます。<br>
+<br>
+完全な説明は<b><a href="http://www.autoitscript.com/autoit3/pcrepattern.html" target="_blank">こちら</a></b>。<br>
+<br>
+<b>警告</b>: 不正な正規表現は見かけ上の無限ループを生み出しCPUに負荷をかけます。また場合によってはクラッシュを引き起こします。<br>
+<br>
+<b><u>マッチング用文字</u></b><br>
+<br>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">[ ... ]</td>
+    <td width="85%">
+	セット内の任意の文字との一致。例：<b>[aeiou]</b>は全ての小文字の母音と一致します。
+	連続するセットは開始文字と終了文字をダッシュでつないで定義します。例：<b>[a-z]</b>は全ての小文字と一致します。
+	ダッシュ(<b>-</b>)を検索する場合は、セットの最初、または最後の文字として指定します。 
+	角カッコを検索する場合は、セットの最初の文字として指定します。 例：<b>[][]</b>は [ または ] に一致します。
+	特殊な意味をもつ文字はセット内では特殊な意味をもつ文字として<b>扱われません</b>。ただし例外的に<b>\\</b>、<b>\^</b>、<b>\-</b>、<b>\[</b>、<b>\]</b>はエスケープされているものとしてセット内で扱われます。
+	.</td>
+  </tr>
+  <tr>
+   <td>[^ ... ]</td>
+   <td>
+   セット内の任意の文字<b>以外</b>との一致。例：<b>[^0-9]</b>は数字以外の全ての文字と一致します。キャレット(<b>^</b>)を検索する場合はセット開始直後に置くか、エスケープ(\^)します。
+   /td>
+  </tr>
+  <tr>
+   <td>[:class:]</td>
+   <td>
+指定された文字クラスとの一致。有効なクラス：alpha(任意のアルファベット文字)、alnum(任意の英数字)、lower(任意の小文字)、upper (任意の大文字)、digit (0-9の任意の数字)、xdigit (0-9、A-F、a-f の任意の16進数数字)、space (任意のホワイトスペース文字)、blank (スペースまたはタブ)、print (任意の印刷可能文字)、graph (スペースを除く任意の印刷可能文字)、cntrl (任意の制御文字[ascii 127 、32以下])、punct (任意の句読点文字)。また[0-9]は[[:digit:]]と等しいです。
+　</td>
+  </tr>
+  <tr>
+   <td>[^:class:]</td>
+   <td>指定された文字クラス<b>以外</b>との一致。ただし最初の文字だけです。</td>
+  </tr>
+  <tr>
+   <td>( ... )</td>
+   <td>グループ。グループ内の要素は並び順に扱われ、繰り返し処理時に一緒に取り扱われます。例：<b>(ab)+</b>は"ab"、"abab"に一致しますが"aba"には一致しません。またフラグによっては後方参照、関数の返す配列に使用するために一致したテキストを保持します。</td>
+  </tr>
+  <tr>
+   <td>(?i)</td>
+   <td>
+大文字小文字非区別フラグ。グループとしては動作しません。正規表現エンジンが大文字小文字の区別をしないように設定します。
+</td>
+  </tr>
+  <tr>
+   <td>(?-i)</td>
+   <td>(デフォルト)大文字小文字区別フラグ。グループとしては動作しません。正規表現エンジンが大文字小文字の区別をするように設定します。
+　</td>
+  </tr>  
+  <tr>
+   <td>(?: ... )</td>
+   <td>非キャプチャーグループ。一致文字を配列に記録しない、後方参照に使用しない以外は通常のグループと同じです。</td>
+  </tr>
+  <tr>
+   <td>(?i: ... )</td>
+   <td>
+   大文字小文字非区別、非キャプチャーグループ。大文字小文字の区別をしない以外は通常の非キャプチャーグループと同じです。
+   </td>
+  </tr>
+  <tr>
+   <td>(?-i: ... )</td>
+   <td>
+    大文字小文字区別、非キャプチャーグループ。大文字小文字の区別をする以外は通常の非キャプチャーグループと同じです。
+</td>
+  </tr>
+  <tr>
+   <td>(?m)</td>
+   <td>^と$はデータ内の改行に一致します。</td>
+  </tr>
+  <tr>
+   <td>(?s)</td>
+   <td>. は改行を含む任意の文字と一致します。(デフォルトでは"."は改行とは一致しません)</td>
+  </tr>
+  <tr>
+   <td>(?x)</td>
+   <td>ホワイトスペースと#コメントを無視します。</td>
+  </tr>
+  <tr>
+   <td>(?U)</td>
+   <td>強欲な量指定子の反転。</td>
+  </tr>
+  <tr>
+   <td><b>.</b></td>
+   <td>任意の文字と一致(改行文字を除く)。</td>
+  </tr>
+  <tr>
+   <td>|</td>
+   <td>OR。式の片方<b>または</b>もう片方との一致。</td>
+  </tr>
+  <tr>
+   <td>\</td>
+   <td>特殊文字の<i>エスケープ</i>(実際の文字との一致)または特殊文字タイプの導入(下記参照)。</td>
+  </tr>
+  <tr>
+   <td>\\</td>
+   <td>バックスラッシュ(\)に一致。</td>
+  </tr>
+  <tr>
+   <td>\a</td>
+   <td>アラーム。BEL文字 (chr(7))。</td>
+  </tr>
+  <tr>
+   <td>\A</td>
+   <td>文字列開始位置でのみ一致。</td>
+  </tr>
+  <tr>
+   <td>\b</td>
+   <td>単語境界位置でのみ一致。</td>
+  </tr>
+  <tr>
+   <td>\B</td>
+   <td>非単語境界位置でのみ一致。</td>
+  </tr>
+  <tr>
+   <td>\c</td>
+   <td>次の文字に基づく制御文字に一致。例えば<b>\cM</b>はctrl-Mに一致する。</td>
+  </tr>
+  <tr>
+   <td>\d</td>
+   <td>任意数字(0-9)に一致。</td>
+  </tr>
+  <tr>
+   <td>\D</td>
+   <td>任意非数字に一致。</td>
+  </tr>
+  <tr>
+   <td>\e</td>
+   <td>エスケープ文字(chr(27))に一致。</td>
+  </tr>
+  <tr>
+   <td>\E</td>
+   <td>ケース終了。</td>
+  </tr>
+  <tr>
+   <td>\f</td>
+   <td>フォームフィード文字(chr(12))に一致。</td>
+  </tr>
+  <tr>
+   <td>\h</td>
+   <td>任意の水平ホワイトスペース文字。</td>
+  </tr>
+  <tr>
+   <td>\H</td>
+   <td>任意の非水平ホワイトスペース文字。</td>
+  </tr>
+  <tr>
+   <td>\n</td>
+   <td>ラインフィード(@LF, chr(10))に一致。</td>
+  </tr>  
+  <tr>
+   <td>\Q</td>
+   <td>\Eまでメタ文字パターンの引用(無効)。</td>
+  </tr>
+  <tr>
+   <td>\r</td>
+   <td>キャリッジリターン(@CR, chr(13))に一致。</td>
+  </tr>
+  <tr>
+   <td>\s</td>
+   <td>任意のホワイトスペース文字に一致。ホワイトスペース文字：Chr(9)からChr(13)の水平タブ、垂直タブ、フォームフィード、キャリッジリターンと標準スペース( Chr(32) )。</td>
+  </tr>
+  <tr>
+   <td>\S</td>
+   <td>ホワイトスペース文字以外に一致。</td>
+  </tr>
+  <tr>
+   <td>\t</td>
+   <td>タブ文字(chr(9))に一致。</td>
+  </tr>
+  <tr>
+   <td>\v</td>
+   <td>任意の垂直ホワイトスペース文字。</td>
+  </tr>
+  <tr>
+   <td>\V</td>
+   <td>任意の非垂直ホワイトスペース文字。</td>
+  </tr>
+  <tr>
+   <td>\w</td>
+   <td>任意の"単語"文字に一致。a-z、A-Z、0-9またはアンダーバー(_)。</td>
+  </tr>
+  <tr>
+   <td>\W</td>
+   <td>非単語文字に一致。</td>
+  </tr>
+  <tr>
+   <td>\###</td>
+   <td>指定されたasciiコードまたは後方参照のasciiコードと対応する文字に一致。8進数で3桁まで。<br>
+   見つかった場合、後方参照に一致。指定された先のグループ番号と正確に一致します。例えば<b>([:alpha:])\1</b>は二重文字(ダブルレター)と一致します。</td>
+   </td>
+  </tr>
+  <tr>
+   <td>\x##</td>
+   <td>16進数で与えられたasciiコードと対応する文字に一致。2桁まで。</td>
+  </tr>
+  <tr>
+   <td>\z</td>
+   <td>文字列終了位置でのみ一致。</td>
+  </tr>
+  <tr>
+   <td>\Z</td>
+   <td>文字列終了位置、改行文字直前でのみ一致。</td>
+  </tr>
+</table><br>
+<u><b>反復文字</u></b><br>
+<br>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">{<i>x</i>}</td>
+    <td width="85%">直前の文字、セット、グループを<i>x</i>回繰り返し。</td>
+  </tr>
+  <tr>
+   <td>{<i>x</i>,}</td>
+   <td>直前の文字、セット、グループを最小<i>x</i>回繰り返し。</td>
+  </tr>
+  <tr>
+   <td>{0,<i>x</i>}</td>
+   <td>直前の文字、セット、グループを最大<i>x</i>回繰り返し。</td>
+  </tr>
+  <tr>
+   <td>{<i>x</i>, <i>y</i>}</td>
+   <td>直前の文字、セット、グループを<i>x</i>回から<i>y</i> 回繰り返し。</td>
+  </tr>
+  <tr>
+   <td>*</td>
+   <td>直前の文字、セット、グループを0回以上繰り返し。{0,}と同じ。</td>
+  </tr>
+  <tr>
+   <td>+</td>
+   <td>直前の文字、セット、グループを1回以上繰り返し。{1,}と同じ。</td>
+  </tr>
+  <tr>
+   <td>?</td>
+   <td>直前の文字、セット、グループが0回または1回出現。{0, 1}と同じ。</td>
+  </tr>
+  <tr>
+   <td>? (反復文字の後ろ)</td>
+   <td>最大の一致の代わりに最小の一致を見つけます。</td>
+  </tr>
+</table><br>
+<u><b>文字クラス</u></b><br>
+<br>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">[:alnum:]</td>
+    <td width="85%">文字と数字</td>
+  </tr>
+  <tr>
+   <td>[:alpha:]</td>
+   <td>文字</td>
+  </tr>
+  <tr>
+   <td>[:ascii:]</td>
+   <td>文字コード 0-127</td>
+  </tr>
+  <tr>
+   <td>[:blank:]</td>
+   <td>スペースとタブ</td>
+  </tr>
+  <tr>
+   <td>[:cntrl:]</td>
+   <td>制御文字</td>
+  </tr>
+  <tr>
+   <td>[:digit:]</td>
+   <td>10進数の数字 (\dと同じ)</td>
+  </tr>
+  <tr>
+   <td>[:graph:]</td>
+   <td>スペースを除く印字文字。</td>
+  </tr>
+  <tr>
+   <td>[:lower:]</td>
+   <td>小文字</td>
+  </tr>
+  <tr>
+   <td>[:print:]</td>
+   <td>スペースを含む印字文字。</td>
+  </tr>
+  <tr>
+   <td>[:punct:]</td>
+   <td>文字と数字を除く印字文字。</td>
+  </tr>
+  <tr>
+   <td>[:space:]</td>
+   <td>ホワイトスペース(\sとは異なる。\sはVT: chr(11)を含む)</td>
+  </tr>
+  <tr>
+   <td>[:upper:]</td>
+   <td>大文字</td>
+  </tr>
+  <tr>
+   <td>[:word:]</td>
+   <td>"単語"文字(\wと同様)</td>
+  </tr>
+  <tr>
+   <td>[:xdigit:]</td>
+   <td>16進数</td>
+  </tr>
+</table><br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="StringInStr.htm">StringInStr</a>, <a href="StringRegExpReplace.htm">StringRegExpReplace</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S1">;オプション1, オフセット使用</span><br>
+<span class="S9">$nOffset</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">1</span><br>
+<span class="S5">While</span><span class="S0"> </span><span class="S3">1</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$array</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">StringRegExp</span><span class="S8">(</span><span class="S7">'&lt;test&gt;a&lt;/test&gt; &lt;test&gt;b&lt;/test&gt; &lt;test&gt;c&lt;/Test&gt;'</span><span class="S8">,</span><span class="S0"> </span><span class="S7">'&lt;(?i)test&gt;(.*?)&lt;/(?i)test&gt;'</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nOffset</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">If</span><span class="S0"> </span><span class="S6">@error</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><span class="S0"> </span><span class="S5">Then</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$nOffset</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S6">@extended</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Else</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">ExitLoop</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">EndIf</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">for</span><span class="S0"> </span><span class="S9">$i</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><span class="S0"> </span><span class="S5">to</span><span class="S0"> </span><span class="S4">UBound</span><span class="S8">(</span><span class="S9">$array</span><span class="S8">)</span><span class="S0"> </span><span class="S8">-</span><span class="S0"> </span><span class="S3">1</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S4">msgbox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"RegExp Test with Option 1 - "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$i</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$array</span><span class="S8">[</span><span class="S9">$i</span><span class="S8">])</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Next</span><br>
+<span class="S5">WEnd</span><br>
+<br>
+<br>
+<span class="S1">;オプション2, シングルリターン, php/preg_match()スタイル</span><br>
+<span class="S9">$array</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">StringRegExp</span><span class="S8">(</span><span class="S7">'&lt;test&gt;a&lt;/test&gt; &lt;test&gt;b&lt;/test&gt; &lt;test&gt;c&lt;/Test&gt;'</span><span class="S8">,</span><span class="S0"> </span><span class="S7">'&lt;(?i)test&gt;(.*?)&lt;/(?i)test&gt;'</span><span class="S8">,</span><span class="S0"> </span><span class="S3">2</span><span class="S8">)</span><br>
+<span class="S5">for</span><span class="S0"> </span><span class="S9">$i</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><span class="S0"> </span><span class="S5">to</span><span class="S0"> </span><span class="S4">UBound</span><span class="S8">(</span><span class="S9">$array</span><span class="S8">)</span><span class="S0"> </span><span class="S8">-</span><span class="S0"> </span><span class="S3">1</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">msgbox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"RegExp Test with Option 2 - "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$i</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$array</span><span class="S8">[</span><span class="S9">$i</span><span class="S8">])</span><br>
+<span class="S5">Next</span><br>
+<br>
+<br>
+<span class="S1">;オプション3, グローバルリターン, 以前のAutoItスタイル</span><br>
+<span class="S9">$array</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">StringRegExp</span><span class="S8">(</span><span class="S7">'&lt;test&gt;a&lt;/test&gt; &lt;test&gt;b&lt;/test&gt; &lt;test&gt;c&lt;/Test&gt;'</span><span class="S8">,</span><span class="S0"> </span><span class="S7">'&lt;(?i)test&gt;(.*?)&lt;/(?i)test&gt;'</span><span class="S8">,</span><span class="S0"> </span><span class="S3">3</span><span class="S8">)</span><br>
+<br>
+<span class="S5">for</span><span class="S0"> </span><span class="S9">$i</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><span class="S0"> </span><span class="S5">to</span><span class="S0"> </span><span class="S4">UBound</span><span class="S8">(</span><span class="S9">$array</span><span class="S8">)</span><span class="S0"> </span><span class="S8">-</span><span class="S0"> </span><span class="S3">1</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">msgbox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"RegExp Test with Option 3 - "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$i</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$array</span><span class="S8">[</span><span class="S9">$i</span><span class="S8">])</span><br>
+<span class="S5">Next</span><br>
+<br>
+<br>
+<span class="S1">;オプション4, グローバルリターン php/preg_match_all()スタイル</span><br>
+<span class="S9">$array</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">StringRegExp</span><span class="S8">(</span><span class="S7">'F1oF2oF3o'</span><span class="S8">,</span><span class="S0"> </span><span class="S7">'(F.o)*?'</span><span class="S8">,</span><span class="S0"> </span><span class="S3">4</span><span class="S8">)</span><br>
+<br>
+<span class="S5">for</span><span class="S0"> </span><span class="S9">$i</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><span class="S0"> </span><span class="S5">to</span><span class="S0"> </span><span class="S4">UBound</span><span class="S8">(</span><span class="S9">$array</span><span class="S8">)</span><span class="S0"> </span><span class="S8">-</span><span class="S0"> </span><span class="S3">1</span><br>
+<br>
+<span class="S9">$match</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$array</span><span class="S8">[</span><span class="S9">$i</span><span class="S8">]</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">for</span><span class="S0"> </span><span class="S9">$j</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><span class="S0"> </span><span class="S5">to</span><span class="S0"> </span><span class="S4">UBound</span><span class="S8">(</span><span class="S9">$match</span><span class="S8">)</span><span class="S0"> </span><span class="S8">-</span><span class="S0"> </span><span class="S3">1</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S4">msgbox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"cRegExp Test with Option 4 - "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$i</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">','</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$j</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$match</span><span class="S8">[</span><span class="S9">$j</span><span class="S8">])</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Next</span><br>
+<span class="S5">Next</span><br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\StringRegExp.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

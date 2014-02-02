@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function ShellExecuteWait</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">ShellExecuteWait</font>
+<hr size="2">
+<p>ShellExecuteAPIを使用して外部プログラムを実行し、終了するまでスクリプト処理を一時停止します。<br></p>
+
+<p class="codeheader">
+ShellExecuteWait ( "filename" [, "parameters" [, "workingdir" [, "verb" [, showflag]]]] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">filename</td>
+    <td width="85%">実行するファイルの名前(EXE、.txt、.lnkなど)。</td>
+  </tr>
+  <tr>
+   <td>parameters</td>
+   <td><b>[オプション]</b> プログラム用パラメータ。空文字("")は「無し」となります。</td>
+  </tr>
+  <tr>
+   <td>workingdir</td>
+   <td><b>[オプション]</b> 作業ディレクトリ。空文字("")を使うと現在の作業ディレクトリが使用されます。</td>
+  </tr>
+  <tr>
+   <td>verb</td>
+   <td><b>[オプション]</b> 使用する"動詞(verb)"。次のものが使用できます。<br>
+       &nbsp;&nbsp;open = 指定されたファイルを開きます。実行ファイル、ドキュメントファイル、フォルダを指定できます。<br>
+       &nbsp;&nbsp;edit = エディタを立ち上げ編集用にドキュメントファイルを開きます。"filename"で指定したファイルがドキュメントファイルで無かった場合、関数は失敗します。<br>
+       &nbsp;&nbsp;print = 指定されたドキュメントファイルを印刷します。"filename"で指定したファイルがドキュメントファイルで無かった場合、関数は失敗します。<br>
+       &nbsp;&nbsp;properties = ファイル、フォルダのプロパティを表示します。<br>
+	   &nbsp;&nbsp;<b>verbが指定されていない場合のデフォルト処理の詳細については注意を参照。</b></td>
+  </tr>
+  <tr>
+   <td>showflag</td>
+   <td><b>[オプション]</b> プログラム実行時の"表示"フラグ<br>
+       &nbsp;&nbsp;@SW_HIDE = ウィンドウ非表示<br>
+       &nbsp;&nbsp;@SW_MINIMIZE = ウィンドウ最小化<br>
+       &nbsp;&nbsp;@SW_MAXIMIZE = ウィンドウ最大化</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">成功</td>
+    <td width="90%">実行してプログラムの終了コードを返します。</td>
+  </tr>
+  <tr>
+    <td valign="top">失敗</td>
+	<td>0を返し、@errorを非ゼロに設定します。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+要求されたプログラムを実行後、プログラムが終了するまでスクリプトは一時停止します。<br>
+<br>
+動詞(verb)が指定されていない場合、デフォルトの動詞(verb)が使用されます。デフォルトの動詞(verb)はレジストリ内の動詞(verb)設定です。レジストリ内にデフォルトの動詞(verb)が設定されていない場合動詞(verb)として"open"が使用されます。動詞(verb)の"open"が存在しない場合、レジストリ内のリストの最初の動詞(verb)が使用されます（Windows 2000を除く）。<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="ShellExecute.htm">ShellExecute</a>, <a href="Run.htm">Run</a>, <a href="RunWait.htm">RunWait</a>, <a href="RunAs.htm">RunAs</a>, <a href="RunAsWait.htm">RunAsWait</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S9">$val</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">ShellExecuteWait</span><span class="S8">(</span><span class="S7">"Notepad.exe"</span><span class="S8">)</span><br>
+<br>
+<span class="S1">; メモ帳が閉じられるまでスクリプトは待機</span><br>
+<span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Program returned with exit code:"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$val</span><span class="S8">)</span><br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\ShellExecuteWait.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

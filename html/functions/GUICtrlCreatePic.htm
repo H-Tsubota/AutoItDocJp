@@ -1,0 +1,234 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function GUICtrlCreatePic</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">GUICtrlCreatePic</font>
+<hr size="2">
+<p>GUI用のピクチャーコントロールを作成します。<br></p>
+
+<p class="codeheader">
+GUICtrlCreatePic ( filename, left, top [, width [, height [, style [, exStyle]]]] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">filename</td>
+    <td width="85%">ロードされる画像のファイル名。BMP、JPG、GIF(アニメーションを除く)をサポートしています。</td>
+  </tr>
+  <tr>
+   <td>left</td>
+   <td>コントロールの左端。-1を使用すると<a href="AutoItSetOption.htm#GUICoordMode">GUICoordMode</a>に基づいて左端位置が計算されます。</td>
+  </tr>
+  <tr>
+   <td>top</td>
+   <td>コントロールの上端。-1を使用すると<a href="AutoItSetOption.htm#GUICoordMode">GUICoordMode</a>に基づいて上端位置が計算されます。</td>
+  </tr>
+  <tr>
+   <td>width</td>
+   <td><b>[オプション]</b> コントロールの幅(デフォルトは最後に使用された幅)。</td>
+  </tr>
+  <tr>
+   <td>height</td>
+   <td><b>[オプション]</b> コントロールの高さ(デフォルトは最後に使用された高さ)。</td>
+  </tr>
+  <tr>
+   <td>style</td>
+   <td><b>[オプション]</b> コントロールのスタイルを定義。<a href="../appendix/GuiStyles.htm#Label">GUIコントロールスタイル付録</a>を参照。<br>
+   <br>
+	デフォルト (-1) : $SS_NOTIFY<br>
+	強制適用されるスタイル : $SS_BITMAP</td>
+  </tr>
+  <tr>
+   <td>exStyle</td>
+   <td><b>[オプション]</b> コントロールの拡張スタイルを定義。<a href="../appendix/GuiStyles.htm#Extended">拡張スタイル表</a>を参照。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">成功</td>
+    <td width="90%">新しく作成したコントロールの識別子(コントロールID)を返します。</td>
+  </tr>
+  <tr>
+    <td valign="top">失敗</td>
+    <td>画像を作成できなかった場合、0を返します。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+コントロールの情報を設定/変更する方法については<a href="GUICtrlUpdate%20Management.htm">GUICtrlUpdate...</a>を参照。<br>
+<br>
+ダイアログボックス表示後に画像を更新したい場合は<a href="GUICtrlSetImage.htm">GUICtrlSetImage</a>を使用します。<br>
+<br>
+画像をファイル内でのサイズと同じにしたい場合、width=height=0と設定します。<br>
+<br>
+透明な画像を作成したい場合、WS_EX_LAYERED拡張スタイル設定がされたウィンドウを作成する必要があります。左上のピクセルが透過色として使用されます。複数の画像が作成されている場合、最後の画像によって透過色が定義されます。例2を参照してください。<br>
+<br>
+デフォルトスタイルに他のスタイルを組み合わせる場合は<b>BitOr</b>($GUI_SS_DEFAULT_PIC, newstyle,...)を使用してください。<br>
+<br>
+上で指定されている値を使用するためにはスクリプトに#include &lt;StaticConstants.au3&gt;と書く必要があります。<br>
+<br>
+デフォルトのサイズ変更方法は$GUI_DOCKSIZEです。<br>
+<br>
+画像を背景画像に設定し、他のコントロールをその上に配置する場合、GuiCtrlSetState(-1,$GUI_DISABLE)でピクチャーコントロールを無効にし、他のコントロールの後で作成する必要があります。個々に処理をおこなうタブコンロトールやリストビューコントロールではさらに別の処理も必要になります。その場合は画像を$WS_CLIPSIBLINGSスタイルで作成し、タブコントロール、ツリービューコントロール、リストビューコントロールにGuiCtrlSetState(-1,$GUI_ONTOP)を設定する必要があります。<br>
+<br>
+拡張スタイル$GUI_WS_EX_PARENTDRAGを使用すると(GUICreateで$WS_CAPTIONスタイルを設定していない)タイトルバーの無いウィンドウ用の親ウィンドウのドラッギングが可能になります。<br>
+<br>
+背景は常に透明に設定されています。GUICtrlSetBkColor()はピクチャーコントロールに対して動作しません。<br>
+<br>
+GDI+を使用した場合、PNGも使用できます。例3を参照してください。<br>
+<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="AutoItSetOption.htm#GUICoordMode">GUICoordMode (Option)</a>, <a href="GUICtrlSetImage.htm">GUICtrlSetImage</a>, <a href="GUICtrlUpdate%20Management.htm">GUICtrlUpdate...</a>, <a href="GUIGetMsg.htm">GUIGetMsg</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;GUIConstantsEx.au3&gt;</span><br>
+<span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;WindowsConstants.au3&gt;</span><br>
+<br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">'MustDeclareVars'</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">)</span><br>
+<br>
+<span class="S5">Global</span><span class="S0"> </span><span class="S9">$gui</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$guiPos</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$pic</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$picPos</span><br>
+<br>
+<span class="S0">Example1</span><span class="S8">()</span><br>
+<span class="S0">Example2</span><span class="S8">()</span><br>
+<br>
+<span class="S1">;----- 例 1 ----</span><br>
+<span class="S5">Func</span><span class="S0"> Example1</span><span class="S8">()</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$n</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$msg</span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUICreate</span><span class="S8">(</span><span class="S7">"My GUI picture"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">350</span><span class="S8">,</span><span class="S0"> </span><span class="S3">300</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$WS_SIZEBOX</span><span class="S0"> </span><span class="S8">+</span><span class="S0"> </span><span class="S9">$WS_SYSMENU</span><span class="S8">)</span><span class="S0"> &nbsp;</span><span class="S1">; 表示時に中央に表示されるダイアログボックスを作成</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUISetBkColor</span><span class="S8">(</span><span class="S3">0xE0FFFF</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$n</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICtrlCreatePic</span><span class="S8">(</span><span class="S7">"..\GUI\mslogo.jpg"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">50</span><span class="S8">,</span><span class="S0"> </span><span class="S3">50</span><span class="S8">,</span><span class="S0"> </span><span class="S3">200</span><span class="S8">,</span><span class="S0"> </span><span class="S3">50</span><span class="S8">)</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUISetState</span><span class="S8">()</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; ダイアログが閉じられるまでGUIを実行</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">While</span><span class="S0"> </span><span class="S3">1</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$msg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUIGetMsg</span><span class="S8">()</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">If</span><span class="S0"> </span><span class="S9">$msg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$GUI_EVENT_CLOSE</span><span class="S0"> </span><span class="S5">Then</span><span class="S0"> </span><span class="S5">ExitLoop</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">WEnd</span><br>
+<br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; コントロールをサイズ変更</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$n</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICtrlSetPos</span><span class="S8">(</span><span class="S9">$n</span><span class="S8">,</span><span class="S0"> </span><span class="S3">50</span><span class="S8">,</span><span class="S0"> </span><span class="S3">50</span><span class="S8">,</span><span class="S0"> </span><span class="S3">200</span><span class="S8">,</span><span class="S0"> </span><span class="S3">100</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; ダイアログが閉じられるまでGUIを実行</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">While</span><span class="S0"> </span><span class="S3">1</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$msg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUIGetMsg</span><span class="S8">()</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">If</span><span class="S0"> </span><span class="S9">$msg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$GUI_EVENT_CLOSE</span><span class="S0"> </span><span class="S5">Then</span><span class="S0"> </span><span class="S5">ExitLoop</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">WEnd</span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUIDelete</span><span class="S8">()</span><br>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;example1</span><br>
+<br>
+<span class="S1">;----- 例 2</span><br>
+<span class="S5">Func</span><span class="S0"> Example2</span><span class="S8">()</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$msg</span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$gui</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICreate</span><span class="S8">(</span><span class="S7">"test transparentpic"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">200</span><span class="S8">,</span><span class="S0"> </span><span class="S3">100</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$pic</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICreate</span><span class="S8">(</span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S3">68</span><span class="S8">,</span><span class="S0"> </span><span class="S3">71</span><span class="S8">,</span><span class="S0"> </span><span class="S3">10</span><span class="S8">,</span><span class="S0"> </span><span class="S3">20</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$WS_POPUP</span><span class="S8">,</span><span class="S0"> </span><span class="S4">BitOR</span><span class="S8">(</span><span class="S9">$WS_EX_LAYERED</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$WS_EX_MDICHILD</span><span class="S8">),</span><span class="S0"> </span><span class="S9">$gui</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUICtrlCreatePic</span><span class="S8">(</span><span class="S7">"..\GUI\merlin.gif"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">)</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUISetState</span><span class="S8">(</span><span class="S6">@SW_SHOW</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$pic</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUISetState</span><span class="S8">(</span><span class="S6">@SW_SHOW</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$gui</span><span class="S8">)</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">HotKeySet</span><span class="S8">(</span><span class="S7">"</span><span class="S10">{ESC}</span><span class="S7">"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"main"</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">HotKeySet</span><span class="S8">(</span><span class="S7">"</span><span class="S10">{LEFT}</span><span class="S7">"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"left"</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">HotKeySet</span><span class="S8">(</span><span class="S7">"</span><span class="S10">{RIGHT}</span><span class="S7">"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"right"</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">HotKeySet</span><span class="S8">(</span><span class="S7">"</span><span class="S10">{DOWN}</span><span class="S7">"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"down"</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">HotKeySet</span><span class="S8">(</span><span class="S7">"</span><span class="S10">{UP}</span><span class="S7">"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"up"</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$picPos</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">WinGetPos</span><span class="S8">(</span><span class="S9">$pic</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$guiPos</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">WinGetPos</span><span class="S8">(</span><span class="S9">$gui</span><span class="S8">)</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Do</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$msg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUIGetMsg</span><span class="S8">()</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Until</span><span class="S0"> </span><span class="S9">$msg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$GUI_EVENT_CLOSE</span><br>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;Example2</span><br>
+<br>
+<span class="S5">Func</span><span class="S0"> main</span><span class="S8">()</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$guiPos</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">WinGetPos</span><span class="S8">(</span><span class="S9">$gui</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">WinMove</span><span class="S8">(</span><span class="S9">$gui</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$guiPos</span><span class="S8">[</span><span class="S3">0</span><span class="S8">]</span><span class="S0"> </span><span class="S8">+</span><span class="S0"> </span><span class="S3">10</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$guiPos</span><span class="S8">[</span><span class="S3">1</span><span class="S8">]</span><span class="S0"> </span><span class="S8">+</span><span class="S0"> </span><span class="S3">10</span><span class="S8">)</span><br>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;main</span><br>
+<br>
+<span class="S5">Func</span><span class="S0"> left</span><span class="S8">()</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$picPos</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">WinGetPos</span><span class="S8">(</span><span class="S9">$pic</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">WinMove</span><span class="S8">(</span><span class="S9">$pic</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$picPos</span><span class="S8">[</span><span class="S3">0</span><span class="S8">]</span><span class="S0"> </span><span class="S8">-</span><span class="S0"> </span><span class="S3">10</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$picPos</span><span class="S8">[</span><span class="S3">1</span><span class="S8">])</span><br>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;left</span><br>
+<br>
+<span class="S5">Func</span><span class="S0"> right</span><span class="S8">()</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$picPos</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">WinGetPos</span><span class="S8">(</span><span class="S9">$pic</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">WinMove</span><span class="S8">(</span><span class="S9">$pic</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$picPos</span><span class="S8">[</span><span class="S3">0</span><span class="S8">]</span><span class="S0"> </span><span class="S8">+</span><span class="S0"> </span><span class="S3">10</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$picPos</span><span class="S8">[</span><span class="S3">1</span><span class="S8">])</span><br>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;right</span><br>
+<br>
+<span class="S5">Func</span><span class="S0"> down</span><span class="S8">()</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$picPos</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">WinGetPos</span><span class="S8">(</span><span class="S9">$pic</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">WinMove</span><span class="S8">(</span><span class="S9">$pic</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$picPos</span><span class="S8">[</span><span class="S3">0</span><span class="S8">],</span><span class="S0"> </span><span class="S9">$picPos</span><span class="S8">[</span><span class="S3">1</span><span class="S8">]</span><span class="S0"> </span><span class="S8">+</span><span class="S0"> </span><span class="S3">10</span><span class="S8">)</span><br>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;down</span><br>
+<br>
+<span class="S5">Func</span><span class="S0"> up</span><span class="S8">()</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$picPos</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">WinGetPos</span><span class="S8">(</span><span class="S9">$pic</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">WinMove</span><span class="S8">(</span><span class="S9">$pic</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$picPos</span><span class="S8">[</span><span class="S3">0</span><span class="S8">],</span><span class="S0"> </span><span class="S9">$picPos</span><span class="S8">[</span><span class="S3">1</span><span class="S8">]</span><span class="S0"> </span><span class="S8">-</span><span class="S0"> </span><span class="S3">10</span><span class="S8">)</span><br>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;up</span><br>
+<br>
+<span class="S1">;----- 例 3 PNG処理 by Zedna</span><br>
+<span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;GUIConstantsEx.au3&gt;</span><br>
+<span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;WindowsConstants.au3&gt;</span><br>
+<span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;GDIPlus.au3&gt;</span><br>
+<span class="S11">#Include</span><span class="S0"> </span><span class="S7">&lt;WinAPI.au3&gt;</span><br>
+<br>
+<span class="S5">Global</span><span class="S0"> </span><span class="S9">$hGUI</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$hImage</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$hGraphic</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$hImage1</span><br>
+<br>
+<span class="S1">; GUI作成</span><br>
+<span class="S9">$hGUI</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICreate</span><span class="S8">(</span><span class="S7">"Show PNG"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">250</span><span class="S8">,</span><span class="S0"> </span><span class="S3">250</span><span class="S8">)</span><br>
+<br>
+<span class="S1">; PNG画像をロード</span><br>
+<span class="S15">_GDIPlus_StartUp</span><span class="S8">()</span><br>
+<span class="S9">$hImage</span><span class="S0"> &nbsp;&nbsp;</span><span class="S8">=</span><span class="S0"> </span><span class="S15">_GDIPlus_ImageLoadFromFile</span><span class="S8">(</span><span class="S7">"..\GUI\Torus.png"</span><span class="S8">)</span><br>
+<span class="S9">$hGraphic</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S15">_GDIPlus_GraphicsCreateFromHWND</span><span class="S8">(</span><span class="S9">$hGUI</span><span class="S8">)</span><br>
+<br>
+<span class="S4">GUIRegisterMsg</span><span class="S8">(</span><span class="S9">$WM_PAINT</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"MY_WM_PAINT"</span><span class="S8">)</span><br>
+<span class="S4">GUISetState</span><span class="S8">()</span><br>
+<br>
+<span class="S1">; ユーザーが終了させるまでループ</span><br>
+<span class="S5">do</span><br>
+<span class="S5">until</span><span class="S0"> </span><span class="S4">GUIGetMsg</span><span class="S8">()</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$GUI_EVENT_CLOSE</span><br>
+<br>
+<span class="S1">; リソースをクリーン</span><br>
+<span class="S15">_GDIPlus_GraphicsDispose</span><span class="S8">(</span><span class="S9">$hGraphic</span><span class="S8">)</span><br>
+<span class="S15">_GDIPlus_ImageDispose</span><span class="S8">(</span><span class="S9">$hImage</span><span class="S8">)</span><br>
+<span class="S15">_GDIPlus_ShutDown</span><span class="S8">()</span><br>
+<br>
+<span class="S1">; PNG画像を描画</span><br>
+<span class="S5">Func</span><span class="S0"> MY_WM_PAINT</span><span class="S8">(</span><span class="S9">$hWnd</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$Msg</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$wParam</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$lParam</span><span class="S8">)</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S15">_WinAPI_RedrawWindow</span><span class="S8">(</span><span class="S9">$hGUI</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$RDW_UPDATENOW</span><span class="S8">)</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S15">_GDIPlus_GraphicsDrawImage</span><span class="S8">(</span><span class="S9">$hGraphic</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$hImage</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">)</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S15">_WinAPI_RedrawWindow</span><span class="S8">(</span><span class="S9">$hGUI</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$RDW_VALIDATE</span><span class="S8">)</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">Return</span><span class="S0"> </span><span class="S9">$GUI_RUNDEFMSG</span><br>
+<span class="S5">EndFunc</span><br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\GUICtrlCreatePic.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function StringIsSpace</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">StringIsSpace</font>
+<hr size="2">
+<p>文字列がスペース文字のみからなるかどうかを調べます。<br></p>
+
+<p class="codeheader">
+StringIsSpace ( "string" )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">string</td>
+    <td width="85%">調べる文字列</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">成功</td>
+    <td width="90%">1を返します。</td>
+  </tr>
+  <tr>
+    <td valign="top">失敗</td>
+    <td>文字列がスペース文字以外の文字を含む場合0を返します。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+スペースにはChr(9)からChr(13)までの水平タブ、ラインフィード、垂直タブ、フォームフィード、キャリッジリターンが含まれます。<br>
+<br>
+またスペースには標準のスペース(Chr(32))も含まれます。<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="StringIsAlNum.htm">StringIsAlNum</a>, <a href="StringIsAlpha.htm">StringIsAlpha</a>, <a href="StringIsASCII.htm">StringIsASCII</a>, <a href="StringIsDigit.htm">StringIsDigit</a>, <a href="StringIsLower.htm">StringIsLower</a>, <a href="StringIsUpper.htm">StringIsUpper</a>, <a href="StringIsXDigit.htm">StringIsXDigit</a>, <a href="StringUpper.htm">StringUpper</a>, <a href="StringLower.htm">StringLower</a>, <a href="StringStripCR.htm">StringStripCR</a>, <a href="StringStripWS.htm">StringStripWS</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S9">$x</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S7">" &nbsp;&nbsp;"</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@LF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S4">Chr</span><span class="S8">(</span><span class="S3">11</span><span class="S8">)</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@TAB</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">" "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><br>
+<span class="S5">If</span><span class="S0"> </span><span class="S4">StringIsSpace</span><span class="S8">(</span><span class="S9">$x</span><span class="S8">)</span><span class="S0"> </span><span class="S5">Then</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"String only contained whitespace characters."</span><span class="S8">)</span><br>
+<span class="S5">EndIf</span><br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\StringIsSpace.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+</body>
+</html>

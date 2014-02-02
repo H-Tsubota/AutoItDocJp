@@ -1,0 +1,100 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Window Titles and Text (Advanced)</title>
+  <META http-equiv=Content-Type content="text/html; charset=shift-jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<h1>Window Titles and Text (Advanced)</h1>
+<p>
+  AutoItには3つの&quot;ウィンドウマッチング&quot;モードがあります。
+  モードは<a href="../functions/AutoItSetOption.htm#WinTitleMatchMode">AutoItSetOption</a>関数で
+  <a href="../functions/AutoItSetOption.htm#WinTitleMatchMode">WinTitleMatchMode</a>オプションを使用することで設定します。
+</p>
+<p>&nbsp;</p>
+<p><strong>モード 1 (デフォルト)</strong></p>
+<p>タイトル文頭からの部分一致</p>
+<p>このモードでは<strong>Untitled - Notepad</strong>というウィンドウタイトルは
+ &quot;Untitled - Notepad&quot;、 &quot;Untitled&quot;、 &quot;Un&quot;
+  などと一致します。</p>
+<p>例</p>
+<p class="codebox">WinWait(&quot;Untitled&quot;)</p>
+<p>&nbsp;</p>
+<p><strong>モード 2</strong></p>
+<p>タイトル内の部分文字列一致</p>
+<p>このモードでは<strong>Untitled - Notepad</strong>というウィンドウタイトルは
+  &quot;Untitled - Notepad&quot;、 &quot;Untitled&quot;、 &quot;Notepad&quot;、
+  &quot;pad&quot;などと一致します。</p>
+<p>例.</p>
+<p class="codebox">WinWait(&quot;Notepad&quot;)</p>
+<p>&nbsp;</p>
+<p><strong>モード 3</strong></p>
+<p>完全一致</p>
+<p>このモードでは<strong>Untitled - Notepad</strong>というウィンドウタイトルは
+  &quot;Untitled - Notepad&quot;にのみ一致します。</p>
+<p>&nbsp;</p>
+<p><strong>モード 4</strong> (後方互換性の維持用)</p>
+<p>アドバンスドモード</p>
+<p>モード設定の必要ないアドバンスドウィンドウ記法(Advanced Window Descriptions)に置き換える必要があります。</p>
+<p>&nbsp;</p>
+<p><strong>モード -1 ～ -3</strong></p>
+<p>他のモードにと同じ動作ですが、アルファベット小文字での検索を行います。</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h2>アドバンスドウィンドウ記法(Advanced Window Descriptions)</h2>
+<p>ウィンドウの<strong>title</strong>パラメータとして使用できる特別な記法です。この記法を使って以下の<em>プロパティ</em>からウィンドウを識別することが可能です:</p>
+<ul>
+  <li><strong>TITLE - </strong>ウィンドウタイトル</li>
+  <li><strong>CLASS - </strong>内部のウィンドウクラス名</li>
+  <li><strong>REGEXPTITLE -</strong><a href="../functions/StringRegExp.htm">正規表現</a>を使用したウィンドウタイトル
+  (正規表現が間違っている場合は@errorが2に設定されます)</li>
+  <li><strong>REGEXPCLASS -</strong><a href="../functions/StringRegExp.htm">regular expression</a>を使用した内部のウィンドウクラス名
+  (正規表現が間違っている場合は@errorが2に設定されます)</li>
+  <li><strong>LAST - </strong>直前のAutoItコマンドで使用された最後のウィンドウ</li>
+  <li><strong>ACTIVE - </strong>現在アクティブなウィンドウ</li>
+	<li><strong>X</strong> \ <strong>Y</strong> \ <strong>W</strong> \ <strong>H</strong> 
+	- ウィンドウの位置とサイズ</li>
+  <li><strong>INSTANCE - </strong>全ての指定されたプロパティが一致する場合、1始まりのインスタンス</li>
+</ul>
+<p>ウィンドウコマンドの<em>title</em>パラメータでは以下のフォーマットで一つ以上のプロパティを使用できます:</p>
+<p class="codebox"> [PROPERTY1:Value1; PROPERTY2:Value2]</p>
+<p><strong>注意</strong> : Valueが&quot;;&quot;を含む場合は二重にしてください。</p>
+<p>&nbsp; </p>
+<p>例: &quot;Notepad&quot;というクラス名のウィンドウを待ちます</p>
+<p class="codebox">  WinWaitActive(&quot;[CLASS:Notepad]&quot;, &quot;&quot;)</p>
+<p>&nbsp;</p>
+<p>例: 現在アクティブなウィンドウを閉じます</p>
+<p class="codebox"> WinClose(&quot;[ACTIVE]&quot;, &quot;&quot;)</p>
+<p>&nbsp;</p>
+<p>例: &quot;My Window&quot;というタイトルかつ&quot;My Class&quot;というクラス名のウィンドウの2番目のインスタンスを待ちます</p>
+<p class="codebox">WinWaitActive(&quot;[TITLE:My Window; CLASS:My Class; INSTANCE:2]&quot;, &quot;&quot;)</p>
+<p>&nbsp;</p>
+<p>例: 正規表現で定義されたクラス名と一致するウィンドウをリストにします</p>
+<p class="codebox">WinList(&quot;[REGEXPCLASS:#\d+]&quot;)</p>
+<p>&nbsp; </p>
+<p>&nbsp;</p>
+<h2>ウィンドウハンドル / HWNDs </h2>
+<p>
+AutoItはウィンドウハンドル(HWNDs)型のデータをサポートしています。
+ウィンドウハンドルはウィンドウが作成されたときに生成される特別な値です。
+<em>title/text</em>を指定するタイプの全ての関数でハンドルを<em>title</em>パラメータに使用できます。
+ウィンドウハンドルを使用する利点は、アプリケーションを多重起動した場合でも同じタイトル、テキスト
+を持つそれぞれのウィンドウをハンドルで識別できることです。
+<b><em>title</em>パラメータにウィンドウタイトルに使用すると<em>text</em>パラメータは完全に無視されます。</b>
+</p>
+<p><a href="../functions/WinGetHandle.htm">WinGetHandle</a>、<a href="../functions/WinList.htm">WinList</a>、<a href="../functions/GUICreate.htm">GUICreate</a>
+といった多くの関数がこのハンドルを返します。注意しなければならないのはウィンドウハンドルは数値でも文字列でも<strong>無い</strong>ということです-それ自体1つの特別な型なのです。</p>
+<p>&nbsp;</p>
+<p><strong>注意：ウィンドウハンドルはどのWinTitleMatchModeであっても使用できます。</strong></p>
+<p>&nbsp;</p>
+<p><strong>例</strong></p>
+<p class="codebox">
+$handle = WinGetHandle(&quot;Untitled - Notepad&quot;, &quot;&quot;)<br>
+WinClose($handle)</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</body>
+</html>

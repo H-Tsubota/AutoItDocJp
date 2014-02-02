@@ -1,0 +1,63 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function ConsoleWriteError</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">ConsoleWriteError</font>
+<hr size="2">
+<p>STDERRストリームにデータを書き込みます。テキストエディタによってはこのストリームのデータを利用する他のプログラムのためにこのストリームを読み込めます。<br></p>
+
+<p class="codeheader">
+ConsoleWriteError ( "data" )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">data</td>
+    <td width="85%">出力したいデータ。テキストまたはバイナリです。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+書き込まれたデータの量。バイナリを書き込んだ場合は書き込まれたバイト数、テキストを書き込んだ場合は書き込まれた文字数になります。<br>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+この関数の目的はSTDERRストリームへのデータの書き込みです。人気のある多くのテキストエディタはこのストリームを読み込めます。<br>
+<br>
+<b>スクリプトがコンソールアプリケーションとしてコンパイルされていない場合、DOSコンソールには書き込めません。</b><br>
+<br>
+書き込み前に文字はANSIに変換されます。<br>
+<br>
+バイナリデータはそのまま書き込まれます。文字列に変換されません。バイナリデータの16進数表記を表示する場合はString()関数を使用して明示的にデータを文字列にキャストしてください。<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="ConsoleWrite.htm">ConsoleWrite</a>, <a href="ConsoleRead.htm">ConsoleRead</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$var</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S7">"Test"</span><br>
+<span class="S4">ConsoleWriteError</span><span class="S8">(</span><span class="S7">"var="</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$var</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S8">)</span><br>
+<span class="S1">; コンソール出力をトラップできるテキストエディタ上で実行すると"var=Test"となる</span><br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\ConsoleWriteError.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

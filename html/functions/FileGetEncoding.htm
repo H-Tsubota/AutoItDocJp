@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function FileGetEncoding</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">FileGetEncoding</font>
+<hr size="2">
+<p>ファイルに使用されているテキストエンコーディングを判定します。<br></p>
+
+<p class="codeheader">
+FileGetEncoding ( "filehandle/filename" [, mode] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">filehandle/filename</td>
+    <td width="85%">
+FileOpenの呼び出しで返されたファイルのハンドル。文字列でのファイル名を代わりに使用することもできます。
+	</td>
+  </tr>
+  <tr>
+   <td>mode</td>
+   <td>	<b>[オプション]</b> 使用するUTF8の検出モード<br>
+       1 = ファイル全体でUTF8シークエンスをチェックします (デフォルト)<br>
+       2 = ファイルの最初の部分でUTF8シークエンスをチェックします (FileOpenのデフォルトでの使用と同じ)</td>
+  </tr>
+</table>
+
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">成功</td>
+    <td width="90%">FileOpen関数でのものと同じ値でファイルエンコーディングを返します:</td>
+  </tr>
+  <tr>
+    <td valign="top"></td>
+    <td>0 = ANSI</td>
+  </tr>
+  <tr>
+    <td valign="top"></td>
+    <td>32 = UTF16 リトルエンディアン</td>
+  </tr>
+  <tr>
+    <td valign="top"></td>
+    <td>64 = UTF16 ビッグエンディアンB</td>
+  </tr>
+  <tr>
+    <td valign="top"></td>
+    <td>128 = UTF8 (BOMつき)</td>
+  </tr>
+  <tr>
+    <td valign="top"></td>
+    <td>256 = UTF8 (BOMなし)</td>
+  </tr>
+  <tr>
+    <td valign="top">失敗</td>
+    <td>-1を返します。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+ファイルハンドルではなくファイル名が指定された場合、この関数の呼び出し中にファイルの開閉がおこなわれます。<br>
+注意: ファイルハンドルとファイル名を混ぜて使用することはできません。例えばファイルをFileOpenで開いた後、この関数でファイル名を使用することはできません。<br>
+一度に使用できるのはファイルハンドルかファイル名のどちらかだけで両方を使用することはできません。<br>
+<br>
+ファイルハンドルを指定した場合は"mode"パラメータは無視され、FileOpenで使用されたモードが優先されます。<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="FileOpen.htm">FileOpen</a>, <a href="FileRead.htm">FileRead</a>, <a href="FileReadLine.htm">FileReadLine</a>, <a href="FileWrite.htm">FileWrite</a>, <a href="FileWriteLine.htm">FileWriteLine</a>
+<p>&nbsp;</p>
+
+</body>
+</html>

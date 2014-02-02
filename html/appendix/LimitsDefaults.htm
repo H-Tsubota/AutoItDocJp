@@ -1,0 +1,130 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Limits Defaults</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>AutoIt3 Limits/defaults</h1>
+<br>
+<table border="1" style="width: 100%;" cellspacing="0" cellpadding="3" bordercolor="#c0c0c0" height="496">
+  <tr style="color: rgb(255, 255, 255);">
+    <th style="background-color: rgb(0, 0, 153); width: 20%;" height="16">AutoIt3のリミット</th>
+    <th style="background-color: rgb(0, 0, 153); width: 10%;" height="16">値</th>
+    <th style="background-color: rgb(0, 0, 153);" height="16"><b>説明</b></th>
+  </tr>
+  <tr>
+    <td height="16">MAX_LINESIZE</td>
+    <td align="right" height="16">4095 </td>
+    <td height="16">スクリプト1行の最大サイズ</td>
+  </tr>
+  <tr>
+    <td height="16">MAX_ENVSIZE</td>
+    <td align="right" height="16">32767</td>
+    <td height="16">ENV値の最大サイズ</td>
+  </tr>
+  <tr>
+    <td height="16">WINTEXTBUFFER</td>
+    <td align="right" height="16">32767 </td>
+    <td height="16">
+		GetWindowTextは95環境下では65535以上の場合エラーになります。
+		WM_GETTEXTは32767以上の場合エラーになることがあります。 </td>
+  </tr>
+  <tr>
+    <td height="8">MAXCALLRECURSE </td>
+    <td align="right" height="8">5100 </td>
+    <td height="8">Call()関数の自己再帰できる最大回数</td>
+  </tr>
+  <tr>
+    <td height="16">MAXEXECUTERECURSE </td>
+    <td align="right" height="16">5100</td>
+    <td height="16">Execute()関数の自己再帰できる最大回数</td>
+  </tr>
+  <tr>
+    <td height="16">GUI_MAXCONTROLS</td>
+    <td align="right" height="16">65532</td>
+    <td height="16">GUIボックス内のコントロールの最大数</td>
+  </tr>
+  <tr>
+    <td height="16">GUI_MAXPOINTS</td>
+    <td align="right" height="16">256</td>
+    <td height="16">グラフィックインフォページでのポイントの最大数</td>
+  </tr>
+  <tr>
+    <td height="16">COM_MAXEVENT </td>
+    <td align="right" height="16">64 </td>
+    <td height="16">登録できるCOMイベントの最大数</td>
+  </tr>
+  <tr>
+    <td height="16">VAR_SUBSCRIPT_MAX</td>
+    <td align="right" height="16">64 </td>
+    <td height="16">1つの配列での要素の最大数</td>
+  </tr>
+  <tr>
+    <td height="16">MAIN_TIMER_DELAY</td>
+    <td align="right" height="16">750 ms </td>
+    <td height="16">トレイアイコンの非表示/点滅/表示は750msごとにチェックされます。</td>
+  </tr>
+  <tr>
+    <td height="16">CMDLINEPARAM_MAXLEN</td>
+    <td align="right" height="16">4096</td>
+    <td height="16">パラメータの文字数の最大値</td>
+  </tr>
+  <tr>
+    <td height="16">TRAY_MAXITEMS</td>
+    <td align="right" height="16">505</td>
+    <td height="16">トレイメニュー内アイテムの最大数</td>
+  </tr>
+  <tr>
+    <td height="16">TRAY_MAXEVENT </td>
+    <td align="right" height="16">32 </td>
+    <td height="16">登録できるイベントの最大数</td>
+  </tr>
+  <tr>
+    <td height="16">TRAY_TOOLTIPWIDTH</td>
+    <td align="right" height="16">64</td>
+    <td height="16">トレイのツールチップに表示する文字の最大数</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<table border="1" style="width: 100%;" cellspacing="0" cellpadding="3" bordercolor="#c0c0c0">
+<tr style="color: rgb(255, 255, 255);">
+  <th style="background-color: rgb(0, 0, 153); width: 20%;">デフォルト</th>
+  <th style="background-color: rgb(0, 0, 153); width: 10%;">値</th>
+  <th style="background-color: rgb(0, 0, 153);"><b>説明</b></th>
+</tr>
+<tr>
+  <td>ADLIB delay</td>
+  <td align="right">250 ms</td>
+  <td>デフォルトでのADLIBトリガー間の待機時間(ms)。<a href="../functions/AdlibRegister.htm">AdlibRegister()</a>で定義可能。</td>
+</tr>
+<tr>
+  <td>&nbsp;</td>
+  <td align="right">&nbsp;</td>
+  <td>以下のデフォルト値は<a href="../functions/AutoItSetOption.htm">Opt()</a>で変更可能</td>
+</tr>
+<tr>
+  <td>MouseClickDelay</td>
+  <td align="right">10 ms</td>
+  <td>マウスクリック間の時間</td>
+</tr>
+<tr>
+  <td>MouseClickDownDelay</td>
+  <td align="right">10 ms</td>
+  <td>クリックダウンの時間</td>
+</tr>
+<tr>
+  <td>MouseClickDragDelay</td>
+  <td align="right">250 ms</td>
+  <td>マウスドラッグ動作の開始前、終了後の待機時間</td>
+</tr>
+<tr>
+  <td>TCPTimeout</td>
+  <td align="right">100 ms</td>
+  <td>TCP関数破棄後の時間</td>
+</tr>
+</table>
+</body>
+</html>

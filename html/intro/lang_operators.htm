@@ -1,0 +1,188 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>Language Reference - Operators</title>
+  <META http-equiv=Content-Type content="text/html; charset=shift-jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css"></head>
+<body>
+<h1>Language Reference - Operators</h1>
+
+  
+<p>AutoItは次の代入、数学、比較、論理演算子を持っています。</p>
+<p>&nbsp;</p>
+<table border="1" cellpadding="3" cellspacing="0" width="100%">
+  <tbody><tr bgcolor="#000099"> 
+    <td nowrap="nowrap" width="9%"><font color="#ffffff"><strong>演算子</strong></font></td>
+    <td width="91%"><font color="#ffffff"><strong>説明</strong></font></td>
+  </tr>
+<tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>代入演算子</strong>
+      </td>
+    </tr>
+  <tr>
+      <td style="vertical-align: top; text-align: center;">=<br>
+      </td>
+      <td style="vertical-align: top;">代入 例：<strong>$var = 5</strong>&nbsp;&nbsp;&nbsp;&nbsp; (<em></em><em>$var</em>に数字の5を代入)</td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; text-align: center;">+=<br>
+      </td>
+      <td style="vertical-align: top;">加算代入 例：<strong> $var += 1</strong> &nbsp;&nbsp;&nbsp; (<span style="font-style: italic;"><em>$var</em>に1を足す</span>)</td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; text-align: center;">-=<br>
+      </td>
+      <td style="vertical-align: top;">減算代入</td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; text-align: center;">*=<br>
+      </td>
+      <td style="vertical-align: top;">乗算代入</td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; text-align: center;">/=<br>
+      </td>
+      <td style="vertical-align: top;">除算代入</td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top; text-align: center;">&amp;=<br>
+      </td>
+      <td style="vertical-align: top;">連結代入&nbsp; 例：<strong>$var = "one"</strong>後、<strong>$var &amp;= 
+      10</strong>&nbsp;&nbsp;&nbsp; (<em>$varは"one10"となる。</em>)</td>
+    </tr>
+    <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>数学演算子</strong>
+      </td>
+    </tr>
+<tr> 
+    <td align="center" nowrap="nowrap">+</td>
+    <td>2つの数の加算&nbsp; 例：<strong>10 + 20</strong>&nbsp;&nbsp;&nbsp; 
+      (<em>30と同値</em>)</td>
+  </tr>
+  <tr> 
+    <td align="center" nowrap="nowrap">-</td>
+    <td>2つの数の減算&nbsp; 例：<strong>20 - 10</strong>&nbsp;&nbsp;&nbsp; 
+      (<em>10と同値</em>)</td>
+  </tr>
+  <tr> 
+    <td align="center" nowrap="nowrap">*</td>
+    <td>2つの数の乗算&nbsp; 例：<strong>20 * 10</strong>&nbsp;&nbsp;&nbsp; 
+      (<em>200と同値</em>)</td>
+  </tr>
+  <tr> 
+    <td align="center" nowrap="nowrap">/</td>
+    <td>2つの数の除算&nbsp; 例：<strong>20 / 10</strong>&nbsp;&nbsp;&nbsp; 
+	(<em>2と同値</em>)</td>
+  </tr>
+  <tr> 
+    <td align="center" nowrap="nowrap">&amp;</td>
+    <td>2つの文字列の連結/結合&nbsp; 例：<strong>"one" &amp; 
+      10</strong>&nbsp;&nbsp;&nbsp; (<em>"one10"と同値</em>)</td>
+  </tr>
+  <tr> 
+    <td align="center" nowrap="nowrap">^</td>
+    <td>数の累乗&nbsp; 例：<strong>2 ^ 4</strong>&nbsp;&nbsp;&nbsp; 
+      (<em>16と同値</em>) </td>
+  </tr>
+  <tr> 
+    <td align="center" nowrap="nowrap"><br>
+</td>
+    <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>比較演算子</strong> (文字列に使用した場合、==以外では大文字小文字は区別されません。)
+</td>
+  </tr>
+  
+  <tr> 
+    <td align="center" nowrap="nowrap">=</td>
+    <td>2つの値が同値かを判定します。&nbsp; 
+      例：<a href="../keywords/IfElseEndIf.htm"><strong>If</strong></a><strong> 
+      $var= 5 <a href="../keywords/IfElseEndIf.htm">Then</a></strong>&nbsp;&nbsp;&nbsp; 
+      (<em>$varが5のときtrue</em>)。文字列の場合、<strong>大文字小文字</strong>を区別しません。</td>
+  </tr>
+  <tr> 
+    <td align="center" nowrap="nowrap">==</td>
+    <td>2つの<strong>文字列</strong>が同じかどうかを判定します。<strong>大文字小文字を区別します。</strong>
+	文字列でない場合は左右の値は文字列に変換されます。
+	この演算子は大文字小文字の区別が必要な文字列比較でのみ使用してください。
+	</td>
+  </tr>
+  <tr> 
+    <td align="center" nowrap="nowrap">&lt;&gt;</td>
+	<td>2つの値が同値でないかを判定します。
+	文字列に使用された場合、<strong>大文字小文字</strong>を区別しません。
+	大文字小文字を区別した等号否定比較を行う場合は<strong>Not ("string1" == "string2")</strong>を使用してください。</td>
+  </tr>
+  <tr> 
+    <td align="center" nowrap="nowrap">&gt;</td>
+	<td>1番目の値が2番目の値より大きいかを判定します。  
+	文字列の内容が数字である場合でも文字列は辞書順で比較されます。</td>
+  </tr>
+  <tr> 
+    <td align="center" nowrap="nowrap">&gt;=</td>
+	<td>1番目の値が2番目の値以上かを判定します。
+	文字列の内容が数字である場合でも文字列は辞書順で比較されます。</td>
+  </tr>
+  <tr> 
+    <td align="center" nowrap="nowrap">&lt;</td>
+	<td>1番目の値が2番目の値未満かを判定します。
+	文字列の内容が数字である場合でも文字列は辞書順で比較されます。</td>
+  </tr>
+  <tr> 
+    <td align="center" nowrap="nowrap">&lt;=</td>
+	<td>1番目の値が2番目の値以下かを判定します。  
+	文字列の内容が数字である場合でも文字列は辞書順で比較されます。</td>
+  </tr>
+  <tr>
+      <td style="vertical-align: top;"><br>
+      </td>
+      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>論理演算子</strong>
+      </td>
+    </tr>
+<tr> 
+    <td align="center" nowrap="nowrap">AND</td>
+    <td>論理AND演算子&nbsp; 例：<strong>If $var = 5 AND $var2 &gt; 6 
+      Then</strong>&nbsp;&nbsp;&nbsp; (<em>$var が 5 <strong>かつ</strong> 
+      $var2 が6より大きいとき、True</em>)</td>
+  </tr>
+  <tr> 
+    <td align="center" nowrap="nowrap">OR</td>
+    <td>論理OR演算子&nbsp; 例：<strong>If $var = 5 OR $var2 &gt; 6 Then</strong>&nbsp;&nbsp;&nbsp; 
+      (<em>$var が 5 <strong>または</strong> $var2 が6より大きいとき、True</em>)</td>
+  </tr><tr>
+      <td style="vertical-align: top; text-align: center;">NOT</td>
+      <td style="vertical-align: top;">論理NOT演算子&nbsp; 例：<strong>NOT 1</strong>&nbsp;&nbsp;&nbsp; 
+      (<em>False</em>)</td>
+    </tr>
+
+</tbody></table>
+<p>&nbsp;</p>
+<p>
+式の中に複数の演算子が使われている場合、その適用の順番は<strong>演算子の優先順位</strong>.&nbsp; に従います。
+AutoItでの優先順位は下記のとおりです。&nbsp; 2つの演算子の優先順位が同じ場合、式は<em>左から右に</em>評価されます。
+</p>
+<p>上から優先度高。</p>
+<p class="code"> <strong>&nbsp;&nbsp;&nbsp; NOT<br>
+  &nbsp;&nbsp;&nbsp; ^<br>
+  &nbsp;&nbsp;&nbsp; * /<br>
+  &nbsp;&nbsp;&nbsp; + -<br>
+  &nbsp;&nbsp;&nbsp; &amp;<br>
+  &nbsp;&nbsp;&nbsp; &lt; &gt; &lt;= &gt;= = &lt;&gt; ==<br>
+  &nbsp;&nbsp;&nbsp; AND OR</strong>
+</p>
+<p>&nbsp; </p>
+<p>例えば<strong>2 + 4 * 10</strong>は<strong>42</strong>と評価されます。</p>
+<p>&nbsp;&nbsp;&nbsp; 4 * 10&nbsp;&nbsp;&nbsp; (イコール 40)</p>
+<p>&nbsp;&nbsp;&nbsp; 2 + 40&nbsp;&nbsp;&nbsp; (イコール 42)</p>
+<p>
+<strong>*</strong>は<strong>+</strong>よりも優先度が高いので<strong>加算</strong>の前に処理されます。
+&nbsp;</p>
+<p>&nbsp;</p>
+<p> カッコを使うことで式の特定の部分を最初に評価させることができます。</p>
+<p>例えば<strong>(2 + 4) * 10</strong>は<strong>60</strong>と同値です。</p>
+<br>
+<p>論理演算子 AND、ORを使う場合は下記の事項に注意。</p>
+<p><span style="font-weight: bold;"><span style="font-weight: bold;"></span></span></p>
+<p>例： <strong>If&nbsp; MyFunc1() OR MyFunc2() Then&nbsp;</strong> &nbsp;&nbsp; (<em>MyFunc1()がtrueを返した場合、MyFunc2()は呼ばれません。</em>)</p>
+<p><span style="font-weight: bold;"><span style="font-weight: bold;"></span></span>例： <strong>If&nbsp; MyFunc1() AND MyFunc2() Then</strong> &nbsp;&nbsp;(<em>MyFunc1()がfalseを返した場合、MyFunc2()は呼ばれません。</em>)</p>
+</body></html>

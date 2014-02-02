@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function StdioClose</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">StdioClose</font>
+<hr size="2">
+<p>STDIOリダイレクションで実行したプロセスに関連付けられた全てのリソースを閉じます。<br></p>
+
+<p class="codeheader">
+StdioClose ( process_id )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">process_id</td>
+    <td width="85%">Runの呼び出しで返された子プロセスのプロセスID</td>
+  </tr>
+</table>
+
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">成功</td>
+    <td width="90%">非ゼロ</td>
+  </tr>
+  <tr>
+    <td valign="top">失敗</td>
+    <td>プロセスがSTDIOリダイレクションされていない場合、既に閉じられている場合は0</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+この関数は全てのハンドルを閉じ、STDIOに関連付けられた全てのリソースを解放します。<br>
+これによってプロセスからのSTDIOデータを読むことは不可能になります。<br>
+また全ての保留中のデータは失われます。<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="StdoutRead.htm">StdoutRead</a>, <a href="StderrRead.htm">StderrRead</a>, <a href="StdinWrite.htm">StdinWrite</a>, <a href="Run.htm">Run</a>, <a href="RunAs.htm">RunAs</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S1">; StdioClose()のデモ</span><br>
+<span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;Constants.au3&gt;</span><br>
+<br>
+<span class="S5">Local</span><span class="S0"> </span><span class="S9">$pid</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">Run</span><span class="S8">(</span><span class="S6">@ComSpec</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">" /c dir foo.bar"</span><span class="S8">,</span><span class="S0"> </span><span class="S6">@SystemDir</span><span class="S8">,</span><span class="S0"> </span><span class="S6">@SW_HIDE</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$STDERR_MERGED</span><span class="S0"> </span><span class="S8">+</span><span class="S0"> </span><span class="S9">$STDOUT_CHILD</span><span class="S8">)</span><br>
+<span class="S4">StdioClose</span><span class="S8">(</span><span class="S9">$pid</span><span class="S8">)</span><br>
+<br>
+<span class="S1">; 読み込み先の全てのストリームを閉じたので読み込めるデータは無い</span><br>
+<span class="S5">Local</span><span class="S0"> </span><span class="S9">$line</span><br>
+<span class="S5">While</span><span class="S0"> </span><span class="S3">1</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S9">$line</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">StdoutRead</span><span class="S8">(</span><span class="S9">$pid</span><span class="S8">)</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">If</span><span class="S0"> </span><span class="S6">@error</span><span class="S0"> </span><span class="S5">Then</span><span class="S0"> </span><span class="S5">ExitLoop</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"STDOUT read:"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$line</span><span class="S8">)</span><br>
+<span class="S5">Wend</span><br>
+<br>
+<span class="S5">While</span><span class="S0"> </span><span class="S3">1</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S9">$line</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">StderrRead</span><span class="S8">(</span><span class="S9">$pid</span><span class="S8">)</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S5">If</span><span class="S0"> </span><span class="S6">@error</span><span class="S0"> </span><span class="S5">Then</span><span class="S0"> </span><span class="S5">ExitLoop</span><br>
+<span class="S0">&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"STDERR read:"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$line</span><span class="S8">)</span><br>
+<span class="S5">Wend</span><br>
+<br>
+<span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Debug"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Exiting..."</span><span class="S8">)</span><br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\StdioClose.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

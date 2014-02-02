@@ -1,0 +1,103 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function GUICtrlRecvMsg</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">GUICtrlRecvMsg</font>
+<hr size="2">
+<p>コントロールにメッセージを送信し、lParamの情報を取得します。<br></p>
+
+<p class="codeheader">
+GUICtrlRecvMsg ( controlID , msg [, wParam [, lParamType]] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">controlID</td>
+    <td width="85%"><a href="GUICtrlCreate%20Management.htm">GUICtrlCreate...</a>関数によって返されるコントロール識別子(コントロールID)。</td>
+  </tr>
+  <tr>
+   <td>msg</td>
+   <td>Windowsコントロールドキュメンテーションで定義されているコントロールに送信されるメッセージのタイプ。</td>
+  </tr>
+  <tr>
+   <td>wParam</td>
+   <td><b>[オプション]</b> コントロールに送信される1番目の整数パラメータ。</td>
+  </tr>
+  <tr>
+   <td>lParamType</td>
+   <td><b>[オプション]</b> 返されるlParamのタイプを定義する：0（デフォルト)でwParamとlParam、1でlParamの文字列、2でlParamのRECT構造体。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">成功</td>
+    <td width="90%">WindowsAPIのSendMessageによって返される値が返されます。</td>
+  </tr>
+  <tr>
+    <td valign="top">失敗</td>
+    <td>0を返します。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+この関数ではSendMessageAPIを利用して直接コントロールに特殊なWindowsメッセージを送信することができます。これによって単純なGUICtrlRead()関数やGUICtrlUpdate...()関数の範囲では利用できない特別なコントロールの特徴を利用することが可能になります。<br>
+<br>
+wParamパラメータ、lParamTypeパラメータを指定しない場合は2要素(LPwParam, LPlParam)をもつ配列が返されます。<br>
+<br>
+RECTは4要素(左、上、右、下)をもつ配列として返されます。<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="GUICtrlSendMsg.htm">GUICtrlSendMsg</a>, <a href="GUICtrlUpdate%20Management.htm">GUICtrlUpdate...</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;GUIConstantsEx.au3&gt;</span><br>
+<span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;EditConstants.au3&gt;</span><br>
+<br>
+<span class="S4">GUICreate</span><span class="S8">(</span><span class="S7">"My GUI"</span><span class="S8">)</span><span class="S0"> &nbsp;</span><span class="S1">; 表示時に中央に表示されるダイアログボックスを作成</span><br>
+<br>
+<span class="S9">$nEdit</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICtrlCreateEdit</span><span class="S0"> </span><span class="S8">(</span><span class="S7">"line 0"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">10</span><span class="S8">,</span><span class="S3">10</span><span class="S8">)</span><br>
+<span class="S4">GUICtrlCreateButton</span><span class="S0"> </span><span class="S8">(</span><span class="S7">"Ok"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">20</span><span class="S8">,</span><span class="S3">200</span><span class="S8">,</span><span class="S3">50</span><span class="S8">)</span><br>
+<br>
+<span class="S4">GUISetState</span><span class="S0"> </span><span class="S8">()</span><br>
+<br>
+<span class="S5">For</span><span class="S0"> </span><span class="S9">$n</span><span class="S8">=</span><span class="S3">1</span><span class="S0"> </span><span class="S5">To</span><span class="S0"> </span><span class="S3">5</span><br>
+<span class="S4">GUICtrlSetData</span><span class="S0"> </span><span class="S8">(</span><span class="S9">$nEdit</span><span class="S8">,</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">"line "</span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$n</span><span class="S8">)</span><br>
+<span class="S5">Next</span><br>
+<br>
+<br>
+<span class="S1">; ダイアログが閉じられるまでGUIを実行</span><br>
+<span class="S5">Do</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$msg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUIGetMsg</span><span class="S8">()</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">If</span><span class="S0"> </span><span class="S9">$msg</span><span class="S0"> </span><span class="S8">&gt;</span><span class="S3">0</span><span class="S0"> </span><span class="S5">Then</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$a</span><span class="S8">=</span><span class="S4">GUICtrlRecvMsg</span><span class="S8">(</span><span class="S9">$nEdit</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$EM_GETSEL</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S4">GUICtrlSetState</span><span class="S8">(</span><span class="S9">$nEdit</span><span class="S8">,</span><span class="S9">$GUI_FOCUS</span><span class="S8">)</span><span class="S0">&nbsp; </span><span class="S1">; エディットコントロールにフォーカスを戻す</span><br>
+<br>
+<span class="S1">; コントロールによって返されたwParamとlParamの値を表示</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S7">"Current selection"</span><span class="S8">,</span><span class="S4">StringFormat</span><span class="S8">(</span><span class="S7">"start=%d end=%d"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$a</span><span class="S8">[</span><span class="S3">0</span><span class="S8">],</span><span class="S0"> </span><span class="S9">$a</span><span class="S8">[</span><span class="S3">1</span><span class="S8">]))</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">EndIf</span><br>
+<span class="S5">Until</span><span class="S0"> </span><span class="S9">$msg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$GUI_EVENT_CLOSE</span><br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\GUICtrlRecvMsg.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+</body>
+</html>

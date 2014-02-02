@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function ProgressOn</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">ProgressOn</font>
+<hr size="2">
+<p>カスタマイズ可能なプログレスバーウィンドウを作成します。<br></p>
+
+<p class="codeheader">
+ProgressOn ( "title", "maintext" [, "subtext" [, x pos [, y pos [, opt]]]] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">title</td>
+    <td width="85%">プログレスウィンドウの名前</td>
+  </tr>
+  <tr>
+   <td>maintext</td>
+   <td>太文字で上部に表示されるメインテキスト</td>
+  </tr>
+  <tr>
+   <td>subtext</td>
+   <td><b>[オプション]</b> 通常の文字で下部に表示されるサブテキスト（デフォルトでは空白）</td>
+  </tr>
+  <tr>
+   <td>x pos</td>
+   <td><b>[オプション]</b> プログレスウィンドウの左端位置（ピクセル）(デフォルトは中央)</td>
+  </tr>
+  <tr>
+   <td>y pos</td>
+   <td><b>[オプション]</b> プログレスウィンドウの上端位置（ピクセル）(デフォルトは中央)</td>
+  </tr>
+  <tr>
+   <td>opt</td>
+   <td><b>[オプション]</b> デフォルトでは'常に最前面/タイトル有り'です。<br>
+       次のオプションを必要に応じて加えられます。<br>
+       &nbsp;1 = ボーダレス、タイトルなしのウィンドウ<br>
+       &nbsp;2 = "常に最前面"解除<br>
+       16 = ウィンドウ移動可能</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+なし。<br>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+オプションパラメータをスキップする場合、デフォルト値を使用するためには次のようにします。<br>
+&nbsp;&nbsp;"" 文字列パラメータの場合<br>
+&nbsp;&nbsp;-1 数値パラメータの場合<br>
+すでにプログレスウィンドウが存在している場合にProgressOnが呼ばれると、ウィンドウは再描画/移動されます。（同時に複数のプログレスウィンドウがほしい場合、複数のスクリプトを使用しなければなりません。）<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="ProgressOff.htm">ProgressOff</a>, <a href="ProgressSet.htm">ProgressSet</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S4">ProgressOn</span><span class="S8">(</span><span class="S7">"Progress Meter"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Increments every second"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"0 percent"</span><span class="S8">)</span><br>
+<span class="S5">For</span><span class="S0"> </span><span class="S9">$i</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">10</span><span class="S0"> </span><span class="S5">to</span><span class="S0"> </span><span class="S3">100</span><span class="S0"> </span><span class="S5">step</span><span class="S0"> </span><span class="S3">10</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">sleep</span><span class="S8">(</span><span class="S3">1000</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">ProgressSet</span><span class="S8">(</span><span class="S0"> </span><span class="S9">$i</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$i</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">" percent"</span><span class="S8">)</span><br>
+<span class="S5">Next</span><br>
+<span class="S4">ProgressSet</span><span class="S8">(</span><span class="S3">100</span><span class="S0"> </span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Done"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Complete"</span><span class="S8">)</span><br>
+<span class="S4">sleep</span><span class="S8">(</span><span class="S3">500</span><span class="S8">)</span><br>
+<span class="S4">ProgressOff</span><span class="S8">()</span><br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\ProgressOn.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

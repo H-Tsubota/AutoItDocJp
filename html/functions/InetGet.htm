@@ -1,0 +1,126 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function InetGet</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">InetGet</font>
+<hr size="2">
+<p>HTTPプロトコル、HTTPSプロトコルもしくはFTPプロトコルを使用してインターネットからファイルをダウンロードします。<br></p>
+
+<p class="codeheader">
+InetGet ( "URL" [,"filename" [, options [, background]]] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">URL</td>
+    <td width="85%">ダウンロードするファイルのURL。下記、注意を参照。</td>
+  </tr>
+  <tr>
+   <td>filename</td>
+   <td><b>[オプション]</b>ダウンロード先のローカルでの名前</td>
+  </tr>
+    <tr>
+   <td>options</td>
+   <td><b>[オプション]</b> 0 = (デフォルト) 利用可能な場合、ローカルキャッシュからファイルを取得します。<br>
+       1 = 常にリモートサイトからリロードします。<br>
+       2 = 全てのSSLエラーを無視します(HTTPSコネクション時)。<br>
+       4 = FTPプロトコルによるファイル転送時にASCIIを使用します(フラグ8と組み合わせることはできません)。<br>
+       8 = FTPプロトコルによるファイル転送時にBINARYを使用します(フラグ4と組み合わせることはできません)。何も設定していない場合、これがデフォルトの転送モードになります。<br>
+       16 = オンライン接続を回避するようにします (注意を参照)。</td>
+  </tr>
+  <tr>
+   <td>background</td>
+   <td><b>[オプション]</b><br>
+       0 = (デフォルト) ダウンロードが完了するまで処理を停止する。<br>
+       1 = すぐに処理を返し、バックグラウンドでダウンロードをおこなう (注意を参照)。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">成功</td>
+	<td width="90%">返し値はダウンロードがバックグラウンドで行われているかどうかによって変化します:</td>
+  </tr>
+  <tr>
+    <td valign="top"></td>
+    <td>バックグラウンド時: ハンドルが返されます。このハンドルはInetGetInfo()で使用することができます。ハンドルはInetClose()で閉じる必要があります。</td>
+  </tr>
+  <tr>
+    <td valign="top"></td>
+    <td>待機時: ダウンロードされたバイト数</td>
+  </tr>
+  <tr>
+    <td width="10%" valign="top">失敗</td>
+  </tr>  
+  <tr>
+    <td valign="top"></td>
+    <td>バックグラウンド時:  ハンドルが返されます。ダウンロード中にエラーが発生していないかどうか調べるにはInetGetInfo()を使用してください。ハンドルはInetClose()で閉じる必要があります。</td>
+  </tr>
+  <tr>
+    <td valign="top"></td>
+    <td>待機時: @errorを非ゼロに設定し、0を返します。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+この関数の動作にはインターネットエクスプローラ3以上が必要です。<br>
+<br>
+URLパラメータはウェブブラウザに入力する場合と同様に"http://www.somesite.com/path/file.html"形式でなければなりません。<br>
+<br>
+ユーザー名、パスワードを使用する場合はサーバー名の前に"username:password@"形式で付け加えます。
+<br>
+例："http://myuser:mypassword@www.somesite.com"<br>
+<br>
+<b>&quot;background&quot; パラメータについての注意</b><br>
+<br>
+デフォルトでは関数はダウンロードが終了するまで停止して処理を返しません。<b>background</b>パラメータを1に設定するとただちに処理を返して、ダウンロードはバックグラウンドでおこなわれます。関数InetGetInfo()を使用することで
+ダウンロードの進行具合を調べることができます。この関数はInetGet()の返すハンドルを引数にとります。<br>
+<br>
+backgroundモードで開始した場合、複数のダウンロードを同時に行うことができます。<br>
+<br>
+ダウンロードを破棄するにはInetClose()を呼んでInetGet()の返すハンドルを渡してください。<br>
+<br>
+デフォルトではAutoItはダウンロード開始前に接続を確立しようとします。ダイアルアップのユーザーの場合、オンライン移行をプロンプトするかモデムをダイヤルします（システムの設定に依存します）。 options値の16はこの処理を無効にします。常時接続（ブロードバンド、LAN）の場合には処理を無効にした方が良いでしょう。ただし、Windows VistaとWindows 7の場合にはこれに関連した特定の問題に対処する必要があります。<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="InetGetSize.htm">InetGetSize</a>, <a href="InetRead.htm">InetRead</a>, <a href="InetGetInfo.htm">InetGetInfo</a>, <a href="InetClose.htm">InetClose</a>, <a href="HttpSetProxy.htm">HttpSetProxy</a>, <a href="FtpSetProxy.htm">FtpSetProxy</a>, <a href="HttpSetUserAgent.htm">HttpSetUserAgent</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S4">InetGet</span><span class="S8">(</span><span class="S7">"http://www.mozilla.org"</span><span class="S8">,</span><span class="S0"> </span><span class="S6">@TempDir</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">"\mozilla.html"</span><span class="S8">)</span><br>
+<span class="S4">InetGet</span><span class="S8">(</span><span class="S7">"http://www.autoitscript.com"</span><span class="S8">,</span><span class="S0"> </span><span class="S6">@TempDir</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">"autoitscript.html"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">)</span><br>
+<span class="S4">InetGet</span><span class="S8">(</span><span class="S7">"ftp://ftp.mozilla.org/pub/mozilla.org/README"</span><span class="S8">,</span><span class="S0"> </span><span class="S6">@TempDir</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">"\Mozilla-README.txt"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">)</span><br>
+<br>
+<span class="S1">; 応用例 バックグラウンドでのダウンロード</span><br>
+<span class="S5">Local</span><span class="S0"> </span><span class="S9">$hDownload</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">InetGet</span><span class="S8">(</span><span class="S7">"http://www.autoitscript.com/autoit3/files/beta/update.dat"</span><span class="S8">,</span><span class="S0"> </span><span class="S6">@TempDir</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">"\update.dat"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">)</span><br>
+<span class="S5">Do</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">Sleep</span><span class="S8">(</span><span class="S3">250</span><span class="S8">)</span><br>
+<span class="S5">Until</span><span class="S0"> </span><span class="S4">InetGetInfo</span><span class="S8">(</span><span class="S9">$hDownload</span><span class="S8">,</span><span class="S0"> </span><span class="S3">2</span><span class="S8">)</span><span class="S0">&nbsp; &nbsp; </span><span class="S1">; ダウンロードが完了したかどうか調べる</span><br>
+<span class="S5">Local</span><span class="S0"> </span><span class="S9">$nBytes</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">InetGetInfo</span><span class="S8">(</span><span class="S9">$hDownload</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">)</span><br>
+<span class="S4">InetClose</span><span class="S8">(</span><span class="S9">$hDownload</span><span class="S8">)</span><span class="S0">&nbsp; &nbsp;</span><span class="S1">; ハンドルを閉じてリソースを解放</span><br>
+<span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Bytes read: "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$nBytes</span><span class="S8">)</span><br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\InetGet.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

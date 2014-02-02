@@ -1,0 +1,136 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function GUICtrlGetHandle</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">GUICtrlGetHandle</font>
+<hr size="2">
+<p>コントロールのハンドル、特別(アイテム)ハンドル(メニュー、コンテキストメニュー、ツリービューアイテム)を返します。<br></p>
+
+<p class="codeheader">
+GUICtrlGetHandle ( controlID )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">controlID</td>
+    <td width="85%"><a href="GUICtrlCreate%20Management.htm">GUICtrlCreate...</a>関数によって返されるコントロール識別子(コントロールID)。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">成功</td>
+    <td width="90%">与えられたcontrolIDのハンドルを返します。</td>
+  </tr>
+  <tr>
+    <td valign="top">失敗</td>
+    <td>0を返します。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+! 次のコントロールはサポートされていません。：ダミー、グラフィック、オブジェクト、リストビューアイテム、タブアイテム !<br>
+<br>
+リストビューアイテムとタブアイテムはインデックスを使って管理します。<br>
+これらのアイテムのインデックスを取得する場合は<a href="DllCall.htm">DllCall()</a>と<a href="DllStructCreate.htm">DllStructCreate()</a>を使用してください。<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="IsHWnd.htm">IsHWnd</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;GUIConstantsEx.au3&gt;</span><br>
+<br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">'MustDeclareVars'</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">)</span><br>
+<br>
+<span class="S0">Example</span><span class="S8">()</span><br>
+<br>
+<span class="S5">Func</span><span class="S0"> Example</span><span class="S8">()</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$hGui</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$FileMenu</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$OpenItem</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$SaveItem</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$OptionsMenu</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$ViewItem</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$ToolsItem</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$ExitItem</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$HelpMenu</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$AboutItem</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$EndBtn</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$Msg</span><br>
+<br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$hGui</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICreate</span><span class="S8">(</span><span class="S7">"My GUI"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">300</span><span class="S8">,</span><span class="S0"> </span><span class="S3">200</span><span class="S8">)</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$FileMenu</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICtrlCreateMenu</span><span class="S8">(</span><span class="S7">"&amp;File"</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$OpenItem</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICtrlCreateMenuItem</span><span class="S8">(</span><span class="S7">"&amp;Open"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$FileMenu</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$SaveItem</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICtrlCreateMenuItem</span><span class="S8">(</span><span class="S7">"&amp;Save"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$FileMenu</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUICtrlCreateMenuItem</span><span class="S8">(</span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$FileMenu</span><span class="S8">)</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$OptionsMenu</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICtrlCreateMenu</span><span class="S8">(</span><span class="S7">"O&amp;ptions"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$FileMenu</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$ViewItem</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICtrlCreateMenuItem</span><span class="S8">(</span><span class="S7">"View"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$OptionsMenu</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUICtrlCreateMenuItem</span><span class="S8">(</span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$OptionsMenu</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$ToolsItem</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICtrlCreateMenuItem</span><span class="S8">(</span><span class="S7">"Tools"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$OptionsMenu</span><span class="S8">)</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUICtrlCreateMenuItem</span><span class="S8">(</span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$FileMenu</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$ExitItem</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICtrlCreateMenuItem</span><span class="S8">(</span><span class="S7">"&amp;Exit"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$FileMenu</span><span class="S8">)</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$HelpMenu</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICtrlCreateMenu</span><span class="S8">(</span><span class="S7">"&amp;?"</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$AboutItem</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICtrlCreateMenuItem</span><span class="S8">(</span><span class="S7">"&amp;About"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$HelpMenu</span><span class="S8">)</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$EndBtn</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICtrlCreateButton</span><span class="S8">(</span><span class="S7">"End"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">110</span><span class="S8">,</span><span class="S0"> </span><span class="S3">140</span><span class="S8">,</span><span class="S0"> </span><span class="S3">70</span><span class="S8">,</span><span class="S0"> </span><span class="S3">20</span><span class="S8">)</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; SetMenuColor</span><span class="S8">(</span><span class="S9">$FileMenu</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0xEEBB99</span><span class="S8">)</span><span class="S0"> &nbsp; </span><span class="S1">; BGRカラー値</span><br>
+<span class="S0">&nbsp; &nbsp; SetMenuColor</span><span class="S8">(</span><span class="S9">$OptionsMenu</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0x66BB99</span><span class="S8">)</span><span class="S1">; BGRカラー値</span><br>
+<span class="S0">&nbsp; &nbsp; SetMenuColor</span><span class="S8">(</span><span class="S9">$HelpMenu</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0x99BBEE</span><span class="S8">)</span><span class="S0"> &nbsp; </span><span class="S1">; BGRカラー値</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUISetState</span><span class="S8">()</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">While</span><span class="S0"> </span><span class="S3">1</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$Msg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUIGetMsg</span><span class="S8">()</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Switch</span><span class="S0"> </span><span class="S9">$Msg</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Case</span><span class="S0"> </span><span class="S9">$ExitItem</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$EndBtn</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$GUI_EVENT_CLOSE</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">ExitLoop</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">Case</span><span class="S0"> </span><span class="S9">$AboutItem</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">64</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"About..."</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Colored menu sample"</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">EndSwitch</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">WEnd</span><br>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;Example</span><br>
+<br>
+<br>
+<span class="S1">; メニューに色を適用</span><br>
+<span class="S5">Func</span><span class="S0"> SetMenuColor</span><span class="S8">(</span><span class="S9">$nMenuID</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nColor</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$hMenu</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$hBrush</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$stMenuInfo</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S5">Const</span><span class="S0"> </span><span class="S9">$MIM_APPLYTOSUBMENUS</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0x80000000</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S5">Const</span><span class="S0"> </span><span class="S9">$MIM_BACKGROUND</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0x00000002</span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$hMenu</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICtrlGetHandle</span><span class="S8">(</span><span class="S9">$nMenuID</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$hBrush</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">DllCall</span><span class="S8">(</span><span class="S7">"gdi32.dll"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"hwnd"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"CreateSolidBrush"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"int"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nColor</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$hBrush</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$hBrush</span><span class="S8">[</span><span class="S3">0</span><span class="S8">]</span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$stMenuInfo</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">DllStructCreate</span><span class="S8">(</span><span class="S7">"dword;dword;dword;uint;dword;dword;ptr"</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">DllStructSetData</span><span class="S8">(</span><span class="S9">$stMenuInfo</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S4">DllStructGetSize</span><span class="S8">(</span><span class="S9">$stMenuInfo</span><span class="S8">))</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">DllStructSetData</span><span class="S8">(</span><span class="S9">$stMenuInfo</span><span class="S8">,</span><span class="S0"> </span><span class="S3">2</span><span class="S8">,</span><span class="S0"> </span><span class="S4">BitOR</span><span class="S8">(</span><span class="S9">$MIM_APPLYTOSUBMENUS</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$MIM_BACKGROUND</span><span class="S8">))</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">DllStructSetData</span><span class="S8">(</span><span class="S9">$stMenuInfo</span><span class="S8">,</span><span class="S0"> </span><span class="S3">5</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$hBrush</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">DllCall</span><span class="S8">(</span><span class="S7">"user32.dll"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"int"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"SetMenuInfo"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"hwnd"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$hMenu</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"ptr"</span><span class="S8">,</span><span class="S0"> </span><span class="S4">DllStructGetPtr</span><span class="S8">(</span><span class="S9">$stMenuInfo</span><span class="S8">))</span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; 構造体を解放。ローカルなので本当は不必要</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$stMenuInfo</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><br>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;SetMenuColor</span></span><br>
+<script type="text/javascript">
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\GUICtrlGetHandle.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+</body>
+</html>

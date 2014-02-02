@@ -1,0 +1,63 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function InetClose</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">InetClose</font>
+<hr size="2">
+<p>InetGet()から返されるハンドルを閉じます。<br></p>
+
+<p class="codeheader">
+InetClose ( handle )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">handle</td>
+    <td width="85%">InetGet()から返されるハンドル</td>
+  </tr>
+</table>
+
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+ハンドルが見つかり閉じることができた場合、Trueを返します。それ以外の場合、Falseを返します。<br>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+InetGet()のハンドルは閉じなければなりません。閉じない場合、リソースがリークします。<br>
+<br>
+ダウンロードがまだ進行している際にハンドルを閉じるとダウンロードがキャンセルされます。<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="InetGet.htm">InetGet</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$hDownload</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">InetGet</span><span class="S8">(</span><span class="S7">"http://www.autoitscript.com/autoit3/files/beta/update.dat"</span><span class="S8">,</span><span class="S0"> </span><span class="S6">@TempDir</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">"\update.dat"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">)</span><br>
+<span class="S5">Do</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">Sleep</span><span class="S8">(</span><span class="S3">250</span><span class="S8">)</span><br>
+<span class="S5">Until</span><span class="S0"> </span><span class="S4">InetGetInfo</span><span class="S8">(</span><span class="S9">$hDownload</span><span class="S8">,</span><span class="S0"> </span><span class="S3">2</span><span class="S8">)</span><span class="S0">&nbsp; &nbsp; </span><span class="S1">; ダウンロードが終了しているかどうか調べる</span><br>
+<span class="S5">Local</span><span class="S0"> </span><span class="S9">$nBytes</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">InetGetInfo</span><span class="S8">(</span><span class="S9">$hDownload</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">)</span><br>
+<span class="S4">InetClose</span><span class="S8">(</span><span class="S9">$hDownload</span><span class="S8">)</span><span class="S0">&nbsp; &nbsp;</span><span class="S1">; ハンドルを閉じてリソースを解放する</span><br>
+<span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Bytes read: "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$nBytes</span><span class="S8">)</span><br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\InetClose.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

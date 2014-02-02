@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function UBound</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">UBound</font>
+<hr size="2">
+<p>配列次元の要素数を返します。<br></p>
+
+<p class="codeheader">
+UBound ( Array [, Dimension] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">Array</td>
+    <td width="85%">調べたい配列変数</td>
+  </tr>
+  <tr>
+   <td>Dimension</td>
+   <td><b>[オプション]</b> 多次元配列の要素数を調べたい次元。デフォルトは1で最初の次元を表します。
+   このパラメータを0にすると配列の次元数が返されます。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">成功</td>
+    <td width="90%">配列次元の要素数を返します。</td>
+  </tr>
+  <tr>
+    <td valign="top">失敗</td>
+    <td>0を返し、@errorを設定します。</td>
+  </tr>
+  <tr>
+    <td valign="top"></td>
+    <td>1 = 与えられたArrayパラメータは配列ではありません。</td>
+  </tr>
+  <tr>
+    <td valign="top"></td>
+    <td>2 = 配列次元が無効な値です。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+UBoundが返す値は配列の末端要素のインデックスより1つ大きいことに注意してください!<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="../keywords/Dim.htm">Dim</a>, <a href="../keywords/ReDim.htm">ReDim</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S5">Dim</span><span class="S0"> </span><span class="S9">$myArray</span><span class="S8">[</span><span class="S3">10</span><span class="S8">][</span><span class="S3">20</span><span class="S8">]</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;要素 0,0 から 9,19</span><br>
+<span class="S9">$rows</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">UBound</span><span class="S8">(</span><span class="S9">$myArray</span><span class="S8">)</span><br>
+<span class="S9">$cols</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">UBound</span><span class="S8">(</span><span class="S9">$myArray</span><span class="S8">,</span><span class="S0"> </span><span class="S3">2</span><span class="S8">)</span><br>
+<span class="S9">$dims</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">UBound</span><span class="S8">(</span><span class="S9">$myArray</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">)</span><br>
+<br>
+<span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"The "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$dims</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">"-dimensional array has"</span><span class="S8">,</span><span class="S0"> </span><span class="S8">_</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$rows</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">" rows, "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$cols</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">" columns"</span><span class="S8">)</span><br>
+<br>
+<span class="S1">;$myArrayの中身を表示</span><br>
+<span class="S9">$output</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S7">""</span><br>
+<span class="S5">For</span><span class="S0"> </span><span class="S9">$r</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><span class="S0"> </span><span class="S5">to</span><span class="S0"> </span><span class="S4">UBound</span><span class="S8">(</span><span class="S9">$myArray</span><span class="S8">,</span><span class="S3">1</span><span class="S8">)</span><span class="S0"> </span><span class="S8">-</span><span class="S0"> </span><span class="S3">1</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$output</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$output</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@LF</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">For</span><span class="S0"> </span><span class="S9">$c</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><span class="S0"> </span><span class="S5">to</span><span class="S0"> </span><span class="S4">UBound</span><span class="S8">(</span><span class="S9">$myArray</span><span class="S8">,</span><span class="S3">2</span><span class="S8">)</span><span class="S0"> </span><span class="S8">-</span><span class="S0"> </span><span class="S3">1</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$output</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$output</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$myArray</span><span class="S8">[</span><span class="S9">$r</span><span class="S8">][</span><span class="S9">$c</span><span class="S8">]</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">" "</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Next</span><br>
+<span class="S5">Next</span><br>
+<span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">4096</span><span class="S8">,</span><span class="S7">"Array Contents"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$output</span><span class="S8">)</span><br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\UBound.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

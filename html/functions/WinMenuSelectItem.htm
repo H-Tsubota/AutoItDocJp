@@ -1,0 +1,100 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function WinMenuSelectItem</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">WinMenuSelectItem</font>
+<hr size="2">
+<p>ウィンドウのメニューアイテムを呼び出します。<br></p>
+
+<p class="codeheader">
+WinMenuSelectItem ( "title", "text", "item" [, "item" [, "item" [, "item" [, "item" [, "item" [, "item"]]]]]] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">title</td>
+    <td width="85%">対象となるウィンドウの名前。<a href="../intro/windowsadvanced.htm">ウィンドウ名の特別な記述の仕方</a>参照</td>
+  </tr>
+  <tr>
+   <td>text</td>
+   <td><b>[オプション]</b> 対象となるウィンドウのテキスト</td>
+  </tr>
+  <tr>
+   <td>item</td>
+   <td>メニューアイテムのテキスト</td>
+  </tr>
+  <tr>
+   <td>item</td>
+   <td><b>[オプション]</b> サブメニューアイテムのテキスト</td>
+  </tr>
+  <tr>
+   <td>item</td>
+   <td><b>[オプション]</b> サブメニューアイテムのテキスト</td>
+  </tr>
+  <tr>
+   <td>item</td>
+   <td><b>[オプション]</b> サブメニューアイテムのテキスト</td>
+  </tr>
+  <tr>
+   <td>item</td>
+   <td><b>[オプション]</b> サブメニューアイテムのテキスト</td>
+  </tr>
+  <tr>
+   <td>item</td>
+   <td><b>[オプション]</b> サブメニューアイテムのテキスト</td>
+  </tr>
+  <tr>
+   <td>item</td>
+   <td><b>[オプション]</b> サブメニューアイテムのテキスト</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">成功</td>
+    <td width="90%">1を返します。</td>
+  </tr>
+  <tr>
+    <td valign="top">失敗</td>
+    <td>メニューを見つけられなかった場合0を返します。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+アンダーラインのあるメニューアイテムはアンダーラインを示すために& 文字を使用しています。つまり、メニューアイテムの<b><u>F</u>ile</b>を指定する場合は"&File"、<b>Con<u>v</u>ert</b>を指定する場合は"Con&vert"としてください。
+6階層下のメニューアイテムまでアクセスすることができます。またアクティブでないウィンドウ、最小化されたウィンドウや隠されたウィンドウにもアクセスできます。<br>
+<br>
+WinMenuSelectItemは通常のメニューのみ取り扱えます。残念なことに現在使われている多くのメニューはカスタムされていたり、ツールバーを”偽装”してメニューに見せていたりします。これはマイクロソフトのアプリケーションの多くにも言えることです。<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="ControlCommand.htm">ControlCommand</a>, <a href="Send.htm">Send</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S1">; メモ帳のファイルメニューのページ設定を選択します。</span><br>
+<span class="S4">WinMenuSelectItem</span><span class="S8">(</span><span class="S7">"[CLASS:Notepad] "</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"&amp;File"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Page Set&amp;up..."</span><span class="S0"> </span><span class="S8">)</span><br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\WinMenuSelectItem.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

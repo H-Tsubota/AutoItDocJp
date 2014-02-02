@@ -1,0 +1,69 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function BitShift</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">BitShift</font>
+<hr size="2">
+<p>ビットシフト演算子として働きます。<br></p>
+
+<p class="codeheader">
+BitShift ( value, shift )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">value</td>
+    <td width="85%">ビットシフトする数値</td>
+  </tr>
+  <tr>
+   <td>shift</td>
+   <td>右にシフトするビット数。（負の値では左にシフトします。）</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+指定したビット数だけシフトした値を返します。<br>
+ビット演算は32ビット整数として行われます。<br>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+16進数表現を使用することができます。<br>
+右へのシフトは2で割る操作、左へのシフトは2をかける操作と同じです。<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="BitAND.htm">BitAND</a>, <a href="BitNOT.htm">BitNOT</a>, <a href="BitOR.htm">BitOR</a>, <a href="BitXOR.htm">BitXOR</a>, <a href="Hex.htm">Hex</a>, <a href="BitRotate.htm">BitRotate</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S9">$x</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">BitShift</span><span class="S8">(</span><span class="S3">14</span><span class="S8">,</span><span class="S0"> </span><span class="S3">2</span><span class="S8">)</span><br>
+<span class="S1">; &nbsp;x == 3 なぜなら 1110b を右に2回シフトすると 11b == 3</span><br>
+<br>
+<span class="S9">$y</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">BitShift</span><span class="S8">(</span><span class="S3">14</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">2</span><span class="S8">)</span><br>
+<span class="S1">; &nbsp;y == 56 なぜなら 1110b を左に2回シフトすると 111000b == 56</span><br>
+<br>
+<span class="S9">$z</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">BitShift</span><span class="S8">(</span><span class="S0"> </span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">31</span><span class="S8">)</span><br>
+<span class="S1">; &nbsp;z == -2147483648 なぜなら2の補数であるから </span><br>
+<span class="S1">; &nbsp;右から32番目の桁が負符号をもつ。</span><br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\BitShift.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

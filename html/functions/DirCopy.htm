@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function DirCopy</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">DirCopy</font>
+<hr size="2">
+<p>フォルダとその下の全てのフォルダ・ファイルをコピーします(xcopyと同様)。<br></p>
+
+<p class="codeheader">
+DirCopy ( "source dir", "dest dir" [, flag] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">source dir</td>
+    <td width="85%">コピーするフォルダのパス（バックスラッシュを含めない）。 例）"C:\Path1"</td>
+  </tr>
+  <tr>
+   <td>dest dir</td>
+   <td>コピー先のフォルダのパス（バックスラッシュを含めない）。 例）"C:\Path_Copy"</td>
+  </tr>
+  <tr>
+   <td>flag</td>
+   <td><b>[オプション]</b> 同名のフォルダ・ファイルがすでに存在した場合、上書きをするかどうかのフラグ<br>
+       &nbsp;0 = (デフォルト) 上書きしない<br>
+       &nbsp;1 = 上書きする</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">成功</td>
+    <td width="90%">1を返します。</td>
+  </tr>
+  <tr>
+    <td valign="top">失敗</td>
+    <td>フォルダのコピーでエラーが起こった場合0を返します。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+コピー先のフォルダが存在しない場合、（可能であれば）フォルダを作成します。<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="DirRemove.htm">DirRemove</a>, <a href="FileCopy.htm">FileCopy</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S4">DirCopy</span><span class="S8">(</span><span class="S6">@MyDocumentsDir</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"C:\Backups\MyDocs"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">)</span><br>
+<script type="text/javascript">
+
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\DirCopy.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

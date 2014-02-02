@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function TraySetIcon</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">TraySetIcon</font>
+<hr size="2">
+<p>トレイアイコンのロード/設定をおこないます。<br></p>
+
+<p class="codeheader">
+TraySetIcon ( [filename [, iconID] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">filename</td>
+    <td width="85%"><b>[オプション]</b> トレイ内に表示されるアイコンのファイル名</td>
+  </tr>
+  <tr>
+   <td>iconID</td>
+   <td><b>[オプション]</b> ファイル内に複数アイコンがある場合のアイコン識別子</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+なし。<br>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+アイコンをデフォルトにリセットしたい場合は次のようにパラメータを与えずに関数を使用してください。<br>
+TraySetIcon()<br>
+<br>
+正の数を渡すとアイコン名と同じ文字列を参照します。<br>
+負の数を渡すと1始まりの「インデックス」での処理をおこないます。DLLの中にはアイコンを負の数を使った場合のみ取り出せるものがあります。<br>
+<br>
+filenameパラメータに"blank"、"info"、"question"、"stop"、"warningを設定することで対応する標準アイコンを選択できます。<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="TraySetPauseIcon.htm">TraySetPauseIcon</a>, <a href="TraySetState.htm">TraySetState</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span class="S11">#NoTrayIcon</span><br>
+<br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">"TrayMenuMode"</span><span class="S8">,</span><span class="S3">1</span><span class="S8">)</span><span class="S0">&nbsp; &nbsp;</span><span class="S1">; デフォルトのトレイメニューアイテム(スクリプト 停止/終了)を非表示</span><br>
+<br>
+<span class="S9">$exititem</span><span class="S0">&nbsp; &nbsp;&nbsp; &nbsp; </span><span class="S8">=</span><span class="S0"> </span><span class="S4">TrayCreateItem</span><span class="S8">(</span><span class="S7">"Exit"</span><span class="S8">)</span><br>
+<br>
+<span class="S4">TraySetState</span><span class="S8">()</span><br>
+<br>
+<span class="S9">$start</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><br>
+<span class="S5">While</span><span class="S0"> </span><span class="S3">1</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$msg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">TrayGetMsg</span><span class="S8">()</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">If</span><span class="S0"> </span><span class="S9">$msg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$exititem</span><span class="S0"> </span><span class="S5">Then</span><span class="S0"> </span><span class="S5">ExitLoop</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$diff</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">TimerDiff</span><span class="S8">(</span><span class="S9">$start</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">If</span><span class="S0"> </span><span class="S9">$diff</span><span class="S0"> </span><span class="S8">&gt;</span><span class="S0"> </span><span class="S3">1000</span><span class="S0"> </span><span class="S5">Then</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$num</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S8">-</span><span class="S4">Random</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S3">100</span><span class="S8">,</span><span class="S3">1</span><span class="S8">)</span><span class="S0">&nbsp;</span><span class="S1">; 通常の番号を使うためにマイナスをつける</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S4">ToolTip</span><span class="S8">(</span><span class="S7">"#icon="</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$num</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S4">TraySetIcon</span><span class="S8">(</span><span class="S7">"Shell32.dll"</span><span class="S8">,</span><span class="S9">$num</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$start</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">TimerInit</span><span class="S8">()</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">EndIF</span><br>
+<span class="S5">WEnd</span><br>
+<br>
+<span class="S5">Exit</span><br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\TraySetIcon.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

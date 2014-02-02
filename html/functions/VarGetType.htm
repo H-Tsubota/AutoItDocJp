@@ -1,0 +1,57 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function VarGetType</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">VarGetType</font>
+<hr size="2">
+<p>バリアントの内部型表現を返します。<br></p>
+
+<p class="codeheader">
+VarGetType ( expression )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">expression</td>
+    <td width="85%">内部型を調べる式</td>
+  </tr>
+</table>
+
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+式の型を表す文字列を返します。<br>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+IsIntは文字列、floatを変換しようとするので異なる結果を返します。<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="IsInt.htm">IsInt</a>, <a href="IsFloat.htm">IsFloat</a>, <a href="IsString.htm">IsString</a>, <a href="IsBinary.htm">IsBinary</a>, <a href="IsArray.htm">IsArray</a>, <a href="IsDllStruct.htm">IsDllStruct</a>, <a href="IsHwnd.htm">IsHwnd</a>, <a href="IsObj.htm">IsObj</a>, <a href="IsBool.htm">IsBool</a>, <a href="IsKeyword.htm">IsKeyword</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S9">$int</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">1</span><br>
+<span class="S9">$float</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">2.0</span><br>
+<span class="S4">Msgbox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Types"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"$int is "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S4">VarGetType</span><span class="S8">(</span><span class="S9">$int</span><span class="S8">)</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">"$float is "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S4">VarGetType</span><span class="S8">(</span><span class="S9">$float</span><span class="S8">)</span><span class="S0"> </span><span class="S8">)</span><br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\VarGetType.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

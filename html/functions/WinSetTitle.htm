@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function WinSetTitle</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">WinSetTitle</font>
+<hr size="2">
+<p>ウィンドウの名前を変更します。<br></p>
+
+<p class="codeheader">
+WinSetTitle ( "title", "text", "newtitle" )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">title</td>
+    <td width="85%">対象となるウィンドウの名前。<a href="../intro/windowsadvanced.htm">ウィンドウ名の特別な記述の仕方</a>参照</td>
+  </tr>
+  <tr>
+   <td>text</td>
+   <td><b>[オプション]</b> 対象となるウィンドウのテキスト</td>
+  </tr>
+  <tr>
+   <td>newtitle</td>
+   <td>変更後のウィンドウの名前</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">成功</td>
+    <td width="90%">1を返します。 </td>
+  </tr>
+  <tr>
+    <td valign="top">失敗</td>
+    <td>ウィンドウが見つからなかった場合0を返します。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+もし複数のウィンドウが処理の対象に該当する場合、もっともアクティブなウィンドウの名前が変更されます。<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="AutoItWinSetTitle.htm">AutoItWinSetTitle</a>, <a href="WinGetTitle.htm">WinGetTitle</a>, <a href="AutoItSetOption.htm#WinTitleMatchMode">WinTitleMatchMode (Option)</a>, <a href="WinGetHandle.htm">WinGetHandle</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S4">WinSetTitle</span><span class="S8">(</span><span class="S7">"[CLASS:Notepad] "</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"My New Notepad"</span><span class="S8">)</span><br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\WinSetTitle.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

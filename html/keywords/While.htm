@@ -1,0 +1,60 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Keyword While...WEnd</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Keyword Reference</h1>
+<font size="+1">While...WEnd</font>
+<hr size="2">
+<p>条件式に基づいてループします。<br></p>
+
+<p class="codeheader">
+<b>While</b> &lt;expression&gt;<br>
+&nbsp;&nbsp;&nbsp; <i>statements</i><br>
+&nbsp;&nbsp;&nbsp; ...<br>
+<b>WEnd</b><br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">expression</td>
+    <td width="85%">条件（expression）が真だった場合WEndまでに書かれた命令文（statement）が実行されます。このループは条件が偽となるまで続きます。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+While...WEnd文は入れ子構造にすることができます。<br>
+条件が満たされているかどうかはループが実行される前に確認されます。従ってループ内の命令文は一度も実行されない場合があります。<br>
+無限ループを作るためには0でない数字を<i>条件</i>に指定してください。<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="ContinueLoop.htm">ContinueLoop</a>, <a href="ExitLoop.htm">ExitLoop</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S9">$i</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><br>
+<span class="S5">While</span><span class="S0"> </span><span class="S9">$i</span><span class="S0"> </span><span class="S8">&lt;=</span><span class="S0"> </span><span class="S3">10</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Value of $i is:"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$i</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$i</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$i</span><span class="S0"> </span><span class="S8">+</span><span class="S0"> </span><span class="S3">1</span><br>
+<span class="S5">WEnd</span><br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\While.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

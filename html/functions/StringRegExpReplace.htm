@@ -1,0 +1,106 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function StringRegExpReplace</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">StringRegExpReplace</font>
+<hr size="2">
+<p>文字列内のテキストを正規表現に基づいて入れ換えます。<br></p>
+
+<p class="codeheader">
+StringRegExpReplace ( "test", "pattern", "replace", [ count ] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">test</td>
+    <td width="85%">調べる文字列</td>
+  </tr>
+  <tr>
+   <td>pattern</td>
+   <td>比較する正規表現。パターン定義文字については<A href="StringRegExp.htm">StringRegExp</a>を参照。</td>
+  </tr>
+  <tr>
+   <td>replace</td>
+   <td>正規表現に該当したテキストと入れ換えるテキスト。
+   該当するグループテキストを挿入するために、\0 - \9 (または $0 - $9)が後方参照として使用可能です。
+   </td>
+  </tr>
+  <tr>
+   <td>count</td>
+   <td><b>[オプション]</b> 文字列内での入れ換え実行回数。
+   デフォルトは0。文字列全体に適用する場合0を指定します。
+   </td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">@Error</td>
+    <td width="90%">意味</td>
+  </tr>
+  <tr>
+    <td valign="top">0</td>
+    <td>適正に処理。入れ換えた回数を調べるためには@Extendedを参照。</td>
+  </tr>
+  <tr>
+    <td valign="top">2</td>
+    <td>無効なパターン。@Extended = パターン内のエラー位置</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+後方参照を実際の(置換された)番号と分ける場合は波括弧っで囲んでください。例 "${1}5"。<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="StringRegExp.htm">StringRegExp</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S0">Test1</span><span class="S8">()</span><br>
+<span class="S0">Test2</span><span class="S8">()</span><br>
+<br>
+<span class="S1">; 基本的な置換をおこなう例。&nbsp;母音のaeiouを@文字で置換する。</span><br>
+<span class="S5">Func</span><span class="S0"> Test1</span><span class="S8">()</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$sInput</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S7">"Where have all the flowers gone, long time passing?"</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$sOutput</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">StringRegExpReplace</span><span class="S8">(</span><span class="S9">$sInput</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"[aeiou]"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"@"</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; Display</span><span class="S8">(</span><span class="S9">$sInput</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$sOutput</span><span class="S8">)</span><br>
+<span class="S5">EndFunc</span><span class="S0">&nbsp;</span><span class="S1">; Test1()</span><br>
+<br>
+<span class="S1">; 次の例では後方参照を使用してMM/DD/YYYYをDD.MM.YYYYに変更する。</span><br>
+<span class="S5">Func</span><span class="S0"> Test2</span><span class="S8">()</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$sInput</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S7">'some text1 12/31/2009 01:02:03 some text2'</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S8">_</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S7">'some text3 02/28/2009 11:22:33 some text4'</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$sOutput</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">StringRegExpReplace</span><span class="S8">(</span><span class="S9">$sInput</span><span class="S8">,</span><span class="S0"> </span><span class="S7">'(\d</span><span class="S10">{2}</span><span class="S7">)/(\d</span><span class="S10">{2}</span><span class="S7">)/(\d</span><span class="S10">{4}</span><span class="S7">)'</span><span class="S8">,</span><span class="S0"> </span><span class="S7">' $2.$1.$3 '</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; Display</span><span class="S8">(</span><span class="S9">$sInput</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$sOutput</span><span class="S8">)</span><br>
+<span class="S5">EndFunc</span><span class="S0">&nbsp;</span><span class="S1">; Test2()</span><br>
+<br>
+<span class="S5">Func</span><span class="S0"> Display</span><span class="S8">(</span><span class="S9">$sInput</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$sOutput</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; 出力をフォーマット</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$sMsg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">StringFormat</span><span class="S8">(</span><span class="S7">"Input:\t%s\n\nOutput:\t%s"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$sInput</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$sOutput</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Results"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$sMsg</span><span class="S8">)</span><br>
+<span class="S5">EndFunc</span><span class="S0">&nbsp;</span><span class="S1">; Display()</span><br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\StringRegExpReplace.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

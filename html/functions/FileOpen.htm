@@ -1,0 +1,104 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function FileOpen</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">FileOpen</font>
+<hr size="2">
+<p>テキストファイルを読み書き用に開きます。<br></p>
+
+<p class="codeheader">
+FileOpen ( "filename" [, mode ] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">filename</td>
+    <td width="85%">開くファイルのファイル名</td>
+  </tr>
+  <tr>
+   <td>mode</td>
+   <td><b>[オプション]</b> ファイルを開く際のモード<br>
+       次のものを組み合わせることができます:<br>
+	   &nbsp;&nbsp;0 = 読み込みモード (デフォルト)<br>
+       &nbsp;&nbsp;1 = 書き出しモード(追加書き込み)<br>
+       &nbsp;&nbsp;2 = 書き出しモード(内容消去後、書き込み)<br>
+        &nbsp;&nbsp;8 = フォルダが無い場合は作成(注意を参照)<br>
+       &nbsp;&nbsp;16 = バイナリモードを強制 (注意を参照)<br>
+       &nbsp;&nbsp;32 = Unicode UTF16 Little Endianを使用した読み込み、書き込みモード。読み込みでは既存のBOMをオーバーライドしません。<br>
+       &nbsp;&nbsp;64 = Unicode UTF16 Big Endianを使用した読み込み、書き込みモード。読み込みでは既存のBOMをオーバーライドしません。<br>
+       &nbsp;&nbsp;128 = Unicode UTF8 (BOMあり)を使用した読み込み、書き込みモード。読み込みでは既存のBOMをオーバーライドしません。<br>
+       &nbsp;&nbsp;256 = Unicode UTF8 (BOMなし)を使用した読み込み、書き込みモード。<br>
+       &nbsp;&nbsp;16384 = 
+	   読み込み用に開きBOMが存在した場合、ファイル全体のUTF8検出を使用。これを使用しない場合、ファイルの冒頭部分のみUTF8でチェックされます。<br>
+       フォルダパスはこの処理以前に存在している必要があります(モード'8'を除く - 注意を参照)</td>
+  </tr>   
+</table>
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">成功</td>
+    <td width="90%">他のファイル関数で使用するためのファイル"ハンドル"を返します。</td>
+  </tr>
+  <tr>
+    <td valign="top">失敗</td>
+    <td>エラーが起きた場合-1を返します。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+<ul><br>
+<li>ファイルハンドルは<a href="FileClose.htm">FileClose()</a>関数で閉じる必要があります。</li><br>
+<li>アクセス権限、属性によってファイルを開けない場合があります。</li><br>
+<li>デフォルトのモードでは書き込みテキストはANSIです - 変更するにはUNICODEフラグを使用してください。UNICODEファイル書き込み時、Windowsのデフォルトモード（また変換が少なくAutoItで最も速いのは）はUTF16リトルエンディアン(モード 32)です。</li><br>
+<li>ファイルが存在しない場合に書き込みモードでファイルを開くとファイルが作成されます。正しいフラグが使用されていない場合、ディレクトリは作成されません。</li><br>
+<li>同じファイルハンドルを使用して読み込みと書き込みをおこなう場合、現在のファイルポジションを更新するために<a href="FileSetPos.htm">FileSetPos()</a>関数を使用する必要があります。</li><br>
+</ul><br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="FileClose.htm">FileClose</a>, <a href="FileFlush.htm">FileFlush</a>, <a href="FileRead.htm">FileRead</a>, <a href="FileReadLine.htm">FileReadLine</a>, <a href="FileWrite.htm">FileWrite</a>, <a href="FileWriteLine.htm">FileWriteLine</a>, <a href="FileGetPos.htm">FileGetPos</a>, <a href="FileSetPos.htm">FileSetPos</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S9">$file</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">FileOpen</span><span class="S8">(</span><span class="S7">"test.txt"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">)</span><br>
+<br>
+<span class="S1">; ファイルが読み込み用に正常に開かれたを確認</span><br>
+<span class="S5">If</span><span class="S0"> </span><span class="S9">$file</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S0"> </span><span class="S5">Then</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Error"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Unable to open file."</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Exit</span><br>
+<span class="S5">EndIf</span><br>
+<br>
+<span class="S4">FileClose</span><span class="S8">(</span><span class="S9">$file</span><span class="S8">)</span><br>
+<br>
+<br>
+<span class="S1">; フォルダを自動作成する別の例</span><br>
+<span class="S9">$file</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">FileOpen</span><span class="S8">(</span><span class="S7">"test.txt"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">10</span><span class="S8">)</span><span class="S0"> </span><span class="S1">; 2+8(削除+ディレクトリ作成)と同じ</span><br>
+<br>
+<span class="S5">If</span><span class="S0"> </span><span class="S9">$file</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S0"> </span><span class="S5">Then</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Error"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Unable to open file."</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Exit</span><br>
+<span class="S5">EndIf</span><br>
+<br>
+<span class="S4">FileClose</span><span class="S8">(</span><span class="S9">$file</span><span class="S8">)</span></span><br>
+<script type="text/javascript">
+
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\FileOpen.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

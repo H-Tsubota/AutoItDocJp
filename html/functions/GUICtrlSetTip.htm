@@ -1,0 +1,106 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function GUICtrlSetTip</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">GUICtrlSetTip</font>
+<hr size="2">
+<p>コントロールに関連付けられたチップテキストを設定します。<br></p>
+
+<p class="codeheader">
+GUICtrlSetTip ( controlID, tiptext [, "title" [, icon [, options]]]]] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">controlID</td>
+    <td width="85%"><a href="GUICtrlCreate%20Management.htm">GUICtrlCreate...</a>関数によって返されるコントロール識別子(コントロールID)。</td>
+  </tr>
+  <tr>
+   <td>tiptext</td>
+   <td>マウスがコントロールにあてられた際に表示されるテキスト。</td>
+  </tr>
+  <tr>
+   <td>title</td>
+   <td><b>[オプション]</b> ツールチップのタイトル。<b>IE5以上が必要。</b></td>
+  </tr>
+  <tr>
+   <td>icon</td>
+   <td><b>[オプション]</b> タイトルの隣に表示される定義済みアイコン：<b>IE5以上が必要。</b>タイトルが必要。<br>
+       0 = アイコンなし、1 = インフォアイコン、2 = 警告アイコン、3 = エラーアイコン</td>
+  </tr>
+  <tr>
+   <td>options</td>
+   <td><b>[オプション]</b> ツールチップの表示方法のオプション(足し合わせることができます)：<br>
+       1 = バルーンチップとして表示します。<b>IE5以上が必要。</b><br>
+       2 = チップをコントロール水平方向に中央寄せします。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">成功</td>
+    <td width="90%">1を返します。</td>
+  </tr>
+  <tr>
+    <td valign="top">失敗</td>
+    <td>0を返します。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+このチップテキストはツールチップの長方形領域内に表示されます。<br>
+オプションパラメータを省略するにはオプションパラメータにデフォルト値を設定します。<a href="../keywords/Default.htm">Defaultキーワード</a>を使用してください。<br>
+@CR、@LFを使用して複数行のツールチップを作成することができます。<br>
+タイトル、アイコン、バルーンチップオプションが機能するためにはInternet Explorer 5.0以降を必要とします。<br>
+アイコンを表示するためには空ではないタイトルを指定しなければなりません。アイコンはタイトルと同じ行に表示されるのでタイトルが必要になります。<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="GUICtrlUpdate%20Management.htm">GUICtrlUpdate...</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;GUIConstantsEx.au3&gt;</span><br>
+<br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">'MustDeclareVars'</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">)</span><br>
+<br>
+<span class="S0">Example</span><span class="S8">()</span><br>
+<br>
+<span class="S5">Func</span><span class="S0"> Example</span><span class="S8">()</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$msg</span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUICreate</span><span class="S8">(</span><span class="S7">"My GUI control tip"</span><span class="S8">)</span><span class="S0"> &nbsp;</span><span class="S1">; 表示時に中央に表示されるダイアログボックスを作成</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUICtrlCreateLabel</span><span class="S8">(</span><span class="S7">"my label"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">10</span><span class="S8">,</span><span class="S0"> </span><span class="S3">20</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUICtrlSetTip</span><span class="S8">(-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"tip of my label"</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUISetState</span><span class="S8">()</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; ダイアログが閉じられるまでGUIを実行</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">While</span><span class="S0"> </span><span class="S3">1</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$msg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUIGetMsg</span><span class="S8">()</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">If</span><span class="S0"> </span><span class="S9">$msg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$GUI_EVENT_CLOSE</span><span class="S0"> </span><span class="S5">Then</span><span class="S0"> </span><span class="S5">ExitLoop</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">WEnd</span><br>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;Example</span></span><br>
+<script type="text/javascript">
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\GUICtrlSetTip.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+</body>
+</html>

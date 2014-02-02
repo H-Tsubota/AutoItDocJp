@@ -1,0 +1,1701 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>GUI control styles</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+  <style>
+<!--
+.borderwrap{ /* this will affect the outlining border of all the tables and boxes through-out the skin. */
+	background: #FFF;
+	border: 1px solid #072A66;
+	padding: 0px;
+	margin: 0px;
+}
+
+.ipbtable { width:100% }
+
+table.ipbtable
+{ /* required for text in tables, because tables do not inherit from body */
+	background: transparent;
+	color: #222;
+	font-size: 11px;
+	line-height: 135%;
+}
+
+.post2{
+	background: #EEF2F7;
+}
+
+.ipbtable td{ /* gives all tables faux cellpadding of 5px */
+	padding: 5px;
+}
+
+.postcolor{
+	font-size: 12px;
+	line-height: 160%;
+}
+
+.geshimain
+{
+	background: #f0f0f0;
+	border: 1px solid #000;
+	color: #000;
+	font-family: 'Courier New', Courier, monospace;
+	margin: 0 auto 0 auto;
+	padding: 2px;
+	width: 98%;
+	line-height: 133%;
+}
+
+.autoit  {font-family: 'Courier New', Courier, monospace; background-color: #f0f0f0; color: #000000; line-height:133%;}
+.autoit .kw1 {color: #0000ff;}
+.autoit .re0 {color: #5A5A5A;}
+-->
+  </style>
+</head>
+
+<body>
+<h1>GUI Control Styles</h1>
+<br>
+<p>このページではウィンドウに適用できる一般/拡張スタイル及びコントロールに適用できる特定のスタイルのリストを示します。これらのスタイルは多くのGUI関数の「style」、「exStyle」パラメータとして使用できます。これらの値を使用する場合は各セクションの冒頭で指定されているファイルを#includeする必要があります。</p>
+<p><strong>注意：</strong>「値」は参照渡しされます。スクリプトが読めるように必ずスタイルの「名前」を使用してください。</p>
+<p>
+<br>
+</p>
+<table border="1" style="width: 100%;" cellspacing="0" cellpadding="3" bordercolor="#c0c0c0">
+<tr style="color: rgb(255, 255, 255);">
+  <th style="background-color: rgb(0, 0, 153); width: 20%;">一般的なスタイル</th>
+  <th style="background-color: rgb(0, 0, 153); width: 10%;">値</th>
+  <th style="background-color: rgb(0, 0, 153);"><b>説明</b></th>
+</tr>
+<tr>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+  <td><p align=center>#include &lt;WindowsConstants.au3&gt;</p></td>
+</tr>
+<tr>
+  <td>Default/forced for GUI creation</td>
+  <td>&nbsp;</td>
+  <td>$GUI_SS_DEFAULT_GUI。<a href="../functions/GUICreate.htm">GUICreate</a>関数を参照。</td>
+</tr>
+<tr>
+  <td>$WS_BORDER</td>
+  <td>0x00800000</td>
+  <td>細いラインのボーダーを持つウィンドウを作成。</td>
+</tr>
+<tr>
+  <td>$WS_POPUP</td>
+  <td>0x80000000</td>
+  <td>ポップアップウィンドウを作成。このスタイルはWS_CHILDと同時には使えません。</td>
+</tr>
+<tr>
+  <td>$WS_CAPTION</td>
+  <td>0x00C00000</td>
+  <td>タイトルバーを持つウィンドウを作成(WS_BORDERスタイルを含む)。</td>
+</tr>
+<tr>
+  <td>$WS_CLIPCHILDREN</td>
+  <td>0x02000000</td>
+  <td>
+子ウィンドウによって占められた親ウィンドウの領域の描画をおこないません。このスタイルは親ウィンドウを作成する場合使用します。
+</td>
+</tr>
+<tr>
+  <td>$WS_CLIPSIBLINGS</td>
+  <td>0x04000000</td>
+  <td>それぞれの子ウィンドウをクリップします。
+特定の子ウィンドウがWM_PAINTメッセージを受け取ったとき、WS_CLIPSIBLINGSスタイルでは他の全ての重なった子ウィンドウをアップデートされる子ウィンドウの領域外にクリップします。
+WS_CLIPSIBLINGSが指定されないで子ウィンドウが重なっている場合、子ウィンドウのクライアント領域を描画する際に隣の別の子ウィンドウのクライアント領域への描画がおこなわれてしまいます。
+</td>
+</tr>
+<tr>
+  <td>$WS_DISABLED</td>
+  <td>0x08000000</td>
+  <td>操作不能の初期状態のウィンドウを作成します。</td>
+</tr>
+<tr>
+  <td>$WS_DLGFRAME</td>
+  <td>0x00400000</td>
+  <td>ダイアログボックスで使用されるようなスタイルのボーダーをもつウィンドウを作成します。</td>
+</tr>
+<tr>
+  <td>$WS_HSCROLL</td>
+  <td>0x00100000</td>
+  <td>水平スクロールバーを持つウィンドウを作成します。</td>
+</tr>
+<tr>
+  <td>$WS_MAXIMIZE</td>
+  <td>0x01000000</td>
+  <td>最大化された初期状態のウィンドウを作成します。</td>
+</tr>
+<tr>
+  <td>$WS_MAXIMIZEBOX</td>
+  <td>0x00010000</td>
+  <td>最大化ボタンを持ったウィンドウを作成します。WS_EX_CONTEXTHELPスタイルと組み合わせることはできません。
+  WS_SYSMENUスタイルも指定しなければいけません。
+   </td>
+</tr>
+<tr>
+  <td>$WS_MINIMIZE</td>
+  <td>0x20000000</td>
+  <td>最小化された初期状態のウィンドウを作成します。</td>
+</tr>
+<tr>
+  <td>$WS_MINIMIZEBOX</td>
+  <td>0x00020000</td>
+  <td>
+  最小化ボタンを持ったウィンドウを作成します。WS_EX_CONTEXTHELPスタイルと組み合わせることはできません。
+  WS_SYSMENUスタイルも指定しなければいけません。
+  </td>
+</tr>
+<tr>
+  <td>$WS_OVERLAPPED</td>
+  <td>0x00000000</td>
+  <td>オーバーラップしたウィンドウを作成します。オーバーラップしたウィンドウはタイトルバーとボーダーを持ちます。
+  WS_TILEDスタイルと同じです。
+  </td>
+</tr>
+<tr>
+  <td>$WS_OVERLAPPEDWINDOW</td>
+  <td>0x00CF0000</td>
+  <td>WS_OVERLAPPED、WS_CAPTION、WS_SYSMENU、WS_THICKFRAME、WS_MINIMIZEBOX、WS_MAXIMIZEBOX
+  を使ってオーバーラップしたウィンドウを作成します。WS_TILEDWINDOWスタイルと同じです。
+  </td>
+</tr>
+<tr>
+  <td>$WS_POPUPWINDOW</td>
+  <td>0x80880000</td>
+  <td>WS_BORDER、WS_POPUP、WS_SYSMENUを使用してポップアップウィンドウを作成します。
+  ウィンドウメニューを可視状態にするためにWS_CAPTION、WS_POPUPWINDOWを組み合わせる必要があります。
+  </td>
+</tr>
+<tr>
+  <td>$WS_SIZEBOX</td>
+  <td>0x00040000</td>
+  <td>サイズ変更可能なウィンドウを作成します。WS_THICKFRAMEと同じです。</td>
+</tr>
+<tr>
+  <td>$WS_SYSMENU</td>
+  <td>0x00080000</td>
+  <td>タイトルバーにウィンドウメニューを持つウィンドウを作成します。WS_CAPTIONも指定する必要があります。
+  </td>
+</tr>
+<tr>
+  <td>$WS_THICKFRAME</td>
+  <td>0x00040000</td>
+  <td>サイズ変更可能なウィンドウを作成しますWS_SIZEBOXと同じです。
+  </td>
+</tr>
+<tr>
+  <td>$WS_VSCROLL</td>
+  <td>0x00200000</td>
+  <td>垂直スクロールバーを持つウィンドウを作成します。</td>
+</tr>
+<tr>
+  <td>$WS_VISIBLE</td>
+  <td>0x10000000</td>
+  <td>非表示の初期状態のウィンドウを作成します。</td>
+</tr>
+<tr>
+  <td>$WS_CHILD</td>
+  <td>0x40000000</td>
+  <td>子ウィンドウを作成します。このスタイルのウィンドウはメニューバーを持つことはできません。
+  WS_POPUPと一緒に使うことはできません。</td>
+</tr>
+<tr>
+  <td>$WS_GROUP</td>
+  <td>0x00020000</td>
+  <td>
+  グループコントロールの最初のコントロールを指定します。グループは最初のコントロール以降に定義されたコントロールのうち
+  次のWS_GROUPで指定されたコントロールの直前までの全てのコントロールで構成されます。
+</td>
+</tr>
+<tr>
+  <td>$WS_TABSTOP</td>
+  <td>0x00010000</td>
+  <td>コントロールをタブストップに切り替えます。ダイアログボックスのコントロールを通じてユーザーはタブによって
+コントロールを選択できるようになります。</td>
+</tr>
+<tr>
+  <td>$DS_MODALFRAME</td>
+  <td>0x00000080</td>
+  <td>モーダルダイアログボックスフレームを使用してダイアログボックスを作成します。
+  WS_CAPTION、WS_SYSMENUを組み合わせることによってタイトルバーと<b>ウィンドウ</b>メニューを組み込めます。
+</td>
+</tr>
+<tr>
+  <td>$DS_SETFOREGROUND</td>
+  <td>0x00000200</td>
+  <td>
+  このスタイルはオーナーウィンドウが最前面になることで見落とされてしまいがちな
+  モーダルダイアログボックスに注意を向けさせるのに便利です。
+  </td>
+</tr>
+<tr>
+  <td>$DS_CONTEXTHELP</td>
+  <td>0x00002000</td>
+  <td>
+  ダイアログボックスのタイトルバーにクエスチョンマークをインクルードします。
+  WS_MAXIMIZEBOX、WS_MINIMIZEBOXと一緒に使用することはできません。拡張スタイルのWS_EX_CONTEXTHELPと同じです。
+</td>
+</tr>
+</table>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<table border="1" style="width: 100%;" cellspacing="0" cellpadding="3" bordercolor="#c0c0c0">
+  <tr style="color: rgb(255, 255, 255);">
+    <th style="background-color: rgb(0, 0, 153); width: 20%;"><a name="Extended"></a>一般的な拡張スタイル</th>
+    <th style="background-color: rgb(0, 0, 153); width: 10%;">値</th>
+    <th style="background-color: rgb(0, 0, 153);"><b>説明</b></th>
+  </tr>
+<tr>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+  <td><p align=center>#include &lt;WindowsConstants.au3&gt;</p></td>
+</tr>
+ <tr>
+    <td>$WS_EX_ACCEPTFILES </td>
+    <td>0x00000010 </td>
+    <td>
+GUIウィンドウ内のエディットコントロール、インプットコントロールへのドラッグアンドドロップによるファイル名入力を可能にします。コントロールには<a href="../functions/GUICtrlSetState.htm">GUICtrlSetState</a>を使用して$GUI_DROPACCEPTEDを設定する必要があります。
+</td>
+  </tr>
+  <tr>
+    <td>$WS_EX_APPWINDOW </td>
+    <td>0x00040000 </td>
+    <td>ウィンドウが表示状態の際にタスクバー上でトップレベルになるよう設定します。</td>
+  </tr>
+    <tr>
+    <td>$WS_EX_COMPOSITED</td>
+    <td>0x02000000</td>
+    <td>WindowsXP以降: 全ての子孫ウィンドウを下から上の描画順でダブルバッファリングを使用して描画します。</td>
+  </tr>
+  <tr>
+    <td>$WS_EX_CLIENTEDGE </td>
+    <td>0x00000200 </td>
+    <td>ウィンドウがくぼんだ縁のボーダーを持つように設定します。</td>
+  </tr>
+  <tr>
+    <td>$WS_EX_CONTEXTHELP </td>
+    <td>0x00000400 </td>
+    <td>		タイトルバーにクエスチョンマークをインクルードします。WS_MAXIMIZEBOX、WS_MINIMIZEBOXと同時に使用することはできません。
+</td>
+  </tr>
+  <tr>
+    <td>$WS_EX_DLGMODALFRAME </td>
+    <td>0x00000001 </td>
+    <td>	二重のボーダーを持つウィンドウを作成します。dwStyleパラメーターにWS_CAPTIONを設定することによりオプションでウィンドウにタイトルバーを設定できます。
+</td>
+  </tr>
+  <tr>
+    <td>$WS_EX_MDICHILD</td>
+    <td>0x00000040</td>
+    <td>
+親ウィンドウといっしょに動く子ウィンドウを作成します(MDIウィンドウ最大化/最小化はシミュレーションされません)。
+	</td>
+  </tr>
+  <tr>
+    <td>$WS_EX_OVERLAPPEDWINDOW </td>
+    <td>0x00000300 </td>
+    <td>WS_EX_CLIENTEDGEとWS_EX_WINDOWEDGEの組み合わせ。</td>
+  </tr>
+  <tr>
+    <td>$WS_EX_STATICEDGE </td>
+    <td>0x00020000 </td>
+    <td>3Dボーダーのウィンドウを作成します。これはユーザー入力を受け付けないアイテムに使用することが意図されています。</td>
+  </tr>
+  <tr>
+    <td>$WS_EX_TOPMOST </td>
+    <td>0x00000008 </td>
+    <td>
+	このスタイルを設定するとアクティブでない場合でも常にウィンドウが最前面に表示されます。
+	</td>
+  </tr>
+  <tr>
+    <td>$WS_EX_TRANSPARENT </td>
+    <td>0x00000020 </td>
+    <td>
+	親子レベルで同レベルのウィンドウのビットが既に描画されているためにウィンドウが透明になります。
+	</td>
+  </tr>
+  <tr>
+    <td>$WS_EX_TOOLWINDOW </td>
+    <td>0x00000080 </td>
+    <td>	ツールウィンドウを作成します。このウィンドウはフローティングツールバーとして使用することが意図されています。ツールウィンドウは通常のタイトルバーよりも短いタイトルバーを持っており、ウィンドウタイトルは小さいフォントを使って書かれます。ツールバーはタスクバーやダイアログボックス内には表示されずユーザーがALT+TABを押したとき表示されます。ツールウィンドウがシステムメニューを持つ場合、そのアイコンはタイトルバーには表示されませんがALT+SPACEを押すことでシステムメニューは表示されます。</td>
+  </tr>
+  <tr>
+    <td>$WS_EX_WINDOWEDGE </td>
+    <td>0x00000100 </td>
+    <td>ウィンドウが浮き彫りのエッジのボーダーを持つように設定します。</td>
+  </tr>
+  <tr>
+    <td>$WS_EX_LAYERED </td>
+    <td>0x00080000 </td>
+    <td>影つきウィンドウを作成します。子ウィンドウには使用できません。</td>
+  </tr>
+  <tr>
+    <td>$GUI_WS_EX_PARENTDRAG</td>
+    <td>0x00100000</td>
+    <td>ラベルコントロール、画像コントロールを全ての親ウィンドウをドラッグできるタイトルバーとして使用できるようにします。
+	</td>
+  </tr>
+  </table>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<table border="1" style="width: 100%;" cellspacing="0" cellpadding="3" bordercolor="#c0c0c0">
+<tr style="color: rgb(255, 255, 255);">
+  <th style="background-color: rgb(0, 0, 153); width: 20%;"><a name="CheckBox"></a>チェックボックススタイル</th>
+  <th style="background-color: rgb(0, 0, 153); width: 10%;">値</th>
+  <th style="background-color: rgb(0, 0, 153);"><b>説明</b></th>
+</tr>
+<tr>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+  <td><p align=center>#include &lt;ButtonConstants.au3&gt;</p></td>
+</tr>
+<tr>
+  <td>Default/forced</td>
+  <td>&nbsp;</td>
+  <td><a href="../functions/GUICtrlCreateCheckbox.htm">GUICtrlCreateCheckbox</a>関数を参照。</td>
+</tr>
+<tr>
+  <td>$BS_3STATE</td>
+  <td>0x0005</td>
+  <td>
+選択状態/クリア状態/無効状態をもつチェックボックスを作成します。
+無効状態はチェックボックスの状態が決定されていないことを表示するために使われます。
+</td>
+</tr>
+<tr>
+  <td>$BS_AUTO3STATE</td>
+  <td>0x0006</td>
+  <td>
+  3つの状態をもつチェックボックスを作成します。
+  状態はユーザーがチェックボックスを選択するたびに選択、無効、クリアの順に周期的に変わります。
+　</td>
+</tr>
+<tr>
+  <td>$BS_AUTOCHECKBOX</td>
+  <td>0x0003</td>
+  <td>ユーザーがチェックボックスを選択するたびに選択、クリアが切り替わるチェックボックスを作成します。</td>
+</tr>
+<tr>
+  <td>$BS_CHECKBOX</td>
+  <td>0x0002</td>
+  <td>右側にラベルが表示される小さな、空のチェックボックスを作成します。チェックボックスの左側にテキストを表示する場合はこのフラグをBS_RIGHTBUTTONと組み合わせてください。
+　</td>
+</tr>
+<tr>
+  <td>$BS_LEFT</td>
+  <td>0x0100</td>
+  <td>
+	チェックボックスの右側のボタン内にテキストを左揃え。
+　　</td>
+</tr>
+<tr>
+  <td>$BS_PUSHLIKE</td>
+  <td>0x1000</td>
+  <td>
+  (チェックボックス、3状態チェックボックス、ラジオボタンを)プッシュボタンのような形状で作成。
+  ボタンは押されていない(チェックされていない)状態ではとび出ており、押した状態(チェックされた状態)では押し込まれている。
+　</td>
+</tr>
+<tr>
+  <td>$BS_RIGHT</td>
+  <td>0x0200</td>
+  <td>チェックボックスの右側のボタン内にテキストを右揃え。</td>
+</tr>
+<tr>
+  <td>$BS_RIGHTBUTTON</td>
+  <td>0x0020</td>
+  <td>
+  ボタンの右側にチェックボックスの四角を配置。
+</td>
+</tr>
+<tr>
+  <td>$BS_GROUPBOX</td>
+  <td>0x0007</td>
+  <td>
+  他のボタンとグループであることを示す長方形を作成します。このスタイルに関連付けられたテキストは長方形の左上の角に表示されます。</td>
+</tr>
+<tr>
+  <td>$BS_AUTORADIOBUTTON</td>
+  <td>0x0009</td>
+  <td>
+  ラジオボタンと同じです。ただしユーザーが選択すると自動でハイライトされ、同じグループ内の同じスタイルのラジオボタンの選択が解除されます。
+　</td>
+</tr>
+</table>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<table border="1" style="width: 100%;" cellspacing="0" cellpadding="3" bordercolor="#c0c0c0">
+<tr style="color: rgb(255, 255, 255);">
+  <th style="background-color: rgb(0, 0, 153); width: 20%;"><a name="Button"></a>プッシュボタンスタイル</th>
+  <th style="background-color: rgb(0, 0, 153); width: 10%;">値</th>
+  <th style="background-color: rgb(0, 0, 153);"><b>説明</b></th>
+</tr>
+<tr>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+  <td><p align=center>#include &lt;ButtonConstants.au3&gt;</p></td>
+</tr>
+<tr>
+  <td>Default/forced</td>
+  <td>&nbsp;</td>
+  <td><a href="../functions/GUICtrlCreateButton.htm">GUICtrlCreateButton</a>、<a href="../functions/GUICtrlCreateCheckbox.htm">GUICtrlCreateCheckbox</a>、<a href="../functions/GUICtrlCreateRadio.htm">GUICtrlCreateRadio</a>
+  関数を参照。</td>
+</tr>
+<tr>
+  <td>$BS_BOTTOM </td>
+  <td>0x0800</td>
+  <td>ボタン長方形の下側にテキストを配置します。</td>
+</tr>
+<tr>
+  <td>$BS_CENTER </td>
+  <td>0x0300</td>
+  <td>ボタン長方形内の水平方向中央にテキストを配置します。</td>
+</tr>
+<tr>
+  <td>$BS_DEFPUSHBUTTON </td>
+  <td>0x0001</td>
+  <td>
+  濃い黒枠のプッシュボタンを作成します。ボタンがダイアログボックス内にある場合、
+  入力のフォーカスが合っていなくてもENTERキーによってボタンの選択ができます。
+  このスタイルによってユーザーはほとんどがデフォルトであるような入力をすばやくおこなえます。
+ </td>
+</tr>
+<tr>
+  <td>$BS_MULTILINE </td>
+  <td>0x2000</td>
+  <td>ボタンの長方形内におさまらないくらい長いテキスト文字列の場合、
+  ボタンテキストを複数行にラップします。
+  </td>
+</tr>
+<tr>
+  <td>$BS_TOP </td>
+  <td>0x0400</td>
+  <td>ボタンの長方形の上側にテキストを配置します。</td>
+</tr>
+<tr>
+  <td>$BS_VCENTER </td>
+  <td>0x0C00</td>
+  <td>ボタン長方形内の垂直方向中央にテキストを配置します。</td>
+</tr>
+<tr>
+  <td>$BS_ICON</td>
+  <td>0x0040</td>
+  <td>ボタンがアイコンを表示するよう指定します。</td>
+</tr>
+<tr>
+  <td>$BS_BITMAP</td>
+  <td>0x0080</td>
+  <td>ボタンがビットマップを表示するよう指定します。</td>
+</tr>
+<tr>
+  <td>$BS_FLAT </td>
+  <td>0x8000</td>
+  <td>ボタンが二次元風になるよう指定します。デフォルトの3Dイメージ風シェーディングでは使用できません。
+  </td>
+</tr>
+<tr>
+  <td>$BS_NOTIFY</td>
+  <td>0x4000</td>
+  <td>ボタンがBN_KILLFOCUS通知メッセージとBN_SETFOCUS通知メッセージをその親ウィンドウに送信するように
+  指定します。このスタイルが設定されているかどうかに関わらずボタンはBN_CLICKED通知メッセージを送信します。
+  BN_DBLCLK通知メッセージを取得するにはボタンにはBS_RADIOBUTTONスタイルまたはBS_OWNERDRAWスタイル
+  が設定されている必要があります。</td>
+</tr>
+</table>
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<table border="1" style="width: 100%;" cellspacing="0" cellpadding="3" bordercolor="#c0c0c0">
+<tr style="color: rgb(255, 255, 255);">
+  <th style="background-color: rgb(0, 0, 153); width: 20%;"><a name="Combo"></a>コンボスタイル</th>
+  <th style="background-color: rgb(0, 0, 153); width: 10%;">値</th>
+  <th style="background-color: rgb(0, 0, 153);"><b>説明</b></th>
+</tr>
+<tr>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+  <td><p align=center>#include &lt;ComboConstants.au3&gt;</p></td>
+</tr>
+<tr>
+  <td>Default/forced</td>
+  <td>&nbsp;</td>
+  <td>$GUI_SS_DEFAULT_COMBO。<a href="../functions/GUICtrlCreateCombo.htm">GUICtrlCreateCombo</a>関数を参照。</td>
+</tr>
+<tr>
+  <td>$CBS_AUTOHSCROLL</td>
+  <td>0x0040</td>
+  <td>ユーザーのタイピングに合わせてエディットコントロール内のテキストを自動で右にスクロールします。
+  このスタイルを設定していない場合、コントロールの長方形枠内のテキストのみ有効になります。
+  </td>
+</tr>
+<tr>
+  <td>$CBS_DISABLENOSCROLL</td>
+  <td>0x0800</td>
+  <td>リストボックス内のアイテム数がスクロールせずに表示できる量の場合、機能を無効にして垂直スクロールバーを表示します。
+  このスタイルを設定しておらずアイテム数が少ない場合、スクロールバーは表示されません。
+  <td>
+</tr>
+<tr>
+  <td>$CBS_DROPDOWN</td>
+  <td>0x0002</td>
+  <td>
+  デフォルト設定でエディットコントロールのみ表示します。
+  エディットコントロールの隣の選択アイコンを使用することでリストボックスを表示することができます。
+ </td>
+</tr>
+<tr>
+  <td>$CBS_DROPDOWNLIST</td>
+  <td>0x0003</td>
+  <td>リストボックス内で現在選択しているものを表示するスタティックなテキストフィールドを表示します。
+  </td>
+</tr>
+<tr>
+  <td>$CBS_LOWERCASE</td>
+  <td>0x4000</td>
+  <td>
+  コンボボックスのエディットコントロールに入力された任意の大文字を小文字に変換します。
+　</td>
+</tr>
+<tr>
+  <td>$CBS_NOINTEGRALHEIGHT</td>
+  <td>0x0400</td>
+  <td>
+  アプリケーションが指定したサイズでコンボボックスを作成するよう設定します。
+  通常、 WindowsCEはアイテムが全て表示されるようにコンボボックスのサイズを調整します。
+　</td>
+</tr>
+<tr>
+  <td>$CBS_OEMCONVERT</td>
+  <td>0x0080</td>
+  <td>
+  コンボボックスのエディットコントロールに入力されたテキストをWindowsCE文字セットからOEM文字セットに変換し、
+  WindowsCEセットに戻ります。このスタイルはコンボボックス内にファイル名がある場合に使用されます。
+  CBS_DROPDOWNを設定したコンボボックスのみに適用できます。
+ </td>
+</tr>
+<tr>
+  <td>$CBS_SIMPLE</td>
+  <td>0x0001</td>
+  <td>
+  常にリストボックスを表示します。リストボックス内の選択されているアイテムはエディットコントロールに表示されます。
+  </td>
+</tr>
+<tr>
+  <td>$CBS_SORT</td>
+  <td>0x0100</td>
+  <td>リストボックスにタイプされた文字列をソートします。</td>
+</tr>
+<tr>
+  <td>$CBS_UPPERCASE </td>
+  <td>0x2000</td>
+  <td>
+  コンボボックスのエディットコントロールに入力された任意の小文字を大文字に変換します。
+　</td>
+</tr>
+</table>
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<table border="1" style="width: 100%;" cellspacing="0" cellpadding="3" bordercolor="#c0c0c0">
+<tr style="color: rgb(255, 255, 255);">
+  <th style="background-color: rgb(0, 0, 153); width: 20%;"><a name="List"></a>リストスタイル</th>
+  <th style="background-color: rgb(0, 0, 153); width: 10%;">値</th>
+  <th style="background-color: rgb(0, 0, 153);"><b>説明</b></th>
+</tr>
+<tr>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+  <td><p align=center>#include &lt;ListboxConstants.au3&gt;</p></td>
+</tr>
+<tr>
+  <td>Default/forced</td>
+  <td>&nbsp;</td>
+  <td>$GUI_SS_DEFAULT_LIST。<a href="../functions/GUICtrlCreateList.htm">GUICtrlCreateList</a>関数を参照。</td>
+</tr>
+<tr>
+  <td>$LBS_DISABLENOSCROLL </td>
+  <td>0x1000</td>
+  <td>
+  リストボックス内のアイテム数がスクロールせずに表示できる量の場合、機能を無効にして垂直スクロールバーを表示します。
+  このスタイルを設定しておらずアイテム数が少ない場合、スクロールバーは表示されません。
+  </td>
+</tr>
+<tr>
+  <td>$LBS_NOINTEGRALHEIGHT </td>
+  <td>0x0100</td>
+  <td>  アプリケーションが指定したサイズでリストボックスを作成するよう設定します。
+  </td>
+</tr>
+<tr>
+  <td>$LBS_NOSEL </td>
+  <td>0x4000</td>
+  <td>リストボックス内の文字列を表示だけして選択できないように設定します。
+  </td>
+</tr>
+<tr>
+  <td>$LBS_NOTIFY</td>
+  <td>0x0001</td>
+  <td>ユーザーがリストボックス内の文字列をクリック、ダブルクリックした場合、親ウィンドウに通知します。
+  </td>
+</tr>
+<tr>
+  <td>$LBS_SORT </td>
+  <td>0x0002</td>
+  <td>リストボックス内の文字列をアルファベット順にソートします。</td>
+</tr>
+<tr>
+  <td>$LBS_STANDARD </td>
+  <td>0xA00003</td>
+  <td>
+  リストボックス内の文字列をアルファベット順にソートします。
+  ユーザーがリストボックス内の文字列をクリック、ダブルクリックした場合、親ウィンドウは入力メッセージを受け取ります。
+  リストボックスは全方向にボーダーを持ちます。(LBS_NOTIFY | LBS_SORT |
+  WS_VSCROLL | WS_BORDER)</td>
+</tr>
+<tr>
+  <td>$LBS_USETABSTOPS </td>
+  <td>0x0080</td>
+  <td>リストボックスがタブ文字を認識できるようになります。
+  デフォルトのタブ位置は32ダイアログボックス単位です。
+  1ダイアログボックス単位は現在のダイアログボックス横幅の1/4です。
+  </td>
+</tr>
+</table>
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<table border="1" style="width: 100%;" cellspacing="0" cellpadding="3" bordercolor="#c0c0c0">
+<tr style="color: rgb(255, 255, 255);">
+  <th style="background-color: rgb(0, 0, 153); width: 20%;"><a name="Edit"></a>エディット/インプットスタイル</th>
+  <th style="background-color: rgb(0, 0, 153); width: 10%;">値</th>
+  <th style="background-color: rgb(0, 0, 153);"><b>説明</b></th>
+</tr>
+<tr>
+  <td>Default/forced</td>
+  <td>&nbsp;</td>
+  <td>$GUI_SS_DEFAULT_EDIT, $GUI_SS_DEFAULT_INPUT。<a href="../functions/GUICtrlCreateEdit.htm">GUICtrlCreateEdit</a>、<a href="../functions/GUICtrlCreateInput.htm">
+  GUICtrlCreateInput</a>
+  関数を参照。</td>
+</tr>
+<tr>
+  <td>$ES_AUTOHSCROLL</td>
+  <td>0x0080</td>
+  <td>
+  行末に文字をタイプした場合、10文字ごとに自動で右にスクロールします。
+  ENTERキーを押すと行開始位置に戻ります。
+　</td>
+  </tr>
+<tr>
+  <td>$ES_AUTOVSCROLL</td>
+  <td>0x0040</td>
+  <td>
+  最終行でENTERキーを押すと1ページ上にスクロールします。
+  </td>
+</tr>
+<tr>
+  <td>$ES_CENTER</td>
+  <td>0x0001</td>
+  <td>複数行のエディットコントロールでテキストを中央揃えにします。</td>
+</tr>
+<tr>
+  <td>$ES_LOWERCASE</td>
+  <td>0x0010</td>
+  <td>エディットコントロールに入力された全ての文字を小文字に変換します。
+  </td>
+</tr>
+<tr>
+  <td>$ES_NOHIDESEL</td>
+  <td>0x0100</td>
+  <td>
+  エディットコントロールのデフォルト設定を解除します。
+  デフォルトでは
+  コントロールに入力フォーカスが合っていない場合、選択部分を反転させず、
+  コントロールに入力フォーカスが合っている場合、選択部分を反転させます。
+  ES_NOHIDESELを指定すると、コントロールにフォーカスが合っていない場合でも選択されたテキストは反転します。
+</td>
+</tr>
+<tr>
+  <td>$ES_NUMBER</td>
+  <td>0x2000</td>
+  <td>エディットコントロールが数字入力のみ受け付けるように設定します。
+  </td>
+</tr>
+<tr>
+  <td>$ES_OEMCONVERT</td>
+  <td>0x0400</td>
+  <td>ファイル名が入力されるエディットコントロールに対して使用します。
+  </td>
+</tr>
+<tr>
+  <td>$ES_MULTILINE</td>
+  <td>0x0004</td>
+  <td>エディットコントロールが複数行になるよう設定します。
+  デフォルト設定では一行のエディットコントロールになります。
+　</td>
+</tr>
+<tr>
+  <td>$ES_PASSWORD</td>
+  <td>0x0020</td>
+  <td>
+  エディットコントロールに入力された文字をアスタリスク(*)で表示します。
+　</td>
+</tr>
+<tr>
+  <td>$ES_READONLY</td>
+  <td>0x0800</td>
+  <td>エディットコントロール内のテキストを編集できないように設定します。
+  </td>
+</tr>
+<tr>
+  <td>$ES_RIGHT</td>
+  <td>0x0002</td>
+  <td>複数行のエディットコントロール内のテキストを右揃えにします。</td>
+</tr>
+<tr>
+  <td>$ES_UPPERCASE</td>
+  <td>0x0008</td>
+  <td>エディットコントロールに入力された全ての文字を大文字に変換します。
+  </td>
+</tr>
+<tr>
+  <td>$ES_WANTRETURN</td>
+  <td>0x1000</td>
+  <td>
+  ダイアログボックス内の複数行のエディットコントロールでの文字入力時、ENTERキーを押すとキャリッジリターンを挿入するよう設定します。
+  このスタイルを設定しないと、ENTERキー入力はダイアログボックスのデフォルトボタンクリックとして認識されます。
+  このスタイルは一行のエディットコントロールに対しては無効です。
+　</td>
+</tr>
+</table>
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<table border="1" style="width: 100%;" cellspacing="0" cellpadding="3" bordercolor="#c0c0c0">
+<tr style="color: rgb(255, 255, 255);">
+  <th style="background-color: rgb(0, 0, 153); width: 20%;"><a name="Progress"></a>プログレスバースタイル</th>
+  <th style="background-color: rgb(0, 0, 153); width: 10%;">値</th>
+  <th style="background-color: rgb(0, 0, 153);"><b>説明</b></th>
+</tr>
+<tr>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+  <td><p align=center>#include &lt;ProgressConstants.au3&gt;</p></td>
+</tr>
+<tr>
+  <td>$PBS_SMOOTH </td>
+  <td>0x01</td>
+  <td>デフォルトのしま模様のバーの代わりにスムーズなスクロールバーで進捗状況を表示します。
+  </td>
+  </tr>
+<tr>
+  <td>$PBS_VERTICAL</td>
+  <td>0x04</td>
+  <td>下から上に伸びる垂直バーで進捗状況を表示します。</td>
+  </tr>
+</table>
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<table border="1" style="width: 100%;" cellspacing="0" cellpadding="3" bordercolor="#c0c0c0">
+<tr style="color: rgb(255, 255, 255);">
+  <th style="background-color: rgb(0, 0, 153); width: 20%;"><a name="UpDown"></a>アップダウンスタイル</th>
+  <th style="background-color: rgb(0, 0, 153); width: 10%;">値</th>
+  <th style="background-color: rgb(0, 0, 153);"><b>説明</b></th>
+</tr>
+<tr>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+  <td><p align=center>#include &lt;UpdownConstants.au3&gt;</p></td>
+</tr>
+<tr>
+  <td>Default/forced</td>
+  <td>&nbsp;</td>
+  <td>$GUI_SS_DEFAULT_UPDOWN。<a href="../functions/GUICtrlCreateUpdown.htm">GUICtrlCreateUpdown</a>関数を参照。
+  </td>
+</tr>
+<tr>
+  <td>$UDS_ALIGNLEFT</td>
+  <td>0x08</td>
+  <td>
+  関連付けられたウィンドウの左縁隣にアップダウンコントロールを配置します。
+  関連付けられたウィンドウを右に動かすとその幅はアップダウンコントロールの幅に合わせて減少します。
+  </td>
+  </tr>
+<tr>
+  <td>$UDS_ALIGNRIGHT</td>
+  <td>0x04</td>
+  <td>
+  関連付けられたウィンドウの右縁隣にアップダウンコントロールを配置します。
+  関連付けられたウィンドウの幅はアップダウンコントロールの幅に合わせて減少します。
+　</td>
+  </tr>
+<tr>
+  <td>$UDS_ARROWKEYS</td>
+  <td>0x20</td>
+  <td>アップダウンコントロールの動作をキーボードの上下カーソルで操作できるようにします。
+  </td>
+</tr>
+<tr>
+  <td>$UDS_HORZ</td>
+  <td>0x40</td>
+  <td>アップダウンコントロールの動作を上下矢印の代わりに左右矢印で操作できるようにします。
+  </td>
+</tr>
+<tr>
+  <td>$UDS_NOTHOUSANDS</td>
+  <td>0x80</td>
+  <td>3桁ごとのセミコロンの挿入をしなくなります。
+  </td>
+</tr>
+<tr>
+  <td>$UDS_WRAP</td>
+  <td>0x01</td>
+  <td>
+  上限値以上に加算した場合、下限値に戻り、
+  下限値以下に減算した場合、上限値に戻りるようになります。
+</td>
+</tr>
+</table>
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<table border="1" style="width: 100%;" cellspacing="0" cellpadding="3" bordercolor="#c0c0c0">
+<tr style="color: rgb(255, 255, 255);">
+  <th style="background-color: rgb(0, 0, 153); width: 20%;"><a name="Label"></a>ラベル/スタティックスタイル</th>
+  <th style="background-color: rgb(0, 0, 153); width: 10%;">値</th>
+  <th style="background-color: rgb(0, 0, 153);"><b>説明</b></th>
+</tr>
+<tr>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+  <td><p align=center>#include &lt;StaticConstants.au3&gt;</p></td>
+</tr>
+<tr>
+  <td>Default/forced</td>
+  <td>&nbsp;</td>
+  <td>$GUI_SS_DEFAULT_LABEL、$GUI_SS_DEFAULT_ICON、$GUI_SS_DEFAULT_PIC。<a href="../functions/GUICtrlCreateLabel.htm">GUICtrlCreateLabel</a>、<a href="../functions/GUICtrlCreateIcon.htm">
+  GUICtrlCreateIcon</a>、<a href="../functions/GUICtrlCreatePic.htm">
+  GUICtrlCreatePic</a>関数を参照。</td>
+</tr>
+<tr>
+  <td>$SS_BLACKFRAME</td>
+  <td>0x07</td>
+  <td>ウィンドウのフレームと同じ色のフレームのボックス描画を設定します。
+  デフォルトの色設定ではこの色は黒になります。
+ </td>
+  </tr>
+<tr>
+  <td>$SS_BLACKRECT</td>
+  <td>0x04</td>
+  <td>現在のウィンドウフレーム色で長方形内を塗りつぶすよう設定します。
+   デフォルトの色設定ではこの色は黒になります。
+  </td>
+</tr>
+<tr>
+  <td>$SS_CENTER </td>
+  <td>0x01</td>
+  <td>
+  シンプルな長方形を設定しその中のテキストを中央揃えします。
+  コントロールは自動でテキストを調整し、長方形からはみだした部分の行は次の行に表示されます。
+  </td>
+</tr>
+<tr>
+  <td>$SS_CENTERIMAGE</td>
+  <td>0x0200</td>
+  <td>
+    コントロールがリサイズされた際にSS_BITMAPが設定された
+  スタティックコントロールの中央が固定されるよう設定します。
+  新しいサイズのビットマップでは4面がサイズ調整されます。
+  ビットマップがコントロールのクライアント領域より小さい場合、
+  残りのクライアント領域はビットマップ左上隅のピクセルの色で塗りつぶされます。
+  <b>一行</b>のテキストのみを持つスタティックコントロールに対して使用することができます。<br>
+  Microsoft Windows XP：使用されていないコントロールの領域はビットマップ/アイコン左上隅のピクセルの色で塗りつぶされません。
+  背景色のままになります。
+  </td>
+</tr>
+<tr>
+  <td>$SS_ETCHEDFRAME </td>
+  <td>0x12</td>
+  <td>EDGE_ETCHEDエッジスタイルを使用してスタティックコントロールのフレームを描画します。
+  </td>
+</tr>
+<tr>
+  <td>$SS_ETCHEDHORZ </td>
+  <td>0x10</td>
+  <td>EDGE_ETCHEDエッジスタイルを使用してスタティックコントロールの上エッジと下エッジを描画します。
+  </td>
+</tr>
+<tr>
+  <td>$SS_ETCHEDVERT </td>
+  <td>0x11</td>
+  <td>EDGE_ETCHEDエッジスタイルを使用してスタティックコントロールの左エッジと右エッジを描画します。
+　</td>
+</tr>
+<tr>
+  <td>$SS_GRAYFRAME </td>
+  <td>0x08</td>
+  <td>
+  スクリーン背景(デスクトップ)色でフレームのボックス描画を設定します。
+  デフォルトの色設定ではこの色は灰色になります。
+  </td>
+</tr>
+<tr>
+  <td>$SS_GRAYRECT </td>
+  <td>0x05</td>
+  <td>
+  現在のスクリーン背景色で長方形内を塗りつぶすよう設定します。
+　デフォルトの色設定ではこの色は灰色になります。
+  </td>
+</tr>
+<tr>
+  <td>$SS_LEFT</td>
+  <td>0x0000</td>
+  <td>
+  シンプルな長方形を設定しその中にテキストを左揃えします。
+  テキストは表示前にフォーマットされ、長方形からはみだした部分の行は自動で次の行に表示されます。
+  コントロールの幅よりも長い語句は切り捨てられます。
+</td>
+</tr>
+<tr>
+  <td>$SS_LEFTNOWORDWRAP </td>
+  <td>0x0C</td>
+  <td>長方形を設定しその中にテキストを左揃えします。
+  タブは有効ですが、語句は自動調整されません。
+  行末からはみ出したテキストは切り捨てられます。
+ 　</td>
+</tr>
+<tr>
+  <td>$SS_NOPREFIX </td>
+  <td>0x80</td>
+  <td>
+  アクセラレータ用接頭辞としてコントロール内のテキスト上の&amp;記号を解釈することをやめます。
+  ビット演算子OR(|)を使用するSS_NOPREFIXと他のスタイルを組み合わせることができます。
+  ダイアログボックス内のスタティックコントロールに&amp;記号を含んだファイル名などの文字列を表示させる際に使用します。
+  </td>
+</tr>
+<tr>
+  <td>$SS_NOTIFY</td>
+  <td>0x0100</td>
+  <td>ユーザーがコントロールをクリックした際に親ウィンドウにSTN_CLICKEDを通知します。</td>
+  </tr>
+<tr>
+  <td>$SS_RIGHT </td>
+  <td>0x0002</td>
+  <td>長方形を設定しその中に指定されたテキストを右揃えします。
+  </td>
+</tr>
+<tr>
+  <td>$SS_RIGHTJUST </td>
+  <td>0x0400</td>
+  <td>
+  コントロールがリサイズされた際にSS_BITMAP、SS_ICONが設定された
+  スタティックコントロールの右下隅が固定されるよう設定します。
+   新しいサイズのビットマップ、アイコンでは上部、左部のみがサイズ調整されます。
+ 　</td>
+</tr>
+<tr>
+  <td>$SS_SIMPLE </td>
+  <td>0x0B</td>
+  <td>
+  シンプルな長方形を設定しその中に一行の左揃えテキストを表示します。
+  テキスト行は短縮したり、変更されたりしません。
+  またコントロールが無効な場合でもテキストはグレイアウトしません。
+  </td>
+</tr>
+<tr>
+  <td>$SS_SUNKEN </td>
+  <td>0x1000</td>
+  <td>スタティックコントロールの周りに半分沈み込んだボーダーを描画します。</td>
+</tr>
+<tr>
+  <td>$SS_WHITEFRAME </td>
+  <td>0x09</td>
+  <td>
+  ウィンドウ背景色と同じ色のフレームのボックス描画を設定します。
+  デフォルトの色設定ではこの色は白になります。
+  </td>
+</tr>
+<tr>
+  <td>$SS_WHITERECT </td>
+  <td>0x06</td>
+  <td>
+  現在のウィンドウ背景色で長方形内を塗りつぶすよう設定します。
+   デフォルトの色設定ではこの色は白になります。
+  </td>
+</tr>
+</table>
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<table border="1" style="width: 100%;" cellspacing="0" cellpadding="3" bordercolor="#c0c0c0">
+<tr style="color: rgb(255, 255, 255);">
+  <th style="background-color: rgb(0, 0, 153); width: 20%;"><a name="Tab"></a>タブスタイル</th>
+  <th style="background-color: rgb(0, 0, 153); width: 10%;">値</th>
+  <th style="background-color: rgb(0, 0, 153);"><b>説明</b></th>
+</tr>
+<tr>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+  <td><p align=center>#include &lt;TabConstants.au3&gt;</p></td>
+</tr>
+<tr>
+  <td>Default/forced</td>
+  <td>&nbsp;</td>
+  <td><a href="../functions/GUICtrlCreateTab.htm">GUICtrlCreateTab</a>関数を参照。</td>
+</tr>
+<tr>
+  <td>$TCS_SCROLLOPPOSITE</td>
+  <td>0x0001</td>
+  <td>タブ選択時に不要なタブをコントロールの反対側にスクロールさせます。</td>
+  </tr>
+<tr>
+  <td>$TCS_BOTTOM </td>
+  <td>0x0002</td>
+  <td>コントロールの下部にタブを表示します。
+  TCS_RIGHTと同じ値です。
+  このスタイルはComCtl32.dll version 6を使用していない場合、サポートされません。
+  </td>
+</tr>
+<tr>
+  <td>$TCS_RIGHT </td>
+  <td>0x0002</td>
+  <td>TCS_VERTICALを使用しているコントロールの右側にタブが垂直に表示されます。
+  TCS_BOTTOMと同じ値です。
+  このスタイルはVisual Stylesを使用していない場合、サポートされません。
+  </td>
+</tr>
+<tr>
+  <td>$TCS_MULTISELECT </td>
+  <td>0x0004 </td>
+  <td>
+  <small>CTRL</small>を押しながらクリックすることで複数のタブを選択できるようにします。
+  このスタイルはTCS_BUTTONSが設定されている場合にのみ有効です。
+  </td>
+</tr>
+<tr>
+  <td>$TCS_FLATBUTTONS </td>
+  <td>0x0008</td>
+  <td>
+  選択されているタブは背景から浮き上がって、
+  選択されていないタブは背景と同じ高さで表示されます。
+  このスタイルはTCS_BUTTONSが設定されている場合にのみ有効です。
+  </td>
+</tr>
+<tr>
+  <td>$TCS_FORCEICONLEFT </td>
+  <td>0x0010</td>
+  <td>各固定幅タブの左端にアイコンを表示します。
+  このスタイルはTCS_FIXEDWIDTHが設定されている場合にのみ使用できます。
+  </td>
+</tr>
+<tr>
+  <td>$TCS_FORCELABELLEFT </td>
+  <td>0x0020</td>
+  <td>
+  各固定幅タブの左端にラベルを表示します。
+  ラベルは中央寄せではなく、アイコンのすぐ右側に表示されます。
+  <p>このスタイルはTCS_FIXEDWIDTHが設定されている場合にのみ使用でき、
+  TCS_FORCEICONLEFTを意味します。
+  </td>
+</tr>
+<tr>
+  <td>$TCS_HOTTRACK </td>
+  <td>0x0040</td>
+  <td>ポインタがあっているアイテムが自動でハイライトされます。</td>
+</tr>
+<tr>
+  <td>$TCS_VERTICAL </td>
+  <td>0x0080</td>
+  <td>
+  タブはコントロールに左側に表示され、タブテキストは垂直に表示されます。
+  このスタイルはTCS_MULTILINEと同時に使用時のみ有効です。
+  タブをコントロールの右側に表示するにはTCS_RIGHTを使用します。
+  このスタイルはComCtl32.dll version 6を使用していない場合、サポートされません。
+  </td>
+</tr>
+<tr>
+  <td>$TCS_TABS </td>
+  <td>0x0000</td>
+  <td>タブはタブとして表示され、表示領域の周りにボーダーが描画されます。
+  このスタイルはデフォルトです。
+  </td>
+</tr>
+<tr>
+  <td>$TCS_BUTTONS </td>
+  <td>0x0100</td>
+  <td>タブはボタンとして表示され、表示領域の周りにボーダーは描画されません。
+  </td>
+</tr>
+<tr>
+  <td>$TCS_SINGLELINE </td>
+  <td>0x0000</td>
+  <td>
+  タブを一行表示します。
+  ユーザーは必要があればスクロールして全てのタブを見ることができます。
+  このスタイルはデフォルトです。
+  </td>
+</tr>
+<tr>
+  <td>$TCS_MULTILINE </td>
+  <td>0x0200</td>
+  <td>
+  全てのタブを表示する場合、必要であればタブを複数行表示します。
+  </td>
+</tr>
+<tr>
+  <td>$TCS_RIGHTJUSTIFY </td>
+  <td>0x0000</td>
+  <td>
+  タブ列がコントロール全体の幅に合うように各タブの幅が引き伸ばされます。
+  <p>このウィンドウスタイルはTCS_MULTILINEが設定されていない場合、無視されます。
+</td>
+</tr>
+<tr>
+  <td>$TCS_FIXEDWIDTH </td>
+  <td>0x0400</td>
+  <td>
+  タブの幅を揃えます。
+  このスタイルをTCS_RIGHTJUSTIFYと組み合わせることはできません。
+  </td>
+</tr>
+<tr>
+  <td>$TCS_RAGGEDRIGHT </td>
+  <td>0x0800</td>
+  <td>
+  タブの列はコントロール全体の幅に合うように引き伸ばされません。　
+  このスタイルはデフォルトです。
+  </td>
+</tr>
+<tr>
+  <td>$TCS_FOCUSONBUTTONDOWN </td>
+  <td>0x1000</td>
+  <td>クリック時にタブコントロールに入力がフォーカスされるように設定します。
+  </td>
+</tr>
+<tr>
+  <td>$TCS_OWNERDRAWFIXED </td>
+  <td>0x2000</td>
+  <td>親ウィンドウがタブの描画をおこないます。</td>
+</tr>
+<tr>
+  <td>$TCS_TOOLTIPS </td>
+  <td>0x4000</td>
+  <td>タブコントロールが関連付けられたツールチップコントロールを持つように設定します。<td>
+</tr>
+<tr>
+  <td>$TCS_FOCUSNEVER </td>
+  <td>0x8000</td>
+  <td>クリック時にタブコントロールに入力がフォーカスされないように設定します。
+  </td>
+</tr>
+</table>
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<table border="1" style="width: 100%;" cellspacing="0" cellpadding="3" bordercolor="#c0c0c0" height="206">
+<tr style="color: rgb(255, 255, 255);">
+  <th style="background-color: rgb(0, 0, 153); width: 20%;" height="19"><a name="Avi"></a>Aviクリップスタイル</th>
+  <th style="background-color: rgb(0, 0, 153); width: 10%;" height="19">値</th>
+  <th style="background-color: rgb(0, 0, 153);"><b>説明</b></th>
+</tr>
+<tr>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+  <td><p align=center>#include &lt;AVIConstants.au3&gt;</p></td>
+</tr>
+<tr>
+  <td>Default/forced</td>
+  <td>&nbsp;</td>
+  <td>$GUI_SS_DEFAULT_AVI。<a href="../functions/GUICtrlCreateAvi.htm">GUICtrlCreateAvi</a>関数を参照。</td>
+  </tr>
+<tr>
+  <td>$ACS_AUTOPLAY </td>
+  <td>0x04</td>
+  <td>AVIクリップが開かれたらすぐにアニメーション再生を開始。</td>
+  </tr>
+<tr>
+  <td>$ACS_CENTER</td>
+  <td>0x01</td>
+  <td>アニメーションコントロールがあるウィンドウの中央にアニメーションを配置。</td>
+  </tr>
+<tr>
+  <td>$ACS_TRANSPARENT</td>
+  <td>0x02</td>
+  <td>「透明」背景(デフォルト値)を作成してアニメーション背景色を背後のウィンドウの色に合わせる。</td>
+</tr>
+<tr>
+  <td>$ACS_NONTRANSPARENT</td>
+  <td>0x10</td>
+  <td>デフォルトのACS_TRANSPARENTをオーバーライドする。</td>
+</tr>
+</table>
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<table border="1" style="width: 100%;" cellspacing="0" cellpadding="3" bordercolor="#c0c0c0">
+<tr style="color: rgb(255, 255, 255);">
+  <th style="background-color: rgb(0, 0, 153); width: 20%;"><a name="Date"></a>日付スタイル</th>
+  <th style="background-color: rgb(0, 0, 153); width: 10%;">値</th>
+  <th style="background-color: rgb(0, 0, 153);"><b>説明</b></th>
+</tr>
+<tr>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+  <td><p align=center>#include &lt;DateTimeConstants.au3&gt;</p></td>
+</tr>
+<tr>
+  <td>Default/forced</td>
+  <td>&nbsp;</td>
+  <td>$GUI_SS_DEFAULT_DATE。<a href="../functions/GUICtrlCreateDate.htm">GUICtrlCreateDate</a>関数を参照。
+  </td>
+</tr>
+<tr>
+  <td>$DTS_UPDOWN </td>
+  <td>0x01</td>
+  <td>時間を修正するためにDTPコントロールの右側にアップダウンコントロールを配置。
+  デフォルトのスタイルであるドロップダウンの月カレンダーの代わりに使用できます。
+  </td>
+  </tr>
+<tr>
+  <td>$DTS_SHOWNONE </td>
+  <td>0x02</td>
+  <td>有効な選択状態として「no date」を受け付けるようコントロールに設定します。</td>
+  </tr>
+<tr>
+  <td>$DTS_LONGDATEFORMAT </td>
+  <td>0x04</td>
+  <td>
+長いフォーマットで日付を表示します。このスタイルのデフォルトフォーマットはLOCALE_SLONGDATEFORMATで定義されており、
+「Friday, April 19, 1998.」のような形の出力を生成します。
+ </td>
+</tr>
+<tr>
+  <td>$DTS_TIMEFORMAT </td>
+  <td>0x09</td>
+  <td>時間を表示します。このスタイルのデフォルトフォーマットはLOCALE_STIMEFORMATで定義されており、
+  「5:31:42 PM.」のような形の出力を生成します。
+  </td>
+</tr>
+<tr>
+  <td>$DTS_RIGHTALIGN </td>
+  <td>0x20</td>
+  <td>ドロップダウンの月カレンダーをデフォルトの左揃えから右揃えに切り替えます。
+  /td>
+</tr>
+<tr>
+  <td>$DTS_SHORTDATEFORMAT</td>
+  <td>0x00</td>
+  <td>
+  短いフォーマットで日付を表示します。このスタイルのデフォルトフォーマットはLOCALE_SSHORTDATEで定義されており、
+「4/19/96」のような形の出力を生成します。
+</td>
+</tr>
+</table>
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<table border="1" style="width: 100%;" cellspacing="0" cellpadding="3" bordercolor="#c0c0c0">
+<tr style="color: rgb(255, 255, 255);">
+  <th style="background-color: rgb(0, 0, 153); width: 20%;"><a name="MonthCal"></a>
+  月カレンダースタイル</th>
+  <th style="background-color: rgb(0, 0, 153); width: 10%;">値</th>
+  <th style="background-color: rgb(0, 0, 153);"><b>説明</b></th>
+</tr>
+<tr>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+  <td><p align=center>#include &lt;DateTimeConstants.au3&gt;</p></td>
+</tr>
+<tr>
+  <td>Default/forced</td>
+  <td>&nbsp;</td>
+  <td><a href="../functions/GUICtrlCreateMonthCal.htm">
+  GUICtrlCreateMonthCal</a>関数を参照。</td>
+</tr>
+<tr>
+  <td>$MCS_NOTODAY</td>
+  <td>0x10</td>
+  <td>
+  月カレンダーコントロール下側の「今日」の日付を表示しなくなります。
+  </td>
+  </tr>
+<tr>
+  <td>$MCS_NOTODAYCIRCLE</td>
+  <td>0x08</td>
+  <td> 月カレンダーコントロールの「今日」の日付を丸囲みしなくなります。
+  </td>
+  </tr>
+<tr>
+  <td>$MCS_WEEKNUMBERS</td>
+  <td>0x04</td>
+  <td>
+  週の番号(1-52)を各日付行の左側に表示します。
+  少なくとも4日以上ある最初の週が1番目の週になります。
+</td>
+</tr>
+</table>
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<table border="1" style="width: 100%;" cellspacing="0" cellpadding="3" bordercolor="#c0c0c0">
+<tr style="color: rgb(255, 255, 255);">
+  <th style="background-color: rgb(0, 0, 153); width: 20%;"><a name="TreeView"></a>ツリービュースタイル</th>
+  <th style="background-color: rgb(0, 0, 153); width: 10%;">値</th>
+  <th style="background-color: rgb(0, 0, 153);"><b>説明</b></th>
+</tr>
+<tr>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+  <td><p align=center>#include &lt;TreeviewConstants.au3&gt;</p></td>
+</tr>
+<tr>
+  <td>Default/forced</td>
+  <td>&nbsp;</td>
+  <td>$GUI_SS_DEFAULT_TREEVIEW。<a href="../functions/GUICtrlCreateTreeView.htm">
+  GUICtrlCreateTreeView</a>関数を参照。</td>
+  </tr>
+<tr>
+  <td>$TVS_HASBUTTONS </td>
+  <td>0x0001</td>
+  <td>
+  親アイテムの隣にプラス(+)ボタン、マイナス(-)ボタンを表示します。
+  このボタンをクリックすることで親アイテムの持つ子アイテムのリストを開閉できます。
+  ツリービューのルートにあるアイテムのボタン同士を結ぶには、TVS_LINESATROOTも設定する必要があります。
+  </td>
+  </tr>
+<tr>
+  <td>$TVS_HASLINES </td>
+  <td>0x0002</td>
+  <td>アイテムの階層を表示する線を使用します。</td>
+</tr>
+<tr>
+  <td>$TVS_LINESATROOT </td>
+  <td>0x0004</td>
+  <td>ツリービューコントロールのルートにあるアイテム同士を結ぶ線を使用します。
+  TVS_HASLINESが設定されていない場合、この値は無視されます。
+  </td>
+</tr>
+<tr>
+  <td>$TVS_DISABLEDRAGDROP </td>
+  <td>0x0010</td>
+  <td>
+  ツリービューコントロールがTVN_BEGINDRAGメッセージを通知しないように設定します。
+</td>
+</tr>
+<tr>
+  <td>$TVS_SHOWSELALWAYS </td>
+  <td>0x0020</td>
+  <td>ツリービューコントロールからフォーカスが外れても、
+  アイテムの選択表示が表示されたままになるよう設定します。
+  </td>
+</tr>
+<tr>
+  <td>$TVS_RTLREADING </td>
+  <td>0x0040</td>
+  <td>
+  通常のウィンドウではテキストは左から右に(LTR)表示されます。
+  Windowsはヘブライ語やアラビア語のように右から左(RTL)に読む言語のために言語を<i>反転</i>させることができます。
+  通常ツリービューのテキストは親ウィンドウのテキストと同じ向きで表示されますが、
+  TVS_RTLREADINGを設定すると通常ツリービューのテキストは親ウィンドウのテキストと反対の向きで表示されます。
+</td>
+</tr>
+<tr>
+  <td>$TVS_NOTOOLTIPS </td>
+  <td>0x0080</td>
+  <td>ツリービューコントロールはツールチップをサポートしなくなります。</td>
+</tr>
+<tr>
+  <td>$TVS_CHECKBOXES</td>
+  <td>0x0100</td>
+  <td>ツリービューコントロール内のアイテムのチェックボックスを有効にします。一度このスタイルでツリービューコントロールを作成するとこのスタイルを解除することはできません。代わりにそのコントロールを破棄し、新しいものを同じ場所に作成する必要があります。</td>
+</tr>
+<tr>
+  <td>$TVS_TRACKSELECT </td>
+  <td>0x0200</td>
+  <td>ツリービューコントロールのホットトラッキング機能を有効にします。</td>
+</tr>
+<tr>
+  <td>$TVS_SINGLEEXPAND </td>
+  <td>0x0400</td>
+  <td>
+  このスタイルを有効にすると、選択変更時にツリービューは自動で選択されたアイテムを開き、
+  選択されなくなったアイテムを閉じます。
+  選択されているアイテムをシングルクリックするとそのアイテムが閉じている場合には開きます。
+  CTRLキーを押しながらアイテム選択をすると選択されていないアイテムは閉じません。
+</td>
+</tr>
+<tr>
+  <td>$TVS_FULLROWSELECT </td>
+  <td>0x1000</td>
+  <td>
+  ツリービューでの列選択を有効にします。
+  アイテム列をクリックすることで選択することが可能で、
+  選択したアイテムの列全体がハイライトされます。
+  このスタイルはTVS_HASLINESと同時には使用できません。
+  </td>
+</tr>
+<tr>
+  <td>$TVS_NOSCROLL </td>
+  <td>0x2000</td>
+  <td>コントロールの水平スクロールを無効にします。
+  コントロールには水平スクロールバーが表示されません。
+  </td>
+</tr>
+<tr>
+  <td>$TVS_NONEVENHEIGHT </td>
+  <td>0x4000</td>
+  <td>
+ TVM_SETITEMHEIGHTメッセージを使用して アイテムの高さに奇数値を設定できるようになります。
+ デフォルトではアイテムの高さは偶数値でなければいけません。
+ </td>
+</tr>
+</table>
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<table border="1" style="width: 100%;" cellspacing="0" cellpadding="3" bordercolor="#c0c0c0">
+<tr style="color: rgb(255, 255, 255);">
+  <th style="background-color: rgb(0, 0, 153); width: 20%;"><a name="Slider"></a>スライダースタイル</th>
+  <th style="background-color: rgb(0, 0, 153); width: 10%;">値</th>
+  <th style="background-color: rgb(0, 0, 153);"><b>説明</b></th>
+</tr>
+<tr>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+  <td><p align=center>#include &lt;SliderConstants.au3&gt;</p></td>
+</tr>
+<tr>
+  <td>Default/forced</td>
+  <td>&nbsp;</td>
+  <td>$GUI_SS_DEFAULT_SLIDER。<a href="../functions/GUICtrlCreateSlider.htm">
+  GUICtrlCreateSlider</a>関数を参照。</td>
+  </tr>
+<tr>
+  <td>$TBS_AUTOTICKS</td>
+  <td>0x0001</td>
+  <td>TBM_SETRANGEを使用してトラックバーに範囲設定した場合に、目盛りをつけます。
+  </td>
+  </tr>
+<tr>
+  <td>$TBS_BOTH</td>
+  <td>0x0008</td>
+  <td>トラックバーの両端に目盛りをつけます。
+  </td>
+  </tr>
+<tr>
+  <td>$TBS_BOTTOM</td>
+  <td>0x0000</td>
+  <td>水平トラックバーの下側に目盛りをつけます。</td>
+</tr>
+<tr>
+  <td>$TBS_HORZ </td>
+  <td>0x0000</td>
+  <td>水平トラックバーを設定します。これはデフォルトです。</td>
+</tr>
+<tr>
+  <td>$TBS_VERT</td>
+  <td>0x0002</td>
+  <td>垂直トラックバーの左側に目盛りをつけます。</td>
+</tr>
+<tr>
+  <td>$TBS_NOTHUMB</td>
+  <td>0x0080</td>
+  <td>スライダーを持たないトラックバーを設定します。</td>
+</tr>
+<tr>
+  <td>$TBS_NOTICKS</td>
+  <td>0x0010</td>
+  <td>目盛りを持たないトラックバーを設定します。</td>
+</tr>
+<tr>
+  <td>$TBS_LEFT</td>
+  <td>0x0004</td>
+  <td>垂直トラックバーの左側に目盛りをつけます。</td>
+</tr>
+<tr>
+  <td>$TBS_RIGHT</td>
+  <td>0x0000</td>
+  <td>垂直トラックバーの右側に目盛りをつけます。</td>
+</tr>
+<tr>
+  <td>$TBS_TOP</td>
+  <td>0x0004</td>
+  <td>水平トラックバーの上側に目盛りをつけます。</td>
+</tr>
+</table>
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<table border="1" style="width: 100%;" cellspacing="0" cellpadding="3" bordercolor="#c0c0c0" height="299">
+<tr style="color: rgb(255, 255, 255);">
+  <th style="background-color: rgb(0, 0, 153); width: 20%;" height="19"><a name="ListView"></a>リストビュースタイル</th>
+  <th style="background-color: rgb(0, 0, 153); width: 10%;" height="19">値</th>
+  <th style="background-color: rgb(0, 0, 153);"><b>説明</b></th>
+</tr>
+<tr>
+  <td>&nbsp;</td>
+  <td>&nbsp;</td>
+  <td><p align=center>#include &lt;ListviewConstants.au3&gt;</p></td>
+</tr>
+<tr>
+  <td>Default/forced</td>
+  <td>&nbsp;</td>
+  <td>$GUI_SS_DEFAULT_LISTVIEW。<a href="../functions/GUICtrlCreateListView.htm">
+  GUICtrlCreateListView</a>関数を参照。</td>
+  </tr>
+<tr>
+  <td>$LVS_ICON</td>
+  <td>0x0000</td>
+  <td>アイコンビューを設定します。</td>
+  </tr>
+<tr>
+  <td>$LVS_REPORT</td>
+  <td>0x0001</td>
+  <td>レポートビューを設定します。</td>
+  </tr>
+<tr>
+  <td>$LVS_SMALLICON</td>
+  <td>0x0002</td>
+  <td>スモールアイコンビューを設定します。</td>
+  </tr>
+<tr>
+  <td>$LVS_LIST</td>
+  <td>0x0003</td>
+  <td>リストビューを設定します。</td>
+  </tr>
+<tr>
+  <td>$LVS_EDITLABELS</td>
+  <td>0x0200</td>
+  <td>アイテムのテキストを編集可能にします。</td>
+</tr>
+<tr>
+  <td>$LVS_NOCOLUMNHEADER</td>
+  <td>0x4000</td>
+  <td>レポートビューで列ラベルを非表示にします。
+  デフォルトではレポートビューで列ラベルが表示されます。
+  </td>
+</tr>
+<tr>
+  <td>$LVS_NOSORTHEADER</td>
+  <td>0x8000</td>
+  <td>列ラベルのボタン機能を無効にします。
+  レポートビューでの列ラベルのクリックでソートなどの動作がおこなわれない場合に使用します。
+  </td>
+  </tr>
+<tr>
+  <td>$LVS_SINGLESEL</td>
+  <td>0x0004</td>
+  <td>一度に選択できるアイテム数を1つにします。</td>
+</tr>
+<tr>
+  <td>$LVS_SHOWSELALWAYS</td>
+  <td>0x0008</td>
+  <td>コントロールにフォーカスが合っていない場合でも選択表示が有効になるようにします。
+  </td>
+</tr>
+<tr>
+  <td>$LVS_SORTASCENDING</td>
+  <td>0x0010</td>
+  <td>アイテム索引がアイテムのテキストに従って昇順にソートされるようにします。
+  </td>
+</tr>
+<tr>
+  <td>$LVS_SORTDESCENDING</td>
+  <td>0x0020</td>
+  <td>アイテム索引がアイテムのテキストに従って降順にソートされるようにします。
+  </td>
+</tr>
+<tr>
+  <td>$LVS_NOLABELWRAP</td>
+  <td>0x0080</td>
+  <td>アイコンビューでアイテムのテキストが一行表示されるようにします。
+  デフォルトではアイコンビューでアイテムのテキストは自動調整されます。
+  </td>
+</tr>
+</table>
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<table border="1" style="width: 100%;" cellspacing="0" cellpadding="3" bordercolor="#c0c0c0">
+  <tr style="color: rgb(255, 255, 255);">
+    <th style="background-color: rgb(0, 0, 153); width: 20%;"><a name="ListViewExtended"></a>
+    リストビュー拡張スタイル</th>
+    <th style="background-color: rgb(0, 0, 153); width: 10%;">値</th>
+    <th style="background-color: rgb(0, 0, 153);"><b>説明</b></th>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td><p align=center>#include &lt;ListviewConstants.au3&gt;</p></td>
+  </tr>
+  <tr>
+    <td>$LVS_EX_FULLROWSELECT </td>
+    <td>0x00000020 </td>
+    <td>アイテム選択時に、アイテムとそのサブアイテム全てをハイライトします。</td>
+  </tr>
+  <tr>
+    <td>$LVS_EX_GRIDLINES</td>
+    <td>0x00000001</td>
+    <td>アイテムとサブアイテムのまわりに枠線を表示します。</td>
+  </tr>
+  <tr>
+    <td>$LVS_EX_HEADERDRAGDROP</td>
+    <td>0x00000010</td>
+    <td>リストビューコントロールでのドラッグアンドドロップでの列の並べ替えを有効にします。</td>
+  </tr>
+  <tr>
+    <td>$LVS_EX_TRACKSELECT</td>
+    <td>0x00000008</td>
+    <td>
+	リストビューコントロールでのホットトラック選択を有効にします。
+	ホットトラック選択とは、一定時間以上マウスカーソルがアイテム上にあると自動でそのアイテムが選択される機能です。
+	</td>
+  </tr>
+  <tr>
+    <td>$LVS_EX_CHECKBOXES</td>
+    <td>0x00000004</td>
+    <td>リストビューコントロールでのアイテムのチェックボックスを有効にします。
+	</td>
+  </tr>
+  <tr>
+    <td>$LVS_EX_BORDERSELECT</td>
+    <td>0x00008000</td>
+    <td>
+	このスタイルが設定されると、アイテム選択時にアイテムがハイライトされる代わりにアイテムの枠線の色が変わります。
+	</td>
+  </tr>
+  <tr>
+    <td>$LVS_EX_DOUBLEBUFFER</td>
+    <td>0x00010000</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>$LVS_EX_FLATSB</td>
+    <td>0x00000100</td>
+    <td>リストビューのフラットスクロールバーを有効にします。</td>
+  </tr>
+  <tr>
+    <td>$LVS_EX_MULTIWORKAREAS</td>
+    <td>0x00002000</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>$LVS_EX_SNAPTOGRID</td>
+    <td>0x00080000</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td>$LVS_EX_SUBITEMIMAGES</td>
+    <td>0x00000002</td>
+    <td>サブアイテムに画像を表示することができます。</td>
+  </tr>
+</table>
+
+<p>&nbsp;</p>
+</body>
+</html>

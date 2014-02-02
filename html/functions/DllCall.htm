@@ -1,0 +1,303 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function DllCall</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">DllCall</font>
+<hr size="2">
+<p>DLL内の関数を動的に実行します。<br></p>
+
+<p class="codeheader">
+DllCall ( "dll", "return type", "function" [, type1, param1 [, type n, param n]] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">dll</td>
+    <td width="85%">使用するDLLファイルの名前。例："user32.dll"。DllOpenで取得したハンドルも使用可能(注意を参照)。</td>
+  </tr>
+  <tr>
+   <td>return type</td>
+   <td>関数の返し値の型(下記参照)。</td>
+  </tr>
+  <tr>
+   <td>function</td>
+   <td>実行するDLL内の関数の名前。例："MessageBox"、序数の"62"。</td>
+  </tr>
+  <tr>
+   <td>type1</td>
+   <td><b>[オプション]</b> パラメータの型(注意を参照)。</td>
+  </tr>
+  <tr>
+   <td>param1</td>
+   <td><b>[オプション]</b> 実際のパラメータ(注意を参照)。</td>
+  </tr>
+  <tr>
+   <td>type n</td>
+   <td><b>[オプション]</b> n番目のパラメータの型(注意を参照)。</td>
+  </tr>
+  <tr>
+   <td>param n</td>
+   <td><b>[オプション]</b> n番目の実際のパラメータ(注意を参照)。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+有効な型は下表のとおりです。<br>
+<br>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%"><b>型</b></td>
+    <td width="85%"><b>詳細</b></td>
+  </tr>
+  <tr>
+   <td>none</td>
+   <td>値なし(返し値の型としてのみ有効。C言語のvoidと等価。)</td>
+  </tr>
+  <tr>
+   <td>BYTE</td>
+   <td>符号なし8ビット整数</td>
+  </tr>
+  <tr>
+   <td>BOOLEAN</td>
+   <td>符号なし8ビット整数</td>
+  </tr>
+  <tr>
+   <td>short</td>
+   <td>16ビット整数</td>
+  </tr>
+  <tr>
+   <td>USHORT</td>
+   <td>符号なし16ビット整数</td>
+  </tr>
+  <tr>
+   <td>WORD</td>
+   <td>符号なし16ビット整数</td>
+  </tr>
+  <tr>
+   <td>int</td>
+   <td>32ビット整数</td>
+  </tr>
+  <tr>
+   <td>long</td>
+   <td>32ビット整数</td>
+  </tr>
+  <tr>
+   <td>BOOL</td>
+   <td>32ビット整数</td>
+  </tr>
+  <tr>
+   <td>UINT</td>
+   <td>符号なし32ビット整数</td>
+  </tr>
+  <tr>
+   <td>ULONG</td>
+   <td>符号なし32ビット整数</td>
+  </tr>
+  <tr>
+   <td>DWORD</td>
+   <td>符号なし32ビット整数</td>
+  </tr>
+  <tr>
+   <td>INT64</td>
+   <td>64ビット整数</td>
+  </tr>
+  <tr>
+   <td>UINT64</td>
+   <td>符号なし64ビット整数</td>
+  </tr>
+  <tr>
+   <td>ptr</td>
+   <td>汎用ポインタ (void *)</td>
+  </tr>
+  <tr>
+   <td>HWND</td>
+   <td>ウィンドウハンドル(ポインタ)</td>
+  </tr>
+  <tr>
+   <td>HANDLE</td>
+   <td>ハンドル(ポインタ)</td>
+  </tr>
+  <tr>
+   <td>float</td>
+   <td>単精度浮動小数点数</td>
+  </tr>
+  <tr>
+   <td>double</td>
+   <td>倍精度浮動小数点数</td>
+  </tr>
+  <tr>
+   <td>INT_PTR, LONG_PTR, LRESULT, LPARAM</td>
+   <td>x86版またはx64版のAutoItの実行時にポインタを保持するのに十分な大きさの整数</td>
+  </tr>
+  <tr>
+   <td>UINT_PTR, ULONG_PTR, DWORD_PTR, WPARAM</td>
+   <td>x86版またはx64版のAutoItの実行時にポインタを保持するのに十分な大きさの符号なし整数</td>
+  </tr>
+  <tr>
+   <td>str</td>
+   <td>ANSI文字列(65536文字未満)</td>
+  </tr>
+  <tr>
+   <td>wstr</td>
+   <td>UNICODEワイド文字文字列 (65536文字未満)</td>
+  </tr>
+  <tr>
+   <td>*</td>
+   <td>他の型の末尾に*を付けることで参照渡しが可能です。例えば"int*"とすると"int"型へのポインタが渡されます。</td>
+  </tr>    
+</table><br>
+WindowsAPIの型からAutoItの型への変換:<br>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%"><b>WindowsAPIの型</b></td>
+    <td width="85%"><b>AutoItの型</b></td>
+  </tr>
+  <tr>
+   <td>LPCSTR/LPSTR</td>
+   <td>str</td>
+  </tr>
+  <tr>
+   <td>LPCWSTR/LPWSTR</td>
+   <td>wstr</td>
+  </tr>
+  <tr>
+   <td>LPVOID</td>
+   <td>ptr</td>
+  </tr>
+  <tr>
+   <td>LP<i>xyz</i></td>
+   <td><i>xyz</i>*</td>
+  </tr>
+  <tr>
+   <td>HINSTANCE</td>
+   <td>handle</td>
+  </tr>
+  <tr>
+   <td>HRESULT</td>
+   <td>long</td>
+  </tr>
+  <tr>
+   <td>LONGLONG/LARGE_INTEGER</td>
+   <td>INT64</td>
+  </tr>
+  <tr>
+   <td>ULONGLONG/ULARGE_INTEGER</td>
+   <td>UINT64</td>
+  </tr>
+  <tr>
+   <td>SIZE_T</td>
+   <td>ULONG_PTR</td>
+  </tr>
+</table>
+
+構造体内のネストされた構造体を使用するにはネスとされた構造体を再定義する必要があります。
+例えば2つのPOINT構造体("long;long")を持つ構造体は"long;long;long;long"として宣言する必要があります。
+最初の2つのlong値は1つ目のPOINT構造体と対応しており、2つ目の2つの値は2番目のPOINT構造体と対応しています。<br>
+その他のWindowsAPIの型については<a href="http://msdn.microsoft.com/en-us/library/aa383751.aspx">MSDN</a>を参照してください。<br>
+<p>&nbsp;</p>
+<p><b>返し値</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">成功</td>
+    <td width="90%">@error = 0</td>
+  </tr>
+  <tr>
+    <td valign="top">失敗</td>
+    <td>@errorを設定します。</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td valign="top">@error:</td>
+	<td>DLLファイルが使用できない場合 @error = 1 </td>
+  </tr>
+  <tr>
+    <td valign="top"></td>
+    <td>"返し値の型"が不明な場合 @error = 2</td>
+  </tr>
+  <tr>
+    <td valign="top"></td>
+    <td>"関数"がDLLファイル内に見つからない場合 @error = 3</td>
+  </tr>
+</table>注意を参照<br>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+DLLファイル名が与えられるとDLLは自動でロードされ、実行が終わると閉じられます。DLLのロード、終了を手動で制御したい場合はDllOpen、DllCloseを使用してこの関数にファイル名の代わりにハンドルを渡してください。<br>
+<br>
+デフォルトではAutoItはstdcall規約を使用します。cdecl規約を使用するためには返し値の型の後ろに':cdecl'をつけて下さい。<br>
+例：DllCall("SQLite.dll", "int:cdecl", "sqlite3_open", "str", $sDatabase_Filename , "long*", 0).<br>
+<br>
+デフォルトではAutoItはANSI版の関数名の使用を試みます。例えば関数名としてMessageBoxを指定された場合MessageBoxAを実行しようとします。UNICODE版を使用するにはMessageBoxWを呼んでください。<br>
+<br>
+関数呼び出しに失敗した場合@errorが1に設定されます。それ以外の場合は関数の返し値と全てのパラメータ(関数が変更したパラメータを含む)のコピーが格納された配列が返されます。<br>
+$return[0] = 関数の返し値<br>
+$return[1] = パラメータ1<br>
+$return[2] = パラメータ1<br>
+...<br>
+$return[n] = パラメータn<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="DllCallbackFree.htm">DllCallbackFree</a>, <a href="DllCallbackGetPtr.htm">DllCallbackGetPtr</a>, <a href="DllCallbackRegister.htm">DllCallbackRegister</a>, <a href="DllOpen.htm">DllOpen</a>, <a href="DllClose.htm">DllClose</a>, <a href="DllStructCreate.htm">DllStructCreate</a>, <a href="DllStructGetPtr.htm">DllStructGetPtr</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S1">; *******************************************************</span><br>
+<span class="S1">; 例 1 - MessageBox API を直接呼び出す</span><br>
+<span class="S1">; *******************************************************</span><br>
+<br>
+<span class="S9">$result</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">DllCall</span><span class="S8">(</span><span class="S7">"user32.dll"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"int"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"MessageBox"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"hwnd"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"str"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Some text"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"str"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Some title"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"int"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">)</span><br>
+<br>
+<br>
+<span class="S1">; *******************************************************</span><br>
+<span class="S1">; 例 2 - 渡したパラメータを変更する関数を呼び出す</span><br>
+<span class="S1">; *******************************************************</span><br>
+<br>
+<span class="S9">$hwnd</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">WinGetHandle</span><span class="S8">(</span><span class="S7">"[CLASS:Notepad]"</span><span class="S8">)</span><br>
+<span class="S9">$result</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">DllCall</span><span class="S8">(</span><span class="S7">"user32.dll"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"int"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"GetWindowText"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"hwnd"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$hwnd</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"str"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"int"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">32768</span><span class="S8">)</span><br>
+<span class="S4">msgbox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$result</span><span class="S8">[</span><span class="S3">0</span><span class="S8">])</span><span class="S0">&nbsp; &nbsp;</span><span class="S1">; 文字数が返される</span><br>
+<span class="S4">msgbox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$result</span><span class="S8">[</span><span class="S3">2</span><span class="S8">])</span><span class="S0">&nbsp; &nbsp;</span><span class="S1">; パラメータ2内の返されたテキスト</span><br>
+<br>
+<br>
+<span class="S1">; *******************************************************</span><br>
+<span class="S1">; 例 3 - Windows PickIconDlgを表示</span><br>
+<span class="S1">; *******************************************************</span><br>
+<br>
+<span class="S9">$sFileName</span><span class="S0">&nbsp; </span><span class="S8">=</span><span class="S0"> </span><span class="S6">@SystemDir</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">'\shell32.dll'</span><br>
+<br>
+<span class="S9">$sFileName</span><span class="S0"> &nbsp;</span><span class="S8">=</span><span class="S0"> </span><span class="S6">@SystemDir</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">'\shell32.dll'</span><br>
+<br>
+<span class="S1">; アイコンインデックス用の構造体を作成</span><br>
+<span class="S9">$stIcon</span><span class="S0"> &nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S8">=</span><span class="S0"> &nbsp;</span><span class="S4">DllStructCreate</span><span class="S8">(</span><span class="S7">"int"</span><span class="S8">)</span><br>
+<span class="S9">$stString</span><span class="S0"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S8">=</span><span class="S0"> </span><span class="S4">DLLStructCreate</span><span class="S8">(</span><span class="S7">"wchar[260]"</span><span class="S8">)</span><br>
+<span class="S9">$structsize</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">DllStructGetSize</span><span class="S8">(</span><span class="S9">$stString</span><span class="S8">)/</span><span class="S3">2</span><br>
+<span class="S4">DllStructSetData</span><span class="S8">(</span><span class="S9">$stString</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$sFileName</span><span class="S8">)</span><br>
+<br>
+<span class="S1">; PickIconDlgを実行 - '62' はこの関数の序数</span><br>
+<span class="S4">DllCall</span><span class="S8">(</span><span class="S7">"shell32.dll"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"none"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">62</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"hwnd"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"ptr"</span><span class="S8">,</span><span class="S0"> </span><span class="S4">DllStructGetPtr</span><span class="S8">(</span><span class="S9">$stString</span><span class="S8">),</span><span class="S0"> </span><span class="S7">"int"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$structsize</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"ptr"</span><span class="S8">,</span><span class="S0"> </span><span class="S4">DllStructGetPtr</span><span class="S8">(</span><span class="S9">$stIcon</span><span class="S8">))</span><br>
+<br>
+<span class="S9">$sFileName</span><span class="S0"> &nbsp;</span><span class="S8">=</span><span class="S0"> </span><span class="S4">DllStructGetData</span><span class="S8">(</span><span class="S9">$stString</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">)</span><br>
+<span class="S9">$nIconIndex</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">DllStructGetData</span><span class="S8">(</span><span class="S9">$stIcon</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">)</span><br>
+<br>
+<span class="S1">; 新しいファイル名とアイコンインデックスを表示</span><br>
+<span class="S4">Msgbox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Info"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Last selected file: "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$sFileName</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@LF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">"Icon-Index: "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$nIconIndex</span><span class="S8">)</span><br>
+<span class="S0"></span></span><br><script type="text/javascript">
+
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\DllCall.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

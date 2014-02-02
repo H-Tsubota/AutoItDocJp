@@ -1,0 +1,134 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function RunAs</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">RunAs</font>
+<hr size="2">
+<p>別ユーザーの権限で外部プログラムを実行します。<br></p>
+
+<p class="codeheader">
+RunAs ( "username", "domain", "password", logon_flag, "program" [, "workingdir" [, show_flag [, opt_flag ]]] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">username</td>
+    <td width="85%">ログオンするユーザー名</td>
+  </tr>
+  <tr>
+   <td>domain</td>
+   <td>認証ドメイン</td>
+  </tr>
+  <tr>
+   <td>password</td>
+   <td>ユーザーのパスワード</td>
+  </tr>
+  <tr>
+   <td>logon_flag</td>
+   <td>0 - プロフィールなしの対話型ログオン<br>
+       1 - プロフィールありの対話型ログオン<br>
+       2 - ネットワーク信認のみ<br>
+       4 - ユーザーの代わりに呼び出しプロセスの環境を継承</td>
+  </tr>
+  <tr>
+   <td>program</td>
+   <td>実行するプログラム(EXE、BAT、COM、またはPIF)のフルパス(注意を参照)</td>
+  </tr>
+  <tr>
+   <td>workingdir</td>
+   <td>	<b>[オプション]</b> 作業ディレクトリ。指定しない場合、@SystemDirが使用されます。これはプログラムのパスではありません。
+   </td>
+  </tr>
+  <tr>
+   <td>show_flag</td>
+   <td>	<b>[オプション]</b> 実行プログラムの"表示"フラグ:<br>
+       &nbsp;&nbsp;@SW_HIDE = 非表示ウィンドウ (デフォルト)<br>
+       &nbsp;&nbsp;@SW_MINIMIZE = 最小化ウィンドウ<br>
+       &nbsp;&nbsp;@SW_MAXIMIZE = 最大化ウィンドウ</td>
+  </tr>
+  <tr>
+   <td>opt_flag</td>
+   <td>	<b>[オプション]</b> 
+   親プロセスと子プロセスの連携方法に関連したさまざまなオプションを制御します。<br>
+       &nbsp;&nbsp;0x1 ($STDIN_CHILD)  = 子のSTDINストリームのハンドルを提供します。<br>
+       &nbsp;&nbsp;0x2 ($STDOUT_CHILD) = 子のSTDOUTストリームのハンドルを提供します。<br>
+       &nbsp;&nbsp;0x4 ($STDERR_CHILD) = 子のSTDERRストリームのハンドルを提供します。<br>
+       &nbsp;&nbsp;0x8 ($STDERR_MERGED) = STDOUTとSTDERRを同じハンドルで提供します。$STDOUT_CHILDと$STDERR_CHILDの両方を設定するのと同じです。<br>
+       &nbsp;&nbsp;0x10 ($STDIO_INHERIT_PARENT) = 親のSTDIOストリームを子に提供します。このフラグを他のSTDIOフラグと組み合わせることはできません。このフラグは親をコンソールアプリケーションとしてコンパイルした場合のみ使用できます。<br>
+       &nbsp;&nbsp;0x10000 ($RUN_CREATE_NEW_CONSOLE) = 
+	   子コンソールプロセスは親のウィンドウを使用する代わりに独自のウィンドウを作成します。
+	   このフラグは親をコンソールアプリケーションとしてコンパイルした場合のみ使用できます。</td>
+  </tr>
+</table>
+
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">成功</td>
+    <td width="90%">立ち上がったプロセスのPID</td>
+  </tr>
+  <tr>
+    <td valign="top">失敗</td>
+    <td>0を返し、@errorを非ゼロに設定します。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+スペースを含むパスはコーテーションマークで囲む必要があります。<br>
+<br>
+実行時にアクセスする作業ディレクトリはユーザーに指定させることが重要です。さもないとこの関数が失敗することがあります。<br>
+<br>
+ユーザーのプロフィールは確実に必要な場合のみロードすることをお勧めします。正しい状態でメモリにプロフィールをスタックできることは稀です。RunAs()を使ったスクリプトをSYSTEMアカウントで実行し(例えばスクリプトをサービスとして実行している場合)、ユーザーのプロフィールがロードされる場合は子プロセスが終了するまでスクリプトの実行が継続するように注意する必要があります。<br>
+<br>
+管理者として実行する場合はSecondary Logon(RunAs)サービスが有効にされている必要があります。さもないとこの関数は失敗します。これはSYSTEMアカウントで実行する際は関係ありません。<br>
+<br>
+要求されたプログラムの実行後、スクリプト処理は継続します。立ち上げたプログラムが終わるまでスクリプトの実行を一時停止する場合は代わりにRunAsWait関数を使用してください。<br>
+<br>
+標準I/Oパラメータに適切な値を指定することでStderrRead関数、StdinWrite関数、StdoutRead関数を使用して子プロセスと連携ができます。複数のストリームを使用する場合はフラグの値(またはConstants.au3で定義されている$STDERR_CHILD、 $STDIN_CHILD、 $STDOUT_CHILD)を組み合わせます。<br>
+<br>
+ストリームを閉じるためには次の条件が満たされる必要があります:
+1) 子プロセスがそのストリーム終端を閉じている。(これは子プロセスでの処理です)。
+2) AutoItがキャプチャーしたストリームの全データを読み込んだ。
+3) 子にSTDINが指定されている場合、ストリームを閉じるためのStdinWrite() が呼び出された。
+一度全てのストリームが不必要であることが判明すると、全内部リソースが自動的に解放されます。<br>
+StdioCloseを使用して強制的にSTDIOストリームを閉じることも可能です。<br>
+<br>
+"プロフィールロード"オプションと"ネットワーク信認のみ"オプションを組み合わせることはできません。両方を使用した場合、未定義の結果が返ります。<br>
+<br>
+Windows XPではウィンドウ生成がSTDIOリダイレクションと表示フラグの動作を妨害するという問題があります。Microsoft Knowledge Baseの記事KB818858にどのバージョンでこの問題が起きるか、ホットフィックスする必要があるかの詳細な情報がありますので参照してください。Windows 2000、Windows XP SP2以降、Windows Vistaではこの問題はありません。
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="Run.htm">Run</a>, <a href="RunWait.htm">RunWait</a>, <a href="RunAsWait.htm">RunAsWait</a>, <a href="ShellExecute.htm">ShellExecute</a>, <a href="ShellExecuteWait.htm">ShellExecuteWait</a>, <a href="StderrRead.htm">StderrRead</a>, <a href="StdinWrite.htm">StdinWrite</a>, <a href="StdoutRead.htm">StdoutRead</a>, <a href="StdioClose.htm">StdioClose</a>, <a href="ProcessClose.htm">ProcessClose</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S1">; 実行するシステムのユーザー名とパスワードを正しく設定すること</span><br>
+<span class="S5">Local</span><span class="S0"> </span><span class="S9">$sUserName</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S7">"Username"</span><br>
+<span class="S5">Local</span><span class="S0"> </span><span class="S9">$sPassword</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S7">"Password"</span><br>
+<br>
+<span class="S1">; 別ユーザーとしてコマンドプロンプトを実行</span><br>
+<span class="S4">RunAs</span><span class="S8">(</span><span class="S9">$sUserName</span><span class="S8">,</span><span class="S0"> </span><span class="S6">@ComputerName</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$sPassword</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S6">@ComSpec</span><span class="S8">,</span><span class="S0"> </span><span class="S6">@SystemDir</span><span class="S8">)</span><br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\RunAs.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

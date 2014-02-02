@@ -1,0 +1,138 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Language Reference - Variables</title>
+  <META http-equiv=Content-Type content="text/html; charset=shift-jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Language Reference - Variables</h1>
+
+  
+<p>
+	変数はすばやくアクセスできるようにメモリ上に記憶されたデータの置き場所です。&nbsp; 
+	情報を出し入れできるメモリ上の郵便受けだと考えてください。例えば、ユーザーが入力した
+	値や方程式の解を憶えておくために変数を作ることができます。
+</p>
+<p>
+	それぞれの変数には(郵便受けと同じように)名前を付けることができます。
+	名前は<strong>$</strong>で始めなければならず、<strong>文字</strong>、<strong>数字</strong>
+	アンダーバー (<strong>_</strong>)のみ使えます。&nbsp; 
+	名前の例：
+</p>
+<p>&nbsp;&nbsp;&nbsp; $var1</p>
+<p>&nbsp;&nbsp;&nbsp; $my_variable</p>
+<p>&nbsp;</p>
+<p>
+各変数は<a href="lang_datatypes.htm">バリアント</a>型として保持されます。
+</p>
+<p>&nbsp;</p>
+<h2>変数の宣言</h2>
+<p>
+変数はキーワード<a href="../keywords/Dim.htm">Dim</a>、 <a href="../keywords/Dim.htm">Local</a>、<a href="../keywords/Dim.htm">Global</a>
+で宣言し、作成します。
+</p>
+<p class="codebox">&nbsp;&nbsp;&nbsp; Dim $var1</p>
+<p>
+あるいは、複数の変数を1度で宣言することもできます。
+</p>
+<p class="codebox">&nbsp;&nbsp;&nbsp; Dim $var1, $myvariable</p>
+<p>&nbsp;</p>
+<p>
+また宣言を<strong>おこなわずに</strong> 変数に代入することもできます。
+ただし多くの人は明示的な宣言を好みます。
+</p>
+<p class="codebox">&nbsp;&nbsp;&nbsp; $var1 = &quot;create and assign&quot;</p>
+<p>&nbsp;</p>
+<h2>定数の宣言</h2>
+<p>定数はキーワード<a href="../keywords/Dim.htm">Const</a> で宣言し、作成します。</p>
+<p class="codebox">&nbsp;&nbsp;&nbsp; Const $const1 = 1, $const2=12</p>
+<p>キーワード<a href="../keywords/Enum.htm">Enum</a>を使用して宣言し、初期化することもできます。</p>
+<p class="codebox">&nbsp;&nbsp;&nbsp; Enum $const1 = 1, $const2, $const3&nbsp;&nbsp;&nbsp; 
+; 1, 2, 3<br>
+&nbsp;&nbsp;&nbsp; Enum STEP 2 $incr0, $incr2, $incr4&nbsp;&nbsp;&nbsp; ; 0, 2, 
+4<br>
+&nbsp;&nbsp;&nbsp; Enum STEP *2 $mult1, $mult2, $mult4&nbsp;&nbsp; ; 1, 2, 4</p>
+<p>&nbsp;</p>
+<p>同名の変数がある場合、定数は宣言できません。</p>
+<p>&nbsp;</p>
+<h2>スコープ</h2>
+<p>
+	変数のスコープはいつ、どのように変数を宣言したかによって変わります。&nbsp; 
+	変数をスクリプトの最初に関数の外で宣言した場合、<strong>グローバル</strong>スコープ
+	となり、スクリプトのどこからでも読み書きできるようになります。
+</p>
+<p>
+	変数を<a href="lang_functions.htm">関数</a>の<em>中で </em>宣言すると
+	<strong>ローカル</strong>スコープになり、<em>同じ関数の中で</em>のみ使えるようになります。&nbsp;
+	関数内で作成された変数は関数終了時に自動的に破棄されます。
+</p>
+<p>
+同じ名前のグローバル変数が無い限り、
+変数を<a href="../keywords/Dim.htm">Dim</a>を使って宣言した場合、また関数内で代入した場合、
+デフォルトでは<strong>ローカル</strong>スコープになります
+(同じ名前のグローバル変数があった場合はグローバル変数が再利用されます)。&nbsp; 
+変数宣言時に
+<a href="../keywords/Dim.htm">Local</a>キーワードと<a href="../keywords/Dim.htm">Global</a>キーワードを
+使用することで使用したいスコープに<strong>強制的に</strong>変更することができます。
+</p>
+<h2>配列</h2>
+<p>
+<b>配列</b> とは同じ型とサイズのデータ要素系列を保持する変数です。
+各要素にはインデックスを使ってアクセスすることができます。
+<br>
+<br>
+例：<br>
+<br>
+文字、&quot;A&quot;、&quot;U&quot;、&quot;T&quot;、&quot;O&quot;、&quot;I&quot;、&quot;T&quot;、&quot;3&quot;を記憶したいとしましょう。<br> 
+7個の変数を使えばそれはできます。しかし、配列を使用するとより効果的です。
+</p>
+<p class="codebox">$Array[0]=&quot;A&quot;<br>
+$Array[1]=&quot;U&quot;<br>
+..etc..<br>
+$Array[6]=&quot;3&quot;</p>
+<p>
+インデックスさえわかれば、配列の特定の値にアクセスできます。
+</p>
+<p class="codebox">$MyChar=$Array[2]</p>
+<p>
+$MyCharには文字&quot;T&quot;が代入されます(<b>'演算子'</b>を参照)。<br>
+<br>
+<br>
+インデックスには他の変数や、式を使用することもできます。
+従って、より複雑な方法で配列の要素に代入・参照をおこなうことができます。
+<br>
+<br>
+<br>
+配列は複数系列のインデックスを使用して、次のように複数次元にすることができます。
+</p>
+<p class="codebox">$Array[0][0]=&quot;Upper-Left&quot;<br>
+$Array[1][0]=&quot;Lower-Left&quot;<br>
+$Array[0][1]=&quot;Upper-Right&quot;<br>
+$Array[1][1]=&quot;Lower-Right&quot;</p>
+<p>(値は一例)<br>
+<br>
+64次元の配列まで使用できます。ただし総要素数が2^24 (16 777 216)を超えてはいけません。<br>
+<br>
+スクリプトで配列を使用する前に、その境界を<b>'<a href="../keywords/Dim.htm">Dim</a>'</b>キーワード
+を使って定義しなければなりません。<br>
+<br>
+<!--c1--></p>
+<h2>配列のデータ型</h2>
+<p><br>
+普通、1つの配列は<b>同じ種類の</b>データ型しか記憶できません。
+しかし厳密に言えば、AutoItのバリアント型は数値からブール値までなんでも記憶できます。
+従って1つのAutoIt配列は異なった型の値を記憶でき、他の配列をすら記憶できます。
+</p>
+<p class="codebox">$Array[0]=1<br>
+$Array[1]=true<br>
+$Array[2]=&quot;Text&quot;<br>
+$Array[3]=$AnotherArray</p>
+<p>
+これらはAutoItでは厳密には禁止されていません。
+ただし異なるデータ型を1つの配列に混ぜて使うことは<b>お勧めできません</b>。
+特に配列内の配列の使用はスクリプトの実行速度に大きな影響を及ぼします。
+</p>
+</body>
+</html>

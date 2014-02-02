@@ -1,0 +1,77 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Window Titles and Text (Basic)</title>
+  <META http-equiv=Content-Type content="text/html; charset=shift-jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<h1>Window Titles and Text (Basic)</h1>
+<p>
+自動化の際、ほとんどのウィンドウはその<strong>タイトル</strong>もしくは<strong>タイトルとテキストの組み合わせ</strong>で個別に識別することができます。&nbsp;
+そして<a href="au3spy.htm">AutoItWindowInfoTool</a>を使用することで(あるいは目視でも)、その情報は容易の得ることができます。&nbsp;
+たとえば<strong>Untitled - Notepad</strong>(訳注：日本語環境では新規テキスト ドキュメント.txt - メモ帳)はnotepad.exeエディタのタイトルです。多くの場合、自動化にはこれで充分です。&nbsp;
+</p>
+<p>&nbsp;</p>
+<p><strong><font color="#0000FF">
+注意：空文字列 &quot;&quot;  を<em>タイトル</em>と<em>テキスト</em>に使用すると現在<em>アクティブ</em>なウィンドウが使用されます(<a href="../functions/AutoItSetOption.htm#WinTitleMatchMode">WinTitleMatchModes</a>のアドバンスモードではまた異なりますが)!
+  </font></strong></p>
+<p>&nbsp;</p>
+<p>
+ウィンドウのタイトルとテキストでは<strong>大文字小文字が区別されます</strong>。&nbsp;大文字小文字、句読点は正確に記述する必要があります。&nbsp;この問題を解決するにはWindowInfoToolでタイトル・テキストを選択し、<strong>ctrl-c</strong>でコピーし、スクリプトに直接ペーストすることです。<br>
+<b> <a href="windowsadvanced.htm">advanced modes</a></b>を使用すると小文字での一致が可能になります。
+</p>
+<p>&nbsp;</p>
+<p>
+多くのAutoItのウィンドウ関数はタイトルとテキストの指定欄があります。ここではWinWaitActive関数をみてみましょう。この関数は指定したウィンドウが現れ、アクティブになる<em><strong>まで</strong></em>スクリプトの実行を停止します。
+</p>
+<p class="codebox">WinWaitActive ( &quot;<strong>title</strong>&quot;,
+  [&quot;<strong>text</strong>&quot;], [timeout] )</p>
+<p>&nbsp;</p>
+<p>
+この関数では<em><strong>タイトル</strong></em>のみ必須で、<em><strong>テキスト</strong></em>と<em><strong>タイムアウト時間</strong></em>はオプションとなっています。&nbsp;
+他のいくつかの関数では<em><strong>テキスト</strong></em>パラメータが必要になります。もし指定したくない場合は<strong>&quot;&quot;</strong>(空文字列)を指定してください。&nbsp; 空文字列あるいはオプション指定をしないとAutoItは全ての<em><strong>テキスト</strong></em> を有効ととらえます。
+</p>
+<p>&nbsp;</p>
+<p>上記の関数をメモ帳に使用する場合両方の方法が有効です。</p>
+<p class="codebox"> WinWaitActive(&quot;Untitled - Notepad&quot;)</p>
+<p>もしくは</p>
+<p class="codebox"> WinWaitActive(&quot;Untitled - Notepad&quot;, &quot;&quot;)</p>
+<p>&nbsp;</p>
+<p>
+もしメモ帳のウィンドウに&quot;This is some text&quot;と書かれていた場合
+<a href="au3spy.htm">WindowInfoTool</a>は次のような表示になります。
+</p>
+<p>&nbsp;</p>
+<p><img src="../images/au3spy_notepad.png" width="463" height="512"></p>
+<p>&nbsp;</p>
+<p>
+WindowInfoToolでメモ帳ウィンドウのタイトルとテキストが<em><strong>見えます</em></strong>。&nbsp;WindowInfoToolで見える情報は全てAutoItにも見えます。&nbsp;以上で例え他のメモ帳ウィンドウが存在してもこのメモ帳ウィンドウを特定するだけの充分な情報が手にはいりました。&nbsp;今の場合次のようになります。
+</p>
+<p>&nbsp;</p>
+<p class="codebox"> WinWaitActive(&quot;Untitled - Notepad&quot;,
+  &quot;This is some text!&quot;)</p>
+<p class="code">&nbsp;</p>
+<h2>ウィンドウテキスト</h2>
+<p>
+ウィンドウテキストはAutoItが&quot;見える&quot;すべてのテキストから構成されます。&nbsp;普通はエディットコントロールの内容(上の例では&quot;This is some text&quot;)ですが他にも次のようなものを含みます。
+</p>
+<ul>
+  <li>&nbsp;&amp;Yes、&amp;No、&amp;Next といったボタンのテキスト(&amp;はアンダーラインを表す)</li>
+  <li>&nbsp;&quot;続けますか?&quot;といったダイアログのテキスト</li>
+  <li>&nbsp;コントロールテキスト</li>
+  <li>&nbsp;その他のテキスト - なんのことかわからない場合があります :)</li>
+</ul>
+<p>重要なことは動かしたいウィンドウを特定するためにタイトルとともにテキストを使用できるということです。</p>
+<p>
+<em><strong>テキスト</strong></em> パラメータをウィンドウ関数で使用するとその値は部分文字列として扱われます。&nbsp;
+上の例では&quot;is some&quot;というテキストを使用するとウィンドウが一致したと判断されます。
+</p>
+<p>&nbsp;</p>
+<p>
+以上の説明はAutoItが<em>デフォルト</em>モードのときの動作です。他にもより複雑に動作するための多くの<a href="windowsadvanced.htm">アドバンスモード</a>が用意されています。
+</p>
+<p>&nbsp;</p>
+<strong>注意:</strong> 非表示のウィンドウは"テキスト"が空("")の場合のみ"タイトル"で検索できます。
+</body>
+</html>

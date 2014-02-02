@@ -1,0 +1,155 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Compiling Scripts with Aut2Exe</title>
+  <META http-equiv=Content-Type content="text/html; charset=shift-jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<h1>Compiling Scripts with Aut2Exe</h1>
+<p>
+あなたの作成した<em>.au3</em>スクリプトを<b>スタンドアローン</b>で実行できる形式にコンパイルすることが可能です。
+この実行ファイルの使用にはAutoItのインストールも、<em>AutoIt3.exe</em>も必要ありません。&nbsp;
+さらにコンパイル時のオプション選択によりに実行ファイルを圧縮、
+暗号化したり<a href="../functions/FileInstall.htm">FileInstall</a>関数で使用する他のファイル(これらも圧縮、暗号化できます)
+をバインドすることができます。&nbsp;
+またどの<a href="../keywords/include.htm">#include</a> ファイルも実行ファイルに一緒にコンパイルされるので実行時に
+別途必要になることはありません。
+<p><b>注意</b>: コンパイルするスクリプトは構文エラーが無いようにしなければいけません。
+コンパイル時には構文チェックがおこなわれません。</p>
+<p>&nbsp;</p>
+<p>Aut2Exeには3種類の使用方法があります。</p>
+<h2>方法 1 - スタートメニュー</h2>
+<p><em>フルインストール時のみ使用可能</em></p>
+<p>1.&nbsp; スタートメニューから<em>AutoIt v3</em>グループを開く</p>
+<p>2.&nbsp; <em>Script Compiler \ Convert .au3 to .exe</em>をクリック</p>
+<p>3.&nbsp; Aut2Exe メイン画面が表示されます。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <img src="../images/aut2exe.png" width="450" height="377"></p>
+<p>4.&nbsp; <em>Browse</em>ボタンを押して入力ファイル(.au3)と出力ファイル(.exe)を設定します。</p>
+<p>5.&nbsp; 出力される.exeファイルのアイコンを変更したい場合は
+Browseボタンを押してアイコンを選択してください(いくつかのサンプルアイコンが<em>Program Files\AutoIt3\Aut2Exe\Icons</em>内にあります)。</p>
+<p>6.&nbsp; 最後に設定するオプションは圧縮レベルです(特にFileInstallを使用して他のファイルをバインドする場合必要です)。
+  &nbsp; <em>Compression</em>メニューで設定してください。
+  &nbsp; 圧縮レベルが高いほど圧縮に時間がかかります。
+  &nbsp; ただし、どの圧縮レベルを選択してもでも.exe実行時の解凍速度は同じです。
+</p>
+<p>7.&nbsp; <em>Convert</em>をクリックしてスクリプトをコンパイルします。</p>
+<p>注意: スクリプトを.a3x拡張子のファイルにコンパイルできます。
+このファイルは「AutoIt.exe ファイル名.a3x」とすることで実行できます。
+.a3xはスクリプト本体、全てのインクルードファイル、FileInstall 用ファイルを含みます。
+この形式ではコンパイル後のスクリプトにAutoIt3.exeをインクルードしないことによって
+より小さいファイルを配布可能にしています。
+実行マシンにはAutoIt3.exeのみが存在すればよいことになります。
+</p>
+<p>&nbsp;</p>
+<h2>方法 2 - 右クリック</h2>
+<p><em>フルインストール時のみ使用可能</em></p>
+<p>1.&nbsp; エクスプローラでコンパイルしたい.au3ファイルのあるフォルダを開きます。</p>
+<p>2.&nbsp; 右クリックしポップアップメニューを開きます。</p>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <img src="../images/compile-rightclick.png" width="336" height="274"></p>
+<p>3.&nbsp; ファイルが同じファイル名に.exe拡張付きの実行ファイル名でコンパイルされます。</p>
+<p>この方法でコンパイルするとAut2Exeは現在のアイコン設定、圧縮レベル設定(Aut2Exeを方法1で最後に使用した際の設定)を使用します。</p>
+<p>&nbsp;</p>
+<h2>方法 3 - コマンドライン</h2>
+<p><em>Aut2Exe.exe</em> は次のようなコマンドラインで実行できます。</p>
+<p class="code">&nbsp;&nbsp;&nbsp; Aut2exe.exe /in &lt;入力ファイル.au3&gt; [/out &lt;出力ファイル.exe&gt;] [/icon
+  &lt;アイコンファイル.ico&gt;] [/comp 0-4]
+[/nopack] [x64] [/bin &lt;binファイル.bin&gt;]</p>
+<p>通例</p>
+<table border="1" width="100%" id="table1">
+	<tr>
+		<td width="90px"><strong>スイッチ</strong></td>
+		<td><strong>使用法</strong></td>
+		<td><strong>デフォルト値</strong></td>
+	</tr>
+	<tr>
+		<td>/in</td>
+		<td>&lt;入力ファイル.au3&gt; コンパイルするスクリプトのパスと名前を指定します。</td>
+		<td align="center">なし。このファイルは<strong>必ず</strong>指定しなければなりません。</td>
+	</tr>
+	<tr>
+		<td>/out</td>
+		<td>&lt;出力ファイル.exe&gt; コンパイル済みスクリプトのパスと名前を指定します。<br>
+		&lt;出力ファイル.a3x&gt; *.a3xファイル作成時のパスとファイル名を指定します。</td>
+		<td align="center">.exe拡張子をつけた入力ファイル名</td>
+	</tr>
+	<tr>
+		<td>/icon</td>
+		<td>&lt;アイコンファイル.ico&gt; コンパイル済みファイルに使用するアイコンのパスとファイル名を指定します。</td>
+		<td align="center">AutoItアイコン</td>
+	</tr>
+	<tr>
+		<td>/comp</td>
+		<td>
+		スクリプトをエンコードする際に使用する圧縮レベルを指定します(UPXとは関係ありません)。<br>
+		0(非圧縮)から4(最高)の間の数字でなければなりません。</td>
+		<td align="center">2</td>
+	</tr>
+	<tr>
+		<td>/nopack</td>
+		<td>コンパイル後にファイルをUPXで圧縮しないように指定します。</td>
+		<td align="center">圧縮</td>
+	</tr>
+	<tr>
+		<td>/pack</td>
+		<td>コンパイル後にファイルをUPXで圧縮するように指定します。</td>
+		<td align="center">圧縮</td>
+	</tr>
+	<tr>
+		<td>/x64</td>
+		<td>x64 (64ビット)アーキテクチャのシステム用にスクリプトをコンパイルします。</td>
+		<td align="center">ノートを参照</td>
+	</tr>
+	<tr>
+		<td>/x86</td>
+		<td>x86 (32ビット)アーキテクチャのシステム用にスクリプトをコンパイルします。</td>
+		<td align="center">ノートを参照</td>
+	</tr>
+	<tr>
+		<td>/console</td>
+		<td>スクリプトをコンソールアプリケーションとしてコンパイルします。</td>
+		<td align="center">Windowsアプリケーション (/gui)</td>
+	</tr>
+	<tr>
+		<td>/gui</td>
+		<td>スクリプトをWindowsアプリケーションとしてコンパイルします。</td>
+		<td align="center">Windowsアプリケーション (/gui)</td>
+	</tr>
+	<tr>
+		<td>/bin</td>
+		<td>&lt;binファイル.bin&gt; ファイルをコンパイルする際に使用されたbinファイルのパスと名前を指定します。</td>
+		<td align="center">Aut2exeフォルダを検索</td>
+	</tr>
+</table>
+<p><br>
+</p>
+<h2>コマンドラインの例</h2>
+<p>/in c:\myscript.au3 /out c:\myapp.exe /icon c:\myicon.ico /x64</p>
+<p>通常圧縮で、指定されたアイコンを使って、x64システムアーキテクチャ用にc:\myapp.exeを作成します。</p>
+<p>/in c:\myscript.au3</p>
+<p>通常圧縮、デフォルトAutoItアイコン、win_32システム用にUNICODEのc:\myscript.exe を作成します。</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h2>コマンドライン ノート</h2>
+<p>ファイル名をパスで指定する場合はダブルコーテーションで囲んで
+&nbsp;&quot;C:\Program Files\Test\test.au3&quot;&nbsp;のようにします。</p>
+<p>/in以外の全てのスイッチはオプションです。</p>
+<p>デフォルトでは32ビットコンパイラは32ビットバイナリを、64ビットコンパイラは64ビットバイナリを作成します。
+/x86パラメータと/x64パラメータを使用することで明示的に出力を指定できます。</p>
+<p>/passスイッチと/nodecompileスイッチはバージョン3.2.8.1で廃止されました。使用しても無視されます。またリストからも取り除かれています。</p>
+<p>/ansiスイッチと/unicodeスイッチはバージョン3.3.0.0で廃止されました。</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<h2>技術的な詳細</h2>
+<p>
+コンパイルしたスクリプトとFileInstallで追加した追加ファイルはわたし(Jon)の独自圧縮スキームによって圧縮されます。&nbsp; </p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</body>
+</html>

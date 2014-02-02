@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Tutorial - Notepad</title>
+  <meta http-equiv="Content-Type"
+ content="text/html; charset=shift-jis">
+  <link href="../../css/default.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<h1>Tutorial - Notepad </h1>
+<p>このチュートリアルではメモ帳の起動、テキスト入力、終了の自動化方法を説明します。AutoItスクリプトの作成・実行方法については<a href="../helloworld/helloworld.htm">HelloWorld</a>チュートリアルを見て既に理解しているものとします。</p>
+<p>&nbsp;</p>
+<p>初めに<strong>npad.au3</strong>という空のスクリプトを作成してそのファイルを編集します（メモ帳か<a href="../../intro/editors.htm">SciTe</a>の好きな方を使ってください）。</p>
+<p>&nbsp;</p>
+<p>最初に調べなければいけないのはメモ帳実行ファイルの名前です。それは<strong>notepad.exe</strong>です - この情報はスタートメニューにあるメモ帳のショートカットアイコンのプロパティを見るとわかります。メモ帳を実行するためにはAutoItの<a href="../../functions/Run.htm">Run</a>関数を使います。この関数は指定した実行ファイルを実行して処理を返します。</p>
+<p>スクリプトの1行目に次のように書きます。</p>
+<p class="codebox">Run(&quot;notepad.exe&quot;)</p>
+<p>&nbsp;</p>
+<p>スクリプトを実行します。スクリプトに問題がなければ新しいメモ帳が開かれるはずです。</p>
+<p>アプリケーションを自動化する場合、どのウィンドウを操作するか知るためにAutoItはウィンドウタイトルをチェックします。
+メモ帳の場合ウィンドウタイトルはもちろん<strong>Untitled - Notepad</strong>です（訳注：日本語版ウィンドウズでは"無題 - メモ帳"）。AutoItはウィンドウタイトルを使用する際、大文字と小文字を区別するので正確なタイトルを得る必要があります - もっともよい方法はAutoIt Window Information Toolを使用することです。<strong>Start Menu \ AutoIt v3 \ AutoIt Window Info</strong>からInformation Toolを実行してください。</p>
+<p>Info Toolを実行したらアクティブにするために新しく開いたメモ帳ウィンドウをクリックします。Info Toolはメモ帳の情報を表示するはずです。今知りたい情報はウィンドウの<strong>title</strong>です。</p>
+<p><img src="au3spy_notepad.png" width="494" height="272" border="1"></p>
+<p>&nbsp;</p>
+<p>AutoIt Info Toolのtitleの内容を選択して<strong>CTRL-C</strong>を押してクリップボードにコピーします - これでミススペルを心配せずにスクリプトにタイトルを貼り付けられます。</p>
+<p>メモ帳を<a href="../../functions/Run.htm">Run</a>した後、なんらかのキーストロークを送信する前に メモ帳が現れるのを待ってそれをアクティブにする必要があります。ウィンドウが現れるのを待つには<a href="../../functions/WinWaitActive.htm">WinWaitActive</a>関数を使います。AutoItのウィンドウ関連関数の多くはウィンドウの<strong>タイトル</strong>をパラメータとして必要とします。</p>
+<p>スクリプトの2行目に次のように入力します。(<strong>CTRL-V</strong>または<strong>Edit\Paste</strong>を使ってクリップボードからウィンドウタイトルを貼り付けます。)</p>
+<p class="codebox">WinWaitActive(&quot;Untitled - Notepad&quot;)</p>
+（訳注：日本語版ウィンドウズではパラメータの内容が変わります。）
+<p>&nbsp;</p>
+<p>メモ帳ウィンドウが現れたら次になにかテキストを打ち込んでみましょう。それには<a href="../../functions/Send.htm">Send</a>を使います。</p>
+<p>次の1行をスクリプトに付け加えましょう。</p>
+<p class="codebox">Send(&quot;This is some text.&quot;)</p>
+<p>&nbsp;</p>
+<p>スクリプトは全部で次のようになります。</p>
+<p class="codebox">Run(&quot;notepad.exe&quot;)<br>
+WinWaitActive(&quot;Untitled - Notepad&quot;)<br>
+Send(&quot;This is some text.&quot;)</p>
+（訳注：日本語版ウィンドウズではパラメータの内容が変わります。）
+<p>&nbsp;</p>
+<p>開いてるメモ帳を全て閉じて（これはスクリプトを実行するたびに必要です。さもなければ最後にはメモ帳だらけになってしまいます！）スクリプトを実行します。
+<p>メモ帳が実行されて、テキストが魔法のように現れます！</p>
+<p><img src="notepad1.png" width="344" height="198" border="1"></p>
+<p> <br>
+　次にメモ帳を閉じたいと思います。これは<a href="../../functions/WinClose.htm">WinClose</a>関数でできます。</p>
+<p class="codebox">WinClose(&quot;Untitled - Notepad&quot;)</p>
+（訳注：日本語版ウィンドウズではパラメータの内容が変わります。）
+<p>&nbsp;</p>
+<p>メモ帳を閉じようとすると変更を保存するかどうか訊ねるメッセージが現れます。Window Info Toolを使ってポップアップしたダイアログの詳細を調べて操作しましょう（＾ ＾）</p>
+<p><img src="savechanges.png" width="560" height="338" border="1"> </p>
+<p>&nbsp;</p>
+<p>そのためにダイアログがアクティブになるの待つための1行を加えましょう（関数をより正確に動かすために、また新しいウィンドウをもとのメモ帳と区別するためにウィンドウテキストも使うようにします）。</p>
+<p class="codebox">WinWaitActive(&quot;Notepad&quot;, &quot;Do you want to save&quot;)</p>
+（訳注：日本語版ウィンドウズではパラメータの内容が変わります。）
+<p>&nbsp;</p>
+<p>次に自動で<strong>Alt-N</strong>を押して<strong>No/Don't save</strong>ボタンを選択します（一般に下線付きの文字はウィンドウズではALTキーとその文字でキーボードショートカットができることを示します）。<a href="../../functions/Send.htm">Send</a>関数でALTキーを送信するためには<b><span style="font-weight: 400"></span></b> <strong>!</strong><strong style="font-weight: 400">を使います。</p>
+<p>
+<p class="code">Send(&quot;!n&quot;)</p>
+<p>&nbsp;</p>
+<p>完成したスクリプトは次のようになります。</p>
+<p class="codebox">Run(&quot;notepad.exe&quot;)<br>
+WinWaitActive(&quot;Untitled - Notepad&quot;)<br>
+Send(&quot;This is some text.&quot;)<br>
+WinClose(&quot;Untitled - Notepad&quot;)<br>
+WinWaitActive(&quot;Notepad&quot;, &quot;Do you want to save&quot;)<br>
+Send(&quot;!n&quot;)</p>
+（訳注：日本語版ウィンドウズではパラメータの内容が変わります。）
+<p>&nbsp;</p>
+<p>スクリプトを実行するとメモ帳が開き、テキストが書き込まれ、そして閉じます！このチュートリアルで学んだテクニックを使えば他の多くのアプリケーションを自動化することができます。</p>
+<p>&nbsp;</p>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function DllCallbackFree</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">DllCallbackFree</font>
+<hr size="2">
+<p>DllCallbackRegisterで作成したハンドルを解放します。<br></p>
+
+<p class="codeheader">
+DllCallbackFree ( handle )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">handle</td>
+    <td width="85%">DllCallbackRegisterの呼び出し時に返されるDllCallbackハンドル。</td>
+  </tr>
+</table>
+
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+なし。<br>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+終了時にはAutoItは開かれている全てのハンドルを閉じます。しかしDllCallbackFreeの呼びだしをした方がいいでしょう。
+<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="DllCall.htm">DllCall</a>, <a href="DllCallbackGetPtr.htm">DllCallbackGetPtr</a>, <a href="DllCallbackRegister.htm">DllCallbackRegister</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S0"></span><br>
+<span class="S1">; コールバック関数を作成</span><br>
+<span class="S9">$handle</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">DLLCallbackRegister</span><span class="S0"> </span><span class="S8">(</span><span class="S7">"_EnumWindowsProc"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"int"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"hwnd;lparam"</span><span class="S8">)</span><span class="S0"> &nbsp;&nbsp;&nbsp;&nbsp;</span><br>
+<br>
+<span class="S1">; EnumWindowsを呼ぶ</span><br>
+<span class="S4">DllCall</span><span class="S8">(</span><span class="S7">"user32.dll"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"int"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"EnumWindows"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"ptr"</span><span class="S8">,</span><span class="S0"> </span><span class="S4">DllCallbackGetPtr</span><span class="S8">(</span><span class="S9">$handle</span><span class="S8">),</span><span class="S0"> </span><span class="S7">"lparam"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">10</span><span class="S8">)</span><br>
+<br>
+<span class="S1">; コールバック関数を削除</span><br>
+<span class="S4">DllCallbackFree</span><span class="S8">(</span><span class="S9">$handle</span><span class="S8">)</span><br>
+<br>
+<span class="S1">; コールバックプロシージャ</span><br>
+<span class="S5">Func</span><span class="S0"> _EnumWindowsProc</span><span class="S8">(</span><span class="S9">$hWnd</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$lParam</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">If</span><span class="S0"> </span><span class="S4">WinGetTitle</span><span class="S8">(</span><span class="S9">$hWnd</span><span class="S8">)</span><span class="S0"> </span><span class="S8">&lt;&gt;</span><span class="S0"> </span><span class="S7">""</span><span class="S0"> </span><span class="S5">And</span><span class="S0"> </span><span class="S4">BitAnd</span><span class="S8">(</span><span class="S4">WinGetState</span><span class="S8">(</span><span class="S9">$hWnd</span><span class="S8">),</span><span class="S0"> </span><span class="S3">2</span><span class="S8">)</span><span class="S0"> </span><span class="S5">Then</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$res</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S4">WinGetTitle</span><span class="S8">(</span><span class="S9">$hWnd</span><span class="S8">),</span><span class="S0"> </span><span class="S7">"$hWnd="</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$hWnd</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">"lParam="</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$lParam</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">"$hWnd(type)="</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S4">VarGetType</span><span class="S8">(</span><span class="S9">$hWnd</span><span class="S8">))</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">If</span><span class="S0"> </span><span class="S9">$res</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">2</span><span class="S0"> </span><span class="S5">Then</span><span class="S0"> </span><span class="S5">Return</span><span class="S0"> </span><span class="S3">0</span><span class="S0">&nbsp; &nbsp;</span><span class="S1">; キャンセルをクリックすると0を返し、列挙をやめる</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">EndIf</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Return</span><span class="S0"> </span><span class="S3">1</span><span class="S0">&nbsp; &nbsp; </span><span class="S1">; 1を返し、列挙を続ける</span><br>
+<span class="S5">EndFunc</span><br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\DllCallbackFree.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

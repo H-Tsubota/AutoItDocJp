@@ -1,0 +1,126 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Keyword Dim / Global / Local / Const</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift-jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Keyword Reference</h1>
+<font size="+1">Dim / Global / Local / Const</font>
+<hr size="2">
+<p>変数・定数の宣言。配列の作成。<br></p>
+
+<p class="codeheader">
+<b>Dim</b> [Const] $variable [ = initializer ]<br>
+<b>Dim</b> [Const] $array<b>[</b>subscript 1<b>]</b>...<b>[</b>subscript n<b>]</b> [ = initializer ]<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">const</td>
+    <td width="85%"><b>[オプション]</b> キーワードConstを指定した場合、変数でなく定数が作成されます。</td>
+  </tr>
+  <tr>
+   <td>$variable</td>
+   <td>宣言する変数名/定数名</td>
+  </tr>
+  <tr>
+   <td>initializer</td>
+   <td>変数の初期値。Constの場合は必ず指定します。初期化に関数呼び出しの値を使うこともできます。</td>
+  </tr>
+  <tr>
+   <td>subscript</td>
+   <td>配列の各次元での作成する要素数。0からn-1でインデックスされます。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+Dim/Local/Global キーワードは同じ機能を持ちます。<br>
+1. 変数を使用する前に変数を宣言(VBスクリプトと同様)<br>
+2. 配列を作成<br>
+<br>
+<b>Note</b>:  AutoItでは変数代入($myvar = 0)によって変数を作成できます。しかし多くの人は変数を明確に宣言することを好みます。<a href="../functions/AutoItSetOption.htm#MustDeclareVars">AutoItSetOption("MustDeclareVars", 1)</a>をアクティブにすると、変数は使用前に必ず宣言が必要になります。<br>
+<br>
+また、1行で複数の変数の宣言をすることが可能です。<br>
+<p class="code">Dim $a, $b, $c</p><br>
+変数の初期化もできます。<br>
+<p class="code">Dim $a = 2, $b = 10, $c = 20</p><br>
+<br>
+同様にして定数の作成もできます。<br>
+<p class="code">Const $a = 2, $b = 10, $c = 20<br>
+Dim Const $d = 21, $e = Exp(1)<br>
+Local Const $f = 5, $g = 7, $h = -2<br>
+</p><br>
+一度作成した定数の値を変更することはできません。また、すでに存在する変数を定数に変更することもできません。<br>
+<br><br>
+<br>
+配列を初期化するためには、それぞれの要素の値を大括弧内でコンマで区切って指定してください。複数次元の場合は初期化を入れ子にしておこなってください。
+宣言した要素数より少ない要素数を初期化することはできますが逆はできません。関数呼び出しを配列の初期化で使うこともできます。呼び出した関数が配列を返す場合、配列の1要素に返される配列が格納されます。<br>
+<p class="code">Dim $Array1[12]=[3, 7.5, "string"], $array[5] = [8, 4, 5, 9, 1]<br>
+Dim $Grid[2][4]=[["Paul", "Jim", "Richard", "Louis"], [485.44, 160.68, 275.16, 320.00]]<br>
+Dim $Test[5] = [3, 1, StringSplit("Abe|Jack|Bobby|Marty", "|"), Cos(0)]<br>
+</p><br>
+<br>
+Dim、Local、Globalの違いは作成時に決まるスコープ（作用範囲）の違いです。<br>
+<b>Dim</b> = もし同名のグローバル変数がなければローカル変数になります(この場合あとでグローバル変数として利用することができます！）。<br>
+<b>Global</b> = グローバル変数を作成します。<br>
+<b>Local</b> = ローカル/関数内変数を作成します。<br>
+<br>
+変数/定数/配列のスコープを明確に定めたい場合はDimの代わりにLocalやGlobalを使用する必要があります。<br>
+<br>
+変数が使用される場合にはまずローカルスコープがチェックされ、次にグローバルスコープがチェックされます。<br>
+<br>
+作成できる配列は最大64次元、トータル1600万要素までです。<br>
+<br>
+AutoItのユニークな特徴として次のような配列のコピーがあげられます。<br>
+$mycopy = $myarray<br>
+この場合、$mycopyは$myarrayの完全なコピーとなり同じ次元を持ちます - 配列のサイズを決めるためのDimは必要ありません。<b><a href="../functions/AutoItSetOption.htm#MustDeclareVars">AutoItSetOption("MustDeclareVars", 1)</a></b> がアクティブな場合、はじめに$mycopyを宣言する必要はありますがそのサイズを決めておく必要はありません。$mycopy内に値が代入されていた場合、その値はコピー前に消去されます。<br>
+<br>
+配列を消去するためには（おそらくは大きくてグローバルな配列のメモリを開放したい場合でしょう）、配列に値をひとつ代入してください。<br>
+$array = 0<br>
+こうすると配列は開放され、値0の通常の変数に変換されます。<br>
+<br>
+同じ変数名を再宣言すると配列の値すべてが消去され、次元が新しい定義に基づいてリセットされます。同じスコープ内で単純な値を使って変数を宣言した場合、変数内の値は変更されません。<br>
+<br>
+ユーザー定義関数内で<b>Local</b>を使用してパラメータと同じ名前の変数を宣言した場合、エラーが起きます。
+
+<b>Global</b>を使用して関数内でグローバル変数への代入をおこなうことができますが、ローカル変数（もしくはパラメータ）がグローバル変数と同じ名前を持っていた場合、ローカル変数のみが使用されます。ローカル変数とグローバル変数で異なる名前をつけることをお勧めします。<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="../../html/functions/UBound.htm">UBound</a>, <a href="ReDim.htm">ReDim</a>, <a href="Static.htm">Static</a>, <a href="../functions/AutoItSetOption.htm#MustDeclareVars">AutoItSetOption</a></b> 
+<p>&nbsp;</p>
+
+<p><b>Example</b></p>
+<p class="codebox">
+<br>
+<span><span class="S1">; 例1 - 変数の宣言</span><br>
+<span class="S5">Dim</span><span class="S0"> </span><span class="S9">$x</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$y</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">23</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$z</span><br>
+<span class="S5">Global</span><span class="S0"> </span><span class="S9">$_PI</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">3.14159</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$RADIUS</span><br>
+<span class="S5">Local</span><span class="S0"> </span><span class="S9">$_daysWorking</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">5</span><br>
+<br>
+<span class="S1">; 例2 - 配列の宣言</span><br>
+<span class="S5">Dim</span><span class="S0"> </span><span class="S9">$weeklyWorkSchedule</span><span class="S8">[</span><span class="S9">$_daysWorking</span><span class="S8">]</span><br>
+<span class="S5">Global</span><span class="S0"> </span><span class="S9">$chessBoard</span><span class="S8">[</span><span class="S3">8</span><span class="S8">][</span><span class="S3">8</span><span class="S8">]</span><br>
+<span class="S5">Local</span><span class="S0"> </span><span class="S9">$mouseCoordinates</span><span class="S8">[</span><span class="S3">2</span><span class="S8">],</span><span class="S0"> </span><span class="S9">$windowStats</span><span class="S8">[</span><span class="S3">4</span><span class="S8">]</span><br>
+<br>
+<span class="S1">; 例3 - 定数の宣言</span><br>
+<span class="S5">Const</span><span class="S0"> </span><span class="S9">$x1</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">11</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$y1</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">23</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$z1</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">55</span><br>
+<span class="S5">Global</span><span class="S0"> </span><span class="S5">Const</span><span class="S0"> </span><span class="S9">$PI</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">3.14159</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$E</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">2.71828</span><br>
+<span class="S5">Local</span><span class="S0"> </span><span class="S5">Const</span><span class="S0"> </span><span class="S9">$daysWorking</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">5</span><br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\Dim.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

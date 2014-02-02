@@ -1,0 +1,210 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function GUICreate</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">GUICreate</font>
+<hr size="2">
+<p>GUIウィンドウを作成します。<br></p>
+
+<p class="codeheader">
+GUICreate ( "title" [, width [, height [, left [, top [, style [, exStyle [, parent]]]]]]] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">title</td>
+    <td width="85%">ダイアログボックスのタイトル。</td>
+  </tr>
+  <tr>
+   <td>width</td>
+   <td><b>[オプション]</b> ウィンドウの幅。</td>
+  </tr>
+  <tr>
+   <td>height</td>
+   <td><b>[オプション]</b> ウィンドウの高さ。</td>
+  </tr>
+  <tr>
+   <td>left</td>
+   <td><b>[オプション]</b> ダイアログボックスの左端。デフォルト(-1)ではウィンドウは中央に配置されます。定義する場合はtopも定義しなければなりません。</td>
+  </tr>
+  <tr>
+   <td>top</td>
+   <td><b>[オプション]</b> ダイアログボックスの上端。デフォルト(-1)ではウィンドウは中央に配置されます。</td>
+  </tr>
+  <tr>
+   <td>style</td>
+   <td><b>[オプション]</b> ウィンドウのスタイルを定義します。<a href="../appendix/GuiStyles.htm">GUI Control Styles Appendix</a>を参照。<br>
+		-1を使用するとデフォルトスタイルになります。デフォルトスタイルは$WS_MINIMIZEBOX、$WS_CAPTION、$WS_POPUP、$WS_SYSMENUスタイルの組み合わせです。<br>
+	   いくつかのスタイルは常に使用されます。$WS_MAXIMIZEBOXまたは$WS_SIZEBOX を指定すると$WS_CLIPSIBLINGSと$WS_SYSMENUが常に使用されます。</td>
+  </tr>
+  <tr>
+   <td>exStyle</td>
+   <td><b>[オプション]</b> ウィンドウの拡張スタイルを定義します。下記の<a href="GUICreate.htm#Extended Style Table">Extended Style Table</a>を参照。-1がデフォルトです。</td>
+  </tr>
+  <tr>
+   <td>parent</td>
+   <td><b>[オプション]</b> 事前に作成された別のウィンドウのハンドル。新しいウィンドウはその子ウィンドウになります。
+</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">成功</td>
+    <td width="90%">ウィンドウハンドルを返します。</td>
+  </tr>
+  <tr>
+    <td valign="top">失敗</td>
+    <td>ウィンドウが作成できなかった場合、0を返し@errorを1に設定します。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+デフォルトではダイアログボックスはサイズ変更不可、最大化不可です。変更のためにstyleパラメータにWS_SIZEBOXまたはWS_MAXIMIZEBOXを使用することができます。<br>
+このスタイルは1つのスタイルしか定義しないので、忘れずにデフォルトのものを組み合わせて使用してください。つまりWS_SIZEBOXを定義しただけではWS_MINIMIZEBOX、WS_CAPTION、WS_POPUP、WS_SYSMENUは定義されないということです。以上を踏まえてサイズ変更可能なウィンドウを定義するもっとも良い方法はWS_OVERLAPPEDWINDOWを使用することです。<br>
+$WS_EX_MDICHILDを使用すると親ウィンドウのクライアント領域に対する相対座標でウィンドウが表示されます。$WS_EX_LAYEREDを使用すると親ウィンドウで定義された背景画像上に透明な画像を作成できます。
+$WS_CLIPCHILDRENを使用するとエディットコントロールなどがあるGUIでサイズ変更時におきるちらつきを抑えることができます。<br>
+exStyleパラメータに$WS_EX_CONTROLPARENTを使用することで$WS_CAPTIONなしのGUIウィンドウをドラッグできるようになります。<br>
+<br>
+<br>
+デフォルトスタイルにスタイルを組み合わせるには<b>BitOr</b>($GUI_SS_DEFAULT_GUI, newstyle,...)とします。<br>
+サイズ指定でのサイズはウィンドウのクライアント領域のサイズです。枠とタイトルバーによってウィンドウは指定したよりも少しだけ大きくなります。またメニューコントロールを使った場合にもウィンドウの高さは変わります。<br>
+<br>
+<a name="Extended Style table"></a><b>Extended Style table</b><br>
+<table width="100%" border="1" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td style="border-bottom-style: solid; border-bottom-width: 1">Extended Style</td>
+    <td style="border-bottom-style: solid; border-bottom-width: 1">result</td>
+  </tr>
+  <tr>
+    <td>$WS_EX_ACCEPTFILES</td>
+    <td>GUIウィンドウ内のエディットコントロール、インプットコントロールへのドラッグアンドドロップによるファイル名入力を可能にします。コントロールには<a href="GUICtrlSetState.htm">GUICtrlSetState</a>を使用して$GUI_DROPACCEPTEDを設定する必要があります。他のコントロールのドラッグアンドドロップ情報は@GUI_DRAGID、@GUI_DRAGFILE、@GUIDROPIDを使用して取得できます。</td>
+  </tr>
+  <tr>
+    <td>$WS_EX_APPWINDOW</td>
+    <td>ウィンドウが表示状態の際にタスクバー上でトップレベルになるよう設定します。</td>
+  </tr>
+  <tr>
+    <td>$WS_EX_CLIENTEDGE</td>
+    <td>ウィンドウがくぼんだ縁のボーダーを持つように設定します。</td>
+  </tr>
+  <tr>
+    <td>$WS_EX_CONTEXTHELP</td>
+    <td> 	 タイトルバーにクエスチョンマークをインクルードします。WS_MAXIMIZEBOX、WS_MINIMIZEBOXと同時に使用することはできません。 </td>
+  </tr>
+  <tr>
+    <td>$WS_EX_DLGMODALFRAME</td>
+    <td>二重のボーダーを持つウィンドウを作成しますstyleパラメーターにWS_CAPTIONを設定することによりオプションでウィンドウにタイトルバーを設定できます。 
+	</td>
+  </tr>
+  <tr>
+    <td>$WS_EX_MDICHILD</td>
+    <td>親ウィンドウといっしょに動く子ウィンドウを作成します(実際のMDIシミュレーションはされません)。 
+	</td>
+  </tr>
+  <tr>
+    <td>$WS_EX_OVERLAPPEDWINDOW</td>
+    <td>WS_EX_CLIENTEDGEとWS_EX_WINDOWEDGEの組み合わせ。</td>
+  </tr>
+  <tr>
+    <td>$WS_EX_STATICEDGE</td>
+    <td>3Dボーダーのウィンドウを作成します。これはユーザー入力を受け付けないアイテムに使用することが意図されています。</td>
+  </tr>
+  <tr>
+    <td>$WS_EX_TOPMOST</td>
+    <td>このスタイルを設定するとアクティブでない場合でも常にウィンドウが最前面に表示されます。 </td>
+  </tr>
+  <tr>
+    <td>$WS_EX_TRANSPARENT</td>
+    <td>親子レベルで同レベルのウィンドウのビットがが既に描画されているためにウィンドウが透明になります。 </td>
+  </tr>
+  <tr>
+    <td>$WS_EX_TOOLWINDOW</td>
+    <td>	ツールウィンドウを作成します。このウィンドウはフローティングツールバーとして使用することが意図されています。ツールウィンドウは通常のタイトルバーよりも短いタイトルバーを持っており、ウィンドウタイトルは小さいフォントを使って書かれます。ツールバーはタスクバーやダイアログボックス内には表示されずユーザーがALT+TABを押したとき表示されます。ツールウィンドウがシステムメニューを持つ場合、そのアイコンはタイトルバーには表示されませんがALT+SPACEを押すことでシステムメニューは表示されます。</td>
+  </tr>
+  <tr>
+    <td>$WS_EX_WINDOWEDGE</td>
+    <td>ウィンドウが浮き彫りのエッジのボーダーを持つように設定します。</td>
+  </tr>
+  <tr>
+    <td>$WS_EX_LAYERED</td>
+    <td>影つきウィンドウを作成します。子ウィンドウには使用できません。</td>
+  </tr>
+</table><br>
+これらの値を使用する場合はスクリプトの冒頭に#include &lt;WindowsConstants.au3&gt; と書く必要があります。 <br>
+<br>
+注意：この関数が返すハンドルは実際のウィンドウハンドルです。従ってWinGetHandleの返し値と同じ様に使用することができます。<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="GUISetParameters%20Management.htm">GUISetParameters...</a>, <a href="GUICtrlCreate%20Management.htm">GUICtrlCreate...</a>, <a href="GUIGetMsg.htm">GUIGetMsg</a>, <a href="GUISwitch.htm">GUISwitch</a>, <a href="GUIGetStyle.htm">GUIGetStyle</a>, <a href="GUIDelete.htm">GUIDelete</a>, <a href="WinGetHandle.htm">WinGetHandle</a>, <a href="GUICtrlSetDefBkColor.htm">GUICtrlSetDefBkColor</a>, <a href="GUICtrlSetDefColor.htm">GUICtrlSetDefColor</a>, <a href="GUIGetCursorInfo.htm">GUIGetCursorInfo</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;GUIConstantsEx.au3&gt;</span><br>
+<span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;WindowsConstants.au3&gt;</span><br>
+<br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">'MustDeclareVars'</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">)</span><br>
+<br>
+<span class="S0">Example1</span><span class="S8">()</span><br>
+<span class="S0">Example2</span><span class="S8">()</span><br>
+<br>
+<span class="S1">;example1</span><br>
+<span class="S5">Func</span><span class="S0"> Example1</span><span class="S8">()</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$msg</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUICreate</span><span class="S8">(</span><span class="S7">"My GUI"</span><span class="S8">)</span><span class="S0"> </span><span class="S1">; 表示時に中央に表示されるダイアログボックスを作成</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUISetState</span><span class="S8">(</span><span class="S6">@SW_SHOW</span><span class="S8">)</span><span class="S0"> </span><span class="S1">; 空のダイアログボックスを表示</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; ダイアログが閉じられるまでGUIを実行</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">While</span><span class="S0"> </span><span class="S3">1</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$msg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUIGetMsg</span><span class="S8">()</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">If</span><span class="S0"> </span><span class="S9">$msg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$GUI_EVENT_CLOSE</span><span class="S0"> </span><span class="S5">Then</span><span class="S0"> </span><span class="S5">ExitLoop</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">WEnd</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUIDelete</span><span class="S8">()</span><br>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;example1</span><br>
+<br>
+<span class="S1">; 例2</span><br>
+<span class="S5">Func</span><span class="S0"> Example2</span><span class="S8">()</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$gui</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$background</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$pic</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$basti_stay</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$msg</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$sFile</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S7">"..\GUI\logo4.gif"</span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$gui</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICreate</span><span class="S8">(</span><span class="S7">"Background"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">400</span><span class="S8">,</span><span class="S0"> </span><span class="S3">100</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; 背景画像</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$background</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICtrlCreatePic</span><span class="S8">(</span><span class="S7">"..\GUI\msoobe.jpg"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S3">400</span><span class="S8">,</span><span class="S0"> </span><span class="S3">100</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUISetState</span><span class="S8">(</span><span class="S6">@SW_SHOW</span><span class="S8">)</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; 透明なMDI子ウィンドウ</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$pic</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICreate</span><span class="S8">(</span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S3">169</span><span class="S8">,</span><span class="S0"> </span><span class="S3">68</span><span class="S8">,</span><span class="S0"> </span><span class="S3">20</span><span class="S8">,</span><span class="S0"> </span><span class="S3">20</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$WS_POPUP</span><span class="S8">,</span><span class="S0"> </span><span class="S4">BitOR</span><span class="S8">(</span><span class="S9">$WS_EX_LAYERED</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$WS_EX_MDICHILD</span><span class="S8">),</span><span class="S0"> </span><span class="S9">$gui</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; 透明な画像</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$basti_stay</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICtrlCreatePic</span><span class="S8">(</span><span class="S9">$sFile</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S3">169</span><span class="S8">,</span><span class="S0"> </span><span class="S3">68</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUISetState</span><span class="S8">(</span><span class="S6">@SW_SHOW</span><span class="S8">)</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Do</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$msg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUIGetMsg</span><span class="S8">()</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Until</span><span class="S0"> </span><span class="S9">$msg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$GUI_EVENT_CLOSE</span><br>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;Example2</span></span><br>
+<script type="text/javascript">
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\GUICreate.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+</body>
+</html>

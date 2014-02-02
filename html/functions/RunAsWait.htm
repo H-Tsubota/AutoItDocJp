@@ -1,0 +1,126 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function RunAsWait</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">RunAsWait</font>
+<hr size="2">
+<p>別ユーザーの権限で外部プログラムを実行し、そのプログラムが終了するまでスクリプトの実行を一時停止します。<br></p>
+
+<p class="codeheader">
+RunAsWait ( "username", "domain", "password", logon_flag, "program" [, "workingdir" [, show_flag [, opt_flag ]]] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">username</td>
+    <td width="85%">ログオンするユーザー名</td>
+  </tr>
+  <tr>
+   <td>domain</td>
+   <td>認証ドメイン</td>
+  </tr>
+  <tr>
+   <td>password</td>
+   <td>ユーザーのパスワード</td>
+  </tr>
+  <tr>
+   <td>logon_flag</td>
+   <td>0 - プロフィールなしの対話型ログオン<br>
+       1 - プロフィールありの対話型ログオン<br>
+       2 - ネットワーク信認のみ<br>
+       4 - ユーザーの代わりに呼び出しプロセスの環境を継承</td>
+  </tr>
+  <tr>
+   <td>program</td>
+   <td>実行するプログラム(EXE、BAT、COM、またはPIF)のフルパス(注意を参照)</td>
+  </tr>
+  <tr>
+   <td>workingdir</td>
+   <td>	<b>[オプション]</b> 作業ディレクトリ。指定しない場合、@SystemDirが使用されます。これはプログラムのパスではありません。
+   </td>
+  </tr>
+  <tr>
+   <td>show_flag</td>
+   <td>	<b>[オプション]</b> 実行プログラムの"表示"フラグ:<br>
+       &nbsp;&nbsp;@SW_HIDE = 非表示ウィンドウ (デフォルト)<br>
+       &nbsp;&nbsp;@SW_MINIMIZE = 最小化ウィンドウ<br>
+       &nbsp;&nbsp;@SW_MAXIMIZE = 最大化ウィンドウ</td>
+  </tr>
+  <tr>
+   <td>opt_flag</td>
+   <td>	<b>[オプション]</b> 親プロセスと子プロセスの連携方法に関連したさまざまなオプションを制御します。<br>
+       &nbsp;&nbsp;0x10000 ($RUN_CREATE_NEW_CONSOLE) = 
+	   子コンソールプロセスは親のウィンドウを使用する代わりに独自のウィンドウを作成します。
+	   このフラグは親をコンソールアプリケーションとしてコンパイルした場合のみ使用できます。</tr>
+</table>
+
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">成功</td>
+    <td width="90%">実行したプログラムの終了コードを返します。</td>
+  </tr>
+  <tr>
+    <td valign="top">失敗</td>
+    <td>0を返し、@errorを非ゼロに設定します。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+スペースを含むパスはコーテーションマークで囲む必要があります。<br>
+<br>
+実行時にアクセスする作業ディレクトリはユーザーに指定させることが重要です。さもないとこの関数が失敗することがあります。<br>
+<br>
+ユーザーのプロフィールは確実に必要な場合のみロードすることをお勧めします。正しい状態でメモリにプロフィールをスタックできることは稀です。RunAs()を使ったスクリプトをSYSTEMアカウントで実行し(例えばスクリプトをサービスとして実行している場合)、ユーザーのプロフィールがロードされる場合は子プロセスが終了するまでスクリプトの実行が継続するように注意する必要があります。<br>
+<br>
+管理者として実行する場合はSecondary Logon(RunAs)サービスが有効にされている必要があります。さもないとこの関数は失敗します。これはSYSTEMアカウントで実行する際は関係ありません。<br>
+<br>
+要求されたプログラムを実行した後、そのプログラムが終了するまでスクリプトは一時停止します。プログラムを実行し、その後ただちにスクリプト実行を継続するには代わりにRunAs関数を使用してください。<br>
+<br>
+プログラムの中には　まだ実行中にも関わらず直ちに処理が返されるように見えるものがあります。これらのプログラムは別のプロセスを立ち上げています - ProcessWaitCloseを使用することでこういった場合の処理を制御することができます。<br>
+<br>
+"プロフィールロード"オプションと"ネットワーク信認のみ"オプションを組み合わせることはできません。両方を使用した場合、未定義の結果が返ります。<br>
+<br>
+Windows XPではウィンドウ生成がSTDIOリダイレクションと表示フラグの動作を妨害するという問題があります。Microsoft Knowledge Baseの記事KB818858にどのバージョンでこの問題が起きるか、ホットフィックスする必要があるかの詳細な情報がありますので参照してください。Windows 2000、Windows XP SP2以降、Windows Vistaではこの問題はありません。
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="ProcessWait.htm">ProcessWait</a>, <a href="ProcessWaitClose.htm">ProcessWaitClose</a>, <a href="Run.htm">Run</a>, <a href="RunWait.htm">RunWait</a>, <a href="ShellExecute.htm">ShellExecute</a>, <a href="ShellExecuteWait.htm">ShellExecuteWait</a>, <a href="RunAs.htm">RunAs</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S1">; 実行するシステムのユーザー名とパスワードを正しく設定すること</span><br>
+<span class="S5">Local</span><span class="S0"> </span><span class="S9">$sUserName</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S7">"Username"</span><br>
+<span class="S5">Local</span><span class="S0"> </span><span class="S9">$sPassword</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S7">"Password"</span><br>
+<br>
+<span class="S1">; 別ユーザーとしてコマンドプロンプトを実行</span><br>
+<span class="S5">Local</span><span class="S0"> </span><span class="S9">$pid</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">RunAsWait</span><span class="S8">(</span><span class="S9">$sUserName</span><span class="S8">,</span><span class="S0"> </span><span class="S6">@ComputerName</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$sPassword</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S6">@ComSpec</span><span class="S8">,</span><span class="S0"> </span><span class="S6">@SystemDir</span><span class="S8">)</span><br>
+<br>
+<span class="S1">; プロセスが終了するまで待機</span><br>
+<span class="S4">ProcessWaitClose</span><span class="S8">(</span><span class="S9">$pid</span><span class="S8">)</span><br>
+<br>
+<span class="S1">; メッセージを表示</span><br>
+<span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"The process we were waiting for has closed."</span><span class="S8">)</span><br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\RunAsWait.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

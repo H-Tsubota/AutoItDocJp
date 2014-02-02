@@ -1,0 +1,117 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Keyword Func...Return...EndFunc</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Keyword Reference</h1>
+<font size="+1">Func...Return...EndFunc</font>
+<hr size="2">
+<p>引数と返し値を持つことのできるユーザー定義関数を定義します。<br></p>
+
+<p class="codeheader">
+<b>Func</b> functioname ( [<b>Const</b>] [<b>ByRef</b>] $param1, ..., [<b>Const</b>] [<b>ByRef</b>] $paramN, $optionalpar1 = value, ...)<br>
+&nbsp;&nbsp;&nbsp; ...<br>
+&nbsp;&nbsp;&nbsp; [<b>Return</b> [<i>value</i>]]<br>
+<b>EndFunc</b><br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+ユーザーが定義したパラメータ。定義後、他の組み込み関数と同様にして呼び出すことができます。<br>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+オプションでConst句を設定することでパラメータ値が関数実行中に変化しないように指定できます。Constで宣言された変数はConstパラメータを持つ関数にのみ渡すことができます。<br>
+<br>
+ByRef句によってパラメータを元のオブジェクトへの参照として取り扱うよう指定にできます。デフォルト処理ではパラメータは新しい変数にコピーされますが、ByRefによって新しい変数は元のパラメータとリンクされます。ByRefは関数が大きな配列など大量のデータを扱うことが予想され、
+その全てのデータをコピーすると著しく効率が悪い場合などによく使われます。ByRefパラメータとして渡すことのできる名前がつけられている変数だけでなく、関数の返し値など名前のない一時変数もByRefパラメータとして渡されます。定数をByRefパラメータとして渡すことはできません。<br>
+<br>
+ByRefとConstの両方を関数のパラメータに使用する場合、適用される変数の前にさえ書かれていればその順番はどちらでも構いません。<br>
+<br>
+カッコ([ ])をつけないで配列名を渡すことで関数に配列全体を渡すことが(返すことも)可能です。ByRef句を使用してユーザー定義関数に配列を渡すと配列内の全データがコピーされる処理を防ぐことができます。<br>
+<br>
+オプションパラメータはデフォルト値をパラメータに代入しておくことで定義できます。使用できる値はグローバル変数、マクロ、定数値です。オプションパラメータはパラメータ定義の最後に定義しなければなりません。最初に定義したオプションパラメータ以降のパラメータは全てオプションパラメータになります。関数呼び出し時に渡されたパラメータの数は、関数内で@NUMPARAMSマクロを使って取得できます(例2を参照)。<br>
+<br>
+Return句を使用することで関数を終了できます。組み込み関数と異なり、ユーザー定義関数は返し値を指定しない場合0を返します。<br>
+<br>
+関数内で関数定義をすることはできません。<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="Dim.htm">Dim/Global/Local</a>, <a href="include.htm">#include</a>, <a href="Dim.htm">Const</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S4">Opt</span><span class="S8">(</span><span class="S7">'MustDeclareVars'</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">)</span><br>
+<br>
+<span class="S0">Example1</span><span class="S8">()</span><br>
+<span class="S0">Example2</span><span class="S8">()</span><br>
+<br>
+<span class="S1">; 例1</span><br>
+<span class="S5">Func</span><span class="S0"> Example1</span><span class="S8">()</span><br>
+<span class="S1">; 3つのユーザー定義関数 サンプルスクリプト</span><br>
+<span class="S1">; 変数、ByRef、Return 使用法</span><br>
+<br>
+<span class="S5">Local</span><span class="S0"> </span><span class="S9">$foo</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">2</span><br>
+<span class="S5">Local</span><span class="S0"> </span><span class="S9">$bar</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">5</span><br>
+<span class="S4">msgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S7">"Today is "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> today</span><span class="S8">(),</span><span class="S0"> </span><span class="S7">"$foo equals "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$foo</span><span class="S8">)</span><br>
+<span class="S0">swap</span><span class="S8">(</span><span class="S9">$foo</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$bar</span><span class="S8">)</span><br>
+<span class="S4">msgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S7">"After swapping $foo and $bar"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"$foo now contains "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$foo</span><span class="S8">)</span><br>
+<span class="S4">msgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S7">"Finally"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"The larger of 3 and 4 is "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> max</span><span class="S8">(</span><span class="S3">3</span><span class="S8">,</span><span class="S3">4</span><span class="S8">))</span><br>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;Example1</span><br>
+<br>
+<span class="S5">Func</span><span class="S0"> swap</span><span class="S8">(</span><span class="S5">ByRef</span><span class="S0"> </span><span class="S9">$a</span><span class="S8">,</span><span class="S0"> </span><span class="S5">ByRef</span><span class="S0"> </span><span class="S9">$b</span><span class="S8">)</span><span class="S0"> &nbsp;</span><span class="S1">;2つの変数の中身の入れ替え</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$t</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$t</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$a</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$a</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$b</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$b</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$t</span><br>
+<span class="S5">EndFunc</span><br>
+<br>
+<span class="S5">Func</span><span class="S0"> today</span><span class="S8">()</span><span class="S0"> &nbsp;</span><span class="S1">;現在の日付を mm/dd/yyyy 形式で返す</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">return</span><span class="S0"> </span><span class="S8">(</span><span class="S6">@MON</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">"/"</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@MDAY</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">"/"</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@YEAR</span><span class="S8">)</span><br>
+<span class="S5">EndFunc</span><br>
+<br>
+<span class="S5">Func</span><span class="S0"> max</span><span class="S8">(</span><span class="S9">$x</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$y</span><span class="S8">)</span><span class="S0"> &nbsp;</span><span class="S1">;2つの数の内大きい方を返す。</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">If</span><span class="S0"> </span><span class="S9">$x</span><span class="S0"> </span><span class="S8">&gt;</span><span class="S0"> </span><span class="S9">$y</span><span class="S0"> </span><span class="S5">Then</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">return</span><span class="S0"> </span><span class="S9">$x</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Else</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">return</span><span class="S0"> </span><span class="S9">$y</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">EndIf</span><br>
+<span class="S5">EndFunc</span><br>
+<br>
+<span class="S1">;サンプルスクリプト1終了</span><br>
+<br>
+<span class="S1">; 例2</span><br>
+<span class="S5">Func</span><span class="S0"> Example2</span><span class="S8">()</span><br>
+<span class="S1">; @NumParamsマクロのサンプルスクリプト</span><br>
+<span class="S0">&nbsp; &nbsp; Test_Numparams</span><span class="S8">(</span><span class="S3">1</span><span class="S8">,</span><span class="S3">2</span><span class="S8">,</span><span class="S3">3</span><span class="S8">,</span><span class="S3">4</span><span class="S8">,</span><span class="S3">5</span><span class="S8">,</span><span class="S3">6</span><span class="S8">,</span><span class="S3">7</span><span class="S8">,</span><span class="S3">8</span><span class="S8">,</span><span class="S3">9</span><span class="S8">,</span><span class="S3">10</span><span class="S8">,</span><span class="S3">11</span><span class="S8">,</span><span class="S3">12</span><span class="S8">,</span><span class="S3">13</span><span class="S8">,</span><span class="S3">14</span><span class="S8">)</span><br>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;Example2</span><br>
+<br>
+<span class="S5">Func</span><span class="S0"> Test_Numparams</span><span class="S8">(</span><span class="S9">$v1</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$v2</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$v3</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$v4</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$v5</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$v6</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$v7</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$v8</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$v9</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S8">_</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$v10</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$v11</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$v12</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$v13</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$v14</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$v15</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$v16</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$v17</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$v18</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$v19</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$val</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">For</span><span class="S0"> </span><span class="S9">$i</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">1</span><span class="S0"> </span><span class="S5">To</span><span class="S0"> </span><span class="S6">@NumParams</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$val</span><span class="S0"> </span><span class="S8">&amp;=</span><span class="S0"> </span><span class="S4">Eval</span><span class="S8">(</span><span class="S7">"v"</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$i</span><span class="S8">)</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">" "</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Next</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"@NumParams example"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"@NumParams ="</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@NumParams</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$val</span><span class="S8">)</span><br>
+<span class="S5">EndFunc</span><br>
+<span class="S0">&nbsp;</span><br>
+<span class="S1">;サンプルスクリプト2終了</span><br>
+<span class="S0">&nbsp;</span><br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\Func.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

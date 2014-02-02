@@ -1,0 +1,142 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function InputBox</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">InputBox</font>
+<hr size="2">
+<p>ユーザー入力用のインプットボックスを表示します。<br></p>
+
+<p class="codeheader">
+InputBox ( "title", "prompt" [, "default" [, "password char" [, width [, height [, left [, top [, timeout [, hwnd]]]]]]]] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">title</td>
+    <td width="85%">インプットボックスの名前</td>
+  </tr>
+  <tr>
+   <td>prompt</td>
+   <td>何を入力するかをユーザーに教えるメッセージ</td>
+  </tr>
+  <tr>
+   <td>default</td>
+   <td><b>[オプション]</b>インプットボックスの入力のデフォルト値</td>
+  </tr>
+  <tr>
+   <td>password char</td>
+   <td><b>[オプション]</b> 入力文字表示時に置き換える文字。入力したそのままで表示したい場合は空の文字列("") （デフォルト）もしくは1文字目にスペースを入力してください。複数の文字からなる文字列を指定した場合、初めの1文字が文字の隠蔽に使われます。 2文字目以降は特別な意味を持ちます。"注意"を参照。</td>
+  </tr>
+  <tr>
+   <td>width</td>
+   <td><b>[オプション]</b> ウィンドウの横幅。</td>
+  </tr>
+  <tr>
+   <td>height</td>
+   <td><b>[オプション]</b> ウィンドウの縦幅。</td>
+  </tr>
+  <tr>
+   <td>left</td>
+   <td><b>[オプション]</b> インプットボックスの左端位置。</td>
+  </tr>
+  <tr>
+   <td>top</td>
+   <td><b>[オプション]</b> インプットボックスの上端位置。</td>
+  </tr>
+  <tr>
+   <td>timeout</td>
+   <td><b>[オプション]</b> インプットボックスが自動でキャンセルされるまでの待機秒数</td>
+  </tr>
+  <tr>
+   <td>hwnd</td>
+   <td><b>[オプション]</b> このダイアログの親として使用されるウィンドウのハンドル</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">成功</td>
+    <td width="90%">入力された文字列を返します。</td>
+  </tr>
+  <tr>
+    <td valign="top">失敗</td>
+    <td>"" (空の文字列)を返し、@errorを次のように設定します。</td>
+  </tr>
+  <tr>
+    <td valign="top">@Error</td>
+    <td>0 = 返された文字列が不正です。</td>
+  </tr>
+  <tr>
+    <td valign="top"></td>
+    <td>1 = キャンセルボタンが押されました。</td>
+  </tr>
+  <tr>
+    <td valign="top"></td>
+    <td>2 = タイムアウトしました。</td>
+  </tr>
+  <tr>
+    <td valign="top"></td>
+    <td>3 = インプットボックスの表示に失敗しました。一般にパラメータ指定の不正が原因です。</td>
+  </tr>
+  <tr>
+    <td valign="top"></td>
+    <td>4 = インプットボックスをモニターに表示することができません。</td>
+  </tr>
+  <tr>
+    <td valign="top"></td>
+    <td>5 = 無効なパラメータです。widthが指定されているにもかかわらずheightが指定されていないか、またはtopが指定されているにもかかわらずleftが指定されていない状態です。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+ユーザーはインプットボックスのサイズを変えられます。ただし最小で約190 x 115ピクセルまでです。デフォルトサイズは約250 x 190ピクセルです。<br>
+<br>
+改行文字を除き254文字を超えて文字列は返されません。返し値は文字列の先頭から切り捨てられます。<br>
+<br>
+passwordパラメータの2文字目以降の文字は入力を制限するために使われます。入力文字を表示するには1文字目にスペースを入力してください。
+1文字目に続けて書かれた<B>M</b>は入力が必須（<u>M</u>andatory）であることを意味します。つまりなにか入力しなければなりません。何も入力しないと<b>Ok</b>ボタンを押しても何も起こりません。インプットボックスは消えず、文字列も返しません。<br>
+<br>
+またpasswordパラメータで入力の最大の長さを指定することができます。文字列の長さを指定するためにはパラメータの最後の文字として数字を入れてください。<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="MsgBox.htm">MsgBox</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S1">;インプットボックスを左上端に表示。入力した文字を</span><br>
+<span class="S1">;表示。</span><br>
+<span class="S9">$answer</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">InputBox</span><span class="S8">(</span><span class="S7">"Question"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Where were you born?"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Planet Earth"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S8">_</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S8">-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">)</span><br>
+<br>
+<span class="S1">;ユーザーにパスワード入力を求める。&nbsp;パスワードの確認を忘れずに！</span><br>
+<span class="S9">$passwd</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">InputBox</span><span class="S8">(</span><span class="S7">"Security Check"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Enter your password."</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"*"</span><span class="S8">)</span><br>
+<br>
+<span class="S1">;ユーザーに1文字または2文字の入力を求める。&nbsp;passwordパラメータのMは</span><br>
+<span class="S1">;空入力を受け付けないことを意味し、2は</span><br>
+<span class="S1">;入力が最大で2文字までであることを意味する。</span><br>
+<span class="S9">$value</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">InputBox</span><span class="S8">(</span><span class="S7">"Testing"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Enter the 1 or 2 character code."</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S7">" M2"</span><span class="S8">)</span><br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\InputBox.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

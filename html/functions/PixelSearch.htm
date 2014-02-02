@@ -1,0 +1,111 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function PixelSearch</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">PixelSearch</font>
+<hr size="2">
+<p>ピクセル長方形から指定された色のピクセルをさがします。<br></p>
+
+<p class="codeheader">
+PixelSearch ( left, top, right, bottom, color [, shade-variation [, step [, hwnd]]] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">left</td>
+    <td width="85%">長方形の左部座標</td>
+  </tr>
+  <tr>
+   <td>top</td>
+   <td>長方形の上部座標</td>
+  </tr>
+  <tr>
+   <td>right</td>
+   <td>長方形の右部座標</td>
+  </tr>
+  <tr>
+   <td>bottom</td>
+   <td>長方形の下部座標</td>
+  </tr>
+  <tr>
+   <td>color</td>
+   <td>探すピクセルの色（10進数または16進数）</td>
+  </tr>
+  <tr>
+   <td>shade-variation</td>
+   <td><b>[オプション]</b> 赤、緑、青色成分の濃淡の許容度を指定する0から255までの数値。デフォルトは0 (完全一致)。</td>
+  </tr>
+  <tr>
+   <td>step</td>
+   <td><b>[オプション]</b> 全てのピクセルではなく、与えられた1より大きい値おきにスキップした位置のピクセルを調べます（高速化のため）。例えば、2を指定すると１つおきにピクセルをチェックします。デフォルトは1。</td>
+  </tr>
+  <tr>
+   <td>hwnd</td>
+   <td><b>[オプション]</b> 使用されるウィンドウのハンドル</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">成功</td>
+    <td width="90%">ピクセルの座標が格納された要素数2の配列を返します。(Array[0] = x, Array[1] = y)</td>
+  </tr>
+  <tr>
+    <td valign="top">失敗</td>
+    <td>指定された色が見つからなかった場合、@errorを1に設定します。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+検索方向は次のように変化します:<br>
+&nbsp;&nbsp;&nbsp; 左から右 - left < right<br>
+&nbsp;&nbsp;&nbsp; 右から左 - right < left<br>
+&nbsp;&nbsp;&nbsp; 上から下 - top < bottom<br>
+&nbsp;&nbsp;&nbsp; 下から上 - bottom < top<br>
+検索する色が検索領域内の特定の場所に頻繁に現れる場合、検索方向を変更するのはよい最適化手法です。
+なぜなら検索をもっともよく表れる場所から開始することで検索処理を減らすことができるからです。<br>
+<br>
+一般的な1024 x 768のディスプレイは786432ピクセルあります。PixelSearchは最適化してありますが探査領域を小さくすることでよりはやく結果を得ることができます。<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="PixelChecksum.htm">PixelChecksum</a>, <a href="PixelGetColor.htm">PixelGetColor</a>, <a href="AutoItSetOption.htm#PixelCoordMode">PixelCoordMode (Option)</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S1">; 0,0-20,300の領域からピュアレッドのピクセルを見つけます</span><br>
+<span class="S9">$coord</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">PixelSearch</span><span class="S8">(</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S3">20</span><span class="S8">,</span><span class="S0"> </span><span class="S3">300</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0xFF0000</span><span class="S0"> </span><span class="S8">)</span><br>
+<span class="S5">If</span><span class="S0"> </span><span class="S5">Not</span><span class="S0"> </span><span class="S6">@error</span><span class="S0"> </span><span class="S5">Then</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"X and Y are:"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$coord</span><span class="S8">[</span><span class="S3">0</span><span class="S8">]</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">","</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$coord</span><span class="S8">[</span><span class="S3">1</span><span class="S8">])</span><br>
+<span class="S5">EndIf</span><br>
+<br>
+<br>
+<span class="S1">; ピュアレッドまたはピュアレッドからの濃淡度10の赤色のピクセルを見つけます</span><br>
+<span class="S9">$coord</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">PixelSearch</span><span class="S8">(</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S3">20</span><span class="S8">,</span><span class="S0"> </span><span class="S3">300</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0xFF0000</span><span class="S8">,</span><span class="S0"> </span><span class="S3">10</span><span class="S0"> </span><span class="S8">)</span><br>
+<span class="S5">If</span><span class="S0"> </span><span class="S5">Not</span><span class="S0"> </span><span class="S6">@error</span><span class="S0"> </span><span class="S5">Then</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"X and Y are:"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$coord</span><span class="S8">[</span><span class="S3">0</span><span class="S8">]</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">","</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$coord</span><span class="S8">[</span><span class="S3">1</span><span class="S8">])</span><br>
+<span class="S5">EndIf</span><br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\PixelSearch.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

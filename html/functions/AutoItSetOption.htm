@@ -1,0 +1,311 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function AutoItSetOption</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">AutoItSetOption</font>
+<hr size="2">
+<p>多くの種類のAutoItの関数/パラメータのオペレーション方法を変更します。<br></p>
+
+<p class="codeheader">
+AutoItSetOption ( "option" [, param] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">option</td>
+    <td width="85%">変更されるオプション。"注意"を参照。</td>
+  </tr>
+  <tr>
+   <td>param</td>
+   <td><b>[オプション]</b> オプションの指定値。型と意味はオプションによって異なる。下記の"注意"を参照。paramパラメータを与えない場合、関数は現在設定されている値を返すだけで終了します。<a href="../keywords/Default.htm">Default</a>を使用することでパラメータをデフォルト状態にリセットできます。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">成功</td>
+    <td width="90%">変更前に設定されていたオプションの値を返します。</td>
+  </tr>
+  <tr>
+    <td valign="top">失敗</td>
+    <td>@errorを非ゼロに設定します。（オプションが存在しないなど）パラメータが無効な場合に起きます。</td>
+  </tr>
+</table>
+
+
+
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+Opt()としても同じです。<br>
+<br>
+オプションには次のものがあります。<br>
+<br><br>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%"><b>オプション</b></td>
+    <td width="85%"><b>パラメータ</b></td>
+  </tr>
+  <tr>
+   <td>CaretCoordMode</td>
+   <td><a name="CaretCoordMode"></a>キャレット関数での座標指定方法を設定します。絶対座標もしくは現在のアクティブウィンドウに対する相対座標。<br>
+       0 = アクティブウィンドウに対する相対座標<br>
+       1 = スクリーン絶対座標（デフォルト）<br>
+       2 = アクティブウィンドウのクライアント領域に対する相対座標</td>
+  </tr>
+  <tr>
+   <td>ExpandEnvStrings</td>
+   <td><a name="ExpandEnvStrings"></a>
+   リテラル文字列と%記号の処理方法を変更します。デフォルトでは文字列は文字の通りに処理されますが、このオプションを使うと %環境% 変数を文字列中に使用できるようになります。例）"The temp directory is: %temp%"<br>
+       1 = 環境変数拡張(AutoIt v2 と同様)<br>
+       0 = 環境変数拡張しない(デフォルト)<br>
+	   このオプションを使用しない通常の方法： "The temp directory is: " & EnvGet("temp")</td>
+  </tr>
+  <tr>
+   <td>ExpandVarStrings</td>
+   <td><a name="ExpandVarStrings"></a>
+   
+   リテラル文字列と変数/マクロ ($ / @)記号の処理方法を変更します。デフォルトでは文字列は文字の通りに処理されますが、このオプションを使うと変数とマクロを文字列中に使用できるようになります。例）"The value of var1 is $var1$"<br>
+       1 = 変数拡張(このモードで$記号や@記号を使いたい場合、2重に書いてください。例）"This is a single dollar $$ sign"）<br>
+       0 = 変数拡張しない(デフォルト)</td>
+  </tr>
+  <tr>
+   <td>GUICloseOnESC</td>
+   <td><a name="GUICloseOnESC"></a>GUI上でESCキーが押された場合$GUI_EVENT_CLOSE メッセージが送信されます。このオプションはその機能のオン/オフを切り替えます。<br>
+       1 = ESCキーが押された時、$GUI_EVENT_CLOSEメッセージを送信します(デフォルト)。<br>
+       0 = ESCキーが押された時、$GUI_EVENT_CLOSEメッセージを送信しない。</td>
+  </tr>
+  <tr>
+   <td>GUICoordMode</td>
+   <td><a name="GUICoordMode"></a><a href="GUICtrlSetPos.htm">GUICtrlSetPos</a>でのコントロール位置の定義を変更します。<br>
+       1 = ダイアログボックスを基準とした絶対座標（デフォルト）<br>
+       0 = 変更前のコントロール開始位置（左上）に対する相対座標<br>
+       2 = 現在のセルに対する相対セル位置。left、topパラメータに-1を使用するとスタート位置から動きません。<br>
+	   つまり、次の行は(-1, offset)、次のセルは(offset, -1)、現在のセルは(-1, -1)になります。<td>
+	</tr>
+	<tr>
+	   <td></td>
+	   <td>
+       -1は"移動なし"を表すために使われるので"offset"が-1になることはありません。
+	   ただし、widthの倍数を使用すれば位置をスキップしたり、戻したりすることはできます。
+	   </td>
+  </tr>
+  <tr>
+   <td>GUIDataSeparatorChar</td>
+   <td><a name="GUIDataSeparatorChar"></a>GUICtrlSetDataでのサブアイテムを区切る文字を定義します。<br>
+       &nbsp;デフォルトの区切り文字は '|' です。</td>
+  </tr>
+  <tr>
+   <td>GUIOnEventMode</td>
+   <td><a name="GUIOnEventMode"></a>OnEvent関数を登録する/しない<br>
+       0 = (デフォルト) しない<br>
+       1 = する</td>
+  </tr>
+  <tr>
+   <td>GUIResizeMode</td>
+   <td><a name="GUIResizeMode"></a>デフォルトのコントロールサイズ変更方法を変更します。<br>
+       0 = (デフォルト) デフォルトのコントロールサイズ変更方法を維持<br>
+       &lt;1024 = サイズ変更方法。<a href="GUICtrlSetResizing.htm">GUICtrlSetResizing</a>を参照。</td>
+  </tr>
+  <tr>
+   <td>GUIEventOptions</td>
+   <td><a name="GUIEventOptions"></a>
+   特別なイベントの処理方法またはGUI関数の返し値を変更します。<br>
+	0 = (デフォルト) クリックによるウィンドウの最小化、復元、最大化、サイズ変更を有効にします。<br>
+	1 = クリックによるウィンドウの最小化、復元、最大化及びサイズ変更を無効にします。イベント通知送信のみおこなわれます。<br>
+  </tr>
+  <tr>
+   <td>MouseClickDelay</td>
+   <td><a name="MouseClickDelay"></a>マウスクリックの間隔を変更します。<br>
+       ミリ秒単位での停止時間 (デフォルト=10)</td>
+  </tr>
+  <tr>
+   <td>MouseClickDownDelay</td>
+   <td><a name="MouseClickDownDelay"></a>クリック時の押してる時間の長さを変更します。<br>
+       ミリ秒単位での停止時間 (デフォルト=10)</td>
+  </tr>
+  <tr>
+   <td>MouseClickDragDelay</td>
+   <td><a name="MouseClickDragDelay"></a>
+   マウスドラッグ処理の開始/終了時の一時停止の長さを変更します。<br>
+       ミリ秒単位での停止時間 (デフォルト=250)</td>
+  </tr>
+  <tr>
+   <td>MouseCoordMode</td>
+   <td><a name="MouseCoordMode"></a>マウス関数での座標指定方法を設定します。絶対座標もしくは現在のアクティブウィンドウに対する相対座標。<br>
+       0 = アクティブウィンドウに対する相対座標<br>
+       1 = スクリーン絶対座標（デフォルト）<br>
+       2 = アクティブウィンドウのクライアント領域に対する相対座標</td>
+  </tr>
+  <tr>
+   <td>MustDeclareVars</td>
+   <td><a name="MustDeclareVars"></a>このオプションを使うと全ての変数で使用前にDim、Local 、Globalでの初期化が必要になります。これにより変数名のミススペルによるバグを防ぐことができます。<br>
+       1 = 変数の初期化が必要<br>
+       0 = 変数の初期化が不必要 (デフォルト)</td>
+  </tr>
+  <tr>
+   <td>PixelCoordMode</td>
+   <td><a name="PixelCoordMode"></a>ピクセル関数での座標指定方法を設定します。絶対座標もしくはhwndで定義されたウィンドウ（デフォルトではアクティブウィンドウ）に対する相対座標です。<br>
+       0 = 定義されたウィンドウに対する相対座標<br>
+       1 = スクリーン絶対座標（デフォルト）<br>
+       2 = 定義されたウィンドウのクライアント領域に対する相対座標</td>
+  </tr>
+  <tr>
+   <td>SendAttachMode</td>
+   <td><a name="SendAttachMode"></a>
+Send()関数使用時にAutoItを入力スレッドにアタッチさせるかどうか指定します。アタッチしない場合(デフォルトモード=0)、NT4環境下ではCapsLock、ScrolLlock 、NumLockの状態取得の信頼性が下がります。一方でアタッチモード=1を設定した場合はSend("{... down/up}")句が動作せず、"ハングアップ"したウィンドウにキーストロークを送信する際に問題が起こります。ControlSend()は常にアタッチをおこない、このモードの影響を受けません。<br>
+       0 = アタッチしない (デフォルト)<br>
+       1 = アタッチする</td>
+  </tr>
+  <tr>
+   <td>SendCapslockMode</td>
+   <td><a name="SendCapslockMode"></a>Sendの実行前/後にcapslockの切り替え/復元をおこなうかどうか指定します。<br>
+       0 = 切り替え/復元をおこなわない<br>
+       1 = 切り替え/復元をおこう(デフォルト)</td>
+  </tr>
+  <tr>
+   <td>SendKeyDelay</td>
+   <td><a name="SendKeyDelay"></a>キーストローク送信時のキー入力の間隔を変更します。値0で完全に間隔を無くせます。<br>
+       ミリ秒単位での停止時間 (デフォルト=5)。</td>
+  </tr>
+  <tr>
+   <td>SendKeyDownDelay</td>
+   <td><a name="SendKeyDownDelay"></a>キーストローク中のキーを押してから離すまでの時間を変更します。キー入力を記録するアプリケーション（多くのゲーム）では デフォルト値より長い値を設定する必要があります。値0で完全に間隔を無くせます。<br>
+       ミリ秒単位での停止時間 (デフォルト=5)</td>
+  </tr>
+  <tr>
+   <td>TCPTimeout</td>
+   <td><a name="TCPTimeout"></a>TCP関数で通信が確認できない時のタイムアウト時間を定義します。<br>
+       ミリ秒単位でのタイムアウトまでの時間 (デフォルト=100)</td>
+  </tr>
+  <tr>
+   <td>TrayAutoPause</td>
+   <td><a name="TrayAutoPause"></a>トレイアイコンクリック時スクリプトを一時停止するかどうか。<br>
+       0 = 一時停止しない<br>
+       1 = 一時停止する(デフォルト)。デフォルトのトレイメニューにない場合、一時停止できません。</td>
+  </tr>
+  <tr>
+   <td>TrayIconDebug</td>
+   <td><a name="TrayIconDebug"></a>実行中スクリプトの現在の行位置をデバッグのためにトレイアイコンチップで表示できるようにするかどうか。<br>
+       0 = 表示しない(デフォルト)<br>
+       1 = 表示する</td>
+  </tr>
+  <tr>
+   <td>TrayIconHide</td>
+   <td><a name="TrayIconHide"></a>トレイアイコンを隠す。注意：設定してもトレイアイコンは実行時に～750ミリ秒程度表示されます。<br>
+       0 = アイコンを表示(デフォルト)<br>
+       1 = アイコンを隠す</td>
+  </tr>
+  <tr>
+   <td>TrayMenuMode</td>
+   <td><a name="TrayMenuMode"></a>スクリプトのトレイアイコン/メニュー機能を拡張します。次の値の組み合わせ（加算）でおこないます。<br>       
+	   0 = デフォルトメニューアイテム(スクリプトの一時停止/終了)がユーザーが作成したメニューに追加されます。ユーザーが作成したチェック付きアイテムのチェックは自動ではずされます。トレイアイコンをダブルクリックすると、"デフォルト"スタイルのコントロールIDが返されます。(デフォルト)。<br>
+       1 = デフォルトメニューなし<br>
+       2 = ユーザーが作成したチェック付きアイテムのチェックがクリック時に自動で外れなくなります。<br>
+       4 = トレイアイコンをダブルクリック時、メインコンテクストメニュー内の"デフォルト"スタイルのメニューアイテムIDが返されなくなります。<br>
+       8 = ラジオアイテムグループの自動チェックを無効にします。</td>
+  </tr>
+  <tr>
+   <td>TrayOnEventMode</td>
+   <td><a name="TrayOnEventMode"></a>
+   トレイのOnEvent関数通知の有効/無効を切り替えます。<br>
+       0 = (デフォルト) 無効<br>
+       1 =有効</td>
+  </tr>
+  <tr>
+   <td>WinDetectHiddenText</td>
+   <td><a name="WinDetectHiddenText"></a>ウィンドウの検索をする関数で隠されたウィンドウテキストを"見る"かどうか指定します。<br>
+       0 = 隠されたテキストは無視（デフォルト）<br>
+       1 = 隠されたテキストも見る</td>
+  </tr>
+  <tr>
+   <td>WinSearchChildren</td>
+   <td><a name="WinSearchChildren"></a>
+   ウィンドウ検索時に子ウィンドウもトップレベルウィンドウと同様に検索するかどうかを指定します。<br>
+       0 = トップレベルウィンドウのみ検索（デフォルト）<br>
+       1 = トップレベルウィンドウと子ウィンドウを検索</td>
+  </tr>
+  <tr>
+   <td>WinTextMatchMode</td>
+   <td><a name="WinTextMatchMode"></a>検索作業でのウィンドウテキスト一致条件を変更します。<br>
+       1 = 完全 / スローモード(デフォルト)<br>
+       2 = クイックモード<br>
+	   クイックモードではAutoItはダイアログテキスト、ボタンテキストとコントロールのキャプションのみ"見"ます。デフォルトのモードではさらに多くのテキストが検査されます（たとえばメモ帳ウィンドウだとその中身など）<br>
+       もし多くのウィンドウを検索する際にパフォーマンスの問題が起きた場合、"クイック"モードに変更することで改善できるかもしれません。</td>
+  </tr>
+  <tr>
+   <td>WinTitleMatchMode</td>
+   <td><a name="WinTitleMatchMode"></a>検索作業でのウィンドウ名一致条件を変更します。<br>
+	   1 = 前方一致（デフォルト）<br>
+       2 = 部分一致<br>
+       3 = 完全一致<br>
+       4 = アドバンスモード。<a href="../intro/windowsadvanced.htm">Window Titles & Text (Advanced)</a>を参照。<br>
+       -1 から -4 = 対応する検索タイプをそれぞれ大文字小文字を区別しないように変更します。</td>
+  </tr>
+  <tr>
+   <td>WinWaitDelay</td>
+   <td><a name="WinWaitDelay"></a>ウィンドウ関連関数成功後の停止時間を変更します。<br>
+       ミリ秒単位での停止時間 (デフォルト=250)</td>
+  </tr>
+</table><br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+たくさん！
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S1">; 変更したいものをコピーしてください。 &nbsp;&nbsp;;デフォルト値はリストの1番目にあります。</span><br>
+<br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">"CaretCoordMode"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">)</span><span class="S0"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S1">;1=絶対, 0=相対, 2=クライアント</span><br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">"ExpandEnvStrings"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">)</span><span class="S0"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S1">;0=拡張しない, 1=拡張する</span><br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">"ExpandVarStrings"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">)</span><span class="S0"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S1">;0=拡張しない, 1=拡張する</span><br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">"GUICloseOnESC"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">)</span><span class="S0"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S1">;1=ESC &nbsp;閉じる, 0=ESC 閉じない</span><br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">"GUICoordMode"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">)</span><span class="S0"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S1">;1=絶対, 0=相対, 2=セル</span><br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">"GUIDataSeparatorChar"</span><span class="S8">,</span><span class="S7">"|"</span><span class="S8">)</span><span class="S0">&nbsp;</span><span class="S1">;"|" がデフォルト</span><br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">"GUIOnEventMode"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">)</span><span class="S0"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S1">;0=不可, 1=OnEventモード 可</span><br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">"GUIResizeMode"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">)</span><span class="S0"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S1">;0=サイズ変更なし, &lt;1024 特別なサイズ変更方法</span><br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">"GUIEventOptions"</span><span class="S8">,</span><span class="S3">0</span><span class="S8">)</span><span class="S0">&nbsp; &nbsp; </span><span class="S1">;0=デフォルト, 1=通知のみ, 2=タブインデックスをGuiCtrlRead</span><br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">"MouseClickDelay"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">10</span><span class="S8">)</span><span class="S0"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S1">;10 ミリ秒</span><br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">"MouseClickDownDelay"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">10</span><span class="S8">)</span><span class="S0"> &nbsp;</span><span class="S1">;10 ミリ秒</span><br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">"MouseClickDragDelay"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">250</span><span class="S8">)</span><span class="S0"> </span><span class="S1">;250 ミリ秒</span><br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">"MouseCoordMode"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">)</span><span class="S0"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S1">;1=絶対, 0=相対, 2=クライント</span><br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">"MustDeclareVars"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">)</span><span class="S0"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S1">;0=必要でない, 1=初期化が必要</span><br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">"PixelCoordMode"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">)</span><span class="S0"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S1">;1=絶対, 0=相対, 2=クライント</span><br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">"SendAttachMode"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">)</span><span class="S0"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S1">;0=アタッチしない, 1=アタッチする</span><br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">"SendCapslockMode"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">)</span><span class="S0"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S1">;1=切り替えをおこなう, 0=おこなわない</span><br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">"SendKeyDelay"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">5</span><span class="S8">)</span><span class="S0"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S1">;5 ミリ秒</span><br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">"SendKeyDownDelay"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">)</span><span class="S0"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S1">;1 ミリ秒</span><br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">"TCPTimeout"</span><span class="S8">,</span><span class="S3">100</span><span class="S8">)</span><span class="S0">&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S1">;100 ミリ秒</span><br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">"TrayAutoPause"</span><span class="S8">,</span><span class="S3">1</span><span class="S8">)</span><span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S1">;0=一時停止しない, 1=一時停止する</span><br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">"TrayIconDebug"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">)</span><span class="S0"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S1">;0=情報無し, 1=デバッグ行情報</span><br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">"TrayIconHide"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">)</span><span class="S0"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S1">;トレイアイコンを 0=表示, 1=隠す</span><br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">"TrayMenuMode"</span><span class="S8">,</span><span class="S3">0</span><span class="S8">)</span><span class="S0">&nbsp; &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S1">;0=追加, 1=デフォルトメニューなし, 2=自動チェックなし, 4=メニューアイテムIDを返さない</span><br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">"TrayOnEventMode"</span><span class="S8">,</span><span class="S3">0</span><span class="S8">)</span><span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S1">;0=登録不可, 1=登録可</span><br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">"WinDetectHiddenText"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">)</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;0=検出しない, 1=検出する</span><br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">"WinSearchChildren"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">)</span><span class="S0"> &nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S1">;0=no, 1=子も検索する</span><br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">"WinTextMatchMode"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">)</span><span class="S0"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S1">;1=完全, 2=クイック</span><br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">"WinTitleMatchMode"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">)</span><span class="S0"> &nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S1">;1=前方, 2=部分, 3=完全, 4=アドバンス, -1 から -4=大文字小文字を区別しない</span><br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">"WinWaitDelay"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">250</span><span class="S8">)</span><span class="S0"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S1">;250 ミリ秒</span><br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\AutoItSetOption.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

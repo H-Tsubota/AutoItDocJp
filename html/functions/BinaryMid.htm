@@ -1,0 +1,66 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function BinaryMid</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">BinaryMid</font>
+<hr size="2">
+<p>バイナリ変数から指定したバイト数を抽出します。<br></p>
+
+<p class="codeheader">
+BinaryMid ( binary, start [, count] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">binary</td>
+    <td width="85%">評価するバイナリデータ</td>
+  </tr>
+  <tr>
+   <td>start</td>
+   <td>開始バイト位置  (1 = 1バイト目)</td>
+  </tr>
+  <tr>
+   <td>count</td>
+   <td>	<b>[オプション]</b> 抽出するバイト数。デフォルトでは残りのバイナリデータ全て。</td>
+  </tr>
+</table>
+
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+抽出したバイナリデータを返します。<br>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+<i>start</i>が範囲外の場合、空のバイナリ変数が返されます。<i>start</i>が有効で<i>count</i>が範囲外の場合、残りのバイナリデータ全てが返されます。<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="Binary.htm">Binary</a>, <a href="BinaryLen.htm">BinaryLen</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S1">; バイナリデータ 0x10203040 を作成</span><br>
+<span class="S9">$binary</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">Binary</span><span class="S8">(</span><span class="S7">"0x10203040"</span><span class="S8">)</span><br>
+<span class="S9">$extract</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">BinaryMid</span><span class="S8">(</span><span class="S9">$binary</span><span class="S8">,</span><span class="S0"> </span><span class="S3">2</span><span class="S8">,</span><span class="S0"> </span><span class="S3">2</span><span class="S8">)</span><br>
+<span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"2nd and 3rd bytes are"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$extract</span><span class="S8">)</span><br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\BinaryMid.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Keyword #include</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Keyword Reference</h1>
+<font size="+1">#include</font>
+<hr size="2">
+<p>スクリプトにファイルをインクルードします。<br></p>
+
+<p class="codeheader">
+<b>#include</b> "[path\]filename"<br>
+<b>#include</b> &lt;filename&gt;<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">filename</td>
+    <td width="85%">スクリプトにインクルードするファイルのファイル名。オプションでパスの指定可。<b>文字列でなければなりません。変数は不可。</b><br>
+       <b>"..."</b>の形式で書くと編集中のスクリプトに対する相対位置となります。<br>
+       <b>&lt;...&gt;</b>の形式で書くとインクルードライブラリフォルダ(通常 C:\Program Files\AutoIt3\Include)に対する相対位置となります。 インクルードライブラリには既に使用可能な多くのユーザー定義関数が含まれています!</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+AutoItスクリプトでは他のスクリプトを#includeコマンドを使用してインクルードすることができます。<br>
+<br>
+ユーザー関数を含むファイルを複数回インクルードした場合、"関数の重複"エラーが起きます。そのような場合、ファイルが複数回インクルードされるのを防ぐために1行目に<b>#include-once</b>が書かれているかを確認してください。<br>
+<br>
+"HKEY_CURRENT_USER\Software\AutoIt v3\AutoIt"に"Include"と呼ばれる特別なレジストリ値を作ることができます。これはREG_SZ(文字列)値でなければなりません。
+内容はセミコロンで区切られたフォルダのリストで#include句を実行する際、通常のインクルードフォルダに加えこのリストが検索されます。<br>
+<br>
+AutoItによる検索順は#includeの書式に依存します。下表に両方の書式での検索されるフォルダ順を示します。<br>
+<br>
+#include &lt;&gt;を使用した場合<br>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">標準ライブラリ</td>
+    <td width="85%">現在実行中のインタープリタのパスに"\Include"を追加したパスが検索されます。</td>
+  </tr>
+  <tr>
+   <td>ユーザー定義ライブラリ</td>
+   <td>上述のレジストリ値が読み込まれ、リスト登場順に検索されます。</td>
+  </tr>
+  <tr>
+   <td>スクリプトフォルダ</td>
+   <td>現在実行中のスクリプトのフォルダ</td>
+  </tr>
+</table><br>
+#include "" を使用した場合 (#include &lt;&gt;の逆となる).<br>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">スクリプトフォルダ</td>
+    <td width="85%">現在実行中のスクリプトのフォルダ</td>
+  </tr>
+  <tr>
+   <td>ユーザー定義ライブラリ</td>
+   <td>上述のレジストリ値が読み込まれ、リスト登場順に検索されます。</td>
+  </tr>
+  <tr>
+   <td>標準ライブラリ</td>
+   <td>現在実行中のインタープリタのパスに"\Include"を追加したパスが検索されます。</td>
+  </tr>
+</table><br>
+/AutoIt3ExecuteScriptオプションの使用上の注意。
+標準ライブラリが現在のインタープリタのフォルダから検索されるため、標準ライブラリ関数が見つからなくなります。
+このライブラリはAutoIt3.exeを使用した場合のみ見つかります。
+/AutoIt3ExecuteScriptを使用してスクリプトを実行する場合にはスクリプトを.a3xフォーマットにコンパイルすることを推奨します。<br>
+<br>
+Aut2ExeはAutoIt3.exeと同じアルゴリズムを使用しています。違いはインクルードフォルダ(..\Include)と同じ階層のフォルダも検索することです。<br>
+<br>
+Opt("TrayIconDebug",1)を使用すると64個までのインクルードファイルの名前がトレイツールチップに表示されます。それ以外の場合は表示されません。<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="include-once.htm">#include-once</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S1">;;; TIME.AU3 ;;;</span><br>
+<span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"The time is "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@HOUR</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">":"</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@MIN</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">":"</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@SEC</span><span class="S8">)</span><br>
+<br>
+<span class="S1">;;; SCRIPT.AU3 ;;;</span><br>
+<span class="S11">#include</span><span class="S0"> </span><span class="S7">"TIME.AU3"</span><br>
+<span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Example"</span><span class="S8">)</span><br>
+<span class="S11">#include</span><span class="S0"> </span><span class="S7">"TIME.AU3"</span><br>
+<span class="S5">Exit</span><br>
+<br>
+<span class="S1">; script.au3を実行すると3つのメッセージボックスが表示される。</span><br>
+<span class="S1">; 1つは時間、1つは'Example'、もう1つは時間が表示される。</span><br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\include.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

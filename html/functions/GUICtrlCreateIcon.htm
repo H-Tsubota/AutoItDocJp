@@ -1,0 +1,158 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function GUICtrlCreateIcon</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">GUICtrlCreateIcon</font>
+<hr size="2">
+<p>GUI用のアイコンコントロールを作成します。<br></p>
+
+<p class="codeheader">
+GUICtrlCreateIcon ( filename, iconName, left, top [, width [, height [, style [, exStyle]]]] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">filename</td>
+    <td width="85%">ロードされるアイコンのファイル名。</td>
+  </tr>
+  <tr>
+   <td>iconName</td>
+   <td>ファイル内に複数アイコンがある場合、アイコン名。負の数の場合は序数名を使用できます。それ以外の場合は-1。</td>
+  </tr>
+  <tr>
+   <td>left</td>
+   <td>コントロールの左端。-1を使用すると<a href="AutoItSetOption.htm#GUICoordMode">GUICoordMode</a>に基づいて左端位置が計算されます。</td>
+  </tr>
+  <tr>
+   <td>top</td>
+   <td>コントロールの上端。-1を使用すると<a href="AutoItSetOption.htm#GUICoordMode">GUICoordMode</a>に基づいて上端位置が計算されます。</td>
+  </tr>
+  <tr>
+   <td>width</td>
+   <td><b>[オプション]</b> コントロールの幅(デフォルトは32)。</td>
+  </tr>
+  <tr>
+   <td>height</td>
+   <td><b>[オプション]</b> コントロールの高さ(デフォルトは32)。</td>
+  </tr>
+  <tr>
+   <td>style</td>
+   <td>
+   <b>[オプション]</b> コントロールのスタイルを定義。<a href="../appendix/GuiStyles.htm#Label">GUIコントロールスタイル付録</a>を参照。<br>
+       <br>
+       デフォルト ( -1) : $SS_NOTIFY<br>
+       強制適用されるスタイル : $WS_TABSTOP、$SS_ICON</td>
+  </tr>
+  <tr>
+   <td>exStyle</td>
+   <td><b>[オプション]</b> コントロールの拡張スタイルを定義。<a href="../appendix/GuiStyles.htm#Extended">拡張スタイル表</a>を参照。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">成功</td>
+    <td width="90%">新しく作成したコントロールの識別子(コントロールID)を返します。</td>
+  </tr>
+  <tr>
+    <td valign="top">失敗</td>
+    <td>0を返します。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+コントロールの情報を設定/変更する方法については<a href="GUICtrlUpdate%20Management.htm">GUICtrlUpdate...</a>を参照。<br>
+<br>
+ダイアログボックス表示後にアイコンを更新する場合は<a href="GUICtrlSetImage.htm">GUICtrlSetImage</a>を使用してください。<br>
+<br>
+アイコンIDにはアイコングループ番号を使用できます。値を知るためにはリソースハッカーを使用してください。<br>
+<br>
+デフォルトスタイルに他のスタイルを組み合わせる場合は<b>BitOr</b>($GUI_SS_DEFAULT_ICON, newstyle,...)を使用してください。<br>
+<br>
+上で指定されている値を使用するためにはスクリプトに#include &lt;StaticConstants.au3&gt;と書く必要があります。<br>
+<br>
+デフォルトのサイズ変更方法は$GUI_DOCKSIZEです。<br>
+<br>
+正の数を渡した場合、アイコン名と等しい文字列を参照します。<br>
+負の数を渡した場合、1始まりの"インデックス"処理が起きます。Dllには負の数を使ってアイコンを取り出す仕様のものがあります。<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="AutoItSetOption.htm#GUICoordMode">GUICoordMode (Option)</a>, <a href="GUICtrlSetImage.htm">GUICtrlSetImage</a>, <a href="GUICtrlUpdate%20Management.htm">GUICtrlUpdate...</a>, <a href="GUIGetMsg.htm">GUIGetMsg</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;GUIConstantsEx.au3&gt;</span><br>
+<br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">'MustDeclareVars'</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">)</span><br>
+<br>
+<span class="S0">Example1</span><span class="S8">()</span><br>
+<span class="S0">Example2</span><span class="S8">()</span><br>
+<br>
+<br>
+<span class="S1">; 例1 ---------------------------</span><br>
+<span class="S5">Func</span><span class="S0"> Example1</span><span class="S8">()</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$icon</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$n1</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$n2</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$msg</span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUICreate</span><span class="S8">(</span><span class="S7">" My GUI Icons"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">250</span><span class="S8">,</span><span class="S0"> </span><span class="S3">250</span><span class="S8">)</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$icon</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICtrlCreateIcon</span><span class="S8">(</span><span class="S7">"shell32.dll"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">10</span><span class="S8">,</span><span class="S0"> </span><span class="S3">20</span><span class="S8">,</span><span class="S0"> </span><span class="S3">20</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$n1</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICtrlCreateIcon</span><span class="S8">(</span><span class="S6">@WindowsDir</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">"\cursors\horse.ani"</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S3">20</span><span class="S8">,</span><span class="S0"> </span><span class="S3">40</span><span class="S8">,</span><span class="S0"> </span><span class="S3">32</span><span class="S8">,</span><span class="S0"> </span><span class="S3">32</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$n2</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICtrlCreateIcon</span><span class="S8">(</span><span class="S7">"shell32.dll"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">7</span><span class="S8">,</span><span class="S0"> </span><span class="S3">20</span><span class="S8">,</span><span class="S0"> </span><span class="S3">75</span><span class="S8">,</span><span class="S0"> </span><span class="S3">32</span><span class="S8">,</span><span class="S0"> </span><span class="S3">32</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUISetState</span><span class="S8">()</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; ダイアログが閉じられるまでGUIを実行</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">While</span><span class="S0"> </span><span class="S3">1</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$msg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUIGetMsg</span><span class="S8">()</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">If</span><span class="S0"> </span><span class="S9">$msg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$GUI_EVENT_CLOSE</span><span class="S0"> </span><span class="S5">Then</span><span class="S0"> </span><span class="S5">ExitLoop</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">WEnd</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUIDelete</span><span class="S8">()</span><br>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;example1</span><br>
+<br>
+<br>
+<br>
+<span class="S1">; 例2 ---------------------------</span><br>
+<span class="S5">Func</span><span class="S0"> Example2</span><span class="S8">()</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$iOldOpt</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$n1</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$n2</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$a</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$b</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$iOldOpt</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">Opt</span><span class="S8">(</span><span class="S7">"GUICoordMode"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">)</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUICreate</span><span class="S8">(</span><span class="S7">"My GUI icon Race"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">350</span><span class="S8">,</span><span class="S0"> </span><span class="S3">74</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUICtrlCreateLabel</span><span class="S8">(</span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S3">331</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S3">74</span><span class="S8">,</span><span class="S0"> </span><span class="S3">5</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$n1</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICtrlCreateIcon</span><span class="S8">(</span><span class="S6">@WindowsDir</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">"\cursors\dinosaur.ani"</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S3">32</span><span class="S8">,</span><span class="S0"> </span><span class="S3">32</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$n2</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICtrlCreateIcon</span><span class="S8">(</span><span class="S6">@WindowsDir</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">"\cursors\horse.ani"</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S3">40</span><span class="S8">,</span><span class="S0"> </span><span class="S3">32</span><span class="S8">,</span><span class="S0"> </span><span class="S3">32</span><span class="S8">)</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUISetState</span><span class="S8">(</span><span class="S6">@SW_SHOW</span><span class="S8">)</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Dim</span><span class="S0"> </span><span class="S9">$a</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$b</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">0</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">While</span><span class="S0"> </span><span class="S8">(</span><span class="S9">$a</span><span class="S0"> </span><span class="S8">&lt;</span><span class="S0"> </span><span class="S3">300</span><span class="S8">)</span><span class="S0"> </span><span class="S5">And</span><span class="S0"> </span><span class="S8">(</span><span class="S9">$b</span><span class="S0"> </span><span class="S8">&lt;</span><span class="S0"> </span><span class="S3">300</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$a</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$a</span><span class="S0"> </span><span class="S8">+</span><span class="S0"> </span><span class="S4">Int</span><span class="S8">(</span><span class="S4">Random</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">)</span><span class="S0"> </span><span class="S8">+</span><span class="S0"> </span><span class="S3">0.5</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$b</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$b</span><span class="S0"> </span><span class="S8">+</span><span class="S0"> </span><span class="S4">Int</span><span class="S8">(</span><span class="S4">Random</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">)</span><span class="S0"> </span><span class="S8">+</span><span class="S0"> </span><span class="S3">0.5</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S4">GUICtrlSetPos</span><span class="S8">(</span><span class="S9">$n1</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$a</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S4">GUICtrlSetPos</span><span class="S8">(</span><span class="S9">$n2</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$b</span><span class="S8">,</span><span class="S0"> </span><span class="S3">40</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S4">Sleep</span><span class="S8">(</span><span class="S3">20</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">WEnd</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">Sleep</span><span class="S8">(</span><span class="S3">1000</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">Opt</span><span class="S8">(</span><span class="S7">"GUICoordMode"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$iOldOpt</span><span class="S8">)</span><br>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;Example2</span></span><br>
+<script type="text/javascript">
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\GUICtrlCreateIcon.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+</body>
+</html>

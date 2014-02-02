@@ -1,0 +1,99 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function DriveMapAdd</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">DriveMapAdd</font>
+<hr size="2">
+<p>ネットワークドライブをマップします。<br></p>
+
+<p class="codeheader">
+DriveMapAdd ( "device", "remote share" [, flags [, "user" [, "password"]]] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">device</td>
+    <td width="85%">マップするデバイス。例："O:"、"LPT1:"。このパラメータに空文字列を設定するとコネクションは作られますが特定のドライブへのマップはおこなわれません。"*"を指定すると使用していないドライブ文字が自動で選択されます。</td>
+  </tr>
+  <tr>
+   <td>remote share</td>
+   <td>接続するリモートの共有フォルダ。"\\server\share"形式で指定。</td>
+  </tr>
+  <tr>
+   <td>flags</td>
+   <td><b>[オプション]</b><br>
+       次のものを組み合わせられる。<br>
+       0 = デフォルト<br>
+       1 = 永続的なマッピング<br>
+       8 = 必要な場合、認証ダイアログを表示</td>
+  </tr>
+  <tr>
+   <td>user</td>
+   <td><b>[オプション]</b> 接続時に使用するユーザー名。"username"形式か、"domain\username"形式のいずれか。</td>
+  </tr>
+  <tr>
+   <td>password</td>
+   <td><b>[オプション]</b> 接続時に使用するパスワード。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">成功</td>
+    <td width="90%">1を返します。(注意を参照)</td>
+  </tr>
+  <tr>
+    <td valign="top">失敗</td>
+    <td>新しいマッピングを作成できなかった場合、0を返し@errorを設定します(下記を参照)。(注意を参照)</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+関数が失敗した場合(0を返し)、@errorに情報が設定されます。<br>
+&nbsp;1 = 未定義/その他のエラー。@extendedにWindowsAPIの返し値が設定されます。<br>
+&nbsp;2 = リモート共有へのアクセスが拒否されました。<br>
+&nbsp;3 = デバイスは既に割り当てられています。<br>
+&nbsp;4 = 無効なデバイス名<br>
+&nbsp;5 = 無効なリモート共有<br>
+&nbsp;6 = 無効なパスワード<br>
+<br>
+注意：deviceパラメータに"*"を使用すると選択されたドライブ文字(例： "U:")が1、0の代わりに返されます。"*"使用時にエラーが起きた場合は空文字列""が返されます。<br>
+<br>
+user/passwordが定義されている場合、それらは認証用リモートコンピュータに送信されます。<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="DriveMapDel.htm">DriveMapDel</a>, <a href="DriveMapGet.htm">DriveMapGet</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S0"></span><br>
+<span class="S1">; ドライブXを\\myserver\stuffに現在のユーザーでマップ</span><br>
+<span class="S4">DriveMapAdd</span><span class="S8">(</span><span class="S7">"X:"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"\\myserver\stuff"</span><span class="S8">)</span><br>
+<br>
+<span class="S1">; ドライブXを\\myserver2\stuff2にユーザーで"jon"、"domainx"形式、パスワード"tickle"でマップ</span><br>
+<span class="S4">DriveMapAdd</span><span class="S8">(</span><span class="S7">"X:"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"\\myserver2\stuff2"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"domainx\jon"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"tickle"</span><span class="S8">)</span><br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\DriveMapAdd.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

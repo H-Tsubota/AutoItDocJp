@@ -1,0 +1,1928 @@
+AutoIt Changelog
+================
+
+3.3.6.1 (xth April, 2010) (Release)
+AutoIt:
+- Fixed #1515: FileOpen still opening in exclusive mode in some situations.
+
+
+3.3.6.0 (7th March, 2010) (Release)
+AutoIt:
+- Added #1376: FileOpen() mode parameter is now optional. Default mode is read.
+- Added #1054: Added FileGetEncoding().
+- Added: ControlCommand() "SendCommandID" - used to send WM_COMMAND Control ID messages. Allows the
+	automation of ToolBarWindow32 controls (amongst others). For example, the "Back" button of
+	Internet Explorer. Use Au3Info to get the Command ID from the ToolBar tab.
+
+- Fixed #1428: AdlibRegister/Unregister() were incorrectly using case-sensitive function names.
+- Fixed #1448: #OnAutoItStartRegister did not work in compiled scripts.
+- Fixed #961: RegDelete() was not working properly on 64bit keys when using the 32bit version of AutoIt and HKLM64.
+- Fixed: Regression in FileOpen() where it wasn't allowed to open files in read mode if they were already open in write mode.
+- Fixed #1449: GUICtrlDelete() not working for GUICtrlCreateDummy() types.
+- Fixed #1458: Inet sizes were capped to 32-bits.
+- Fixed #1459: Hard crash when too much recursion is used.
+- Fixed #1464: Regular expressions with a single character * pattern were stopping after the first null match.
+- Fixed #1463: StringToASCIIArray() working incorrectly with UTF8 characters.
+- Fixed #1475: TrayItemSetState($Value, $Tray_Checked) incorrectly enables a disabled TrayItem.
+
+- Changed: Send() and ControlSend() code reworked to allow for more Unicode characters to be used.
+- Changed: FileWriteLine() performance improved.
+
+Aut2Exe:
+- Fixed #1409: Ctrl+C is no longer the shortcut for Convert. It is now Ctrl+G (Go) to avoid clashing with a Ctrl+C copy operation.
+
+Au3Info:
+- Fixed #1444: Controls in applications like RegEdit were left highlighted.
+- Fixed #1391: ToolbarWindow32 info only showing the first toolbar.
+
+- Changed: Better identification of the control under the mouse.
+
+AutoIt3Help:
+- Fixed #1423: "Open Script" button stopped working.
+
+AutoItX:
+- Fixed: Missing .lib files readded.
+
+UDFs:
+- Fixed #1438: AutoIt error when using _ArrayCombinations().
+- Fixed #1454: StringBetween() not working correctly.
+- Fixed #1441: _GUICtrlRichEdit_GetText() using wrong buffer length.
+- Fixed #1446: _ScreenCapture_Capture() was using height/width of 1 pixel less.
+- Fixed #1445: Documentation updated for _MemGlobalFree().
+- Fixed #1469: _GDIPlus_BitmapCloneArea() documentation updated.
+- Fixed #1466: _GUICtrlEdit_GetLine() returns an unexpected character.
+- Fixed #1487: _DateToDayOfWeekIso returned 0-6 but should be 1-7 where Monday = 1
+
+
+3.3.4.0 (15th January, 2010) (Release)
+AutoIt:
+- Added: Ability to read and write UTF-8 files with no BOM including automatic detection during reading.
+- Added #682: Removed the 64KB limitation for FileReadLine()
+- Added: AutoIt scripts using the line continuation character "_" are no longer limited to a combined line length of 4095 characters.
+- Added: FileRead() returns the number of characters/bytes read in @extended.
+- Added #1311: MouseGetCursor() returns hand cursor.
+
+- Fixed #384: Under certain circumstances the network credentials flag would prevent the process from starting when launched with RunAs() or RunAsWait().
+- Fixed #1370: StringInStr() would crash with a negative occurrence and start position greater than the string length.
+- Fixed #1367: Calling GUIDelete() from a GUIRegisterMsg() callback that returns $GUI_RUNDEFMSG would crash AutoIt.
+- Fixed #1363: FileSetPos() did not work when the origin was the current position.
+- Fixed #1355: Regression in how unsigned numbers are displayed when returned from DllCall().
+- Fixed #1396: Crash in DllCallbackGetPtr() with invalid handle.
+- Fixed #1352: StringSplit() hard crash with binary data.
+- Fixed #1398: Fixed declaration of $tagPARAFORMAT2 from GuiRichEdit.au3.
+
+- Removed: The "RAW" reading mode from FileOpen() has been removed.
+- Removed: InetGet("abort"), @InetGetActive and @InetGetBytesRead have been removed.
+- Removed: AdlibEnable() and AdlibDisable() have been removed.
+- Removed: OnAutoItStart and OnAutoItExit have been removed.
+
+UDFs:
+- Changed: _SQLite 3.6.19 -> 3.6.22
+- Fixed #1338: bad _ArrayDisplay() GUI position error.
+- Fixed #1362: _WinAPI_WindowFromPoint() did not work with 64-bit AutoIt.
+- Fixed #1389: _IEAttach() could fail if called multiple times.
+- Fixed #1353: _FileWriteToLine() excessively strict on input text type.
+- Fixed: SQLite.au3 various errors in _SQLite_FetchData, $iCharSize, _SQLite_QuerySingleRow, _SQLite_GetTable2d, _SQLite_Display2DResult by jchd.
+
+AutoIt3Help:
+- Fixed #1327: Some keywords would fail to open correctly in rare cases.
+
+
+3.3.2.0 (18th December, 2009) (Release)
+AutoIt:
+- Added #529: Added the "NAME" property to allow direct search for .NET WinForm control names.
+- Added #757: Set defaults for MouseClick()'s x/y parameters.
+- Added #764: Return Pid on ProcessWait() and handle on WinWait(), WinWaitActive, WinActivate(), WinActive(), WinMove() when successful.
+- Added #414: better handling of OnAutoItStart/OnAutoItExit, now #OnAutoItStartRegister, OnAutoItExitRegister() and OnAutoItExitUnRegister().
+- Added: Better handling of AdlibEnable/AdlibDisable, now AdlibRegister(), AdlibUnRegister() and AdlibDisable().
+- Added #351: Reverse PixelSearch().
+- Added #769: FileFlush() function.
+- Added #333: #NoAutoIt3Execute Directive for disabling /AutoIt3ExecuteScript or /AutoIt3ExecuteLine.
+- Added #604: $GUI_BKCOLOR_TRANSPARENT can be used with label, group, radio, checkbox controls.
+- Added #135: FileSetPos(), FileGetPos() functions for moving the file pointer around.
+- Added #582: GUICtrlSetTip() can be used on TabItem controls.
+- Added #699: Shutdown() now return @error=GetLastError() when failing.
+- Added #461: StringReplace() from right to left if occurrence <0 as for StringInStr().
+- Added: GUICtrlSetColor() and GUICtrlSetBkColor() for Combo Controls.
+- Added: GUI without title bar (no $WS_CAPTION) can be moved with the mouse.
+- Added #815: Temporary variables can be passed ByRef.
+- Added #837: FileFindNextFile() set @extended if a directory is returned.
+- Added #839: Shutdown() rewritten and now works properly when run as a non-interactive user.
+- Added: Shutdown() now takes an optional reason code.
+- Added #846: _PathFull() now supports strange but valid syntax where drives do not  have a trailing slash.
+- Added #869: @MUILang macro to help MUI environment scripts.
+- Added #918: Added Quality parameter to GUICtrlSetFont() and GUISetFont().
+- Added: ProcessClose() return info on error.
+- Added: PixelChecksum() extra parameter to select CRC32 instead of ADLER.
+- Added #984: @OSVersion now returns "WIN_XPe" for Windows XP Embedded.
+- Added #938: UDPOpen() flag to allow broadcasting  with 255.255.255.255.
+- Added: new types to DllCall and DllStruct to avoid confusion with MSDN description. That avoid specially X64 errors.
+- Added #351: PixelSearch() now supports both right-to-left and bottom-to-top searches.
+- Added #508: Static keyword.
+- Added #1056: New Inet option to by-pass forcing the connection online.
+- Added: DllStructSetData() and DllStructGetData() index parameter now supports the Default keyword.
+- Added #1270: GuiSetIcon() now finds suitable large and small icons.
+
+- Fixed: CtrlSetStyle listview on non selected tab.
+- Fixed #763: GUICtrlCreateIcon() create an empty icon on error.
+- Fixed: no mouse move when invalid button used in MouseClick() or MouseClickDrag().
+- Fixed #779: infinite loop on Exit due to GUICreate() child badly created.
+- Fixed #774: GuiCtrlSetBkColor() bad label display.
+- Fixed #790: Windows region constant $ERROR rename in $ERRORREGION.
+- Fixed: StringInStr("aaa", "aa", 2) does not return 0.
+- Fixed #802: Searching for controls by Height property.
+- Fixed: Checkbox or radio painting on tab.
+- Fixed #816: data for GUI date control doc clarification.
+- Fixed #819: Crash with EventLog functions.
+- Fixed #814: InetGet() through a proxy requiring authentication did not work.
+- Fixed #813: bad handling of Windows advanced matching for [HANDLE:...] in X64 version.
+- Fixed #863: DirMove() extra dot.
+- Fixed #867: UDPRecv() can return from IP/Port.
+- Fixed #886: More explicit documentation that operator == is a forced string comparison.
+- Fixed #885: Default compared to False returned True instead of False.
+- Fixed #888: Send("{}}") Extra null char.
+- Fixed: DllCall() returning 64-bit int.
+- Fixed: GuiCtrlSetImage() after GUI resized.
+- Fixed: DirMove() return code wrong under XP.
+- Fixed #931: bad GUICtrlSetResizing() for graphic control.
+- Fixed #934: MouseGetCursor() hogging mouse double click.
+- Fixed #615: License updated to be less restrictive.
+- Fixed #919: Remarks added to ConsoleWrite(), ConsoleWriteError() and StdinWrite() regarding how those functions handle binary data and non-ANSI characters.
+- Fixed #897: Documented that StringToASCIIArray() does not accept binary input (convert to a string first).
+- Fixed #937: Bad event handling of Opt("TrayMenuMode",1)
+- Fixed #969: FileFindNextFile() does not set @extended if first found is a dir.
+- Fixed #1006: @MSEC returned wrong value for values < 100.
+- Fixed #1010: FileRead() UTF8 with BOM files return too many chars.
+- Fixed #1013: MDI childs doesn't adjust to parent windows client area.
+- Fixed #1005: TraySetClick(64) = hovering.
+- Fixed: ClipPut("") not emptying.
+- Fixed #1068: Binary to Int.
+- Fixed: Bad painting on double GUICtrlSetPos() for label.
+- Fixed #1094: Send("{LSHIFT UP}") stay down.
+- Fixed #1074: Inputbox() positionning on multi monitor.
+- Fixed #1105: disable colored Multiline button not properly displayed.
+- Fixed #1077: GUICtrlSetBkColor() bad recoloring.
+- Fixed #1116: GUICtrlCreateGraphic don't follow ResizeMode.
+- Fixed #1102: Better documentation of the StringInStr() count parameter.
+- Fixed #1161: Removed all documentation references to ColorMode.
+- Fixed #1156: AutoItSetOption()/Opt() now set @error instead of generating a fatal error with invalid input.
+- Fixed: Comparing pointers now works correctly.
+- Fixed #906: ActiveX controls were not told what their initial size was.
+- Fixed: Boolean tests on binary strings now behaves properly.
+- Fixed #1234: COM methods that modified boolean arguments could change them to ints.
+- Fixed #1258: System menu could display when trying to dismiss a control menu.
+- Fixed #1288: Documented how DllStructSetData() and DllStructGetData() work with arrays when omitting the index parameter.
+- Fixed #1300: DLLs could unload when calling DllCall() with an invalid function.
+- Fixed #1295: Unicode to ANSI conversion was crashing in certain situations.
+- Fixed #1304: _GDIPlus_BitmapLockBits() now correctly takes a Width and Height parameter instead of a Right and Bottom.
+- Fixed #1294: Fixed AutoIt deadlock when using the following functions with hanged windows: WinGetTitle, WinSetTitle, WinGetText, WinFlash, WinSetOnTop
+- Fixed #1332: Mod() forced a conversion to floating point numbers when it didn't need to which can cause unexpected output.
+- Fixed #1321: DllStructCreate() did not support _ in data names.  Documented valid characters for data name.
+- Fixed #1322: Crash when using ControlCommand("GetSelected") on non-Edit controls.
+- Fixed #1325: Some date functions could attempt to access an invalid array.
+- Fixed #1345: Number() failed to handle numbers with a trailing decimal point.
+
+- Changed: It is now possible to read from files opened for writing.
+- Changed: PCRE regular expression engine updated to 8.00.
+- Changed #899: ShellExecute[Wait]() no longer uses "open" as the default verb.  See remarks section for those functions for more information.
+- Changed: Inet functions rewritten with the following additions and changes:
+	- Removed: Long deprecate URLDownloadToFile() alias for InetGet().
+	- Added: HttpSetUserAgent(), InetClose(), InetGetInfo() and InetRead() functions.
+	- Added: Multiple background downloads are now supported with InetGet().
+	- Added #408: New flag for ignoring SSL errors for HTTPS connections.
+	- Added #884: Better proxy support with mode 0.
+	- Added #949: The user-agent can be changed.
+	- Changed: InetGet() returns a handle which must be closed.
+	- Changed: @InetGetBytes, @InetGetActive and InetGet("abort") are deprecated and will be removed in the future.
+- Changed #968: AutoUpdateIt updated by ProgAndy to use new Inet features.
+- Changed: @YDAY now returns values in the range 001 - 366 instead of 1 - 366.  This makes the macro more consistent with other languages (like C/C++) and more consistent with all other date related macros which return strings with leading 0s to pad the length.  THIS IS A SCRIPT BREAKING CHANGE.
+- Changed #1080: InetGet background downloads now return immediately instead of connecting to the remote host first.
+- Changed #1137: RegEnumKey() and RegEnumVal() now correctly return an empty string on failure instead of an error message string.
+- Changed: PixelChecksum() can calculate checksums from right-to-left and bottom-to-top.
+- Changed: InputBox() no longer requires passing both x and y or w and h.
+- Changed #1056: Added new Inet option to by-pass forcing the connection online.
+
+AutoItX:
+- Removed: ColorMode option removed from AutoItSetOption().
+
+AU3Info:
+- Removed: ColorMode BGR option removed since AutoIt no longer supports the option to use BGR mode.
+
+- Added: Control information now includes the .NET WinForm if available.
+- Added #140: ToolsBar button info.
+
+Aut2Exe:
+- Fixed #1283: Added new option /x86 to force a 32-bit build and re-added /unicode which also forces a 32-bit build.
+
+Au3Check:
+- Fixed #1239: Incorrect library search order.
+
+Others:
+- Added #1050: TextPad v5 syntax files installation.
+
+UDFs:
+- Added: _GDIPlus_BrushGetSolidColor, _GDIPlus_BrushSetSolidColor (smashly)
+- Added: $tagWIN32_FIND_DATA and corresponding attribute constants.
+- Added #868: _WinAPI_GetLayeredWindowAttributes(), _WinAPI_SetLayeredWindowAttributes().
+- Added: _Date_Time_ ... Str() can return date as yyyy/mm/dd.
+- Added #271: FTPEx.au3 for _FTP_...().
+- Added #932: mouse event constants in WinDowsConstants.au3.
+- Added #952: _ArrayDisplay() extra parameter for column header text.
+- Added #957: _Assert() in Debug.au3.
+- Added: _WinAPI_GetGuiResources()
+- Added #981: _WinAPI_WideCharToMultiByte(), _WinAPI_MultiByteToWideChar() support IN/OUT as "strings"
+- Added #1157: Encryption functions in Crypt.au3.
+- Added #1128: _WinAPI_PathFindOnPath() in WinAPI.au3.
+- Added #1228: _FTP_SetStatusCallback(), _FTP_DecodeInternetStatus() in FTPEx.au3.
+
+- Fixed #755: _FileReadToArray() removing empty end lines.
+- Fixed #773: Doc for _GUICtrlStatusBar_SetParts.
+- Fixed #786: _SQLite_Exec() does not return @error.
+- Fixed #809: _Soundxxx() with first parameter as filename.
+- Fixed #887: Related section based on Tweaky work.
+- Fixed #951: _ArrayDisplay() speed improvement for nb entries >4000.
+- Fixed: _SoundOpen() set @error on MCI Error.
+- Fixed #1015: _SQLite_SaveMode() renamed as _SQLite_SafeMode().
+- Fixed #1016: _WordDocSaveAs() Doc for error handling.
+- Fixed: Sound positioning in case of VBR Format Sound.
+- Fixed #1028: _Clipboard_GetData() fix.
+- Fixed #1031: _Clipboard_SetData() fix.
+- Fixed #1040: _ScreenCapture_Capture() leak memory.
+- Fixed #1026: _Gdiplus_BitmapCreate*() doc examples.
+- Fixed #1092: _Timer_...() datatype for X64.
+- Fixed #1059: Incorrect error handling in _FileListToArray().
+- Fixed #1101: _NowTime(), _NowDate() Doc.
+- Fixed: _WinAPI_GetWindowLong(), _WinAPI_SetWindowLong support X64.
+- Fixed #1111: Bad grammar in comments for _DateAdd().
+- Fixed: UDF library now uses #include "" instead of #include <>.
+- Fixed #1033: UDF library now has better and more consistent error handling when DllCall() is used.
+- Fixed #1215: _ArraySearch() not searching on 2D array.
+- Fixed #1168: _ExcelBookOpen() now selects the first visible worksheet to prevent a COM error.
+- Fixed #1247: Documented that some _GUICtrlComboBoxEx_* functions don't work with certain ComboBox styles.
+- Fixed #1260: Potential buffer overflow in _WinAPI_GetLastErrorMessage().
+- Fixed #1276: _TicksToTime() incorrectly rounded seconds up.
+- Fixed #1277: Resource clean-up in example script for _GDIPlus_ImageGetGraphicsContext.
+- Fixed #1290: Invalid Left coordinate when using _GUICtrlTreeView_DisplayRectEx().
+- Fixed #1296: _GUICtrlTreeView_ClickItem() could click outside the control's parent window.
+- Fixed #1312: Errors with _GUIImageList_BeginDrag() example.
+- Fixed #1320: _GUIImageList_DragMove() documentation contained a parameter that doesn't exist.
+
+- Changed: _StringBetween removed last optional param (not needed after change)(SmOke_N)
+- Changed: _StringToHex(), _HexToString() and _StringReverse() have been rewritten and are faster.
+- Changed: _SQLite 3.6.7 -> 3.6.19 (SQL statement support UNICODE characters)
+- Changed: _InetGetSource() now uses InetRead().
+
+- Removed: _StringAddThousandsSep() has been removed.  Too many opinions on how the function should work means nobody is happy with it.
+- Removed #1112: __WinAPI_Check() has been removed as have all calls to it.
+
+
+3.3.0.0 (24th December, 2008) (Release)
+
+AutoIt:
+- Windows 9x and Windows NT 4.0 Operating System support has been removed.
+
+- Added: New flag for StringSplit() to not return the count in element 0.
+- Added #328: StringToASCIIArray(), StringFromASCIIArray() functions.
+- Added: New flag to Run()/RunAs() to fix issue #415 (Adds new Constants.au3 constant: $STDIO_INHERIT_PARENT).
+- Added: New flag to all Run functions for better CUI compatibility (Adds new Constants.au3 constant: $RUN_CREATE_NEW_CONSOLE).
+- Added #481: 11 pixel margin around the text in SplashTextOn() (Meets Vista UI guidelines).
+- Added #468: Added @MSec macro for obtaining the current milliseconds for the current second.
+- Added #277: @CPUArch macro to return the capability of the processor.
+- Added #454: $FO_UTF8 allowing FileOpen() in Read mode for reading UTF8 files without BOM.
+- Added: $FO_UTF16_LE, $FO_UTF16_BE allowing FileOpen() in Read mode for reading UTF16 files without BOM.
+- Added #407: Documented that For...In loops are read-only.
+- Added #645: IniDelete() now supports the Default keyword for the 3rd parameter.
+
+- Fixed: Send() was incorrectly inserting a leading zero when using the {ASC 0xNNNN} format.
+- Fixed #305: GUICtrlSetFont() for Combo causing highlight.
+- Fixed #318: GUICtrlSetTip() on TreeViewItem must return 0.
+- Fixed #339: GUICtrlDelete() crashes.
+- Fixed #345: @OSVersion for Windows 2008.
+- Fixed #366: AutoIt crash on bad syntax.
+- Fixed #380: @OSVersion for Windows XP 64-bit Edition.
+- Fixed #346: FileOpenDialog/FileSaveDialog filter length limit.
+- Fixed #387: DllClose() and DllCallbackFree() crashing when an invalid handle used.
+- Fixed #449: @SystemDir does not return SysWOW64 under X64 in 32-bit mode.
+- Fixed #440: Fatal error when script ends with EOF (0x1A).
+- Fixed #464: Example script for GUICtrlCreateAvi() did not work on Vista.
+- Fixed #484: ObjGet() would crash when invalid files were specified.
+- Fixed #501: ProcessGetStats() failed for processes running as other users (including SYSTEM).
+- Fixed #92: DllStruct data truncated with char[]/wchar[].
+- Fixed: GuiCtrlSetState($graphic, $GUI_HIDE) does not hide.
+- Fixed: GuiCtrlSetResizing($graphic, ) not moving.
+- Fixed: GuiCreate(...,Style without caption) does not resize properly.
+- Fixed: GuiSetStyle(caption change) does not resize properly.
+- Fixed: GuiCtrlSetState($listviewitem) does not return error.
+- Fixed #562: Specifying the TITLE property caused all other properties to be lost (Window title matching).
+- Fixed #569 TCPRecv doc example.
+- Fixed #589: Some comparison operators did not return a boolean value.
+- Fixed #583: Bad formatting of @MSEC in documentation.
+- Fixed #574: Using 0 for the SendKeyDelay or SendKeyDownDelay removes the respective delay when using Send().
+- Fixed #542: Crash with regular expressions.
+- Fixed #531: Clarification of some of the remarks for GUICtrlSetGraphic().
+- Fixed #539: StringSplit() with flag 2 and no matching delimiters wasn't returning the full string.
+- Fixed #601: Tooltip return 0 when title length >99.
+- Fixed #608: listView GUICtrlSetBkColor not redrawn.
+- Fixed #628: GuiCtrlRead($ctxmenu, $adv) bad return (Saunders)
+- Fixed #640: PCRE does not support \L, \l, \N, \U, or \u : doc updated
+- Fixed #642: Installer now correctly opens the merged helpfile to the history page instead of the AutoIt-only helpfile.
+- Fixed #646: Call() now sets specific @error and @extended values when it fails to find a function.
+- Fixed #669: Typo in Dec() example.
+- Fixed #659: Documented that UNC paths are not supported when using FileSelectFolder().
+- Fixed #671: Crash when using $WS_EX_MDICHILD without specifying a valid parent.
+- Fixed: Crash when using BinaryToString() with invalid UTF16 input string.  BinaryToString() now has new @error codes to support diagnosing invalid input.
+- Fixed #743: AutoIt Crash when Tray functions are use with invalid ID.
+- Fixed #748: AutoIt Crash with DllCall(0,...).
+
+- Changed #393: Documented that SoundSetWaveVolume() works differently in Windows Vista.
+- Changed: PCRE regular expression engine updated to 7.8.
+- Changed: @ProcessorArch changed to @OSArch as it was misleading.
+- Changed: Size limits removed from RegRead() and RegWrite() (previously 64KB for some registry types).
+- Changed: RegRead() and RegWrite() no longer use hex strings for REG_BINARY types - native binary datatypes are enforced.
+
+Aut2Exe:
+- Fixed #436: Compression level was ignored when performing compilation from the GUI.
+- Added #460: More verbose UPX errors.
+
+AutoItX:
+- Changed: Native DLL: All string methods in the native API are now Unicode. The majority of functions no longer have ANSI versions.
+- Added: COM: WinList method.
+- Fixed: Native DLL: Return strings were sometimes incorrectly terminated.
+- Fixed: PixelChecksum() not returning correct values.
+
+UDFs:
+- Added: _GDIPlus_StringFormatSetAlign
+- Added: _StringExplode()
+- Added: _GDIPlus_ImageGetFlags, _GDIPlus_ImageGetHorizontalResolution, _GDIPlus_ImageGetPixelFormat, _GDIPlus_ImageGetRawFormat
+         _GDIPlus_ImageGetType, _GDIPlus_ImageGetVerticalResolution
+- Added: _PathGetRelative
+- Added: _ArrayCombinations, _ArrayPermute, _ArrayUnique
+- Added: _WinAPI_CreatePen, _WinAPI_DrawLine, _WinAPI_LineTo, _WinAPI_MoveTo, _WinAPI_GetBkMode, _WinAPI_SetBkMode
+- Added: _WinAPI_CombineRgn, _WinAPI_CreateRectRgn, _WinAPI_CreateRoundRectRgn, _WinAPI_SetWindowRgn
+- Added: _ExcelHorizontalAlignSet, _ExcelFontSetProperties, _ExcelBookAttach
+- Added: _WinAPI_SetEndOfFile, _WinAPI_SetFilePointer
+- Added: Missing FrameConstants.au3
+- Added: Excel UDFs
+- Added: _Timer_GetIdleTime, _WinAPI_GetWindowPlacement, _WinAPI_SetWindowPlacement
+- Added #332: Remarks to _GUICtrlStatusBar_Create
+- Added #275: _GDIPlus_GraphicsFillPolygon
+- Added: _GUICtrlTab_ClickTab
+- Added: _GUICtrlComboBoxEx_GetUnicode, _GUICtrlComboBoxEx_SetUnicode
+
+- Removed: _StringSplit, no longer needed
+
+- Fixed #693: _DateTimeFormat() time format
+- Fixed #701: _GUICtrlListView_ClickItem() Clicks in the wrong place when $fMove = True
+- Fixed #700: _GUICtrlTreeView_ClickItem() Clicks in the wrong place when $fMove = True
+- Fixed #703: _GUICtrlListBox_ClickItem() Clicks in the wrong place when $fMove = True
+- Fixed #705: _GUICtrlToolbar_ClickButton() Clicks in the wrong place when $fMove = True
+- Fixed #707: _GUICtrlMonthCal_Create() width and height
+- Fixed #674: _GUICtrlTab_ClickTab() Clicks in the wrong place when $fMove = True
+- Fixed #610: _WinAPI_CreateFile() wrong return value upon failure
+- Fixed #619: _GUICtrlListView_SetItemSelected memory allocation
+- Fixed #617: corrections to six GDI+ ImageGet help file examples
+- Fixed #621: _StringAddThousandsSep don't work with negative number
+- Fixed #635: _GuiCtrlTab_ClickTab() docs list unused $fPopupScan parameter
+- Fixed #650: Missing BorderConstants.au3
+- Fixed #656: _FileCountLines returns 0 if file only contains 1 line
+- Fixed #600: _ArraySearch fails with 2D array.
+- Fixed #603: _FileReadToArray() does not return an array if the file contains only a single line of text.
+- Fixed #495: _GUICtrlTreeView_GetTree returns only 1 parent
+- Fixed #503: _Date_Time_FileTimeToLocalFileTime example
+- Fixed #510: _GUICtrlListView_ClickItem: If columns inside listview exceed visible area, clicks outside of the control
+- Fixed #500: _ChooseColor run on 64bit
+- Fixed #517: WinAPI UDF - bad error checking after DllCall()
+- Fixed #533: Array functions dimension check
+- Fixed: various Timer Functions
+- Fixed #506: _FileCountLines deal with all common line-end-chars
+- Fixed #485: WinAPI missing related links in helpfile
+- Fixed #571: return value doc for _GUICtrlListBox_FindString, _GUICtrlListBox_GetAnchorIndex and _GUICtrlListBox_GetText
+- Fixed #586: _GuiCtrlListView_SetGroupInfo() destroyed group ID's.
+- Fixed #516: _ChooseFont run on 64bit
+- Fixed #595: _WinAPI_SetWindowsHookEx help file description of $WH_KEYBOARD_LL
+- Fixed #465: _DateTimeSplit if seconds omitted defaulted to -1, now defaults to 0
+- Fixed: Excel Examples
+- Fixed #422: _GDIPlus_GraphicsSetSmoothingMode $iSmooth accepts only 0 - 4, doc updated
+- Fixed #388: _GUICtrlToolbar_SetButtonSize Example
+- Fixed #400: SQLite.dll.au3 @ProcessorArch replaced with @OSArch
+- Fixed #390: _viPrintf replaced return type
+- Fixed #371: _GDIPlus_Startup return value
+- Fixed #368: _ArrayToClip return value
+- Fixed #361, #362: _GUICtrlListView_InsertItem doc
+- Fixed #285: _ChooseColor Example
+- Fixed #299: _GUICtrlTab_SetItemText buffer length for Unicode
+- Fixed #292: _EventLog__Clear not clearing log when backup parameter is empty
+- Fixed #258: _ClipBoard_GetData
+- Fixed #294: _FileReadToArray where the file contains no @LF
+- Fixed #303: Clock.au3 in Examples\GUI\Advanced
+- Fixed: _GUICtrlListView_SetItemEx text buffer
+- Fixed #320: _WinNet_EnumResource struct pointers
+- Fixed #321: _GUICtrlStatusBar_GetText buffer length for Unicode
+
+- Changed: StringAddThousandsSep params in regards to #442
+- Changed #733: Doc for _GUICtrlButton_SetImageList
+- Changed: _SQLite -> 3.6.7
+- Changed #442: _StringAddThousandsSep() allows for regional settings
+- Changed #290: _GDIPlus_DrawImagePoints
+- Changed: _Soundxxxx functions
+- Changed #599: _FileListToArray speed optimization
+
+
+
+3.2.12.1 (12th June, 2008) (Release)
+
+AutoIt:
+- Fixed #309: RunAs() and RunAsWait() now use @SystemDir as the working directory instead of @WorkingDir when a user-supplied working directory is not specified.
+- Fixed #325: contextmenuitem not firing events.
+- Fixed #282: Icon transparency refresh when on tab regression.
+- Fixed #360: RunAs() under Windows 2000.
+
+
+
+3.2.12.0 (16th May, 2008) (Release)
+
+AutoIt:
+- Removed: Unnecessary optional parameter from ProcessClose().
+- Removed: RunAsSet().  (Replaced with RunAs() and RunAsWait())
+- Removed: RunErrorsFatal option ( Opt() ).
+- Removed: ColorMode option ( Opt() ).
+
+- Changed: @Unicode renamed in @AutoItUnicode. @Unicode is an alias for now. It will be removed > 3.2.14.0
+- Changed: The behavior of StdoutRead(), StderrRead(), StdinWrite() and ConsoleRead() has been changed.
+- Changed: PCRE regular expression engine updated to 7.6.
+- Changed: AutoIt internet functions (e.g. InetGet()) now use "AutoIt" as a user-agent.  Previously using blank
+			which was blocked by many websites.
+- Changed: ControlClick() now accepts the same mouse buttons as MouseClick() - left/right/middle/primary/secondary/main/menu.
+- Changed: Maximum controls in a GUI window 4093 -> 65532.
+- Changed: @OSVersion can now return "WIN_2008" for Windows Server 2008.
+
+- Added: RunAs(), RunAsWait().
+- Added: GUISetAccelerators().
+- Added: REGEXPCLASS in Advanced Window and control definitions.
+- Added: X, Y, W, H in advanced window/control definitions.
+- Added: DllCall() new types int_ptr, uint_ptr, long_ptr, ulong_ptr. Special types that change size on x86/x64.
+- Added: "REG_QWORD" type for RegWrite().
+- Added: HotKeySet() modified to work with the {} notation.
+- Added: FileReadLine( ,-1) read last line.
+- Added: Std I/O redirection works with RunAs...().
+- Added: Std I/O merged flag for using the same stream for stdout/stderr.
+- Added: Std I/O supports binary data.
+- Added: ConsoleWrite()/ConsoleWriteError() now return the amount of data written.
+- Added: Remarks in Run() about how to close streams/release resources associated with STDIO.
+- Added: StdioClose() function to force STDIO data closed for a process.
+- Added: ProcessClose() now closes processes started by other users.
+- Added: ProcessWaitClose() returns exitcode in @extended
+- Added: Pixel...() can specified a window handle as last parameter.
+- Added: "start" and "count" parameters added to StringInStr().
+- Added: GUICtrlSetDefColor(), GUICtrlSetDefBkColor().
+- Added: Added parent window parameter to MsgBox(), FileSelectFolder(), FileOpenDialog(), FileSaveDialog().
+
+- Fixed: DllCall() setting wrong @error values.
+- Fixed: BlockInput() returns errors.
+- Fixed: WinWaitActive() not matching (more frequent with Windows Vista).
+- Fixed: GUICtrlSetState($GUI_SHOW) on hidden radio on an active tab.
+- Fixed: SciTe Lite not installed in the AutoIt Choosen release dir.
+- Fixed: WinMove() with Speed = 0 crash the script.
+- Fixed: Mysterious return value of 1 when no explicit value was set.
+- Fixed: ControlCommand(), "GetLineCount"
+- Fixed: _FileListToArray() when using root drive dir as c:\ under Win9x.
+- Fixed: TraySetState(4) flashing tray icon for Windows Vista.
+- Fixed: ProcessExists() wrong return.
+- Fixed: StringRegExp() crashing under Win95.
+- Fixed: Handle leak when using Run() with I/O redirection.
+- Fixed: Disabled input control background on Tab.
+- Fixed: GUICtrlDelete() of a tab if two GUI windows are used.
+- Fixed: AutoIt crash in Random() when range exceeds 2^31.
+- Fixed: #include parsing error detection.
+- Fixed: Array entry passed Byref to a UDF.
+- Fixed: FileSetTime() erronously rounds UP on non NTFS partition.
+- Fixed: STDIO redirection sometimes failed on Windows 9x.
+- Fixed: IniReadSectionNames() returning incorrect number of sections under Win9x.
+- Fixed: AutoIt tray icon removal on script exiting.
+- Fixed: AutoIt crash when removing ObjEvent() object.
+- Fixed: ObjEvent() handler can destroy return of AutoIt Function : as winwait("title") can return 0.
+- Fixed: Dirmove() on different volume.
+- Fixed: Crash with RegRead() and REG_MULTI_SZ on x64.
+- Fixed: GuiCtrlListView() behind BG Picture. Doc updated.
+- Fixed: Various Edit control focus and DefPushButton issues.
+- Fixed: ControlTreeview() returning @error=1 on success.
+- Fixed: COM objects could lose numeric precision.
+- Fixed: StringReplace() with start float number.
+- Fixed: ControlCommand() "SelectString" wrong selection.
+- Fixed: StringSplit() flag=1 delimiters not case sensitive.
+- Fixed: In advanced Window descriptions only semi-colon must be escaped.
+- Fixed: ObjGet() memory leak.
+- Fixed: Modified AutoUpdateIt.au3 to work under x64.
+- Fixed: Resizing GUI before GUISetState().
+- Fixed: Radio events fired when GUI reactivated.
+- Fixed: GUICtrlDelete() on contextMenuItem.
+- Fixed: An attempt to FileDelete() a file that was just executed with RunWait() would sometimes fail.
+- Fixed: GUI performance problem when creating a large number of windows.
+- Fixed: GuiGetCursorInfo() with swapped mouse buttons.
+- Fixed: Random(Min,Max,1). Previously this would never actually return Max,
+	so if Max was artificially incremented by one the script will now need to be changed.
+
+
+AutoItX:
+- Added: ControlTreeView().
+- Fixed: ControlListView() for native DLL version.
+
+Aut2Exe:
+- Added: Option to compile scripts as console applications.
+
+AU3Info:
+- Changed: Controls are always highlighted when using the finder tool.
+- Changed: Controls are not highlighted by default.
+- Changed: Control description gives the advanced version of class and instance.
+
+SciTE "lite":
+- Updated the source to version 1.76
+- Added Save Dialog extension.
+
+UDFs:
+ - See the script breaking changes page.
+
+
+
+3.2.10.0 (25th November, 2007) (Release)
+
+- Changed: DllCall() new method of passing types by reference using *.
+- Changed: DllCall(): short_ptr, long_ptr, int_ptr types deprecated.  Use short*, long* and int* respectively.
+- Changed: Limits on Execute() removed.
+
+- Changed: PCRE regular expression engine updated to 7.4.
+
+- Added: 64bit (x64) versions of AutoIt, Aut2Exe, Au3Info and AutoItX.
+- Added: DllCallbackRegister(), DllCallbackGetPtr() and DllCallbackFree()
+- Added: DllCall() now accept doubles, int64, uint64, wparam and lparam types.
+- Added: SendKeepActive().
+- Added: ControlTreeView().
+- Added: ProcessGetStats().
+- Added: VarGetType().
+- Added: @AutoItX64 macro.
+- Added: Au3Info : Handle info for windows and controls.
+- Added: DllStructCreate() added "align" keyword to set structure alignment.
+
+- Fixed: Control...() functions using CLASS and TEXT together sometimes incorrect.
+- Fixed: Control...() functions using CLASSNN sometimes incorrect.
+- Fixed: Windows Vista taskbar previews causing problems with windows matching.
+- Fixed: $var = $var was not giving an error when $var didn't already exist.
+- Fixed: GUICtrlSetImage() sizing regression from 3.2.4.9.
+- Fixed: GUICtrlCreateListView() with no column.
+- Fixed: _GUICtrlListViewInsertColumn() after _GUICtrlListViewDeleteColumn() of the first column of a ListView control.
+- Fixed: Extra notification on colored button.
+- Fixed: IniReadSectionNames() for [] sections.
+- Fixed: Opt("WinTitleMatchMode", Default) fatal error.
+- Fixed: GUICtrlSetStyle() with $ES_READONLY bad $WS_TABSTOP.
+- Fixed: AutoIt Crash on exit if Win...() used with a Title being a COM object.
+- Fixed: ProcessExists() on service process under Win2K.
+- Fixed: DefPushButton behavior.
+- Fixed: ControlCommand(SelectString) order selection.
+- Fixed: Array cannot have 2^24 entries.
+- Fixed: GuiCreateMenu() on a windows without title and without client area.
+- Fixed: WinWaitActive() sometimes failing after a WinActivate().
+- Fixed: _SQLite_SQLiteExe() referencing by default "Extras\SQLite\SQlite3.exe".
+- Fixed: _Sound...() when refering to a file with "!" characters.
+- Fixed: Looping GUIRegisterMsg() doesn't unregister.
+- Fixed: Focus on ES_READONLY edit control.
+
+
+
+3.2.8.1 (10th September, 2007) (Release)
+
+- Fixed: Possible crash with StringRegExp().
+
+
+
+3.2.8.0 (8th September, 2007) (Release)
+
+- Changed: General speed improvements (currently up to 24% in some cases compared to 3.2.6.0).
+- Changed: PCRE regular expression engine updated to 7.3.
+- Changed: Recursion-based code limits relaxed.
+
+- Added: wchar type added to DllStructCreate().
+- Added: WinMove() speed parameter.
+
+- Fixed: Crash on AutoIt exit if TrayCreateItem() is not deleted.
+- Fixed: AutoIt crash on bad parameter when calling TrayCreateMenu()
+- Fixed: Character positions used in StringRegExp() not correct for characters > 127 (accents, non-Western)
+- Fixed: ProcessExist() under Windows 9x.
+- Fixed: GUISetState(@SW_DISABLE) not disabling keyboard input.
+- Fixed: Sometimes AutoIt crashes on DllStructGetData() with char[] types.
+- Fixed: Au3Info restoring last settings at startup.
+- Fixed: Better handling of notifications when using colored buttons.
+- Fixed: ControlGetText() crash on Scite windows.
+- Fixed: $LVSCW_AUTOSIZE column truncates display string.
+- Fixed: Incorrect listview creation with GUICtrlCreateListView().
+- Fixed: Memory leak when AutoIt needed to get long file name.
+- Fixed: ListviewItem not created after other child Window creation/deletion.
+- Fixed: ControlGetFocus() returning bad ClassNN values.
+- Fixed: Detection of invalid CONTINUELOOP statement.
+
+
+3.2.6.0 (25th August, 2007) (Release)
+
+- Changed: IconId in all GUI functions is now the same as GUICtrlSetImage().
+
+WARNING: Previous scripts using GUICtrlSetImage(), GUISetIcon(), TraySetIcon() and TraySetPauseIcon()
+	may display a wrong Icon. To get the same icon "if nId > 0 Then newId = - nId - 1".
+
+- Changed: AutoIt .a3x and compiled script format.  Exe2Aut will only decompile 3.2.5.1
+           and earlier files. No ExeAut utility is supplied for ongoing versions.
+
+- Changed: General performance improvements (currently around 30-40% over 3.2.4.9)
+- Changed: Limited Unicode support added in regular expressions.
+- Changed: ControlMove() just resizing as WinMove() if X=Y=Default.
+- Changed: PCRE engine updated from 7.0 to 7.1
+- Changed: Suppress delay when speed=0 in MouseMove().
+
+- Added: GUIGetStyle().
+- Added: byte and ubyte type to DllCall().
+- Added: ClassnameNN in control and summary info in Au3Info.
+- Added: Float type to dllCall.
+- Added: AU3Check v1.54.8 support for both "#AutoIt3Wrapper_plugin_funcs" and "#Compiler_plugin_funcs".
+- Added: Extra parameter in ProcessClose() to close Stream handles.
+
+- Fixed: AutoIt crash on WinWait("","text") when a Scite is open.
+- Fixed: Some crashes on Chinese systems during Unicode/ANSI conversions.
+- Fixed: Aut2Exe crashing on Chinese systems when running in ANSI.
+- Fixed: Wrong Notification on {ENTER} after clicking on a listviewItem.
+- Fixed: Wrong resetting of image on listviewitems if image set on the listview.
+- Fixed: Resizing of listview control.
+- Fixed: @error not set on bad WinGetPos() return.
+- Fixed: LVM_EDITLABEL hogging cpu.
+- Fixed: AutoIt (non UNICODE version) crash with some COM objects.
+- Fixed: GUISetState() on GUI with W=0 or H=0.
+- Fixed: GUI control Tip not reappearing after a click or timeout.
+- Fixed: GUI controls not at the right position if a Control menu is in use.
+- Fixed: EnvUpdate() in UNICODE AutoIt version not working since 3.2.3.3.
+- Fixed: FileRead(..., count) returning count-1 chars.
+- Fixed: Unicode filenames in FileInstall().
+- Fixed: LVS_EX_HEADERDRAGDROP extendedstyle.
+- Fixed: UpDown control shows through tabbed pages.
+- Fixed: GUICtrlSetState on UPDOWN control without changing the state.
+- Fixed: FileInstall() in compiled scripts causing GUI problems.
+- Fixed: ControlGetFocus() on control not created with AutoIt GUI.
+- Fixed: @AutoItPID and processlist coherency under Win9x.
+- Fixed: GUICtrlSetResizing not returning error on non resizable control.
+- Fixed: Regression for ControlSend SHIFTDOWN/UP since 3.2.3.13.
+- Fixed: Drag and drop on a listview control after clicking on its header.
+- Fixed: Support "resource only" dlls for GUISetImage().
+- Fixed: Default minimum for GUICtrlSetLimit() set to 0.
+- Fixed: Z order after GUICtrlSetStyle() on edit or input control.
+- Fixed: FileReadLine() getting bad cached data when reading specific line numbers with file handles.
+- Fixed: Slight lag in GUIGetMsg() under certain circumstances.
+- Fixed: StringReplace() and occurances parameter.
+- Fixed: GuiCtrlSetFont() on Tab control.
+- Fixed: Leading blanks before #include cannot be compiled.
+- Fixed: Notification on ENTER on Colored button.
+- Fixed: RegWrite() setting bad registry entry in certain circumstances.
+- Fixed: AutoIt hogging CPU when text msgbox too big.
+- Fixed: ControlSend() sometime to wrong control when using empty controlid.
+- Fixed: ProcessExists() under Win2K with processname >15 chars.
+- Fixed: Int() with string comparison wrong match.
+- Fixed: InetGetSize() in unicode version returns 0.
+- Fixed: GUICtrlCreateListview() with more than 254 columns.
+- Fixed: AutoIt Crash on recursive RegExp.
+- Fixed: BitRotate() with left bit set.
+- Fixed: Filemove() returning 1 without any move.
+- Fixed: FileRead() returning chr(0) in ANSI mode.
+- Fixed: Au3Info control coords relative to client.
+- Fixed: StringInStr() not returning 0 when searching backward and search length greater than string.
+
+
+3.2.4.9 (25th May, 2007) (Release)
+
+- Added: StringCompare()
+
+- Fixed: Basic string comparisons were not working with locale as in previous versions.
+
+
+3.2.4.8 (23rd May, 2007) (Release)
+
+- Fixed: Errors with non-western codepages and ANSI format scripts.
+
+
+3.2.4.7 (22nd May, 2007) (Release)
+
+- Added: Aut2Exe options for forcing ANSI mode compilation (/ansi and /unicode)
+- Added: StringToBinary()
+- Added: Additional unicode related options for BinaryToString()
+
+
+3.2.4.6 (20th May, 2007) (Release)
+
+- Fixed: StringReplace() and occurances parameter.
+
+
+3.2.4.5 (20th May, 2007) (Release)
+
+- Added: BinaryToString() for binary buffer to ANSI string quick conversions.
+- Added: @Unicode to show if AutoIt is being run in Unicode or ANSI mode.
+
+- Changed: StringReplace() speeded up - a lot.
+- Changed: Au3Info is now resizable.
+
+- Fixed: Chr(0) now properly works with Binary()
+
+
+3.2.4.4 (17th May, 2007) (Release)
+
+- Fixed: Chr(0) now acting more sensible (now acts in a similar way to VBScript).
+
+
+3.2.4.3 (17th May, 2007) (Release)
+
+- Fixed: FileRead() not working properly with unicode files.
+
+
+3.2.4.2 (15th May, 2007) (Release)
+
+- Changed: Au3Info graphical tweaks and Summary tab.
+
+- Fixed: FileReadLine() getting bad cached data when reading specific line numbers with file handles.
+- Fixed: Slight lag in GUIGetMsg() under certain circumstances.
+
+
+3.2.4.1 (13th May, 2007) (Release)
+
+- Added: ChrW() and AscW() for unicode operations.
+
+- Fixed: Chr() and Asc() for character codes 128-255 in unicode mode.
+- Fixed: Unicode BOM was not being written in file append modes if the file was empty.
+- Fixed: Error in Include\GuiCombo.au3 and Include\IE.au3.
+
+
+3.2.4.0 (10th May, 2007) (Release)
+
+Big Changes:
+
+- AutoIt is now compiled for Unicode!  AutoIt3.exe is Unicode - AutoIt3A.exe is ANSI.
+- Au3Info tool rewritten.
+- Binary data functions completely rewritten - scripts using these functions will need to be changed.
+
+
+Other Changes:
+
+- Added: New modes for FileOpen() to force Unicode and binary operations.
+- Added: BinaryLen(), BinaryMid()
+- Added: Colored GUI buttons.
+- Added: DllStruct...() can reference elements by name rather than index.
+
+- Changed: Removed restrictions on the maximum number of #include directives.
+- Changed: Removed restrictions on the maximum number of DllOpen() handles.
+- Changed: Removed restrictions on the maximum number of open files.
+- Changed: Removed restrictions on the maximum number of hotkeys.
+- Changed: Performance improvements in StringStripWS().
+- Changed: Binary data in variants are now treated as a special type, separate from normal strings.
+- Changed: BinaryString() renamed to Binary()
+- Changed: IsBinaryString() renamed to IsBinary()
+- Changed: ControlClick() can now click a control at a certain position.
+- Changed: ControlClick() can now properly simulate double-clicks.
+- Changed: ControlClick() no longer forces the activation of the parent window (up to the user now).
+- Changed: ControlClick() related coordinates added to Au3Info.
+- Changed: Improved the searches that can be done for windows/controls/instances.
+- Changed: From DEFAULT_QUALITY to PROOF_QUALITY for Change/Set Font functions.
+- Changed: x^y compatible with C99 standard.
+
+- Fixed: Possible crash when using StringStripWS(), flag 4 and empty strings.
+- Fixed: GUICtrlSetLimit() for UpDown controls wher min = max.
+- Fixed: GuiCtrlSetTip() not always working correctly.
+- Fixed: Slow GUI tab redrawing under Windows Vista fixed.
+- Fixed: HotKeySet bad notification.
+- Fixed: FileGetAttrib() on pagefile.sys.
+- Fixed: Invalid default parameter in GUICtrlSetData() not detected.
+- Fixed: Assign does return error on array element.
+- Fixed: FileOpen("test.txt", 2+8) returning error.
+- Fixed: Error detection in Enum statement.
+- Fixed: Opt("WinTitleMatchMode").
+- Fixed: Stack corruption resulting from improper use of DllCall() now gracefully aborts the script instead of hard crashing.
+- Fixed: Crash when reading empty REG_MULTI_SZ.
+- Fixed: Round() not returning an integer.
+- Fixed: ControlSend() to empty "" ctrl fixed for inactive window. Also shift state behavior.
+- Fixed : O^(-1).
+- Fixed: Non detection of illegal statement.
+- Fixed: HotKeySet("^{PAUSE]",... notification.
+- Fixed: {CTRLBREAK} ->{BREAK} as ctrl is user responsability.
+- Fixed: $var = Default passed as parameter to Com object.
+- Fixed: Edit control would always have focus the first time the GUI was displayed even if it shouldn't.  This behavior also ignored $GUI_FOCUS.
+- Fixed: range value for seed Number in SRandom().
+- Fixed: Fileread crash if no count in raw mode.
+- Fixed: Opt("WinTitleMatchMode", <0) really matching case insensitive.
+- Fixed: FileSetAttrib/FileSetTime wrong setting.
+- Fixed: Execute/Call recursive overflow display error message.
+- Fixed: Aut2exe warning message if icon not found.
+- Fixed: WinGetTitle() returns 1 on error.
+- Fixed: Memory leak on keyword variable deallocation.
+
+
+3.2.2.0 (23rd December, 2006) (Release)
+
+- Added: StringRegExp() and StringRegExpReplace() regular expression support (Perl compatible)
+- Added: Regular expression support for Window title matching.
+- Added: ShellExecute() and ShellExecuteWait() functions.
+- Added: #RequireAdmin for UAC/Windows Vista
+- Added: Windows Vista help file entry.
+- Added: GuiCtrlSetState() $GUI_DROPNOTACCEPTED.
+- Added: $GUI_FOCUS, $GUINOFOCUS for listviewitem control.
+- Added: IsDllStruct()
+- Added: SRandom() to set seed for random number generation.
+- Added: WinTitleMatchMode for case insensitive matching.
+- Added: IconId can be reference by ordinal value if negative 1-based index is use.
+- Added: CompiledScript string file info for compiled script.
+- Added: Support >32x32 icon from .exe/.dll in GUICtrlCreateIcon or GUICtrlSetImage.
+- Added: Expanded GUICtrlSetTip() to allow creation of tooltips with titles, icons and using the balloon tip style.
+- Added: Tooltip supports Default keyword.
+- Added: Remark added to _PathSplit() mentioning that it does not accept command line strings, only paths.
+- Added: 2 UDF's to GUIStatusBar.au3.
+- Added: GUICtrlCreateIcon and GUICtrlSetImage can select in multiple icon file by name.
+- Added: @KBLayout to retrieve the current keyboard configuration.
+- Added: ToolTip() option to ensure the tooltip is always displaying on a monitor.
+- Added: IniWriteSection() function.
+- Added: @extended error code on DriveMapAdd error.
+- Added: Listview Alternate coloring with $GUI_BKCOLOR_LV_ALTERNATE.
+
+- Removed: old WinShow, TimerStart and TimerStop functions.
+
+- Changed: Performance improvements (up to 100% on some scripts!).
+- Changed: @error set to WinAPI GetLastError() for Run().
+- Changed: Small tweak to Floor() to ensure it is not as susceptible to floating point precision errors.
+- Changed: Small tweak to Ceiling() to ensure it is not as susceptible to floating point precision errors.
+- Changed: PixelChecksum() is now over 30x faster.
+- Changed: FileGetVersion() extra parameter to retrieve string file info.
+
+- Fixed: MsgBox() timeout on Windows Vista.
+- Fixed: GuiCtrlRead on listview control when sorted.
+- Fixed: @OSVERSION on Windows 9x.
+- Fixed: GuiGetCursorInfo() with Handle not retrieving mouse click info.
+- Fixed: DllCall() crashes when using uint, ushort.
+- Fixed: List control height when font size changes.
+- Fixed: GUICtrlSetImage() not testing icon on error.
+- Fixed: @ScriptDir equal @WorkingDir for rootdir (x:\).
+- Fixed: GUIGetCursorInfo() (winhandle) when child not active.
+- Fixed: _StringAddComma().
+- Fixed: drag & drop $GUI_EVENT_DROPPED notififation on edit control.
+- Fixed: Coherency of type parameter for DLLCall() and DLLSructCreate()
+- Fixed: Default keyword didn't always work correctly with COM objects.
+- Fixed: COM property write fails when using arguments
+- Fixed: Send/ControlSend for US international keyboard
+- Fixed: Send/ControlSend char>=chr(128) for english keyboards.
+- Fixed: COM property write fails when using arguments.
+- Fixed: MsgBox() with task modal flag left GUI's disabled on timeout.
+- Fixed: Error reporting by messagebox even with /ErrorStdOut.
+- Fixed: GUICtrlSetImage default icon value for Icon Ctrl.
+- Fixed: GUIRegisterMSG() destroyed @error.
+- Fixed: $LVS_SORTASCENDING with GUICtrlSetImage icon gave bad display.
+- Fixed: Some Object Collections could not be parsed in one AutoIt statement.
+- Fixed: Bad screen updating of already unchecked radiobuttons.
+- Fixed: Tray icon tooltip not displaying the scriptname when compiled.
+- Fixed: UDP... return code on error.
+- Fixed: UDPRecv() crashed on bad parameter.
+- Fixed: COM was corrupting floating point values.
+- Fixed: GUICtrlSetState doc remarks about menu control.
+- Fixed: Refresh after a GUICtrlSetBkColor().
+- Fixed: Crash on line begining with ~  : "Unable to parse line".
+- Fixed: IniReadSectionNames() returned bogus data in Windows 98 when the INI file was empty or did not exist.
+- Fixed: @compiled when the script is compiled.
+- Fixed: Send() to italian keyboard.
+- Fixed: MouseMove() in secondary screen.
+- Fixed: StringInStr() not converting to string search parameter.
+- Fixed: Int() of a binarystring.
+- Fixed: ControlSend sending() special characters.
+- Fixed: Crash in Au3exe with badly formed input file in FileInstall().
+- Fixed: Wrong execution of a compiled script containing FileInstall() inside #CS-#CE.
+- Fixed: FileInstall() referencing a file without any path will reference it from the ScriptDir to be coherent with the compiled script.
+- Fixed: Aut2exe crashed using cmdline with shortnames.
+- Fixed: Tooltip state (such as icon or title) was showing up on subsequent tooltips that didn't want those items.  This affected both ToolTip() and GUICtrlSetTip().
+- Fixed: GUIRegisterMSG() destroy @error.
+- Fixed: $LVS_SORTASCENDING with GUICtrlSetImage() icon bad display.
+- Fixed: Wrong default arguments for _ArrayToString().
+- Fixed: Bad "#" instruction inhibit whole script.
+- Fixed: Installer SciTE bad link creation.
+- Fixed: Uninstaller include file removal
+
+
+3.2.0.1 (13th August, 2006) (Release)
+
+- Fixed: (AU3INFO) Buffer overrun in control code.
+- Fixed: Exe2Aut.exe was missing its digital signature.
+
+
+
+3.2.0 (12th August, 2006) (Release)
+
+- Added: COM object support.
+- Added: Aut2Exe can now created .a3x encoded files (similar to .zip for .au3).
+- Added: Support for custom tray icons.
+- Added: "default" keyword.
+- Added: IsKeyword() so "default" keyword can be used as parameter in a user function call.
+- Added: Boolean support and keywords of 'false' and 'true'.
+- Added: IsBool()
+- Added: +=, -=, *=, /= operators.
+- Added: DLLCall() cdecl and stdcall support.
+- Added: DLLStruct... functions.
+- Added: Limited TCP and UDP functions.
+- Added: Added support for reading and writing stdio.
+- Added: ConsoleRead(), ConsoleWriteError().
+- Added: Ability to initialize arrays in DIM and CONST keywords.
+- Added: Switch, EndSwitch structure.
+- Added: HWnd() and IsHWnd() functions.
+- Added: BinaryString(), IsBinaryString() functions.
+- Added: FileCreateNTFSLink().
+- Added: /AutoIt3ExecuteScript command line option.
+- Added: Call() now supports parameters.
+- Added: Execute()
+- Added: @HotKeyPressed macro.
+- Added: Unary NOT operations on strings are now allowed. A NOT operation on a non-empty string will result in FALSE.
+- Added: Beep() and WinFlash() functions.
+- Added: Floor() and Ceiling() functions.
+- Added: SetError can optionally set @extended.
+- Added: RegRead, RegEnumVal return the type of the value in @extended.
+- Added: FileSaveDialog(), FileOpenDialog() supports multiple filter groups.
+- Added: @ScriptLineNumber, @ProcessorArch, @AutoItPID.
+- Added: BitRotate().
+- Added: Fileopen(), FileCopy(), FileMove() additional flags to create non existent subfolders.
+- Added: FileRead(), FileWrite() work with binary files.
+- Added: (GUI) GUICtrlSetData text for treeview.
+- Added: (GUI) $WS_EX_MDICHILD support for GUICreate().
+- Added: (GUI) GUICtrlCreateGraphic(), GUICtrlSetGraphic().
+- Added: (GUI) Opt('GUIEventOptions',1) to suppress window action when clicking on Minimize,restore or Maximize buttons.
+- Added: (GUI) Right-click support for List/Treeview GUI control.
+- Added: (GUI) GuiCtrlRead return ControlID if Opt("GUIEventCompatibilityMode',2).
+- Added: (GUI) GUICtrlCreateMonthCal().
+- Added: (GUI) Opt("GUIDataSeparatorChar",...).
+- Added: (GUI) GUICtrlCreateObj().
+- Added: (GUI) GUICtrlSetColor(), GUICtrlSetBkColor(), GUICtrlSetImage() for ListviewItem controls.
+- Added: (GUI) GuiSwitch tabitemID optional parameter to allow dynamic control creation on a tabitem.
+- Added: (GUI) GuiCtrlListView support Icon view.
+- Added: (GUI) $GUI_WS_EX_PARENTDRAG Allow the label or pic control to be used as the title bar to drag the whole the parent window.
+- Added: (GUI) GUICtrlGetHandle().
+- Added: (GUI) $GUI_EVENT_DROPPED @GUI_DRAGID,@GUI_DROPID.
+- Added: (GUI) GuiSetCursor(16),GuiCtrlSetCursor(16) hide the cursor.
+- Added: (GUI) Allow Dragfile to any control. @GUI_DRAGFILE contain the filename to be used in the $GUI_EVENT_DROPPED.
+- Added: (GUI) GUIRegisterMsg() to work with GUI WM_Message-routines at runtime.
+- Added: (GUI) GUICtrlRegisterListViewSort() to create a real sorting routine for GUI ListView's.
+- Added: (GUI) Icons for tab items.
+- Added: (AU3INFO) AutoIt Windows Info : Now shows Style and exStyle values for the controls.
+
+- Changed: #include search algorithm modified.
+- Changed: The /c command line option has been replaced by /AutoIt3ExecuteLine.
+- Changed: RegEnumKey and RegEnumVal return more precise @error to help diagnostic.
+- Changed: Return,@error, @extended have to be explicit to be return by an UDF.
+- Changed: FileFindFirstFile no longer returns "." or "..".
+- Changed: Set _ to be a continuation character ONLY after whitespace.
+- Changed: FileClose with an invalid handle no longer triggers an AutoIt runtime error.
+- Changed: Fatal error message is now displayed if DLLCall cannot be executed.
+- Changed: The default setting on Au3info was changed so that it doesn't highlight controls.
+- Changed: RegEnumKey and RegEnumVal return more precise @error values to help diagnostics.
+- Changed: "OnAutoItExit" function is now called on system shutdown or user logoff.
+- Changed: Opt() with just the "option" will now return the current value for that option.
+- Changed: DllCall @error is set when function not found.
+- Changed: SplashTextOn() opt=32 to center vertically.
+- Changed: (GUI) GUICtrlCreateList now forces the style LBS_NOTIFY.
+- Changed: (GUI) GUICtrlCreateIcon default size is 32x32.
+
+- Fixed: ContinueCase to keywords allowed after IF.
+- Fixed: Mouse... invalid button definition.
+- Fixed: IniDelete() could create an empty file if the file did not exist.
+- Fixed: ToolTip Centering go around.
+- Fixed: Menu/ContextMenu enable/disable.
+- Fixed: Hotkey for filecreateshortcut.
+- Fixed: MemGetStats >2Gb.
+- Fixed: StringInStr return 0 when searching for "".
+- Fixed: RegRead under Windows 2000.
+- Fixed: Bad refresh on double GUICtrlSetPos.
+- Fixed: ControlSend (...,"{CTRLDOWN}b{CTRLUP}).
+- Fixed: ContextMenu position.
+- Fixed: Made sure that declaring a UDF parameter in a Local or Global statement will raise an error.
+- Fixed: File...Dialog browse through links.
+- Fixed: ControlCommand "GetCurrentSelection".
+- Fixed: Mouse... returns.
+- Fixed: MouseClick, MouseUp bad behavior.
+- Fixed: StringReplace("abc","","") returns 1 instead of "".
+- Fixed: WinSetTrans returns error.
+- Fixed: Assign not creating/assigning macro variable.
+- Fixed: Assign respect Opt("MustDeclareVars",1).
+- Fixed: @NumParams destroyed after UDF call.
+- Fixed: MouseClickDelay option. (Fixed by Nutster)
+- Fixed: Redim of array byRef parameter.
+- Fixed: InputBox left,top values when not defined.
+- Fixed: FileFindNextFile return error.
+- Fixed: HWND string concatanation.
+- Fixed: Exit inside UDF.
+- Fixed: SendKeyDelay, SendKeyDownDelay when  no shift required.
+- Fixed: FileReadLine with line=0.
+- Fixed: Listview sorting with using styles: $LVS_SORTASCENDING and $LVS_SORTDESCENDING.
+- Fixed: StringLen(integer) returning 0.
+- Fixed: Reg... functions on IA64/X64.
+- Fixed: FileFindFirstFile() leak handles.
+- Fixed: @IpAddress when not network installed.
+- Fixed: FileCopy, FileInstall, DirCopy, FileMove replacing the same file.
+- Fixed: FileClose,FileFindNextFile, FileRead, FileReadLine, FileWrite, FileWriteLine, PluginClose, DllClose return 0 on bad handle.
+- Fixed: FileCopy when creating subdir.
+- Fixed: String... on nonstring parameters.
+- Fixed: Float to Integer precision.
+- Fixed: Bad FatalError after Exit in UDF. Only the first FatalError will be displayed if any before Exit.
+- Fixed: Integer to string conversion.
+- Fixed: StringMid($a,3).
+- Fixed: StringSplit($a,"").
+- Fixed: Refreshing of dispayed tabitem after a tabitem delete.
+- Fixed: StringSplit($a," - ",1) string delimiter.
+- Fixed: Return code from delayed function as WinWait destroyed by Adlib execution.
+- Fixed: FileInstall on same dir.
+- Fixed: Func definition with Byref and default value.
+- Fixed: FileRead returning @error=-1 on empty file.
+- Fixed: INetGetSize, INetGet @error return.
+- Fixed: Run("a.tmp") a.tmp being a compiled script.
+- Fixed: StringSplit("a : b + "," : ").
+- Fixed: #include-once in main script.
+- Fixed: PixelSearch performance.
+- Fixed: HotKeySet("",...) return 0.
+- Fixed: ExpandVarStrings $$, ExpandEnvStrings %%.
+- Fixed: FileInstall in a compiled script whose name is not .exe or .a3x.
+- Fixed: RegRead return right number of fields on REG_MULTI_SZ type.
+- Fixed: FileRead($handle).
+- Fixed: ElseIf ... Then statement not detected.
+- Fixed: Illegal #include with no error message.
+- Fixed: SplashTextOn Memory Leak.
+- Fixed: #include recursion depth enforced.
+- Fixed: @OSVERSION for WIN_XP running under X64 edition.
+- Fixed: Comparison case insensitive accentuated upper case.
+- Fixed: DriveMapDel /DriveMapAdd interaction.
+- Fixed: RegRead MULTI_REG_SZ malformed key.
+- Fixed: For Next with boundary,stepping being a string (no conversion to integer).
+- Fixed: InetGet() could block the foreground execution even when run in background mode.
+- Fixed: WinGetProcess and ProcessExist return same pid precision.
+- Fixed: InetGet("abort") and exiting AutoIt with a download in progres now correctly stop the download immediately.
+- Fixed: @InetGetBytesRead Byte count could be wrong due to a race condition.
+- Fixed: DirCreate not creating subdir on dir with read/hidden/system attributes.
+- Fixed: FileSetAttrib, FileSetTime destroy @workingdir.
+- Fixed: (GUI) GUICtrlSetImage for 16x16 icon not repainting.
+- Fixed: (GUI) The use of $GUI_GR_RECT and $GUI_GR_ELLIPSE under fixed under Win98.
+- Fixed: (GUI) GUI Edit/Input control change notification.
+- Fixed: (GUI) Avoid GuiSwitch when only one remain.
+- Fixed: (GUI) GUI Multiple files drag & drop on edit/input control.
+- Fixed: (GUI) GUI Colors on edit/input control.
+- Fixed: (GUI) GuiCtrlSetImage return 0 on error.
+- Fixed: (GUI) crash Autoit when click on header button of a listview control.
+- Fixed: (GUI) GUICtrlState(@SW_MAXIMIZE or @SW_RESTORE).
+- Fixed: (GUI) GuiCtrlSetStyle ES_READONLY on input/edit control.
+- Fixed: (GUI) GUICtrlCreateTab disapearing.
+- Fixed: (GUI) Resizing of GUI Combo control.
+- Fixed: (GUI) GUICtrlSetData for list or combo not inserting.
+- Fixed: (GUI) GUICtrlSetState for Menu/menuitem.
+- Fixed: (GUI) GUICtrlDelete of a Listview control lead to crash after recreation with more columns.
+- Fixed: (GUI) GUICtrlCreateListViewItem with more field than column.
+- Fixed: (GUI) GUISetFont and Input Control not displayed.
+- Fixed: (GUI) GUICtrlRead return on expanded TreeviewItem.
+- Fixed: (GUI) Windows centering of GUICreate.
+- Fixed: (GUI) GuiCtrlSetPos on Icon control.
+- Fixed: (GUI) GuiGetCursorInfo on tab.
+- Fixed: (GUI) Some flickering in GUICtrlSetImage.
+- Fixed: (GUI) GuiCtrlSetState on non active tab.
+- Fixed: (GUI) TreeviewItem notify when clicking a second time on the same item.
+- Fixed: (GUI) GuiCtrlSetData on inactive tabitem not refreshing active item.
+- Fixed: (GUI) GuiCtrlSetState on control tab.
+- Fixed: (GUI) GuiCtrlSetState disable on hidden control tab.
+- Fixed: (GUI) GuiGetCursorInfo with nonactive GUI.
+- Fixed: (GUI) Bug with accelerator keys (Alt+...) and tabs.
+- Fixed: (GUI) Treeview painting under OS <XP.
+- Fixed: (GUI) GUICtrlSetData with float value.
+- Fixed: (GUI) GuiCtrlSetImage repainting.
+- Fixed: (GUI) Weird behavior when resizing column of listview on a tab.
+- Fixed: (GUI) GuiCtrlSetState($tabitem,$GUI_SHOW) on visible GUI.
+- Fixed: (GUI) GuiGetCursorInfo primary/secondary under nonXP.
+- Fixed: (GUI) GuiCtrlSendMsg, TraySetState doc link.
+- Fixed: (GUI) Crash when deleting an input control.
+- Fixed: (GUI) GuiCtrlCreateCombo and $CBS_DROPDOWNLIST color.
+- Fixed: (GUI) GuiCtrlCreateDate and $DTS_UPDOWN.
+- Fixed: (GUI) GUI click return position.
+- Fixed: (GUI) GuiGetMsg returning on Input control change.
+- Fixed: (GUI) GUICtrlCreateInput/Edit forcing WS_TABSTOP when ES_READONLY.
+- Fixed: (GUI) Resizing of controls dynamically created.
+- Fixed: (GUI) a small flickering bug in CtrlSetImage() for treeview items.
+- Fixed: (GUI) GuiCtrlSetPos, GuiCtrlSetResizing use visible window.
+- Fixed: (GUI) GuiCtrlCreateIcon icon size in multiple icon .ico file.
+- Fixed: (GUI) Pic control size inside a group control.
+- Fixed: (GUI) listview repainting on tab.
+- Fixed: (GUI) Memory overflow in customdraw operations in GUI while scrolling.
+- Fixed: (GUI) Bad GuiCtrlSetResizing when no first show has occured.
+- Fixed: (GUI) bkcolor label on tab if ListViewItem.
+- Fixed: (GUI) $SS_CENTERIMAGE on pic control.
+- Fixed: (GUI) AutoIt Crash when creating a control on a minimized window.
+- Fixed: (GUI) GUICtrlSetImage icon.
+- Fixed: (GUI) Grey coloring of input/edit control when disabled.
+- Fixed: (GUI) Crash after GUICtrldelete of a control having the focus.
+- Fixed: (GUI) UICreate with WS_VISIBLE do an implicit GUISetState().
+- Fixed: (GUI) Background label bad firing when overlayed by an edit control.
+- Fixed: (GUI) GuiCtrlSetData can delete a specific column.
+- Fixed: (GUI) memory leak on GuiDelete($tabitem with icon).
+- Fixed: (GUI) GUI updown control notification if change with keyboard.
+- Fixed: (GUI) GUIGetCursorInfo on listview header.
+- Fixed: (GUI) GUICreate WS_POPUP Centering.
+- Fixed: (GUI) Bad Notification on end of drag when $GUI_DROPACCEPTED not set on a control.
+- Fixed: (GUI) GUISetState(@SW_UNLOCK) force repainting.
+- Fixed: (GUI) GUICtrlSetState $GUI_SHOW on tab with $TCS_BUTTON style.
+- Fixed: (GUI) Bad tabitem creation when no tab defined.
+- Fixed: (GUI) Bad combo disable 16-bit color under W2K.
+- Fixed: (GUI) GUISetBKColor freezing the display.
+- Fixed: (GUI) GUICreate $WS_CHILD+$WS_VISIBLE w=0 or h=0 lead to crash AutoIt.
+- Fixed: (GUI) GuiCtrlCreatePic w=h=0.
+- Fixed: (GUI) GUICtrlRead menuitem checked.
+- Fixed: (GUI) Labels were not painted correctly on tab controls.
+- Fixed: (GUI) GUICtrlSetState(tabitem,@SW_SHOW) under creation bad tabitem display.
+- Fixed: (GUI) GUICtrlSetData on listview/listviewItem bad erasing.
+- Fixed: (GUI) GUICtrlSetImage on a GUI defined with $WS_VISIBLE.
+- Fixed: (GUI) GuiCtrlSetState( ,$GUI_FOCUS) changing tab ordering. Need to create a new state $GUI_ONTOP.
+- Fixed: (GUI) Extra notification on first/default control after GUISetState().
+- Fixed: (GUI) Event notification on {enter} on an edit control.
+- Fixed: (GUI) $GUI_EVENT_MOUSE firing without any mouse movement.
+- Fixed: (GUI) GuiCtrlSetState( ,$GUI_FOCUS) on button repainting.
+- Fixed: (GUI) Drag&Drop of listviewitem onto another listview. $GUI_ACCEPTFILES has been renamed in $GUI_DROPACCEPTED.
+- Fixed: (GUI) TabStop order.
+- Fixed: (GUI) GUICtrlSetPos with a Child window.
+
+
+
+3.1.1 (7th Apr, 2005) (Release)
+
+- Fixed: @OSVersion did not work for Windows Server 2003
+- Fixed: $LVS_EX_FULLROWSELECT in GuiConstants.au3 was defined $LBS...
+- Fixed: @YDAY was incorrect (one day out)
+
+
+
+3.1.0 (7th Feb, 2005) (Release)
+
+- Added: GUI creation capabilties
+- Added: DllCall(), DllOpen(), DllClose()
+- Added: ControlListView()
+- Added: WinList()
+- Added: DirGetSize()
+- Added: IniReadSectionNames(), IniReadSection()
+- Added: InetGet(), InetGetSize()
+- Added: HttpSetProxy(), FtpSetProxy()
+- Added: FtpBinaryMode (Option)
+- Added: Ping()
+- Added: ControlGetHandle()
+- Added: WinGetProcess() and ProcessList()
+- Added: SetExtended()
+- Added: WinSetTrans()
+- Added: Assign()
+- Added: ConsoleWrite()
+- Added: @AutoItExe macro
+- Added: Const keyword
+- Added: Optional parameter support for user functions
+- Added: "main", "primary", "menu", "secondary" added as valid mouse button types
+- Added: ExpandVarStrings (Option)
+- Added: The user functions OnAutoItStart() and OnAutoItExit() are called during startup/exit
+- Added: OnExitFunc (Option)
+- Added: (Internal) Native HWND datatype added to variants
+
+- Removed: URLDownloadToFile() (Replaced by InetGet())
+
+- Changed: For loops automatically declare the counter variable as a Local variable
+- Changed: IniDelete() can also delete entire sections
+- Changed: StringReplace() also returns the number of replacements in the @extended macro
+- Changed: StringMid() the "count" parameter is now optional (assumes remainder of the string)
+- Changed: PixelChecksum() now has optional step parameter
+- Changed: Control...() functions now accept the Control ID as an extra way to identify a control
+- Changed: InetGet() function can download in the background
+- Changed: Reg...() functions no longer give a hard error when an unknown key is used.
+- Changed: The mouse and pixel functions now have an additional "client area" mode
+- Changed: Added WIN_2003 to the possible values for @OS_VERSION
+- Changed: AU3Spy.exe renamed to AU3Info.exe
+- Changed: Major upgrades to the AutoIt Window Spy (control highlighting, magnify)
+- Changed: FileSelectFolder supports an initial directory as well as a root directory
+- Changed: File functions no longer give fatal errors when -1 is used as a handle
+- Changed: (Internal) new quicker variable lookup using a binary tree
+- Changed: (Internal) new shared process memory class used for StatusBarGetText()
+- Changed: (Internal) Unified structure stacks (If, Func, Select, While, Do, For)
+- Changed: (Internal) Variant rewrite (now handles int32, int64, double, string, HWND data)
+
+- Fixed: Memory leak in SplashImageOn()
+- Fixed: Expressions like "$var = $var" will now give an error if the variable wasn't previously defined
+- Fixed: StringFormat() with \\ characters
+- Fixed: Under rare situations after closing a script AutoIt3.exe would still appear in task manager for a while
+- Fixed: Certain paths like @WindowsDir were incorrect under Windows Terminal Server
+- Fixed: FileSetTime() systems in non-GMT timezones had incorrect results
+- Fixed: FileMove() with UNC paths (does a real move when in the same dir rather than a copy).
+- Fixed: ^ operator
+- Fixed: Chr()
+- Fixed: StatusBarGetText() failed when used with no "Text" parameter
+- Fixed: InputBox() didn't return focus to the previously active window
+
+
+
+3.0.102 (4th August, 2004) (Release)
+
+- Major Change: Colors now default to the standard RGB format rather than the previous BGR format.
+
+    This affects PixelSearch, PixelGetColor.
+
+	The "ColorMode" option has been added to allow old scripts to run with the old BGR mode, just
+	place this line at the top of your script to use the old method:
+
+	Opt("ColorMode", 1)
+
+- Added: DriveMapAdd(), DriveMapDel() and DriveMapGet()
+- Added: @SW_SHOWDEFAULT, @SW_SHOWMAXIMIZED, @SW_SHOWMINIMIZED, @SW_SHOWMINNOACTIVE,
+		@SW_SHOWNA, @SW_SHOWNOACTIVATE, @SW_SHOWNORMAL
+- Added: FileGetShortcut()
+- Added: Predefined $CmdLineRaw variable now holds the original command line in full
+- Added: @DesktopDepth
+- Added: ReDim
+- Added: Command line option /ErrorStdOut
+- Added: More command line params for Aut2Exe.exe: /nodecompile and /comp 0-4  (compression level, 4=best)
+- Added: Process ID (PID) support for Process...() and Run() functions
+- Added: ProcessSetPriority()
+- Added: Decompiler (Exe2Aut) added
+- Added: PixelChecksum()
+- Added: Strings starting with "0x" are converted from hex when used numerically
+- Added: Multi-directory #include <> paths
+- Added: MouseWheel()
+- Added: FileRecycleEmpty()
+- Added: RegEnumKey() and RegEnumVal()
+
+- Changed: TimerStart() renamed to TimerInit().  TimerStop() renamed to TimerDiff()
+- Changed: FileSelectFolder() flag parameter changed
+- Changed: REG_MULTI_SZ values allow double NULL values.
+- Changed: BirOr(), BitAnd() and BitXOR() take up to 255 parameters
+- Changed: Icon and windowstate options added to FileCreateShortcut()
+- Changed: RunAsSet() supports extra profile handling options
+- Changed: RegWrite() now accepts just the keyname in order to create a keyname with no value
+- Changed: "Allow Decompilation" option added to Aut2Exe
+- Changed: Aut2Exe gives feedback during compilation and gives the option to abort
+- Changed: Compiled scripts run/extract much faster when using FileInstall and medium/large files
+- Changed: Max number of user function limits removed
+- Changed: Max number of variable limits removed
+- Changed: -1 does no sleep at all for Send/Mouse delays (SendKeyDelay, etc...)
+- Changed: Optional occurance parameter added to StringInStr()
+- Changed: Optional default filename added to FileOpenDialog() and FileSaveDialog()
+- Changed: Registry functions accept 4 letters keys (HKLM instead of HKEY_LOCAL_MACHINE, etc.)
+- Changed: Remote registry keys are accepted in the form "\\computername\key\subkey"
+- Changed: AutoItSetOption returns the previous setting
+- Changed: (Internal)  Built-in function lookups completely rewritten
+- Changed: (Internal) String functions speeded up (concat in astring and variants)
+- Changed: (Internal) ControlSearch modified to include the windowsearch
+
+- Fixed: FileGetSize() works on >2GB files and in-use files
+- Fixed: The expression: If "non-blank" And 1 - now evaluates as true
+- Fixed: /c command line use in compiled scripts
+- Fixed: ToolTip() when the mouse is near the bottom of the screen
+- Fixed: StringIsDigit()
+- Fixed: Process... functions under NT4 unable to see certain processes
+- Fixed: Some keywords incorrectly allowed after a THEN keyword
+- Fixed: (Internal) Hotkey registering logic
+
+
+
+3.0.101 (11th Mar, 2004) (Release)
+- Added: MemGetStats()
+- Fixed: Compatibility problem under Windows 95a
+- Fixed: Some minor help file typos corrected
+
+
+
+3.0.100 (29th Feb, 2004) (Release)
+- Added: WinTextMatchMode (Option)
+- Fixed: ExitLoop and ContinueLoop failed during a recursive function
+- Fixed: Sleep(0) (or < 0 ) no longer hangs
+- Fixed: $ with no name was allowed as a variable
+- Fixed: For Loop bug when used in recursion
+- Fixed: FileGetLongName() return value
+- Fixed: @UserProfileDir under 9x
+- Fixed: IsDeclared()
+- Fixed: Random()
+
+
+
+3.0.94 (21st Feb, 2004) (Beta)
+
+SCRIPT BREAKING CHANGES for FileReadLine and FileWriteLine:
+
+FileWriteLine now automatically writes a DOS @CRLF pair UNLESS the last character of
+the string to write is already @CR or @LF (to make it possible to write non-DOS text files)
+
+FileReadLine will correctly read a DOS, UNIX or MAC line (@CRLF, @LF and @CR terminated respectively).
+
+FileWrite and FileRead added to add further support.
+
+CHANGE YOUR SCRIPTS AS FOLLOWS:
+
+From: FileWriteLine($handle, "line" & @LF)
+To: FileWriteLine($handle, "line" & @CRLF) or FileWriteLine($handle, "line")
+
+From: FileWriteLine($handle, "line")
+To: FileWrite($handle, "line")
+
+
+- Added: FileWrite() and FileRead()
+- Changed: FileReadLine() and FileWriteLine()
+- Added: ToolTip()
+- Added: Eval() and IsDeclared()
+- Added: CaretCoordMode (AutoItSetOption)
+- Added: WinGetCaretPos()
+- Added: WinGetState()
+- Added: MustDeclareVars (AutoItSetOption)
+- Added: Editors page in help
+- Changed: EnvSet()
+- Changed: WinShow() renamed to WinSetState()  (With WinShow() as an alias)
+- Fixed: Splash() and moveable flag (and -1 default flag in options)
+- Fixed: Odd elseif error message showing wrong line
+- Fixed: Crashes with bad function calls: MsgBox(MsgBox(MsgBox))
+- Fixed: HotKey crashes when unregistering a key that was not registered
+
+- Fixed: (Internal) WinWaitDelay, SendKeyDelay, etc type commands now more accurate (previously only accurate to 10ms (NT) or 55ms (9x))
+- Fixed: (Internal) Execute() recursion limit dropped to 384 levels
+- FIxed: (Internal) Calls to Util_AttachThreadInput will not attach to hung windows
+- Fixed: (Internal) some RegRead/RegWrite sizing problems (Ta, Chris)
+
+
+
+3.0.93 (12th Feb, 2004)
+- Added: SendAttachMode (AutoItSetOption)
+- Added: Opt() is an alias for AutoItSetOption() :)
+- Added: Doc updates
+- Added: WinSearchChildren (AutoItSetOption)
+- Changed: Splash and Progress functions have a "moveable" option
+- Changed: StringStripWS (new strip all ws mode)
+- Changed: InputBox (timeout param)
+- Changed: Hot keys are no longer buffered when the script is paused.
+- Fixed: REG_MULTI_SZ support
+- Fixed: TrayIconDebug not showing correct filename
+- Fixed: ControlClick, ControlCommand("CHECK")
+- Fixed: Control functions now using return values rather than @error where appropriate.
+- Fixed: Error with '' quotes in Aut2Exe
+- Fixed: StringFormat()
+- Fixed: Lexer checks that potential user function calls are for existing functions
+- Fixed: Input thread attachment in Send() ( check Send("{... down}") still works)
+
+- Changed: (Internal) Removed the only sscanf call and replaced with own code - saves 4KB.
+
+
+
+3.0.92 (6th Feb, 2004)
+
+Note: Script breaking changes to ControlLeftClick(), FileFindFirstFile(), SendSetCapslockState()
+
+- Added: Dec()
+- Added: BitNOT(), BitXOR(), BitShift()
+- Added: TrayIconDebug (AutoItSetOption)
+- Added: Dim single-line initialization and multiple variables
+- Added WinTitleMatchMode 4 (AutoItSetOption)
+- Added: #comments-start and #comments-end for multiline comments
+- Added: DirCopy()
+- Added: DirMove()
+- Added: Controls will be checked by visible text as well as classname (waves to Chris :) )
+- Added: Macros: @USERPROFILEDIR, @HOMEDRIVE, @HOMEPATH, @HOMESHARE, @LOGONSERVER, @LOGONDOMAIN, @LOGONDNSDOMAIN
+- Removed: SendSetCapslockState() - Use Send("{CAPSLOCK on/off}")
+- Changed: FileFind works differently (handles used and multiple finds now supported)
+- Changed: ControlLeftClick() renamed to ControlClick() and options added.
+- Changed: Window Spy options added and ability to freeze display
+- Changed: StringSplit will return each char if delimiters are ""
+- Changed: WinMenuSelectItem return value
+- Changed: optional variation added to PixelSearch()
+- Changed: optional step value added to PixelSearch()
+- Changed: FileMove() overwrite flag added
+- Changed: *.* assumed if a directory is used in FileCopy/FileMove/FileDelete
+- Fixed: @TempDir under certain conditions
+- Fixed: Hotkeys were ignored while another hotkey function was running
+
+- Changed: (Internal) DirRemove changed
+- Changed: (Internal) Sendkeys tweaked A LOT
+
+
+
+3.0.91 (29th Jan, 2004)
+- Added: Options: MouseClickDelay, MouseClickDownDelay, MouseClickDragDelay (AutoItSetOption)
+- Added: REG_BINARY type for RegRead() and RegWrite()
+- Added: FileChangeDir()
+- Added: ControlCommand() - added GETCURRENTSELECTION
+- Added: Added some standard library includes (See Program Files\AutoIt3\Include\)
+- Added: SendKeyDownDelay (AutoItSetOption) (alters the amount a time a key is held down before released)
+- Added: AutoIt returns an exit code of 1 if script could not be loaded
+- Added: FileSetAttrib(), FileSetTime()
+- Added: In Au3_Spy pixel colour is also shown in hex
+- Fixed: While loops failing when used in recursive functions of themselves... (!?)
+- Fixed: Small line coninuation _ bug
+- Fixed: URLDownloadToFile()
+- Fixed: FileRecycle() not always working
+- Fixed: FileRecycle() return value
+- Fixed: Relative #include use
+- Fixed: Smart boolean comparision re-added
+- Fixed: FileFindFirst() not releasing memory when called multiple times
+- Changed: FileGetTime outputs strings with leading 0s when required
+- Changed: Default value of Local/Global/Dim is the String "" (equates to 0 when used as a number)
+
+- Changed: (Internal) More scriptfile.cpp optimization
+- Changed: (Internal) Execute() recursion levels limited to 512 to prevent stack overflows
+
+
+
+3.0.90 (20th Jan, 2004)
+- Fixed: Serious nested IF bug
+
+- Changed: (Internal) Rollback of variabletable.cpp and stacks/vectors
+
+
+
+3.0.89 (19th Jan, 2004)
+- Added: Method for standard library functions and includes
+- Added: #include < > support (must be fully installed to work)
+- Added: #include-once directive (put at the top of a file to make sure it is only
+       included once)
+- Added: @UserName and @TempDir macros
+- Fixed: Nasty fatal bug in 3.0.88
+
+
+
+3.0.88 (18th Jan, 2004)
+- Added: ElseIf
+- Changed: All block structures (IF/WHILE/FOR, etc.) are now checked before execution.
+- Fixed: Some single hotkeys not working
+- Fixed: Better detection of illegal nesting, e.g.:
+         if 1 = 1
+           while 1
+         endif
+           wend
+
+- Changed: (Internal) lots of error checking code removed as a nice side effect of
+         initial block structure checking
+- Changed: (Internal) windows string functions (lstrcmp etc) moved back to C versions
+         due to massive performance penalty
+
+
+
+3.0.87 (15th Jan, 2004)
+- Changed: Aut2Exe stores files it can't compress (.zip etc) rather than expanding
+- Fixed: Aut2Exe crashing if FileInstall used a file less than 4 bytes
+- Fixed: Aut2Exe crashing with uncompressable files
+- Fixed: RegRead not working correctly with large DWORD values
+- Fixed: NOT fixed when skipped during a boolean expression
+
+- Changed: (Internal) variable_table.cpp rewritten
+- Changed: (Internal) All stacks/vectors replaced with templated code
+
+
+
+3.0.86 (12th Jan, 2004)
+- Added: Enhanced boolean comparisons
+- Added: Send can hold keys down, e.g. Send("{a down}") will hold the A key down (only works usefully with games)
+- Fixed: 0 ^ 0 = 1
+- Fixed: on_top parameter of ProgressOn()
+- Fixed: No longer hanging with blank search in StringReplace()
+- Fixed: Asc() giving -1 in some cases
+- Fixed: Tray icon's tip not updating when un-pausing
+- Changed: Single keys of 0-9, a-z can no longer be used as hotkeys if alt,ctrl or win is NOT also used.
+
+- Changed: (Internal) FPU assembler used for advanced math (sin,cos,pow, etc) functions due to
+         exe size problems under VC7
+
+
+
+3.0.85 (9th Jan, 2004)
+- Added: HotKeySet()
+- Added: Abs(), Sin(), Cos(), Tan(), ASin(), ACos(), ATan(), Sqrt(), Log(), Exp()
+- Added: ^ operator
+- Added: Round()
+- Added: Call()
+- Changed: IniWrite/IniDelete() return 0 if they fail
+- Changed: No longer need to use virtual keys for FileCreateShortcut()
+- Fixed: Return value for FileCopy/FileInstall()
+- Fixed: Incorrect use of ExitLoop/ContinueLoop trapped
+
+- Changed: (Internal) Send() tweaking
+- Fixed: (Internal) Function calling/scope slightly bugged (Adlib, Hotkey)
+
+
+
+3.0.84 (30th Dec, 2003)
+- Added: New window WinTitleMatchMode of 3 (for exact title match)
+- Added: Some more details added to helpfile
+- Changed: The key # is no longer used as a delimiter but as a left Win key combination.  So
+           Send("#e") now presses the left win+e keys.  I don't think anyone actually used
+           it as a delimiter anyway - it was just a left over from v1 and it never made
+           lines easier to read anyway
+- Changed: FileReadLine() and FileWriteLine() modified so that they optionally accept a filename
+           instead of a filehandle for "quick 'n' dirty" file access - I'm sure this will be
+           popular :)
+
+
+
+3.0.83 (30th Dec, 2003)
+- Changed: Due to popular demand, by default functions now return 0 for error and 1 for success.
+           This affects the following functions: FileWriteLine, CDTray, DriveSetLabel, DirCreate,
+           DirRemove, FileCopy, FileMove, FileDelete, FileInstall, ClipPut, URLDownloadToFile,
+           RunAsSet, Shutdown, RegWrite, RegDelete, WinWait, WinWaitActive, WinWaitClose, WinWaitNotActive,
+           ProcessWait, ProcessWaitClose.  If you were using the return values of one of
+           these functions then please check your scripts.
+
+- Changed: ControlSend() supports {} (for most things at least...)
+
+
+
+3.0.82 (29th Dec, 2003)
+- Added: Files installed with FileInstall() now have original timestamps (created/modified)
+- Added: IsNumber()
+- Fixed: Number to string conversions and general float parsing
+
+- Changed: (Internal) FileInstall() compression code updated
+
+
+
+3.0.81
+- Fixed: Yet more bugs with single line IF - regretting adding this feature already...
+- Fixed: Bugs with NOT operator and the new variant code
+- Fixed: Bug with clicking CANCEL on the open script window (introduced in 3.0.80)
+- Fixed: StringIs... functions failing when using numbers as parameters
+
+- Fixed: (Internal) AVector<Variant> modified to allow reference access to variants (instead of copying everytime)
+
+
+
+3.0.80 (15th Dec, 2003)
+- Changed: Number to String conversions tweaked
+- Fixed: Massive bug fixed with arrays introduced in 3.0.76
+- Fixed: Line continuation crash
+
+- Changed: (Internal) script reading code updated for Aut2Exe and merged with AutoIt
+
+
+
+3.0.79 (15th Dec, 2003)
+- Added: Lines can be continued over many lines - use _ at the end of a line to continue it (as VBScript)
+- Added: Single line IF statements possible
+- Changed: Maximum line length (including total of combined lines) increased from 1023 to 4095 characters.
+- Changed: "Then" keyword in IF statements no longer optional (helps with single line IFs)
+
+e.g.
+MsgBox(0, "Test", "This is some text _
+	And more text _
+	And even more text")
+
+
+
+3.0.78 (15th Dec, 2003)
+- Changed: Variants work differently - no longer a seperate INTEGER type
+- Changed: Float() changed to Number()
+
+	All numbers now 15digit precision (internal C double type)
+	Also affects Random() you will get floating point numbers back unless you use Int()
+		with the result
+
+
+
+3.0.77 (30th Nov, 2003)
+- Added: New option "TrayIconHide" (AutoItSetOption)
+- Changed: "AutoIt -" prefix removed from compiled a script's tray icon
+- Changed: Compiled script's file properties point to a custom web page
+- Fixed: Tray icon should redraw after an explorer crash
+
+
+
+3.0.76 (30th Nov, 2003)
+- Fixed: Couple of bugs with ContinueLoop and ExitLoop
+- Fixed: Statements like $test[$test[0]] now working
+
+
+
+3.0.75 (30th Nov, 2003)
+- Added: ControlGetFocus()
+- Added: Local and Global keywords
+- Changed: Dim (along with Local/Global) can now be used as in vbscript to declare variables
+- Changed: FileOpenDialog() uses "|" as the delimiter instead of ","
+- Fixed: PixelSearch()
+- Fixed: SoundPlay()...maybe
+- Fixed: Splash() sizing issues
+
+
+
+3.0.74
+- Added: Hex notation for integer numbers ($var = 10 or $var = 0xa)
+- Added: MouseDown(), MouseUp()
+- Added: TrayTip()
+- Fixed: PixelCoordMode not working correctly
+- Fixed: Compiled exes not producing random numbers
+
+
+
+3.0.73
+- Added: New option "RunErrorsFatal" (AutoItSetOption)
+- Added: New option "ExpandEnvStrings" (AutoItSetOption)
+- Changed: FileMove() moves/renames without affecting timestamps - can also be used
+           for directories
+- Changed: RegRead/RegWrite() now supports REG_EXPAND_SZ
+- Changed: Extra options added to FileGetTime()
+- Changed: Extra 250ms delay added to start and end of mouse drags
+- Fixed: Odd error message fixed where a user function contained a badly formatted line
+
+
+
+3.0.72
+- Fixed: Compiler was ignoring comments near FileInstall() functions
+- Fixed: Memory leak in StatusBarGetText()
+- Fixed: PixelGetColor
+- Added: New option "PixelCoordMode" (AutoItSetOption)
+
+
+
+3.0.71
+  Get ready for some script rewriting...*holds up banner with BETA written on it :) *
+
+- Added: ControlSend()
+- Added: Framework for AutoItSetOption() - note: this function replaces all
+         functions like WinSetDelay, SendSetDelay, MouseSetMode, etc.
+- Removed: MouseSetMode(), SendSetCapslockMode(), SendSetDelay(), WinSetDelay(), WinSetDetectHiddenText()
+           WinSetTitleMatchMode()
+
+
+
+3.0.70
+- Fixed: SoundPlay()
+- Removed: AutoItWinShow(), AutoItWinWrite(), AutoItWinGetText()
+- Changed: ControlCommand() (updated with Larry's recent changes)
+- Changed: RegRead() extended error codes
+- Added: FileFindFirstFile(), FileFindNextFile()
+- Added: AutoItWinGetTitle()
+- Added: WinGetClientSize()
+- Added: EnvUpdate()
+- Added: SoundSetWaveVolume()
+- Added: FileGetLongName(), FileGetShortName()
+- Added: TimerStart(), TimerStop()
+
+
+
+3.0.69
+- Fixed: Small delay added into mouseclick functions
+- Fixed: FileGetVersion()
+- Fixed: WinMenuSelectItem()
+- Fixed: StringSplit() buffer overrun
+
+
+
+3.0.68
+- Added: FileGetAttrib(), WinMenuSelectItem(), FileGetVersion()
+- Added: Added options to ControlCommand()
+
+- Changed: (Internal) Larry's nFlag functions split
+
+
+
+3.0.67
+- Changed: InputBox() narrowed slightly
+- Fixed: AutoIt icon not refreshing if Return was used at top level of script
+- Fixed: Crash with extra long lines fixed
+- Fixed: @OS_VERSION weirdness fixed
+
+- Changed: (Internal) MessagePump handled differently and recursion level of Execute() tracked
+
+
+
+3.0.66
+- Changed: StringSplit() returns full string in array if no delimiters matched (and count=1 not 0)
+- Fixed: Crash related to window titles and text fixed.
+
+
+3.0.65
+- Added: ControlCommand() option GetCurrentLine
+- Fixed: Possible bug with optional "Then" statement fixed
+- (Internal) Window searching functions altered to check for hung windows
+
+
+
+3.0.64
+Fixed: IniWrite/Delete() functions were not flushing immediately under 9x.
+Added: Errors now include the file name that contained the error
+
+
+
+3.0.63
+- Changed: ControlCommand() various internal changes.
+- Fixed: MsgBox() character limit bug fixed
+- Changed: Can now specify a custom time for AdlibEnable()
+
+
+
+3.0.62
+- Fixed: Aut2Exe icon changing code bugged
+- Changed: Timing of "paused" flash and icon modified a little.
+
+
+
+3.0.61
+- Fixed: FileOpenDialog()
+- Changed: (Internal)Encryption code modified - check compiling thoroughly
+- Added: AutoIt icon flashes when in paused state
+
+
+
+3.0.60
+- Changed: Aut2Exe strips version info from compiled script. (Hoping to be custom versioninfo in future)
+- Fixed: FileGetSize() (change made, unsure if problem fixed)
+- Fixed: FileMove wasn't supported on 9x (9x has no MoveFileEx function, Dave... :) )
+
+
+
+3.0.59
+- Fixed: InputBox was not returning "" on cancel
+
+
+
+3.0.58
+- Fixed: The window text searching in AutoIt was not the same as AU3_Spy or WinGetText()
+- Added: InputBox() (and very nice it is too...)
+- Added: FileMove()
+
+
+
+3.0.57
+- Fixed: MsgBox under 9x was doing odd things with timeouts - tried something else.
+
+
+
+3.0.56
+- Fixed: Selecting the default icon in Aut2Exe was not saved between sessions
+- Fixed: @OSLang under NT4...
+- Added: SysTabControl32 tabbing
+
+
+
+3.0.55
+- Changed: Better icon support added to Aut2Exe
+- Changed: (Internal) upx.exe called during the compiler to compress data -
+	necessary to do it this way as you can't edit the resources of a compressed
+	exe
+- Changed: SoundPlay()
+
+
+
+3.0.54
+- Fixed: Compiled scripts with custom icons were failing
+- Fixed: @OS_LANG under 9x
+
+
+
+3.0.53
+- Added: StringSplit()
+
+
+
+3.0.52
+- Changed: SoundPlay() option to wait added
+- Added: ChangeIcon support back in Aut2Exe (32x32x16) - Slightly better than v2 in that
+		a multiimage iconfile can be used - although only the 32x32x16 image is actually used.
+
+
+
+3.0.51
+- Fixed: Aut2Exe still used ' comments when including files -whoops.
+
+
+
+3.0.50
+- Changed: (Internal)A little error checking added to the lexer
+- Added: @TAB, @COMSPEC
+- Changed: MouseClick() parameters changed
+- Added: MouseClickDrag()
+
+
+
+3.0.49
+- Fixed: Statusbar in Aut2Exe with Visual Styles
+- Changed: Single line comment character is now ;
+- Changed: ' and " may now be used for strings
+
+
+
+3.0.48
+- Added: StringIsFloat(), StringIsInt()
+- Fixed: MsgBox() wasn't returning -1 on timeout
+- Fixed: StringReplace() error if string to replace was at end of string
+- Changed: StringReplace() count is now optional (assumes global)
+- Added: Aut2Exe and AutoIt3 now use Visual Styles
+
+
+
+3.0.47
+- Changed: FileExists() to work with wildcards
+- Changed: Extra options added to AutoItWinShow()
+- Changed: RegRead returns the string "" in addition to @error if the (default) key was requested
+	and not found.
+- Fixed: DriveGetDrive()  (still an a: drive bug to find though)
+
+
+
+3.0.46
+- Fixed: RegDelete() return value when value does not exist
+- Fixed: CDTray() open/closed problems
+- Fixed: FileSelectFolder() crash due to missing initialisers
+
+
+
+3.0.45
+- Changed: Set...() functions renamed (SendSetDelay, WinSetDelay, etc.)
+- Added: StatusbarGetText()
+
+
+
+3.0.44
+- Added: Break()
+- Fixed: DriveStatus()
+- Fixed: RegDelete()
+
+
+
+3.0.43
+- Fixed: @OSLang for 2000+
+- Added: Hex(), AutoItWinGetText()
+- Changed: UBound() back to how it was again (same as VBScript syntax)
+
+
+
+3.0.42 (30th Aug, 2003)
+- Tweaked: Mouse coords were 1 pixel out
+- Added: MouseSetMode() to allow for screen _and_ relative coords - yay everyone's happy
+
+
+
+3.0.41 (30th Aug, 2003)
+- Fixed: Bug with invalid filehandles (again!).
+- Changed: Mouse commands may now work on multiple monitors.
+- Fixed: $CmdLine wasn't working correctly for compiled scripts.
+- Fixed: The operator == wasn't properly comparing strings
+- Fixed: INI functions, filename now doesn't need ".\file.ini" to work in the current directory
+- Fixed: Bug in Run() directory would not be set if last parameter was used
+
+
+
+3.0.40
+- Added: Windows API error messages added onto errors for the Run() commands
+	(directory invalid, bad logon, etc).
+
+
+
+3.0.39 (29th Aug, 2003)
+- Added: RunAsSet() (2000/XP only)
+- Added: FileRecycle()
+
+
+
+3.0.38 (28th Aug, 2003)
+- Changed: WinGetText now correctly takes note of detecthiddentext setting
+- Added: StringStripWS()
+- Added: DriveGetLabel(), DriveGetSerial(), DriveGetFileSystem(),
+		DriveSetLabel(), DriveGetType(), MouseGetCursor()
+
+
+
+3.0.37
+- Changed: Compression tweaked in Aut2Exe
+
+- Changed: UBound($array) now returns number of dimensions
+- Renamed all the IsUpper/IsAlpha, etc functions to StringIsUpper/StringIsAlpha, etc.
+- Added: IsFloat(), IsArray(), IsInt(), IsString()
+- Added: Mod()
+
+
+
+3.0.36
+- Fixed: Main dialog in Aut2Exe
+- Added: New compression code (slower but better at higher levels)
+
+
+
+3.0.35
+- Added: FileInstall() support
+- Added: SplashImageOn(), SplashTestOn(), SplashOff()
+- Added: ProgressOn(), ProgressOff(), ProgressSet()
+- Added: Compression level option in Aut2Exe
+
+
+
+3.0.34
+- Fixed: subscript must be > 0 in Dim statement
+- Added: Compiled script reading code added
+- Added: @Compiled
+- Added: Aut2Exe
+
+
+
+3.0.33 (22nd Aug, 2003)
+- Added: Case Else
+- Added: @DesktopWidth, @DesktopHeight
+- Fixed: CDTray - closed/close
+- Fixed: Incorrect reference passing of global variables
+- Fixed: Bad file handle causing a crash in FileWrite/Read/Close
+- Fixed: Crash with badly formatted Func statements
+- Parsing speeded up (doubled the speed)
+- Optimized string handling in variants
+
+
+3.0.32 (20th Aug, 2003)
+- Started proper version logging :)
+
+
+First public beta binary - 4th Mar, 2003.
+
+Development started - 20th Jan, 2003.

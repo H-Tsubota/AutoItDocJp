@@ -1,0 +1,102 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function FileCreateShortcut</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">FileCreateShortcut</font>
+<hr size="2">
+<p>ファイルへのショートカット（.lnk）を作成します。<br></p>
+
+<p class="codeheader">
+FileCreateShortcut ( "file", "lnk" [, "workdir" [, "args" [, "desc" [, "icon" [, "hotkey" [, icon number [, state]]]]]]] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">file</td>
+    <td width="85%">ショートカットを作成するファイルのフルパスとファイル名</td>
+  </tr>
+  <tr>
+   <td>lnk</td>
+   <td>ショートカットのフルパスとファイル名</td>
+  </tr>
+  <tr>
+   <td>workdir</td>
+   <td><b>[オプション]</b> 作業フォルダ</td>
+  </tr>
+  <tr>
+   <td>args</td>
+   <td><b>[オプション]</b> ファイル実行時に渡す値</td>
+  </tr>
+  <tr>
+   <td>desc</td>
+   <td><b>[オプション]</b> コメント</td>
+  </tr>
+  <tr>
+   <td>icon</td>
+   <td><b>[オプション]</b> 使用するアイコンのフルパスとファイル名</td>
+  </tr>
+  <tr>
+   <td>hotkey</td>
+   <td><b>[オプション]</b> ショートカットキー - Send() でのキーの書式と同じ</td>
+  </tr>
+  <tr>
+   <td>icon number</td>
+   <td><b>[オプション]</b> 使用するアイコンのインスタンス(通常は0)</td>
+  </tr>
+  <tr>
+   <td>state</td>
+   <td><b>[オプション]</b> ショートカット実行時の大きさ。@SW_SHOWNORMAL、@SW_SHOWMINNOACTIVE、@SW_SHOWMAXIMIZEDのいずれか。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">成功</td>
+    <td width="90%">1を返します。</td>
+  </tr>
+  <tr>
+    <td valign="top">失敗</td>
+    <td>リンクを作成できなかった場合0を返します。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+ウィンドウズショートカットキーは次の書式でなければいけません。Ctrl+Alt+X、Ctrl+Shift+X、Shift+Alt+X、Ctrl+数字パッドキー、Alt+数字パッドキー。Xの部分には文字キー、数字キー、句読点キー、ファンクションキーを使用することができます。もし間違った書式を使用した場合ウィンドウズはCtrl+Altを設定します。<br>
+ウィンドウズは数字パッドキーと通常の数字・句読点キーを区別することに注意してください。
+FileCreateShortcutではCtrl+X 、Alt+X のショートカットキーを設定することができます（ウィンドウズでは通常Xが数字パッドキーの場合のみ可能です）。しかし通常のアプリケーションショートカットキーと重複しないようにしなければいけません。<br>
+ウィンドウズはESC、ENTER、TAB、SPACEBAR、PRINT SCREEN、SHIFT、BACKSPACE キーをショートカットキーに使うことを禁じています。<br>
+<br>
+FileCreateShortcutは間違ったターゲット、作業フォルダ、アイコン、ショートカットキーであってもLNKファイルの作成に”成功”します。しかし、LNKファイルの作成場所は正しくなければいけません。設定したショートカットキーが重複した場合、より新しい設定が優先されます。またすでに存在するショートカットのパス\ファイル名でショートカットを作成した場合、上書きされます。<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="FileGetShortcut.htm">FileGetShortcut</a>, <a href="FileCreateNTFSLink.htm">FileCreateNTFSLink</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S1">; ショートカットキーは ctrl+alt+t に設定</span><br>
+<span class="S4">FileCreateShortcut</span><span class="S8">(</span><span class="S6">@WindowsDir</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">"\Explorer.exe"</span><span class="S8">,</span><span class="S6">@DesktopDir</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">"\Shortcut Test.lnk"</span><span class="S8">,</span><span class="S6">@WindowsDir</span><span class="S8">,</span><span class="S7">"/e,c:\"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"This is an Explorer link;-)"</span><span class="S8">,</span><span class="S0"> </span><span class="S6">@SystemDir</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">"\shell32.dll"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"^!t"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"15"</span><span class="S8">,</span><span class="S0"> </span><span class="S6">@SW_MINIMIZE</span><span class="S8">)</span><br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\FileCreateShortcut.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

@@ -1,0 +1,145 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function HotKeySet</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">HotKeySet</font>
+<hr size="2">
+<p>ユーザー関数へのホットキー（ショートカットキー）を設定します。<br></p>
+
+<p class="codeheader">
+HotKeySet ( "key" [, "function"] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">key</td>
+    <td width="85%">ホットキーとして使うキーの組み合わせ <b><a href="Send.htm">Send()</a>と同じ書式</b></td>
+  </tr>
+  <tr>
+   <td>function</td>
+   <td><b>[オプション]</b> キーが押された時呼ばれる関数の名前。このパラメータを指定しない場合、直前に設定したホットキーが解除されます。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">成功</td>
+    <td width="90%">1を返します。</td>
+  </tr>
+  <tr>
+    <td valign="top">失敗</td>
+    <td>0を返します。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+2つのAutoItスクリプトに同じホットキーを設定した場合、それらを同時に走らせることは避けなければなりません。（1つ目のスクリプトが終了するか、2つ目のスクリプトがホットキーを設定する前に1つ目のスクリプトのキーの登録を解除しないと2つ目のスクリプトはホットキーを検知できません。）<br>
+<br>
+ホットキーを押すと*一般的には*AutoItの関数/文の実行はユーザー関数の実行が終了、中断するまで中断されます。例外は次の通り。<br>
+1)  現在の関数が"ブロッキング"関数の場合。キー入力はバッファー（＝記憶）され、ブロッキング関数が終了されると実行されます。MsgBoxやFileSelectFolderがブロッキング関数の例です。”例”のShift-Alt-d で試してみてください。<br>
+2)  トレイのAutoItアイコンをクリックしてスクリプトを一時停止している場合。このような一時停止中のホットキー入力は全て無視されます。<br>
+<br>
+<b>次のホットキーは設定できません。</b><br>
+<br>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">Ctrl+Alt+Delete</td>
+    <td width="85%">ウィンドウズが使用しています。</td>
+  </tr>
+  <tr>
+   <td>F12</td>
+   <td>（ウィンドウズのAPIによれば）ウィンドウズが使用しています。</td>
+  </tr>
+  <tr>
+   <td>NumPad's Enter Key</td>
+   <td>{Enter} を使うとキーボードの両方のEnter キーで反応してしまいます。</td>
+  </tr>
+  <tr>
+   <td>Win+B,D,E,F,L,M,R,UとWin+Shift+M</td>
+   <td>これらはウィンドウズの組み込みショートカットです。注意：Win+B と Win+L はWindows XP 以上のみ</td>
+  </tr>
+  <tr>
+   <td>Alt, Ctrl, Shift, Win</td>
+   <td>修飾キーです!</td>
+  </tr>
+  <tr>
+   <td>その他</td>
+   <td>使用することがわかっているサードパーティーソフトウェアのグローバルホットキー全て。'{F1}{F2}'などの2つ以上の"ベースキー"の組み合わせ全て。'{LALT}' 、'{ALTDOWN}'のような形式のキー全て。</td>
+  </tr>
+</table><br>
+ホットキーを設定した場合、AutoItはキー入力を監視しホットキーをアクティブなアプリケーションに渡しません。ただし例外があります。Lockキー(NumLock、CapsLock、ScrollLock)でのそれぞれの状態の切り替えは可能です！<br>
+設定したホットキーと同じキーの組み合わせをSend()する場合、ControlSend()を使うか設定したホットキーの登録を解除しておかなければいけません。さもないとSend()は無限ループを引き起こす恐れがあります。<br>
+<br>
+; キー入力を捕らえて渡します<br>
+<i>HotKeySet("{Esc}", "captureEsc")<br>
+Func captureEsc()<br>
+&nbsp;&nbsp;&nbsp; ; ・・・このようにして問題を回避できます<br>
+&nbsp;&nbsp;&nbsp; HotKeySet("{Esc}")<br>
+&nbsp;&nbsp;&nbsp; Send("{Esc}")<br>
+&nbsp;&nbsp;&nbsp; HotKeySet("{Esc}", "captureEsc")<br>
+EndFunc<br>
+</i><br>
+<br>
+呼ばれる関数はパラメータを<b>持てません</b>。あっても無視されます。<br>
+<br>
+@HotKeyPressed マクロを使うことで関数内で関数を呼んだキーを参照できます。<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="Send.htm">Send</a>, <a href="GUISetAccelerators.htm">GUISetAccelerators</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S1">; Esc でスクリプト終了。 Pause/Break で "一時停止"</span><br>
+<br>
+<span class="S5">Global</span><span class="S0"> </span><span class="S9">$Paused</span><br>
+<span class="S4">HotKeySet</span><span class="S8">(</span><span class="S7">"</span><span class="S10">{PAUSE}</span><span class="S7">"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"TogglePause"</span><span class="S8">)</span><br>
+<span class="S4">HotKeySet</span><span class="S8">(</span><span class="S7">"</span><span class="S10">{ESC}</span><span class="S7">"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Terminate"</span><span class="S8">)</span><br>
+<span class="S4">HotKeySet</span><span class="S8">(</span><span class="S7">"+!d"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"ShowMessage"</span><span class="S8">)</span><span class="S0"> &nbsp;</span><span class="S1">;Shift-Alt-d</span><br>
+<br>
+<span class="S1">;;;; ここからメイン処理 ;;;;</span><br>
+<span class="S5">While</span><span class="S0"> </span><span class="S3">1</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">Sleep</span><span class="S8">(</span><span class="S3">100</span><span class="S8">)</span><br>
+<span class="S5">WEnd</span><br>
+<span class="S1">;;;;;;;;</span><br>
+<br>
+<span class="S5">Func</span><span class="S0"> TogglePause</span><span class="S8">()</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$Paused</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S5">NOT</span><span class="S0"> </span><span class="S9">$Paused</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">While</span><span class="S0"> </span><span class="S9">$Paused</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S4">sleep</span><span class="S8">(</span><span class="S3">100</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S4">ToolTip</span><span class="S8">(</span><span class="S7">'Script is "Paused"'</span><span class="S8">,</span><span class="S3">0</span><span class="S8">,</span><span class="S3">0</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">WEnd</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">ToolTip</span><span class="S8">(</span><span class="S7">""</span><span class="S8">)</span><br>
+<span class="S5">EndFunc</span><br>
+<br>
+<span class="S5">Func</span><span class="S0"> Terminate</span><span class="S8">()</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Exit</span><span class="S0"> </span><span class="S3">0</span><br>
+<span class="S5">EndFunc</span><br>
+<br>
+<span class="S5">Func</span><span class="S0"> ShowMessage</span><span class="S8">()</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">4096</span><span class="S8">,</span><span class="S7">""</span><span class="S8">,</span><span class="S7">"This is a message."</span><span class="S8">)</span><br>
+<span class="S5">EndFunc</span><br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\HotKeySet.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

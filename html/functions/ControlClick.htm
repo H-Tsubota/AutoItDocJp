@@ -1,0 +1,144 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function ControlClick</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">ControlClick</font>
+<hr size="2">
+<p>指定したコントロールにマウスクリックのコマンドを送ります。<br></p>
+
+<p class="codeheader">
+ControlClick ( "title", "text", controlID [, button [, clicks [, x [, y ]]]] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">title</td>
+    <td width="85%">アクセスするウィンドウの名前</td>
+  </tr>
+  <tr>
+   <td>text</td>
+   <td>アクセスするウィンドウのテキスト</td>
+  </tr>
+  <tr>
+   <td>controlID</td>
+   <td>操作するコントロール。<a href="../intro/controls.htm">Controls</a>参照</td>
+  </tr>
+  <tr>
+   <td>button</td>
+   <td><b>[オプション]</b> クリックするマウスボタン。"left"、 "right"、 "middle"、 "main"、 "menu"、 "primary"、 "secondary"から選択。デフォルトは左ボタン。</td>
+  </tr>
+  <tr>
+   <td>clicks</td>
+   <td><b>[オプション]</b> マウスボタンをクリックする回数。デフォルトは1。</td>
+  </tr>
+  <tr>
+   <td>x</td>
+   <td><b>[オプション]</b> コントロール内のどこをクリックするか（x座標）。デフォルトは中央。</td>
+  </tr>
+  <tr>
+   <td>y</td>
+   <td><b>[オプション]</b> コントロール内のどこをクリックするか（y座標）。デフォルトは中央。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">成功:</td>
+    <td width="90%">1を返します。</td>
+  </tr>
+  <tr>
+    <td valign="top">失敗:</td>
+    <td>0を返します。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+
+ウィンドウがアクティブでないとコマンドに反応しないコントロールがあります。その場合、ControlClick()を使用する前にWinActivate()を使ってコントロールのあるウィンドウを最前面に表示してください。<br>
+クリック回数2を使用した場合、コントロールにはダブルクリックのメッセージが送られます。これはエクスプローラコントロールからプログラムを立ち上げるために使用できます!<br><br>
+<br>
+ユーザーがコントロールパネルで左右のマウスボタンが入れ換えている場合、ボタンの動作が変わります。
+ボタンの入れ換えに関係なく"left"と"right"では常にそのボタンがクリックされます。
+ボタンの入れ換えに関係なく"primary"、"main"はメインクリックになります。
+またボタンの入れ換えに関係なく"secondary"、"menu"で通常通りコンテキストメニューが表示されます。<br>
+<br>
+<a name="table"></a><br>
+<table width="100%" border="1" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td style="border-bottom-style: solid; border-bottom-width: 1"><b>ボタン</b></td>
+    <td style="border-bottom-style: solid; border-bottom-width: 1"><b>通常時</b></td>
+    <td style="border-bottom-style: solid; border-bottom-width: 1"><b>入れ換え時</b></td>
+  </tr>
+  <tr>
+    <td>""</td>
+    <td>左</td>
+    <td>左</td>
+  </tr>
+  <tr>
+    <td>"left"</td>
+    <td>左</td>
+    <td>左</td>
+  </tr>
+  <tr>
+    <td>"middle"</td>
+    <td>中央</td>
+    <td>中央</td>
+  </tr>
+  <tr>
+    <td>"right"</td>
+    <td>右</td>
+    <td>右</td>
+  </tr>
+  <tr>
+    <td>"primary"</td>
+    <td>左</td>
+    <td>右</td>
+  </tr>
+  <tr>
+    <td>"main"</td>
+    <td>左</td>
+    <td>右</td>
+  </tr>
+  <tr>
+    <td>"secondary"</td>
+    <td>右</td>
+    <td>左</td>
+  </tr>
+  <tr>
+    <td>"menu"</td>
+    <td>右</td>
+    <td>左</td>
+  </tr>
+</table><br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="ControlCommand.htm">ControlCommand</a>, <a href="MouseClick.htm">MouseClick</a>, <a href="WinActivate.htm">WinActivate</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S4">ControlClick</span><span class="S8">(</span><span class="S7">"[CLASS:Notepad]"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"MDIClient1"</span><span class="S8">)</span><br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\ControlClick.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function GUISetState</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">GUISetState</font>
+<hr size="2">
+<p>GUIウィンドウの状態を変更します。<br></p>
+
+<p class="codeheader">
+GUISetState ( [flag [, winhandle]] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">flag</td>
+    <td width="85%"><b>[オプション]</b> <br>
+       @SW_SHOW = 非表示ウィンドウを表示(デフォルト)<br>
+       @SW_HIDE = ウィンドウを非表示<br>
+       @SW_MINIMIZE = ウィンドウを最小化<br>
+       @SW_MAXIMIZE = ウィンドウを最大化<br>
+       @SW_RESTORE = ウィンドウ最小化を解除<br>
+       @SW_DISABLE = ウィンドウを無効化<br>
+       @SW_ENABLE = ウィンドウを有効化<br>
+       @SW_LOCK = 再描画をしないようウィンドウをロック<br>
+       @SW_UNLOCK = 再描画をするようウィンドウロックを解除</td>
+  </tr>
+  <tr>
+   <td>winhandle</td>
+   <td><b>[オプション]</b> GUICreateによって返されるウィンドウハンドル(デフォルトでは直前に使われたウィンドウ)。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">成功</td>
+    <td width="90%">1を返します。</td>
+  </tr>
+  <tr>
+    <td valign="top">失敗</td>
+    <td>0を返します。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+作成したウィンドウは初期状態では隠されているのでこの関数を使用して表示しなければなりません(@SW_SHOW)。<br>
+<br>
+@SW_LOCKを使ってロックできるウィンドウは1つだけです。他の全ての@SW_LOCK は要求されたウィンドウをロックします。<br>
+@SW_UNLOCKでは"winhandle"は無視され、ロックされている任意のウィンドウのロックがはずされます。<br>
+<br>
+
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="GUICreate.htm">GUICreate</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;GUIConstantsEx.au3&gt;</span><br>
+<br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">'MustDeclareVars'</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">)</span><br>
+<br>
+<span class="S0">Example</span><span class="S8">()</span><br>
+<br>
+<span class="S5">Func</span><span class="S0"> Example</span><span class="S8">()</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$msg</span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUICreate</span><span class="S8">(</span><span class="S7">"My GUI"</span><span class="S8">)</span><span class="S0"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S1">; 定義開始</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUISetState</span><span class="S8">()</span><span class="S0"> &nbsp;&nbsp;&nbsp;&nbsp;</span><span class="S1">; 空のダイアログボックスを表示</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; ダイアログが閉じられるまでGUIを実行</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">While</span><span class="S0"> </span><span class="S3">1</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$msg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUIGetMsg</span><span class="S8">()</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">If</span><span class="S0"> </span><span class="S9">$msg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$GUI_EVENT_CLOSE</span><span class="S0"> </span><span class="S5">Then</span><span class="S0"> </span><span class="S5">ExitLoop</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">WEnd</span><br>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;Example</span></span><br>
+<script type="text/javascript">
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\GUISetState.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+</body>
+</html>

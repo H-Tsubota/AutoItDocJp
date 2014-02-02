@@ -1,0 +1,91 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function ControlSend</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">ControlSend</font>
+<hr size="2">
+<p>コントロールに文字列を送信します。<br></p>
+
+<p class="codeheader">
+ControlSend ( "title", "text", controlID, "string" [, flag] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">title</td>
+    <td width="85%">アクセスするウィンドウの名前</td>
+  </tr>
+  <tr>
+   <td>text</td>
+   <td>アクセスするウィンドウのテキスト</td>
+  </tr>
+  <tr>
+   <td>controlID</td>
+   <td>対象となるコントロール。<a href="../intro/controls.htm">Controls</a>参照。</td>
+  </tr>
+  <tr>
+   <td>string</td>
+   <td>コントロールに送信する文字列</td>
+  </tr>
+  <tr>
+   <td>flag</td>
+   <td><b>[オプション]</b> どのように"キー"を送信するかを変更します。<br>
+       &nbsp;&nbsp;flag = 0 (デフォルト)	：SHIFTを意味する+や→を意味する{LEFT}のような特殊な文字をテキストが含んでる場合。<br>
+       &nbsp;&nbsp;flag = 1	：キーはそのまま送信されます。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">成功</td>
+    <td width="90%">1を返します。</td>
+  </tr>
+  <tr>
+    <td valign="top">失敗</td>
+    <td>ウィンドウ/コントロールが見つからなかった場合0を返します。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+ControlSendは<a href="Send.htm">Send</a>と同様の処理をおこないます。ただしアクティブなウィンドウではなく指定したウィンドウ/コントロールに直接キーストロークを送ることができます。<br>
+<br>
+ControlSendはコマンドプロンプトに対してだけは正常に動作しません。コマンドプロンプトは通常のウィンドウとは違う方法で動いているからです (キーストロークメッセージを受信するのではなくフィジカルステイトを調べているようです)。通常のウィンドウに対してはControlSendはただのSendより信頼性が高い方法です。－もちろんCtrl、Shift、Altキーなどを送信できます。<br>
+<br>
+Sendのヘルプでも言及したようにCAPS LOCKが有効だったりShiftキーが使用されている時に異なった文字を送信するキーボードではうまくキーストロークをシミュレートできません。たとえばチェコ語キーボードです。有効な回避方法はControlSetTextを使うことです。<br>
+<br>
+最初にコントロールにControlFocusコマンドでフォーカスをあわせる必要がある場合があります。特に同じスクリプト上で作ったcontrolIDに操作する場合です。<br>
+<br>
+Opt("SendKeyDelay",...) はキーストロークのキーの間の時間間隔を変更します。<br>
+Opt("SendKeyDownDelay",...) はキーストロークのキーが押されてから離されるまでの時間の長さを変更します。<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="ControlCommand.htm">ControlCommand</a>, <a href="Send.htm">Send</a>, <a href="ControlSetText.htm">ControlSetText</a>, <a href="ControlFocus.htm">ControlFocus</a>, <a href="AutoItSetOption.htm#SendKeyDelay">SendKeyDelay (Option)</a>, <a href="AutoItSetOption.htm#SendKeyDownDelay">SendKeyDownDelay (Option)</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S4">ControlSend</span><span class="S8">(</span><span class="S7">"[CLASS:Notepad]"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Edit1"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"This is a line of text in the notepad window"</span><span class="S8">)</span><br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\ControlSend.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

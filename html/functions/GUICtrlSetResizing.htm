@@ -1,0 +1,201 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function GUICtrlSetResizing</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">GUICtrlSetResizing</font>
+<hr size="2">
+<p>コントロールによって使用されるサイズ変更方法を定義します。<br></p>
+
+<p class="codeheader">
+GUICtrlSetResizing ( controlID, resizing )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">controlID</td>
+    <td width="85%">	<a href="GUICtrlCreate%20Management.htm">GUICtrlCreate...</a>関数によって返されるコントロール識別子(コントロールID)。</td>
+  </tr>
+  <tr>
+   <td>resizing</td>
+   <td>使用する値については下記の<a href="#DockingValues">ドッキング値表</a>を参照してください(必要な場合は複数の値を足し合わせてください)。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">成功</td>
+    <td width="90%">1を返します。</td>
+  </tr>
+  <tr>
+    <td valign="top">失敗</td>
+    <td>0を返します。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+GUIウィンドウがサイズ変更された場合、コントロールにもそれが反映されます。この関数でどのように反映されるかを決定します。GUIウィンドウをサイズ変更できるようにするには作成時に$WS_SIZEBOX スタイルと$WS_SYSMENUスタイルを設定する必要があります。<a href="GUICreate.htm">GUICreate</a>を参照してください。<br>
+<br>
+&nbsp;&nbsp;&nbsp; <a name="DockingValues"></a><b>ドッキング値表</b><br>
+<table width="100%" border="1" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td style="border-bottom-style: solid; border-bottom-width: 1"><b>サイズ変更</b></td>
+    <td style="border-bottom-style: solid; border-bottom-width: 1"><b>値</b></td>
+    <td style="border-bottom-style: solid; border-bottom-width: 1"><b>サイズ変更基準</b></td>
+  </tr>
+  <tr>
+    <td>$GUI_DOCKAUTO</td>
+    <td>1</td>
+    <td>サイズ変更し、新しいウィンドウサイズに基づいて位置変更をする。</td>
+  </tr>
+  <tr>
+    <td>$GUI_DOCKLEFT</td>
+    <td>2</td>
+    <td>左端</td>
+  </tr>
+  <tr>
+    <td>$GUI_DOCKRIGHT</td>
+    <td>4</td>
+    <td>右端</td>
+  </tr>
+  <tr>
+    <td>$GUI_DOCKHCENTER</td>
+    <td>8</td>
+    <td>水平方向中央を基準に相対位置を保ちます。</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>$GUI_DOCKTOP</td>
+    <td>32</td>
+    <td>上端</td>
+  </tr>
+  <tr>
+    <td>$GUI_DOCKBOTTOM</td>
+    <td>64</td>
+    <td>下端</td>
+  </tr>
+  <tr>
+    <td>$GUI_DOCKVCENTER</td>
+    <td>128</td>
+    <td>垂直方向中央を基準に相対位置を保ちます。</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>$GUI_DOCKWIDTH</td>
+    <td>256</td>
+    <td>幅を変更しません。</td>
+  </tr>
+  <tr>
+    <td>$GUI_DOCKHEIGHT</td>
+    <td>512</td>
+    <td>高さを変更しません。</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td></td>
+    <td>サイズ変更の組み合わせ</td>
+  </tr>
+  <tr>
+    <td>$GUI_DOCKSIZE</td>
+    <td>768</td>
+    <td>(256+512) サイズを変更しません。</td>
+  </tr>
+  <tr>
+    <td>$GUI_DOCKMENUBAR</td>
+    <td>544</td>
+    <td>(512+32) コントロールはウィンドウの上端に高さを変えずにとどまります。</td>
+  </tr>
+  <tr>
+    <td>$GUI_DOCKSTATEBAR</td>
+    <td>576</td>
+    <td>(512+64) コントロールはウィンドウの下端に高さを変えずにとどまります。</td>
+  </tr>
+  <tr>
+    <td>$GUI_DOCKALL</td>
+    <td>802</td>
+    <td>(2+32+256+512) コントロールはサイズ変更で位置移動しません。</td>
+  </tr>
+  <tr>
+    <td>$GUI_DOCKBORDERS</td>
+    <td>102</td>
+    <td>(2+4+32+64) コントロールがウィンドウと同様にサイズ変更されます。</td>
+  </tr>
+</table><br>
+サイズ変更に対するコントロールのデフォルトの振る舞いはコントロールの種類に依存します。そのコントロールのドキュメントを参照してください。<br>
+GUIResizeMode (Option)を使って任意のコントロールのデフォルト値を設定することができます<br>
+<br>
+GUIEventOptions (Option)に1が設定されている場合、自動サイズ変更イベントは無効になります。<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="AutoItSetOption.htm#GUIResizeMode">GUIResizeMode (Option)</a>, <a href="AutoItSetOption.htm#GUIEventOptions">GUIEventOptions (Option)</a>, <a href="GUICtrlCreate%20Management.htm">GUICtrlCreate...</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;GUIConstantsEx.au3&gt;</span><br>
+<span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;WindowsConstants.au3&gt;</span><br>
+<span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;EditConstants.au3&gt;</span><br>
+<br>
+<span class="S4">Opt</span><span class="S8">(</span><span class="S7">'MustDeclareVars'</span><span class="S8">,</span><span class="S0"> </span><span class="S3">1</span><span class="S8">)</span><br>
+<br>
+<span class="S0">Example</span><span class="S8">()</span><br>
+<br>
+<span class="S5">Func</span><span class="S0"> Example</span><span class="S8">()</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Local</span><span class="S0"> </span><span class="S9">$nEdit</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nOk</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$nCancel</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$msg</span><br>
+<span class="S0">&nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">Opt</span><span class="S8">(</span><span class="S7">"GUICoordMode"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">2</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUICreate</span><span class="S8">(</span><span class="S7">"My InputBox"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">190</span><span class="S8">,</span><span class="S0"> </span><span class="S3">114</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$WS_SIZEBOX</span><span class="S0"> </span><span class="S8">+</span><span class="S0"> </span><span class="S9">$WS_SYSMENU</span><span class="S8">)</span><span class="S0"> &nbsp; </span><span class="S1">; 定義開始</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUISetIcon</span><span class="S8">(</span><span class="S7">"Eiffel Tower.ico"</span><span class="S8">)</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUISetFont</span><span class="S8">(</span><span class="S3">8</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Arial"</span><span class="S8">)</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUICtrlCreateLabel</span><span class="S8">(</span><span class="S7">"Prompt"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">8</span><span class="S8">,</span><span class="S0"> </span><span class="S3">7</span><span class="S8">)</span><span class="S0"> &nbsp;</span><span class="S1">; プロンプト情報を付加</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUICtrlSetResizing</span><span class="S8">(-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$GUI_DOCKLEFT</span><span class="S0"> </span><span class="S8">+</span><span class="S0"> </span><span class="S9">$GUI_DOCKTOP</span><span class="S8">)</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$nEdit</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICtrlCreateInput</span><span class="S8">(</span><span class="S7">"Default"</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S3">3</span><span class="S8">,</span><span class="S0"> </span><span class="S3">175</span><span class="S8">,</span><span class="S0"> </span><span class="S3">20</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$ES_PASSWORD</span><span class="S8">)</span><span class="S0"> &nbsp; &nbsp;</span><span class="S1">; 入力欄を付加</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUICtrlSetState</span><span class="S8">(</span><span class="S9">$nEdit</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$GUI_FOCUS</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUICtrlSetResizing</span><span class="S8">(</span><span class="S9">$nEdit</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$GUI_DOCKBOTTOM</span><span class="S0"> </span><span class="S8">+</span><span class="S0"> </span><span class="S9">$GUI_DOCKHEIGHT</span><span class="S8">)</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$nOk</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICtrlCreateButton</span><span class="S8">(</span><span class="S7">"OK"</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S3">3</span><span class="S8">,</span><span class="S0"> </span><span class="S3">75</span><span class="S8">,</span><span class="S0"> </span><span class="S3">24</span><span class="S8">)</span><span class="S0"> &nbsp; &nbsp; </span><span class="S1">; GUIを閉じるためのボタンを付加</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUICtrlSetResizing</span><span class="S8">(</span><span class="S9">$nOk</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$GUI_DOCKBOTTOM</span><span class="S0"> </span><span class="S8">+</span><span class="S0"> </span><span class="S9">$GUI_DOCKSIZE</span><span class="S0"> </span><span class="S8">+</span><span class="S0"> </span><span class="S9">$GUI_DOCKHCENTER</span><span class="S8">)</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$nCancel</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUICtrlCreateButton</span><span class="S8">(</span><span class="S7">"Annuler"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">25</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S8">)</span><span class="S0"> &nbsp; </span><span class="S1">; GUIを閉じるためのボタンを付加</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUICtrlSetResizing</span><span class="S8">(</span><span class="S9">$nCancel</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$GUI_DOCKBOTTOM</span><span class="S0"> </span><span class="S8">+</span><span class="S0"> </span><span class="S9">$GUI_DOCKSIZE</span><span class="S0"> </span><span class="S8">+</span><span class="S0"> </span><span class="S9">$GUI_DOCKHCENTER</span><span class="S8">)</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">GUISetState</span><span class="S8">()</span><span class="S0"> &nbsp; </span><span class="S1">; GUIを表示</span><br>
+<br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S1">; ダイアログが閉じられるまでGUIを実行</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">While</span><span class="S0"> </span><span class="S3">1</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S9">$msg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">GUIGetMsg</span><span class="S8">()</span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><br>
+<span class="S0">&nbsp; &nbsp; &nbsp; &nbsp; </span><span class="S5">If</span><span class="S0"> </span><span class="S9">$msg</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$GUI_EVENT_CLOSE</span><span class="S0"> </span><span class="S5">Then</span><span class="S0"> </span><span class="S5">ExitLoop</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">WEnd</span><br>
+<span class="S5">EndFunc</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;==&gt;Example</span></span><br>
+<script type="text/javascript">
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\GUICtrlSetResizing.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+</body>
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function ToolTip</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">ToolTip</font>
+<hr size="2">
+<p>スクリーンの任意の場所にツールチップを作成します。<br></p>
+
+<p class="codeheader">
+ToolTip ( "text" [, x [, y [, "title" [, icon [, options]]]]] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">text</td>
+    <td width="85%">ツールチップのテキスト (空の文字列を指定するとツールチップの表示を終了)</td>
+  </tr>
+  <tr>
+   <td>x</td>
+   <td><b>[オプション]</b> ツールチップのx座標</td>
+  </tr>
+  <tr>
+   <td>y</td>
+   <td><b>[オプション]</b> ツールチップのy座標</td>
+  </tr>  
+  <tr>
+   <td>title</td>
+   <td><b>[オプション]</b> ツールチップのタイトル。<b>IE5+が必要</b>。</td>
+  </tr>
+  <tr>
+   <td>icon</td>
+   <td><b>[オプション]</b> タイトルの横に表示する定義済みアイコン。タイトルが必要。<br>
+       0 = アイコンなし、 1 = Infoアイコン、 2 = 警告アイコン、 3 = エラーアイコン</td>
+  </tr>
+  <tr>
+   <td>options</td>
+   <td><b>[オプション]</b> ツールチップをどのように表示するかをそれぞれ設定。(加え合わせて使用できます。)<br>
+       1 = バルーンチップ表示。<b>IE5+が必要</b>。<br>
+       2 = x、y座標をチップの左上隅でなく中央の座標として表示。<br>
+       4 = 
+必要であればツールチップをモニター枠に閉じ込めて、常に表示させます。複数のモニターを使用した場合、ツールチップは一番近いモニターに"くっつき"ます。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">成功</td>
+    <td width="90%">1を返します。</td>
+  </tr>
+  <tr>
+    <td valign="top">失敗</td>
+    <td>タイトルの長さが99より長い場合、0を返します。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+オプションパラメータをスキップする場合、デフォルト値を使用するためには<a href="../keywords/Default.htm">Defaultキーワード</a>を使用します。<br>
+<br>
+x、y座標を省略した場合、チップはマウスカーソルの近くに表示されます。<br>
+ツールチップはスクリプトが終了するかToolTip("")が呼ばれるまで表示され続けます。<br>
+@CR、@LFを使用することで複数行のテキストを持つツールチップを作成できます。<br>
+アイコンを表示するためにはタイトルを設定しなければなりません。アイコンはタイトルと同じ行に表示されるのでアイコンの表示にはタイトルが必要になります。<br>
+中央表示フラグを使用すると、指定した座標にツールチップの中心が来ます。中央表示フラグをバルーンチップ表示と併用すると、バルーンの軸がバルーンの中央になり指定した座標を指すようになります。<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="TrayTip.htm">TrayTip</a>, <a href="MsgBox.htm">MsgBox</a>, <a href="SplashTextOn.htm">SplashTextOn</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S1">; スクリーンの左上にツールチップを作成します。</span><br>
+<span class="S4">ToolTip</span><span class="S8">(</span><span class="S7">"This is a tooltip"</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">)</span><br>
+<span class="S4">Sleep</span><span class="S8">(</span><span class="S3">2000</span><span class="S8">)</span><span class="S0">&nbsp;</span><span class="S1">; ツールチップ表示時間</span><br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\ToolTip.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function FileSelectFolder</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">FileSelectFolder</font>
+<hr size="2">
+<p>フォルダ参照ダイアログを開始します。<br></p>
+
+<p class="codeheader">
+FileSelectFolder ( "dialog text", "root dir" [, flag [, "initial dir" [, hwnd]]] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">dialog text</td>
+    <td width="85%">ダイアログ内に表示されるメッセージ</td>
+  </tr>
+  <tr>
+   <td>root dir</td>
+   <td>GUIファイルツリーのルートディレクトリ。""を使用するとデスクトップが設定されます。</td>
+  </tr>
+  <tr>
+   <td>flag</td>
+   <td><b>[オプション]</b><br>
+       &nbsp;1 = フォルダ作成ボタンを表示します(IE6.0以降が必要になります)。<br>
+       &nbsp;2 = 新しいダイアログスタイルを使用します(IE5.0以降が必要になります)。<br>
+       &nbsp;4 = (フォルダ名入力のための)エディットコントロールを表示します。</td>
+  </tr>
+  <tr>
+   <td>initial dir</td>
+   <td><b>[オプション]</b>存在する場合選択される初期/スタートディレクトリ。</td>
+  </tr>
+  <tr>
+   <td>hwnd</td>
+   <td><b>[オプション]</b> このダイアログの親として使用されるウィンドウのハンドル</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">成功</td>
+    <td width="90%">選択されたフォルダのフルパスを返します。</td>
+  </tr>
+  <tr>
+    <td valign="top">失敗</td>
+    <td>キャンセル/クローズボタンが押された場合、"" (空文字)を返し@errorを1に設定します。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+initial dirが設定されていて、存在しない場合はroot dirが選択されます。<br>
+さらにroot dirが存在しない場合はデスクトップがルートになります。<br>
+"フォルダ作成ボタン"オプションが動作するためにはWindows XPとIE6.0が必要になります。<br>
+特別なWindowsフォルダ(例えば"My Documents")をルートに設定したい場合はCLSID(付録に詳細説明)を使用してください。<br>
+UNCパスはサポートされていません。ユーザーがUNCパス上のファイルを選ぶ可能性がある場合、まずパスをドライブにマップする必要があります。<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="FileSaveDialog.htm">FileSaveDialog</a>, <a href="FileOpenDialog.htm">FileOpenDialog</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S9">$var</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">FileSelectFolder</span><span class="S8">(</span><span class="S7">"Choose a folder."</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">)</span><br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\FileSelectFolder.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

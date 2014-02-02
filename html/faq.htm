@@ -1,0 +1,276 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+<title>AutoIt</title>
+<meta http-equiv="Content-Type" content="text/html; charset=shift-jis">
+<link href="css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<H1><a name="FAQ"></a>Frequently Asked Questions (FAQ)</H1>
+<p>
+この章では<a class="ext" href="http://www.autoitscript.com/forum/">フォーラム</a>でよく訊かれる質問をとりあげます。
+ここであなたの探している回答が見つからない場合はまず<a class="ext" href="http://www.autoitscript.com/forum/">フォーラム</a>で尋ねてみてください。
+</p>
+<h2>質問</h2>
+<p>1. <a href="#1">なぜ私のAutoIt v2.64のスクリプトはv3で動作しないのでしょうか?</a></p>
+<p>2. <a href="#2">v3は以前のバージョンより難しいのでしょうか?</a></p>
+<p>3. <a href="#3">どうすれば私のv2.64のスクリプトをv3用に変換できますか?</a></p>
+<p>4. <a href="#4">&quot;goto&quot;コマンドはどこへいってしまったのですか?</a></p>
+<p>5. <a href="#5">どうすればDOSプログラムをAutoItから実行できますか?</a></p>
+<p>6. <a href="#6">なぜRun()は.exeファイルと.comファイルの実行にしか利用できないのでしょうか?  .msi / .txtなど他のファイルはどうすればいいのでしょうか?</a></p>
+<p>7. <a href="#7">ダブルコーテーション(&quot;)使用時にエラーが起きるのはなぜでしょか?</a></p>
+<p>8. <a href="#8">ウィンドウの&quot;title&quot;、&quot;text&quot;パラメータは何を意味するのでしょうか?</a></p>
+<p>9. <a href="#9">&quot;My var is $variable&quot;としても変数が表示されないのはなぜでしょうか?</a></p>
+<p>10. <a href="#10">Send()を使用して変数を送信すると変なことが起きるのはなぜでしょうか?</a></p>
+<p>11. <a href="#11">値のreturnと@errorの違いはなんでしょうか?</a></p>
+<p>12. <a href="#12">ホットキーを使用してスクリプトを終了するにはどうすればいいでしょうか?</a></p>
+<p>13. <a href="#13">スクリプトのコンパイル時にカスタムアイコンを使用するにはどうすればいいでしょうか?</a></p>
+<p>14. <a href="#14">スクリプトのコピーが多重実行されていないことを保証するにはどうすればいいでしょうか?</a></p>
+<p>15. <a href="#15">現在のAutoIt v3の技術的な限界は?</a></p>
+<p>16. <a href="#16"> Examples下のヘルプファイルで画像が見つからないというメッセージがでるのですが。</a></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p><img src="images/blue_gradient_1024x24.jpg" width="1024" height="1"></p>
+<h2><a name="1"></a>1. なぜ私のAutoIt v2.64のスクリプトはv3で動作しないのでしょうか?</h2>
+<p>v3はv2.64とは異なった言語構造を持っています。</p>
+<p>
+AutoItの以前のバージョンはソフトウェアのインストールを手助けするためのシンプルなスクリプトを書くためにデザインされていました。しかしAutoItは時間がたつにつれて汎用的で複雑なスクリプト処理をおこなうために使われるようになりはじめました。そのような処理は過去の文法構造でも可能でしたが非常に難しくて面倒でした。その結果、汎用的な自動化処理をおこうなうのにより適していて、より標準的でBasicライクに作られたAutoItを作成することが決定されました。これはあなたが既にスクリプト言語を知っていれば、簡単にAutoIt v3を使うことができるということも意味しています。
+</p>
+<p>&nbsp;</p>
+<p><font size="-2"><a href="#FAQ">トップに戻る</a></font></p>
+<p><img src="images/blue_gradient_1024x24.jpg" width="1024" height="1"></p>
+<p></p>
+<h2><a name="2"></a>2. v3は以前のバージョンより難しいのでしょうか?</h2>
+<p>
+そんなことはありません。実際のところ、この言語では実現不可能なことをやろうとしない限りは多くの場合で以前のバージョンよりも簡単になっています。またBASICライクな言語仕様が採用されており、BASICは...ベーシックなことで有名です:)</p>
+<p>&nbsp;</p>
+<p>
+古いAutoItスクリプトの大半はソフトウェアのインストールとダイアログボックス内の大量の&quot;Next&quot;ボタンをクリックすることに焦点が当てられていました。このようなスクリプトのほとんどはカッコを付け加えることで簡単にv3スクリプトに変換することが可能です。下にv2とv3で書かれたそのようなスクリプトの例を示します(<u><strong>N</strong></u><strong>ext</strong>ボタンと<u><strong>F</strong></u><strong>inish </strong>ボタンをもつ複数のダイアログによるソフトウェアのインストールのシミュレーション)。</p>
+<p>&nbsp;</p>
+<p class="code"> ; v2.64 スクリプト<br>
+  WinWaitActive, Welcome, Welcome to the XSoft installation<br>
+  Send, !n<br>
+  WinWaitActive, Choose Destination, Please choose the<br>
+  Send, !n<br>
+  WinWaitActive, Ready to install, Click Next to install<br>
+  Send, !n<br>
+  WinWaitActive, Installation Complete, Click Finish to exit<br>
+  Send, !f<br>
+  WinWaitClose, Installation Complete<br>
+  <br>
+  ; v3 スクリプト<br>
+  WinWaitActive(&quot;Welcome&quot;, &quot;Welcome to the XSoft installation&quot;)<br>
+  Send(&quot;!n&quot;)<br>
+  WinWaitActive(&quot;Choose Destination&quot;, &quot;Please choose the&quot;)<br>
+  Send(&quot;!n&quot;)<br>
+  WinWaitActive(&quot;Ready to install&quot;, &quot;Click Next to install&quot;)<br>
+  Send(&quot;!n&quot;)<br>
+  WinWaitActive(&quot;Installation Complete&quot;, &quot;Click Finish to exit&quot;)<br>
+  Send(&quot;!f&quot;)<br>
+  WinWaitClose(&quot;Installation Complete&quot;)
+</p>
+<p>&nbsp;</p>
+<p>
+これは改良の結果です!:) 全ての&quot;文字列&quot;をコーテーションで囲むことで、テキスト内の前後のスペースによって引き起こされる問題と格闘する必要はもはやありません。また多くの<a href="intro/editors.htm">テキストエディタ</a>ですばらしいサポートが提供されており、
+ v3スクリプトを書く際に多くのことを簡単にしてくれる構文の強調表示を使用することができます。
+</p>
+<p>&nbsp;</p>
+<p><font size="-2"><a href="#FAQ">トップに戻る</a></font></p>
+<p><img src="images/blue_gradient_1024x24.jpg" width="1024" height="1"></p>
+<h2><a name="3"></a>3. どうすれば私のv2.64のスクリプトをv3用に変換できますか?</h2>
+<p>最初に確認しなければならないのは&quot;自分のスクリプトを変換する必要があるか?&quot;ということです。v2.64は今後もダウンロード可能ですし、サポートも継続されます。従って理由がない限り(あなたがそうしたいのでない限り:))、あなたのスクリプト全てをアップデートする必要はありません。</p>
+<p>&nbsp;</p>
+<p>ヘルプファイルにv2とv3のコマンドの関係を示した章があります。<a href="intro/v264users.htm">こちら</a>をクリックしてページを参照してください。</p>
+<p>&nbsp;</p>
+<p>AutoIt v3作成者の1人がv2のスクリプトをv3のスクリプトに自動変換してくれるユーティリティを書いています。変換はあなたのコードがgoto文の巣窟でない限りはかなり正しくおこなわれます :) コンバーターは&quot;Extras&quot;ディレクトリ(Start \ AutoIt v3 \ Extras - またはあなたがAutoIt v3をインストールしたディレクトリ)内にあります。</p>
+<p>&nbsp;</p>
+<p><font size="-2"><a href="#FAQ">トップに戻る</a></font></p>
+<p><img src="images/blue_gradient_1024x24.jpg" width="1024" height="1"></p>
+<p></p>
+<h2><a name="4"></a>4. &quot;goto&quot;コマンドはどこへいってしまったのですか?</h2>
+<p>消えました。Gotoは悪です。質問は受け付けません-悪なのです。 
+映画<a class="ext" href="http://www.imdb.com/title/tt0081633/">Time Bandits</a>のラストに出てくる電子レンジの中の岩の塊のようなものです:)</p>
+<p>&nbsp;</p>
+<p>
+ AutoIt v3の大きな特徴は&quot;ループ&quot;を使用できるようになったことでもはやGotoを必要としなくなったことです。物事を処理する近代的な方法である
+<a href="keywords/While.htm">While</a>、
+  <a href="keywords/Do.htm">Do</a>、<a href="keywords/For.htm">For</a>、<a href="keywords/ExitLoop.htm">ExitLoop</a>、
+  <a href="keywords/ContinueLoop.htm">ContinueLoop</a>、<a href="keywords/Func.htm">Functions</a>
+を見てください:) そしてヘルプファイルを読むときに<a href="intro/lang_loops.htm">ループ文</a>、<a href="intro/lang_conditional.htm">条件文</a>、<a href="intro/lang_functions.htm">関数</a>についての章もチェックしてください。一度コツを覚えれば事実上どのような言語でも数分でスクリプトを書くことができるようになることを約束します。
+  </p>
+<p>&nbsp;</p>
+<p>
+はじめてみましょう。バージョン2.64でもっとも基本的なGotoの使用法は次のような無限ループです：</p>
+<p class="code"> :mylabel<br>
+  ...処理をおこなう...<br>
+  ...別の処理をおこなう...<br>
+  goto, mylabel<br>
+
+</p>
+<p>この処理のシンプルv3バージョンは常に&quot;true&quot;のWhileループです。</p>
+<p class="code">While 1 = 1<br>
+  &nbsp;&nbsp; ...処理をおこなう...<br>
+  &nbsp;&nbsp; ...別の処理をおこなう...<br>
+  Wend<br>
+</p>
+<p>&nbsp;</p>
+<p><font size="-2"><a href="#FAQ">トップに戻る</a></font></p>
+<p><img src="images/blue_gradient_1024x24.jpg" width="1024" height="1"></p>
+<p></p>
+<h2><a name="5" id="5"></a>5. <a href="#5">どうすればDOSプログラムをAutoItから実行できますか?</a></h2>
+<p>
+DOSの&quot;Dir&quot;コマンドなどを実行したい場合、コマンドインタープリタ(command.comまたはcmd.exe。OSによって異なります)を使用する必要があります。<a href="macros.htm">@Comspec</a>マクロにこのファイルの正しい位置が格納されています。DOSプログラムの終了を待ってからスクリプトの次の行を実行したい場合は<a href="functions/RunWait.htm">RunWait()</a>関数を使用する必要があります。下にDOSのDirコマンドをC:ドライブに対して使用する例(コマンド<strong>command.com /c Dir C:\ </strong>の実行)を示します。
+</p>
+<p class="code">&nbsp;&nbsp;&nbsp; RunWait(@COMSPEC &amp; &quot; /c Dir C:\&quot;)</p>
+<p>&nbsp;</p>
+<p><font size="-2"><a href="#FAQ">トップに戻る</a></font></p>
+<p><img src="images/blue_gradient_1024x24.jpg" width="1024" height="1"></p>
+
+<h2><a name="6" id="6"></a>6. <a href="#6">なぜRun()は.exeファイルと.comファイルの実行にしか利用できないのでしょうか? .msi / .txtなど他のファイルはどうすればいいのでしょうか?</a></h2>
+<p>
+通常、&quot;実行可能&quot;であることを示す拡張子はほんのわずかです。.exe、.bat、.com、.pifがそれにあたります。.txtや.msiなどのその他のファイルタイプは実際は他のプログラムを使って実行されています。 "myfile.msi"というファイルをダブルクリックしたときに実際にバックグラウンドでおこなわれることは&quot;msiexec.exe myfile.msi&quot;の実行です。従って、.msiファイルをAutoItから実行するには次のようにしなければなりません。
+</p>
+<p class="code">&nbsp;&nbsp;&nbsp; RunWait(&quot;msiexec myfile.msi&quot;)</p>
+<p>&nbsp;</p>
+<p>
+また同じくらいシンプルな方法としては&quot;start&quot;コマンドの実行があります。このコマンドは自動でファイルの実行方法を判別して実行します。	
+</p>
+<p class="code"
+>&nbsp;&nbsp;&nbsp; RunWait(@COMSPEC &amp; &quot; /c Start myfile.msi&quot;)</p>
+<p class="code"
+>&nbsp;</p>
+<p>またはShellExecuteWait関数を使用します。このコマンドは自動でファイルの実行方法を判別して実行します。	
+</p>
+<p class="code">
+&nbsp;&nbsp;&nbsp; ShellExecuteWait(&quot;myfile.msi&quot;)</p>
+<p class="code">&nbsp;
+</p><!--QuoteEnd-->
+<p><font size="-2"><a href="#FAQ">トップに戻る</a></font></p>
+<p><img src="images/blue_gradient_1024x24.jpg" width="1024" height="1"></p>
+<p></p>
+<h2><a name="7" id="7"></a>7. <a href="#7">ダブルコーテーション(&quot;)使用時にエラーが起きるのはなぜでしょか?</a></h2>
+<p>
+文字列内でダブルコーテーションを使用したい場合、それらを&quot;2重にする&quot;必要があります。つまりコーテーションを1つ使いたい場所に2つ書くのです。例えば変数に文字列：<strong>A word in &quot;this&quot; sentence has quotes around it!</strong>を設定したい場合は次のようにします。
+</p>
+<p class="code">&nbsp;&nbsp;&nbsp; $var = &quot;A word in &quot;&quot;this&quot;&quot; 
+  sentence has quotes around it!&quot;</p>
+<p>代わりにシングルコーテーションを使う方法もあります。</p>
+<p class="code"
+>&nbsp;&nbsp;&nbsp; $var = 'A word in &quot;this&quot; sentence has quotes around 
+  it!'<font size="-2"></font></p>
+<p>&nbsp;</p>
+<p><font size="-2"><a href="#FAQ">トップに戻る</a></font></p>
+<p><img src="images/blue_gradient_1024x24.jpg" width="1024" height="1"></p>
+<p></p>
+<h2><a name="8" id="8"></a>8. <a href="#8">
+ウィンドウの&quot;title&quot;、&quot;text&quot;パラメータは何を意味するのでしょうか?</a></h2>
+<p><a href="intro/windowsbasic.htm">こちらに</a>詳細な説明があります。</p>
+<p>&nbsp;</p>
+<p><font size="-2"><a href="#FAQ">トップに戻る</a></font></p>
+<p><img src="images/blue_gradient_1024x24.jpg" width="1024" height="1"></p>
+
+<h2><a name="9" id="9"></a>9. <a href="#9">&quot;My var is $variable&quot;としても変数が表示されないのはなぜでしょうか?</a></h2>
+<p>$msgという変数があってそれをMsgBox内に表示したい場合、次の方法ではうまくいきません。</p>
+<p class="code">&nbsp;&nbsp;&nbsp; MsgBox(0, &quot;Example&quot;, &quot;My variable 
+  is $msg&quot;)</p>
+<p>
+上記の場合、そのまま<strong>My variable is $msg</strong>と表示されてしまいます。<a href="intro/lang_operators.htm">&amp; 演算子</a>を使ってAutoItに対して文字列と変数を連結するように教える必要があります。
+</p>
+<p class="code">&nbsp;&nbsp;&nbsp; MsgBox(0, &quot;Example&quot;, &quot;My variable 
+  is &quot; &amp; $msg)</p>
+<p>&nbsp;</p>
+<p>
+<strong>応用：</strong>たくさんの変数を文字列内で使用したい場合、<a href="functions/StringFormat.htm">StringFormat()</a>関数が便利です。
+例えば、文字列内に$var1から$var5を挿入したい場合、次のようにすると簡単です。 
+</p>
+<p class="code">&nbsp;&nbsp;&nbsp;&nbsp; $msg = StringFormat(&quot;Var1 is %s, 
+  Var2 is %s, Var3 is %s, Var4 is %s, Var5 is %s&quot;, $var1, $var2, $var3, $var4, 
+  $var5)<br>
+  &nbsp;&nbsp;&nbsp;&nbsp; MsgBox(0, &quot;Example&quot;, $msg)</p>
+<p>&nbsp;</p>
+<p><font size="-2"><a href="#FAQ">トップに戻る</a></font></p>
+<p><img src="images/blue_gradient_1024x24.jpg" width="1024" height="1"></p>
+<h2><a name="10" id="10"></a>10. <a href="#10">Send()を使用して変数を送信すると変なことが起きるのはなぜでしょうか?</a></h2>
+<p>
+変数を<a href="functions/Send.htm">送信</a>している場合、注意しなければならないのは送信内容に! ^ + {SPACE}などの特殊な送信文字が含まれていないかどうかということです。これらはめったに必要にならないような特殊なキーストロークに変換されます。この問題を解決するためには<a href="functions/Send.htm">Send()</a> のRAWモードを使用して特殊キーの変換をおこなわないようにします。
+</p>
+<p class="code">&nbsp;&nbsp;&nbsp; Send($myvar, 1)</p>
+<p>&nbsp;</p>
+<p><font size="-2"><a href="#FAQ">トップに戻る</a></font></p>
+<p></p>
+<p><img src="images/blue_gradient_1024x24.jpg" width="1024" height="1"></p>
+<h2><a name="11" id="11"></a>11. <a href="#11">値のreturnと@errorの違いはなんでしょうか?</a></h2>
+<p>
+一般的には値のreturnは関数が成功したかどうかを表すために使われます。しかし関数が(<a href="functions/WinGetText.htm">WinGetText()</a>のように )既になにか返している場合、関数が成功したかどうかを判別する方法が必要になります。その際、代わりに@errorを設定します。</p>
+<p>&nbsp;</p>
+<p><font size="-2"><a href="#FAQ">トップに戻る</a></font></p>
+<p></p>
+<p><img src="images/blue_gradient_1024x24.jpg" width="1024" height="1"></p>
+
+<h2><a name="12" id="12"></a>12. <a href="#12">ホットキーを使用してスクリプトを終了するにはどうすればいいでしょうか?</a></h2>
+<p>
+実に簡単です。特定のキーの組み合わせを押すとスクリプトが終了するようにしたい場合、<a href="functions/HotKeySet.htm">HotKeySet()</a> 関数を使用して希望のキーが押された際に実行されるユーザー関数を作成します。このユーザー関数には<a href="keywords/Exit.htm">Exit</a>キーワードのみを書いておきます。
+</p>
+<p>
+下記にCTRL+ALT+xが押された場合にスクリプトが終了するコードを示します。<br></p>
+<p class="code"> HotKeySet(&quot;^!x&quot;, &quot;MyExit&quot;)<br>
+  ...<br>
+  ...<br>
+  ; その他のスクリプト処理<br>
+  ...<br>
+  ...<br>
+  Func MyExit()<br>
+  &nbsp;&nbsp;&nbsp; Exit <br>
+  EndFunc
+</p>
+<p>&nbsp;</p>
+<p><font size="-2"><a href="#FAQ">トップに戻る</a></font></p>
+<p></p>
+<p><img src="images/blue_gradient_1024x24.jpg" width="1024" height="1"></p>
+
+<h2><a name="13" id="13"></a>13. <a href="#13">スクリプトのコンパイル時にカスタムアイコンを使用するにはどうすればいいでしょうか?</a></h2>
+<p>
+(単にスクリプトを右クリックしてコンパイルを選ぶのではなく)完全なコンパイラプログラムを実行する必要があります。<a href="intro/compiler.htm">このページ</a> でコンパイラの詳細について述べています。
+</p>
+<p>&nbsp;</p>
+<p><font size="-2"><a href="#FAQ">トップに戻る</a></font></p>
+<p></p>
+<p><img src="images/blue_gradient_1024x24.jpg" width="1024" height="1"></p>
+<h2><a name="14" id="14"></a>14. <a href="#14">スクリプトのコピーが多重実行されていないことを保証するにはどうすればいいでしょうか?</a></h2>
+<p>_Singleton()関数を使用してください。Singleton()の詳細とその使用方法についてはUser Defined Functionsドキュメントを参照してください。</p>
+<p><font size="-2"><a href="#FAQ">トップに戻る</a></font></p>
+<p></p>
+<p><img src="images/blue_gradient_1024x24.jpg" width="1024" height="1"></p>
+<h2><a name="15" id="15"></a>15. <a href="#15">現在のAutoIt v3の技術的な限界は?</a></h2>
+<p>
+下記に現在のAutoItの技術的な限界の詳細を示します。注意してもらいたいのはこれらの限界のいくつかは理論的なものであって、実際の限界に到達する前にパフォーマンス面、メモリー面で問題が起きることがあるということです。</p>
+<p>&nbsp; </p>
+<p>スクリプトの一行の最大長：4,095<br>
+文字列の最大長：2,147,483,647文字</p>
+<p>数値の範囲(浮動小数)：15桁の精度で 1.7E-308 から1.7E+308<br>
+数値の範囲(整数)：64ビット符号付整数<br>
+16進数：32ビット符号付整数(0x80000000 から 0x7FFFFFFF)</p>
+<p>配列：最大64次元、合計16000000要素まで<br>
+再帰的な関数呼び出しの最大深度：5100レベル</p>
+<p>一度に使用できる変数の最大数：無制限<br>
+ユーザー定義関数の最大数：無制限</p>
+<p>GUIウィンドウの最大数：無制限<br>
+GUIコントロールの最大数：65532</p>
+<p>&nbsp;</p>
+<p><font size="-2"><a href="#FAQ">トップに戻る</a></font></p>
+<p></p>
+<p></p>
+<p><img src="images/blue_gradient_1024x24.jpg" width="1024" height="1"></p>
+<h2><a name="16" id="16"></a>16. <a href="#15">Examples下のヘルプファイルで画像が見つからないというメッセージがでるのですが。</a></h2>
+<p>ヘルプファイル内の例を開くためのOpenボタンのことでしょう。<br>
+この問題はhhctrl.ocxが適切に登録されていないか、壊れていることで起きます。<br>
+コマンドプロンプトから&quot;regsvr32 hhctrl.ocx&quot;をおこなって登録を試みるか、ファイルが壊れていないかどうか確認してみてください。<br>
+&nbsp;</p>
+<p><font size="-2"><a href="#FAQ">トップに戻る</a></font></p>
+<p></p>
+<p><img src="images/blue_gradient_1024x24.jpg" width="1024" height="1"></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</body>
+</html>

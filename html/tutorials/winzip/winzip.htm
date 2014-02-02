@@ -1,0 +1,87 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Tutorial - WinZip</title>
+  <meta http-equiv="Content-Type"
+ content="text/html; charset=shift-jis">
+  <link href="../../css/default.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<h1>Tutorial - WinZip </h1>
+<p>このチュートリアルでは<a href="http://www.winzip.com/" class="ext">WinZip 9 SR-1</a>のインストールの自動化方法について説明します。AutoItスクリプトの作成・実行とウィンドウのタイトルとテキストを調べるための<a href="../../intro/au3spy.htm">AutoIt Window Information Tool</a>の使用方法についてはチュートリアル<a href="../helloworld/helloworld.htm">HelloWorld</a>とチュートリアル<a href="../notepad/notepad.htm">Notepad</a>を見て理解しているものとします。</p>
+<p>&nbsp;</p>
+<p>WinZipのインストーラは約10のダイアログボックスで構成されており、インストールするにはそのボタン（多くは<strong>Next</strong>ボタン）を押していかなければなりません。これからダイアログボックスの出現を待って適切なボタンを押す、というシンプルなスクリプトを書いていきましょう。一般的にこのタイプのインストールダイアログのウィンドウタイトル(WinZip Setup)は変化しません。従ってウィンドウを区別するためにはウィンドウテキストを使用する必要があります。それぞれのダイアログのスクリーンショットを示します。クリックすることでそのダイアログに対する<a href="../../intro/au3spy.htm">Information Tool</a>の出力をみることができます。</p>
+<p>&nbsp;</p>
+<p>まずWinZipインストーラとこれから作るスクリプトファイルのためのディレクトリを作成します。WinZipインストーラをこのディレクトリにコピーし、<strong>winzipinstall.au3</strong>という名前の空のスクリプトを作成してください。</p>
+<p><img src="folder.png" width="361" height="244" border="1"></p>
+<p>&nbsp;</p>
+<p>これから手動でインストールをおこないながらスクリプトを書いていきましょう。それぞれのダイアログを自動化するためのスクリプトをそれぞれの図の下に示します（図をクリックすればAutoIt Window Information Toolの出力を見られます）。また参考として<a href="script.txt">完成したスクリプト</a>を見ることもできます。</p>
+<p>&nbsp;</p>
+<p>スクリプトの1行目は簡単です。<strong>winzip90.exe</strong>インストーラを起動したいので1行目は次のように書きます。</p>
+<p class="codebox">Run(&quot;winzip90.exe&quot;)</p>
+<p>&nbsp;</p>
+<p>最初のダイアログが現れます。</p>
+<p><a href="dialog1.txt"><img src="dialog1.png" width="413" height="139" border="1"></a></p>
+<p>このウィンドウが現れてアクティブになるまで待ちます。その後<strong>Setup</strong>ボタンをクリックするためにキーストローク<strong>ALT-s</strong>を送信します。スクリプトは次のようになります。</p>
+<p class="codebox">WinWaitActive(&quot;WinZip&reg; 9.0 SR-1 Setup&quot;, &quot;&amp;Setup&quot;)<br>
+Send(&quot;!s&quot;)</p>
+<p>(図をクリックするとAutoIt Window Information Toolの出力を見られることを忘れないでください。この出力はキーボードからの入力が難しい特殊な(R)文字がタイトルに含まれる場合、特に重要です。)</p>
+<p>&nbsp;</p>
+<p>次にインストール場所をたずねるダイアログが現れます。</p>
+<p><a href="dialog2.txt"><img src="dialog2.png" width="320" height="199" border="1"></a></p>
+<p>このスクリーンがアクティブになるのを待って、インストール場所を許可するためにENTERをクリックします。スクリプトは次のようになります。</p>
+<p class="codebox">WinWaitActive(&quot;WinZip Setup&quot;, &quot;into the following folder&quot;)<br>
+Send(&quot;{ENTER}&quot;)</p>
+<p>&nbsp;</p>
+<p>次にWinZip Features ダイアログが現れます。</p>
+<p><a href="dialog3.txt"><img src="dialog3.png" width="471" height="333" border="1"></a></p>
+<p>このウィンドウが先ほどの<strong>WinZip Setup</strong>と全く同じタイトルを持つことに気づきましたね - 実はセットアップのダイアログは全てこのタイトルなのです！これらのウィンドウ間の区別をおこなうためにはウィンドウのテキストも使わなければいけません - それぞれのスクリーンの中からできるだけ他と違うテキストを探してください。今回、
+わたしは<strong>WinZip features include</strong>を選びました。ウィンドウが現れたら<strong>ALT-n</strong>を押します。</p>
+<p class="codebox">WinWaitActive(&quot;WinZip Setup&quot;, &quot;WinZip features include&quot;)<br>
+Send(&quot;!n&quot;)</p>
+<p>&nbsp;</p>
+<p>次にライセンスダイアログが現れます。</p>
+<p><a href="dialog4.txt"><img src="dialog4.png" width="452" height="279" border="1"></a></p>
+<p>ウィンドウが現れるのを待って、ライセンスに同意するために<strong>ALT-y</strong>を押します。</p>
+<p class="codebox">WinWaitActive(&quot;License Agreement&quot;)<br>
+Send(&quot;!y&quot;)</p>
+<p>&nbsp;</p>
+<p>セットアップは同じ形式のダイアログで続きます。それぞれのダイアログの図を自動化のために必要なスクリプトと共に示します。</p>
+<p>&nbsp;</p>
+<p><a href="dialog5.txt"><img src="dialog5.png" width="471" height="333" border="1"></a> </p>
+<p class="codebox">WinWaitActive(&quot;WinZip Setup&quot;, &quot;Quick Start Guide&quot;)<br>
+Send(&quot;!n&quot;)</p>
+<p>&nbsp;</p>
+<p><a href="dialog6.txt"><img src="dialog6.png" width="471" height="333" border="1"></a></p>
+<p class="codebox">WinWaitActive(&quot;WinZip Setup&quot;, &quot;switch between the two interfaces&quot;)<br>
+  Send(&quot;!c&quot;)<br>
+Send(&quot;!n&quot;)</p>
+<p>&nbsp;</p>
+<p><a href="dialog7.txt"><img src="dialog7.png" width="471" height="333" border="1"></a></p>
+<p class="codebox">WinWaitActive(&quot;WinZip Setup&quot;, &quot;&amp;Express setup (recommended)&quot;)<br>
+  Send(&quot;!e&quot;)<br>
+Send(&quot;!n&quot;)</p>
+<p>&nbsp;</p>
+<p><a href="dialog8.txt"><img src="dialog8.png" width="471" height="333" border="1"></a></p>
+<p class="codebox">WinWaitActive(&quot;WinZip Setup&quot;, &quot;WinZip needs to associate itself with your archives&quot;)<br>
+Send(&quot;!n&quot;)</p>
+<p>&nbsp;</p>
+<p><a href="dialog9.txt"><img src="dialog9.png" width="471" height="333" border="1"></a></p>
+<p>これがセットアップの最後のダイアログです。<strong>Finish</strong>ボタンにはキーボードショートカットが無いことに気づきます - 幸運なことにこのボタンはダイアログのデフォルトのボタンです。従ってこれを選ぶためにはENTERを押すだけでいいのです。もしデフォルトでなかった場合TABを押してコントロールを移動するか、もっといい方法として<a href="../../functions/ControlClick.htm">ControlClick</a>関数を使う必要があります。</p>
+<p class="codebox">WinWaitActive(&quot;WinZip Setup&quot;, &quot;Thank you for installing this evaluation version&quot;)<br>
+Send(&quot;{ENTER}&quot;)</p>
+<p>&nbsp;</p>
+<p>インストール後、WinZipが自動で起動します。</p>
+<p><a href="dialog10.txt"><img src="dialog10.png" width="566" height="347" border="1"></a></p>
+<p>WinZipのメインウィンドウが現れるのを待って、これを<a href="../../functions/WinClose.htm">WinClose</a>関数を使って閉じましょう</p>
+<p class="codebox">WinWaitActive(&quot;WinZip (Evaluation Version)&quot;)<br>
+WinClose(&quot;WinZip (Evaluation Version)&quot;)</p>
+<p>&nbsp;</p>
+<p>ここに<a href="script.txt">完成したスクリプト</a>示します - それぞれのダイアログごとに分けてコメントがついてることがわかります。コメントすることで読みやすくなり、また将来の修正（次のバージョンのWinZipは少し変更があるかもしれません）を簡単にします。</p>
+<p>&nbsp;</p>
+<p>さて！<strong>winzipinstaller.au3</strong>を実行してWinZipが数秒でインストールされる様子を見てみましょう！このチュートリアルでのテクニックを使えばほとんどのプログラムのインストールを自動化できます。</p>
+<p>&nbsp;</p>
+<p>演習として、ボタンのクリックにSend関数（アクティブなウィンドウにキーを送信）の代わりにより信頼性の高い<a href="../../functions/ControlClick.htm">ControlClick</a>を使ってにスクリプトを書き直してみてください。そのためには<a href="../../intro/controls.htm">Controls</a>を読む必要があるでしょう。</p>
+<p>&nbsp;</p>
+</body>
+</html>

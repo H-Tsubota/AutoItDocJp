@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function StringIsFloat</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">StringIsFloat</font>
+<hr size="2">
+<p>文字列が浮動小数点数かどうかを調べます。<br></p>
+
+<p class="codeheader">
+StringIsFloat ( "string" )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">string</td>
+    <td width="85%">調べる文字列もしくは式</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">成功</td>
+    <td width="90%">1を返します。</td>
+  </tr>
+  <tr>
+    <td valign="top">失敗</td>
+    <td>浮動小数点型で無い場合0を返します。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+10進数が少なくとも1つとピリオドが1つだけ含まれる場合、文字列はfloatです。
+他に問題の無い文字は１文字目に付くプラスとマイナスです。
+(たとえコンピュータのロケール設定でカンマを使用している場合でも、StringIsFloatはカンマを小数点として認識しません。)
+もしパラメータが文字列でない場合、文字列の変換されます。例を参照。
+<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="StringIsInt.htm">StringIsInt</a>, <a href="IsFloat.htm">IsFloat</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S4">StringIsFloat</span><span class="S8">(</span><span class="S7">"1.5"</span><span class="S8">)</span><span class="S0"> &nbsp;</span><span class="S1">;1を返す</span><br>
+<span class="S4">StringIsFloat</span><span class="S8">(</span><span class="S7">"7."</span><span class="S8">)</span><span class="S0"> &nbsp;&nbsp;</span><span class="S1">;10進数を含むので1を返す。</span><br>
+<span class="S4">StringIsFloat</span><span class="S8">(</span><span class="S7">"-.0"</span><span class="S8">)</span><span class="S0"> &nbsp;</span><span class="S1">;1を返す</span><br>
+<span class="S4">StringIsFloat</span><span class="S8">(</span><span class="S7">"3/4"</span><span class="S8">)</span><span class="S0"> &nbsp;</span><span class="S1">;'3' スラッシュ '4' は浮動小数点数ではないので0を返す。</span><br>
+<span class="S4">StringIsFloat</span><span class="S8">(</span><span class="S7">"2"</span><span class="S8">)</span><span class="S0"> </span><span class="S1">;'2'は整数で、浮動小数点数ではないので0を返す。</span><br>
+<br>
+<span class="S4">StringIsFloat</span><span class="S8">(</span><span class="S3">1.5</span><span class="S8">)</span><span class="S0"> &nbsp;&nbsp;&nbsp;</span><span class="S1">;1.5は'.'を含む文字列に変換されるので1を返す。</span><br>
+<span class="S4">StringIsFloat</span><span class="S8">(</span><span class="S3">1.0</span><span class="S8">)</span><span class="S0"> &nbsp;&nbsp;&nbsp;</span><span class="S1">;1.0は'.'を含まない文字列に変換されるので0を返す。</span><br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\StringIsFloat.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+</body>
+</html>

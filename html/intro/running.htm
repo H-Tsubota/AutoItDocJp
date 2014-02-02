@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Running Scripts</title>
+<META http-equiv=Content-Type content="text/html; charset=shift-jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<h1>Running Scripts</h1>
+<p>AutoItを開始すると<strong>スクリプトファイル</strong>を開くかどうかたずねられます。&nbsp;スクリプトファイルとはAutoItキーワードと関数が書かれた単なるテキストファイルでAutoItにあなたがやりたいことを教えるためのものです。スクリプトファイルは<strong>メモ帳</strong>やその他の<a href="editors.htm">もっと優れたテキストエディタ</a>で作られます。</p>
+<p>autoItv3スクリプトは単なるテキストファイルですが、通常のテキストファイルとスクリプトファイルを区別するために<strong>.au3</strong>という拡張子をつけます。もしあなたがAutoItをインストーラでフルインストールしていればAutoItスクリプトをダブルクリックすることで実行できます。&nbsp;<span style="font-weight: bold;">.au3</span>ファイルを右クリックするとファイルを開く、編集する、コンパイルするといったさまざまなオプションを選択できます。</p>
+<p>&nbsp;</p>
+<p>
+スクリプトの例を見てみましょう。<strong>;</strong>はコメント行を表します
+(DOSバッチファイルの<strong>REM</strong>のようなものです)。</p>
+<p class="codebox">
+; はじめてのスクリプト<br>
+MsgBox(0, "My First Script!", "Hello World!")</p>
+<p>&nbsp;</p>
+<p>
+もっと複雑なスクリプトでは<strong>関数</strong>を使います。
+関数は普通、スクリプトの最後に書かれます。&nbsp;関数を使った例を見てみましょう。</p>
+<p class="codebox">
+; 2つめのスクリプト (関数を使用)<br>
+  MsgBox(0, "My second script!", "Hello from the main script!")<br>
+  TestFunc()<br>
+  <br>
+  Func TestFunc()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;MsgBox(0, "My Second Script!", "Hello from the functions!")<br>
+  EndFunc
+</p>
+<p class="code">&nbsp;</p>
+<h2><a name="CommandLine"></a>コマンドライン引数</h2>
+<p>
+$CmdLineという特別な配列はあなたのAutoItスクリプトに渡されたコマンドライン引数
+で初期化されています。&nbsp;スクリプト名はパラメータに含
+まれないことに注意してください。スクリプト名は代わりに@ScriptNameで調べることができ
+ます。&nbsp;スペースを含むパラメータは<strong>&quot;</strong>ダブル コーテーション
+<strong>&quot;</strong>で囲まれている必要があります。&nbsp;<a href="compiler.htm">コンパ
+イル</a>されたスクリプトにも同様の方法でコマンドライン引数を渡せます。<br>
+  <br>
+  $CmdLine[0] パラメータの数<br>
+  $CmdLine[1] パラメータ1 (スクリプト名直後のもの)<br>
+  $CmdLine[2] パラメータ2<br>
+  ...<br>
+  $CmdLine[$CmdLine[0]] とすると最後のパラメータを得られます。</p>
+<p>&nbsp;</p>
+<p>もし次のようにスクリプトを実行すると</p>
+<p class="code">&nbsp;&nbsp;&nbsp; AutoIt3.exe myscript.au3 param1 &quot;this
+  is another param&quot;</p>
+<p>$CmdLine[0] <em>==</em> 2</p>
+<p>$CmdLine[1] <em>==</em> param1</p>
+<p>$CmdLine[2] <em>==</em> this is another param</p>
+<p>@ScriptName <em>==</em> myscript.au3</p>
+<p>となります。</p>
+<p>&nbsp;</p>
+<p>$CmdLineに加えて$CmdLineRawという変数があり、この変数は分割処理されていないコマンドライン全体が代入されています。上の例では<p>
+<p>$CmdLineRaw <em>==</em> <span class="code">myscript.au3 param1 &quot;this is another param&quot;</span></p>
+<p>となります。</p>
+<p>&nbsp;</p>
+<p>コンパイルされているスクリプトは次のように実行します。</p>
+<p class="code">&nbsp;&nbsp;&nbsp;  myscript.exe param1 &quot;this
+  is another param&quot;</p>
+<p>$CmdLineRaw <em>==</em> <span class="code">param1 &quot;this is another param&quot;</span></p>
+<p>$CmdLineRawがパラメータしか返さないことに注意してください。</p>
+<p>&nbsp;</p>
+<p><b>注意</b> : $CmdLine[...]は最大63個までのパラメータしか返しませんが、$CmdLineRaw 
+は常にコマンドライン全体を返します。</p>
+<p>&nbsp;</p>
+<h2>AutoIt特有のコマンドラインオプション</h2>
+<p><b>形式1</b>: AutoIt3.exe [/ErrorStdOut]  [/AutoIt3ExecuteScript] file [params ...]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+AutoIt3スクリプトファイルの実行</p>
+<p><br>
+/ErrorStdOut&nbsp;&nbsp;&nbsp; Sciteエディタのようなアプリケーションでキャプチャできるよう致命的エラーを標準出力にリダイレクトします。
+このオプションはコンパイルされたスクリプトでも有効。<br>
+&nbsp;</p>
+<p>標準的なAutoItスクリプトファイル'myscript.au3'を実行するには<br>
+'AutoIt3.exe myscript.au3'<br>
+とします。</p>
+<p>&nbsp;</p>
+<p><b>形式2</b>: Compiled.exe [/ErrorStdOut] [params ...]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+Aut2Exeを使用してAutoIt3スクリプトファイルをコンパイルします。</p>
+<p><b>形式3</b>: Compiled.exe [/ErrorStdOut] [/AutoIt3ExecuteScript file] [params 
+...]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+コンパイルされたAutoIt3スクリプトファイルから別のスクリプトファイルを実行します。
+この際、AutoIT3.exeを別にコピーする必要はありません。</p>
+<p><br>
+<b>形式4</b>: AutoIt3.exe [/ErrorStdOut] /AutoIt3ExecuteLine &quot;command line&quot;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+コードの一行を実行します。<br>
+<br>
+コードの一行を実行するためには。<br>
+Run(@AutoItExe &amp; ' /AutoIt3ExecuteLine&nbsp; &quot;MsgBox(0, 
+<font color="#FF0000">''</font>Hello World!<font color="#FF0000">''</font>, 
+<font color="#FF0000">''</font>Hi!<font color="#FF0000">''</font>)&quot;')<br>
+とします。
+</p>
+<p>/AutoIt3ExecuteLine を使用している際はトレイアイコンは表示されません。<br>
+<br>
+注意：シングルコーテーション、ダブルコーテーションを正確に使用してください。
+たとえ<font color="#FF0000">二重のシングルコーテーション</font>&nbsp;であってもです。
+</p>
+<br>
+#NoAutoIt3Executeを使用するとコンパイルしたスクリプトで形式3と形式4を無効にすることができます。
+</body>
+</html>

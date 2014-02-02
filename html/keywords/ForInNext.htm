@@ -1,0 +1,93 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Keyword For...In...Next</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Keyword Reference</h1>
+<font size="+1">For...In...Next</font>
+<hr size="2">
+<p>オブジェクトコレクション、配列の要素を列挙します。<br></p>
+
+<p class="codeheader">
+<b>For</b> &lt;$Variable&gt; <b>In</b> &lt;expression&gt;<br>
+&nbsp;&nbsp;&nbsp; <i>statements</i><br>
+&nbsp;&nbsp;&nbsp; ...<br>
+<b>Next</b><br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">Variable</td>
+    <td width="85%">要素を代入する変数</td>
+  </tr>
+  <tr>
+   <td>expression</td>
+   <td>少なくとも1つの要素を持つオブジェクト、配列を結果として持つ式でなくてはなりません。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+MustDeclareVarsオプションが有効になっている場合であってもVariableはLOCALスコープで自動で作られます。<br>
+expressionが要素を持たないオブジェクトコレクションであった場合、また多次元の配列だった場合、ループはスキップされVariableには空の文字列が代入されます。<br>
+expressionがオブジェクトでも配列でもなくCOM Errorハンドルが設定されていない場合、スクリプトはエラー停止します。<br>
+Autoitの配列はFor...In使用時には読み取りだけが可能です。For...Inループ内で変数への代入をおこなってもその変更は配列には反映されません。列挙している配列の内容に変更を加える場合はFor...Toループを使用してください。<br>
+<br>
+For...In...Next句は入れ子構造にできます。<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="With.htm">With...EndWith</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S1">;配列を使用</span><br>
+<span class="S5">Dim</span><span class="S0"> </span><span class="S9">$aArray</span><span class="S8">[</span><span class="S3">4</span><span class="S8">]</span><br>
+<br>
+<span class="S9">$aArray</span><span class="S8">[</span><span class="S3">0</span><span class="S8">]=</span><span class="S7">"a"</span><br>
+<span class="S9">$aArray</span><span class="S8">[</span><span class="S3">1</span><span class="S8">]=</span><span class="S3">0</span><br>
+<span class="S9">$aArray</span><span class="S8">[</span><span class="S3">2</span><span class="S8">]=</span><span class="S3">1.3434</span><br>
+<span class="S9">$aArray</span><span class="S8">[</span><span class="S3">3</span><span class="S8">]=</span><span class="S7">"test"</span><br>
+<br>
+<span class="S9">$string</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S7">""</span><br>
+<span class="S5">FOR</span><span class="S0"> </span><span class="S9">$element</span><span class="S0"> </span><span class="S5">IN</span><span class="S0"> </span><span class="S9">$aArray</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$string</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$string</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$element</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><br>
+<span class="S5">NEXT</span><br>
+<br>
+<span class="S4">Msgbox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S7">"For..IN Arraytest"</span><span class="S8">,</span><span class="S7">"Result is: "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$string</span><span class="S8">)</span><br>
+<br>
+<span class="S1">;オブジェクトコレクションを使用</span><br>
+<br>
+<span class="S9">$oShell</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">ObjCreate</span><span class="S8">(</span><span class="S7">"shell.application"</span><span class="S8">)</span><br>
+<span class="S9">$oShellWindows</span><span class="S8">=</span><span class="S9">$oShell</span><span class="S8">.</span><span class="S14">windows</span><br>
+<br>
+<span class="S5">if</span><span class="S0"> </span><span class="S4">Isobj</span><span class="S8">(</span><span class="S9">$oShellWindows</span><span class="S8">)</span><span class="S0"> </span><span class="S5">then</span><br>
+<span class="S0">&nbsp;&nbsp;</span><span class="S9">$string</span><span class="S8">=</span><span class="S7">""</span><br>
+<br>
+<span class="S0">&nbsp;&nbsp;</span><span class="S5">for</span><span class="S0"> </span><span class="S9">$Window</span><span class="S0"> </span><span class="S5">in</span><span class="S0"> </span><span class="S9">$oShellWindows</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$String</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$String</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$Window</span><span class="S8">.</span><span class="S14">LocationName</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><br>
+<span class="S0">&nbsp;&nbsp;</span><span class="S5">next</span><br>
+<br>
+<span class="S0">&nbsp;&nbsp;</span><span class="S4">msgbox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S7">""</span><span class="S8">,</span><span class="S7">"You have the following windows open:"</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$String</span><span class="S8">)</span><br>
+<span class="S5">else</span><br>
+<br>
+<span class="S0">&nbsp;&nbsp;</span><span class="S4">msgbox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S7">""</span><span class="S8">,</span><span class="S7">"you have no open shell windows."</span><span class="S8">)</span><br>
+<span class="S5">endif</span></span><br>
+<script type="text/javascript">
+
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\ForInNext.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

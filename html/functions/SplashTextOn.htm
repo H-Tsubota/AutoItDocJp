@@ -1,0 +1,133 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function SplashTextOn</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">SplashTextOn</font>
+<hr size="2">
+<p>カスタマイズ可能なテキストポップアップウィンドウを作成します。<br></p>
+
+<p class="codeheader">
+SplashTextOn ( "title", "text" [, w [, h [, x pos [, y pos [, opt [, "fontname" [, fontsz [, fontwt ]]]]]]]] )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">title</td>
+    <td width="85%">スプラッシュウィンドウの名前</td>
+  </tr>
+  <tr>
+   <td>text</td>
+   <td>スプラッシュウィンドウのテキスト</td>
+  </tr>
+  <tr>
+   <td>w</td>
+   <td><b>[オプション]</b> ピクセルでのウィンドウの横幅(デフォルトは500)</td>
+  </tr>
+  <tr>
+   <td>h</td>
+   <td><b>[オプション]</b> ピクセルでのウィンドウの縦幅(デフォルトは400)</td>
+  </tr>
+  <tr>
+   <td>x pos</td>
+   <td><b>[オプション]</b> スプラッシュウィンドウの左端位置（ピクセル）(デフォルトは中央)</td>
+  </tr>
+  <tr>
+   <td>y pos</td>
+   <td><b>[オプション]</b> スプラッシュウィンドウの上端位置（ピクセル）(デフォルトは中央)</td>
+  </tr>
+  <tr>
+   <td>opt</td>
+   <td><b>[オプション]</b>  次のものを加えられます - デフォルトは'中央揃え/常に最前面/タイトル有り'<br>
+       &nbsp;0 = 中央揃え/常に最前面/タイトル有り (デフォルト)<br>
+       &nbsp;1 = ボーダレス、タイトルなしのウィンドウ<br>
+       &nbsp;2 = "常に最前面"解除<br>
+       &nbsp;4 = テキスト左揃え<br>
+       &nbsp;8 = テキスト右揃え<br>
+       16 = ウィンドウ移動可能<br>
+       32 = テキスト垂直方向中央揃え</td>
+  </tr>
+  <tr>
+   <td>fontname</td>
+   <td><b>[オプション]</b> 使用フォント(""指定やフォントが見つからなかった場合はOSデフォルトのGUIフォントが使われます。)</td>
+  </tr>
+  <tr>
+   <td>fontsz</td>
+   <td><b>[オプション]</b> フォントサイズ(デフォルトは12; 標準のサイズは6 8 9 10 11 12 14 16 18 20 22 24 26 28 36 48 72)</td>
+  </tr>
+  <tr>
+   <td>fontwt</td>
+   <td><b>[オプション]</b> フォントの濃さ (0 - 1000, デフォルト = 400 = 標準)。1000より大きい値は0として扱われます。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+スプラッシュウィンドウのハンドルを返します。ハンドルはControlSetTextで使用できます。<br>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+オプションパラメータをスキップする場合、デフォルト値を使用するためには次のようにします。<br>
+&nbsp;&nbsp;&nbsp;&nbsp;"" 文字列パラメータの場合<br>
+&nbsp;&nbsp;&nbsp;&nbsp;-1 数値パラメータの場合<br>
+<br>
+1度に呼べるスプラッシュ画像/テキストウィンドウは1つだけです。従って複数の画像/テキストを表示したい場合には、単純にあたらしい情報を使って再度SplashImageOn/SplashTextOnを呼んでください。<br>
+<br>
+点滅なしにテキストの更新をおこなうにはControlSetTextを使用するのがいいでしょう・・・<br>
+テキストが中央揃えで複数行である場合、ControlSetTextはSplashTextOnで作成された行数を維持しません。<br>
+<br>
+opt=1のスプラッシュは動かせません。またクリックによってアクティブにすることもできません。<br>
+<br>
+標準フォントは次のものを含みます。<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Arial、Comic Sans MS、Courier New、Lucida Console、Microsoft Sans Serif、System、Tahoma、Times New Roman、and WingDings<br>
+完全なフォントのリストはAppendixを参照。<br>
+<br>
+複数行を表示したい場合は@LFを使用してください。<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="SplashOff.htm">SplashOff</a>, <a href="SplashImageOn.htm">SplashImageOn</a>, <a href="ControlSetText.htm">ControlSetText</a>, <a href="ToolTip.htm">ToolTip</a>, <a href="MsgBox.htm">MsgBox</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S4">SplashTextOn</span><span class="S8">(</span><span class="S7">"Title"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Message goes here."</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S3">4</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S3">24</span><span class="S8">)</span><br>
+<span class="S4">Sleep</span><span class="S8">(</span><span class="S3">3000</span><span class="S8">)</span><br>
+<span class="S4">SplashOff</span><span class="S8">()</span><br>
+<br>
+<span class="S1">;; 点滅</span><br>
+<span class="S9">$message</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S7">""</span><br>
+<span class="S4">SplashTextOn</span><span class="S8">(</span><span class="S7">"TitleFoo"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$message</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S3">4</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">)</span><br>
+<span class="S5">For</span><span class="S0"> </span><span class="S9">$x</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">1</span><span class="S0"> </span><span class="S5">to</span><span class="S0"> </span><span class="S3">20</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$message</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$message</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$x</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@LF</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">SplashTextOn</span><span class="S8">(</span><span class="S7">"TitleFoo"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$message</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S3">4</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">Sleep</span><span class="S8">(</span><span class="S3">100</span><span class="S8">)</span><br>
+<span class="S5">Next</span><br>
+<br>
+<span class="S1">;; スムーズ</span><br>
+<span class="S9">$message</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S7">""</span><br>
+<span class="S4">SplashTextOn</span><span class="S8">(</span><span class="S7">"TitleFoo"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$message</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S8">,</span><span class="S0"> </span><span class="S3">4</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">)</span><br>
+<span class="S5">For</span><span class="S0"> </span><span class="S9">$x</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S3">1</span><span class="S0"> </span><span class="S5">to</span><span class="S0"> </span><span class="S3">20</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S9">$message</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S9">$message</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S9">$x</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@LF</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">ControlSetText</span><span class="S8">(</span><span class="S7">"TitleFoo"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Static1"</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$message</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">sleep</span><span class="S8">(</span><span class="S3">100</span><span class="S8">)</span><br>
+<span class="S5">Next</span><br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\SplashTextOn.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

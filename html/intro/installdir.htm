@@ -1,0 +1,346 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Install Directory Structure</title>
+  <meta http-equiv="Content-Type"
+ content="text/html; charset=shift-jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<h1>Install Directory Structure</h1>
+<p>
+AutoItのインストーラは下表で説明するディレクトリ構造(通常、<em>\Program Files\AutoIt3</em>に作成されます)を作成します。またインストーラはスタートメニューにショートカットを作成しますがそれ以外のファイルを追加/修正することはありません。<br><br>
+<table width="100%" border="1" cellspacing="0" cellpadding="3" bordercolor="#c0c0c0">
+  <tr bgcolor="#000099">
+    <td colspan=2><font color="#FFFFFF"><strong>ファイルとディレクト</strong></font></td>
+    <td><font color="#FFFFFF"><strong>説明</strong></font></td>
+  </tr>
+  <tr bgcolor=#FFFF9C>
+    <td colspan=3>(トップレベルのファイル)</td>
+  </tr>
+  <tr> 
+    <td colspan=2>AutoIt3.exe</td>
+    <td>AutoItのメインプログラムです。スクリプト実行時に必要となる<strong>ただひとつ</strong>のファイルです!</td>
+  </tr>
+  <tr> 
+    <td colspan=2>AutoIt3_x64.exe</td>
+    <td>AutoItのx64バージョン (インストールされている場合)</td>
+  </tr>
+  <tr> 
+    <td colspan=2>AU3Info.exe</td>
+    <td><a href="au3spy.htm">AutoIt Window Info Tool</a></td>
+  </tr>
+  <tr> 
+    <td colspan=2>AU3Info_x64.exe</td>
+    <td>Au3Infoのx64バージョン (インストールされている場合)</td>
+  </tr>
+  <tr> 
+    <td colspan=2>AU3Check.exe</td>
+    <td>AutoItの文法チェッカー</td>
+  </tr>
+  <tr> 
+    <td colspan=2>AutoIt.chm</td>
+    <td>AutoIt3.chmとUDFs3.chmを使用するヘルプファイル</td>
+  </tr>
+  <tr> 
+    <td colspan=2>Uninstall.exe</td>
+    <td>AutoItアンインストーラ</td>
+  </tr>
+  <tr> 
+    <td colspan=2>AutoIt v3 Website.url</td>
+    <td><a href="http://www.autoitscript.com/autoit3/">http://www.autoitscript.com/autoit3/</a>へのショートカット</td>
+  </tr>
+ 
+  <tr bgcolor=#FFFF9C>
+    <td colspan=3><strong>Aut2Exe</strong></td>
+  </tr>
+  <tr>
+    <td width="10%"></td>
+	<td width="20%"><b>Icons\</b></td>
+	<td width="70%">エクスプローラで.au3ファイルのアイコンとして使用されるアイコンがあります。</td>
+  <tr>
+    <td></td>
+	<td>Aut2Exe.exe</td>
+	<td>スクリプトコンパイラ</td>
+  <tr>
+    <td></td>
+	<td>Aut2Exe_x64.exe</td>
+	<td>Aut2Exeのx64バージョン (インストールされている場合)</td>
+  <tr>
+    <td></td>
+	<td>AutoItSC.bin</td>
+	<td>コンパイルされるスクリプト用の実行可能スタブ</td>
+ <tr>
+    <td>&nbsp;</td>
+	<td>AutoItSC_x64.bin</td>
+	<td>コンパイルされるスクリプト用のx64実行可能スタブ</td>
+  <tr>
+    <td></td>
+	<td>UPX.exe</td>
+	<td>UPX コンプレッサー(exeファイルのサイズを小さくします)</td>
+  <tr bgcolor=#FFFF9C>
+    <td colspan=3><strong>Examples</strong></td>
+  </tr>
+  <tr>
+    <td width="10%"></td>
+	<td width="20%"><b>GUI\</b></td>
+	<td width="70%">AutoItで書かれたGUIのサンプルがあります。</td>
+  <tr>
+    <td></td>
+	<td><strong>Helpfile\</strong></td>
+	<td>ヘルプファイルに記載されているサンプルスクリプトがあります。</td>
+  <tr bgcolor=#FFFF9C>
+    <td colspan=3><strong>Extras</strong></td>
+  </tr>
+  <tr>
+    <td width="10%"></td>
+	<td width="20%"><b>AutoUpdateIt\</b></td>
+	<td width="70%">AutoIt3の最新バージョンを簡単に取得するためのスクリプトがあります。</td>
+  <tr>
+    <td></td>
+	<td><strong>Editors\</strong></td>
+	<td>いくつかの人気のあるテキストエディタ用の構文色付けの定義があります。</td>
+  <tr>
+    <td></td>
+	<td><strong>Exe2Aut\</strong></td>
+	<td>コンパイル済みスクリプトをソースコードに逆変換するためのユーティリティがあります。</td>
+  <tr>
+    <td>&nbsp;</td>
+	<td><strong>SQLite\</strong></td>
+	<td>SQLiteコマンドライン実行ファイルとヘルプファイルがあります。</td>
+  <tr>
+    <td></td>
+	<td><strong>v2_to_v3_Converter\</strong></td>
+	<td>v2.64スクリプトをAutoIt v3スクリプトに変換するためのツールがあります。</td>
+  <tr bgcolor=#FFFF9C>
+    <td colspan=3><strong>Icons</strong></td>
+  </tr>
+  <tr>
+    <td width="10%"></td>
+	<td colspan=2>エクスプローラで.au3ファイルのアイコンとして使用されるアイコンがあります。</td>
+    
+  <tr bgcolor=#FFFF9C>
+    <td colspan=3><strong>Include</strong></td>
+  </tr>
+    <tr>
+    <td width="10%"></td>
+	<td colspan=2>標準インクルードファイル(定義済みユーザー関数)があります。ライブラリ関数を参照してください。</td>
+    
+  <tr bgcolor=#FFFF9C>
+    <td colspan=3><strong>AutoItX</strong></td>
+  </tr>
+  <tr>
+    <td width="10%"></td>
+	<td colspan=2>
+	DLLバージョンのAutoIt v3があります。これはActiveX/COM、 DLLインターフェイスを介してAutoIt機能のサブセットを提供するものです。</td>
+  <tr bgcolor=#FFFF9C>
+    <td colspan=3><strong>SciTe</strong></td>
+  </tr>
+  <tr>
+    <td width="10%"></td>
+	<td colspan=2>構文色付けをおこなう軽量バージョンのSciTeがあります。</td>
+  </tr>
+</table>
+<p>
+繰り返しになりますがAutoItスクリプトの実行のために必要ファイルは<strong>AutoIt3.exe</strong>だけです。スクリプトを実行ファイルにコンパイルした場合、そのコンパイル済み実行ファイルを実行するためにAutoItをインストールする必要はありません。
+</p>
+<p><font size="-2">(例外：Windows NT 4環境下ではProcess...()関連の関数が動作するためにPSAPI.dllファイルがパスが通っているディレクトリまたはAutoItディレクトリに存在することが必要になります。)
+</font></p>
+<p>&nbsp;</p>
+<h2>レジストリキー</h2>
+<p>AutoItインストーラは<em>HKEY_LOCAL_MACHINE\Software\AutoIt v3</em>と<em>HKEY_CURRENT_USER\Software\AutoIt v3</em>の下にレジストリキーを作成します。これらのキーはAutoItをフルインストールしていないマシン上でAutoItユーティリティが実行される場合には使用/作成されません -- AutoItはサーバーなどの上で&quot;クリーン&quot;に実行されます。</p>
+下の表はデフォルト(または典型的な)レジストリキーです。斜体のキーはインストーラでは作成されず、対応するユーティリティの初回実行時に作成されます。
+<table width="100%" border="1" cellspacing="0" cellpadding="3" bordercolor="#c0c0c0">
+  <tr bgcolor="#000099"> 
+    <td colspan=4><font color="#FFFFFF"><strong>HKEY_LOCAL_MACHINE\SOFTWARE\AutoIt v3\</strong></font></td>
+  </tr>
+  <tr bgcolor=#FFFF9C>
+    <td colspan=4><strong>AutoIt</strong></td>
+  </tr>
+  <tr>
+    <td width="10%"></td>
+    <td width="30%">(Default)</td>
+    <td width="20%">REG_SZ</td>
+    <td width="40%">(値は設定されません)</td>
+  </tr>
+  <tr>
+    <td width="10%"></td>
+    <td>InstallDir</td>
+    <td>REG_SZ</td>
+    <td>C:\Program Files\AutoIt3</td>
+  </tr>
+  <tr>
+    <td width="10%"></td>
+    <td>Version</td>
+    <td>REG_SZ</td>
+    <td><em>バージョン番号</em></td>
+  </tr>
+  
+  <tr><td colspan=4><td></tr>
+  
+  <tr bgcolor="#000099"> 
+    <td colspan=4><font color="#FFFFFF"><strong>HKEY_CURRENT_USER\Software\AutoIt v3\</strong></font></td>
+  </tr>
+  <tr bgcolor=#FFFF9C>
+    <td colspan=4><strong>Aut2Exe</strong></td>
+  </tr>
+  <tr>
+    <td width="10%"></td>
+    <td>(Default)</td>
+    <td>REG_SZ</td>
+    <td>(値は設定されません)</td>
+  </tr>
+  <tr>
+    <td width="10%"></td>
+    <td>AllowDecompile</td>
+    <td>REG_DWORD</td>
+    <td>0x1</td>
+  </tr>
+  <tr>
+    <td width="10%"></td>
+    <td>LastCompression</td>
+    <td>REG_DWORD</td>
+    <td>0x2</td>
+  </tr>
+  <tr>
+    <td width="10%"></td>
+    <td>LastExeDir</td>
+    <td>REG_SZ</td>
+    <td>My Documents</td>
+  </tr>
+  <tr>
+    <td width="10%"></td>
+    <td>LastIcon</td>
+    <td>REG_SZ</td>
+    <td>&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="10%"></td>
+    <td>LastIconDir</td>
+    <td>REG_SZ</td>
+    <td>C:\Program Files\AutoIt3\Aut2Exe\Icons</td>
+  </tr>
+  <tr>
+    <td width="10%"></td>
+    <td>LastScriptDir</td>
+    <td>REG_SZ</td>
+    <td>My Documents</td>
+  </tr>
+  
+  <tr bgcolor=#FFFF9C>
+    <td colspan=4><i><strong>AutoUpdateIt</strong></i></td>
+  </tr>
+  <tr>
+    <td width="10%"></td>
+    <td>(Default)</td>
+    <td>REG_SZ</td>
+    <td>(値は設定されません)</td>
+  </tr>
+  <tr>
+    <td width="10%"></td>
+    <td>DoneOption</td>
+    <td>REG_SZ</td>
+    <td>Notify</td>
+  </tr>
+  <tr>
+    <td width="10%"></td>
+    <td>DownloadDir</td>
+    <td>REG_SZ</td>
+    <td>C:\Downloads\ForExample\</td>
+  </tr>
+  
+  <tr bgcolor=#FFFF9C>
+    <td colspan=4><i><strong>Exe2Aut</strong></i></td>
+  </tr>
+  <tr>
+    <td width="10%"></td>
+    <td>(Default)</td>
+    <td>REG_SZ</td>
+    <td>(値は設定されません)</td>
+  </tr>
+  <tr>
+    <td width="10%"></td>
+    <td>LastExeDir</td>
+    <td>REG_SZ</td>
+    <td>C:\ForExample\</td>
+  </tr>
+  <tr>
+    <td width="10%"></td>
+    <td>LastScriptDir</td>
+    <td>REG_SZ</td>
+    <td>&nbsp;</td>
+  </tr>
+  
+  <tr bgcolor=#FFFF9C>
+    <td colspan=4><i><strong>AU3Info</strong></i></td>
+  </tr>
+  <tr>
+    <td width="10%"></td>
+    <td>Default</td>
+    <td>REG_SZ</td>
+    <td>(値は設定されません)</td>
+  </tr>
+  <tr>
+    <td width="10%"></td>
+    <td>AlwaysOnTop</td>
+    <td>REG_DWORD</td>
+    <td>0x1</td>
+  </tr>
+  <tr>
+    <td width="10%"></td>
+    <td>ColorMode</td>
+    <td>REG_DWORD</td>
+    <td>0x1</td>
+  </tr>
+  <tr>
+    <td width="10%"></td>
+    <td>CoordMode</td>
+    <td>REG_DWORD</td>
+    <td>0x1</td>
+  </tr>
+  <tr>
+    <td width="10%"></td>
+    <td>HighlightColor</td>
+    <td>REG_DWORD</td>
+    <td>0x0</td>
+  </tr>
+  <tr>
+    <td width="10%"></td>
+    <td>HighlightControls</td>
+    <td>REG_DWORD</td>
+    <td>0x1</td>
+  </tr>
+  <tr>
+    <td width="10%"></td>
+    <td>Magnify</td>
+    <td>REG_DWORD</td>
+    <td>0x0</td>
+  </tr>
+  <tr>
+    <td width="10%"></td>
+    <td>WinH</td>
+    <td>REG_DWORD</td>
+    <td>0x01c2</td>
+  </tr>
+  <tr>
+    <td width="10%"></td>
+    <td>WinW</td>
+    <td>REG_DWORD</td>
+    <td>0x012c</td>
+  </tr>
+  <tr>
+    <td width="10%"></td>
+    <td>WinX</td>
+    <td>REG_DWORD</td>
+    <td>0x0064</td>
+  </tr>
+  <tr>
+    <td width="10%"></td>
+    <td>WinY</td>
+    <td>REG_DWORD</td>
+    <td>0x0064</td>
+  </tr>
+  </i>
+</table>
+</body>
+</html>

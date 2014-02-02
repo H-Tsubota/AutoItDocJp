@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function FileSetPos</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">FileSetPos</font>
+<hr size="2">
+<p>ファイルポジションを設定します。<br></p>
+
+<p class="codeheader">
+FileSetPos ( handle, offset, origin )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">handle</td>
+    <td width="85%">FileOpen()で開いたファイルのハンドル.</td>
+  </tr>
+  <tr>
+   <td>offset</td>
+   <td>起点からのオフセット。この値は正、または負です。負の値の場合、起点から先頭に向かって移動します。</td>
+  </tr>
+  <tr>
+   <td>origin</td>
+   <td>次のいずれかを設定する必要があります:<br>
+       &nbsp;0 - ファイルの先頭 (Constants.au3の$FILE_BEGIN)<br>
+       &nbsp;1 - 現在の位置 (Constants.au3の$FILE_CURRENT)<br>
+       &nbsp;2 - ファイルの終端 (Constants.au3の$FILE_END)</td>
+  </tr>
+</table>
+
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">成功</td>
+    <td width="90%">操作に成功した場合、True</td>
+  </tr>
+  <tr>
+    <td valign="top">失敗</td>
+    <td>False</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+起点を指定する際に元の位置をカッコ内のシンボル名を使用する場合はスクリプトにConstants.au3をインクルードしてください。<br>
+
+FileSetPos()を使用することで同じファイルでの読み込みと書き込み両方できます。同じファイルでの読み込みと書き込みをおこなう場合は必ず各読み込み、書き込み操作の間でFileFlush()を呼んでください。<br>
+ポインタをデータの途中に移動することでデータの上書きをおこなえます。<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="FileGetPos.htm">FileGetPos</a>, <a href="FileFlush.htm">FileFlush</a>, <a href="FileRead.htm">FileRead</a>, <a href="FileReadLine.htm">FileReadLine</a>, <a href="FileWrite.htm">FileWrite</a>, <a href="FileWriteLine.htm">FileWriteLine</a>, <a href="FileOpen.htm">FileOpen</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S11">#include</span><span class="S0"> </span><span class="S7">&lt;Constants.au3&gt;</span><br>
+<br>
+<span class="S5">Local</span><span class="S0"> </span><span class="S5">Const</span><span class="S0"> </span><span class="S9">$sFile</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S7">"test.txt"</span><br>
+<span class="S5">Local</span><span class="S0"> </span><span class="S9">$hFile</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">FileOpen</span><span class="S8">(</span><span class="S9">$sFile</span><span class="S8">,</span><span class="S0"> </span><span class="S3">2</span><span class="S8">)</span><br>
+<br>
+<span class="S1">; 書き込み用にファイルが開けたかどうかをチェック</span><br>
+<span class="S5">If</span><span class="S0"> </span><span class="S9">$hFile</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S8">-</span><span class="S3">1</span><span class="S0"> </span><span class="S5">Then</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Error"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Unable to open file."</span><span class="S8">)</span><br>
+<span class="S0">&nbsp; &nbsp; </span><span class="S5">Exit</span><br>
+<span class="S5">EndIf</span><br>
+<br>
+<span class="S1">; ファイルに書き込み</span><br>
+<span class="S4">FileWriteLine</span><span class="S8">(</span><span class="S9">$hFile</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Line1"</span><span class="S8">)</span><br>
+<span class="S4">FileWriteLine</span><span class="S8">(</span><span class="S9">$hFile</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Line2"</span><span class="S8">)</span><br>
+<span class="S4">FileWriteLine</span><span class="S8">(</span><span class="S9">$hFile</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Line3"</span><span class="S8">)</span><br>
+<br>
+<span class="S1">; ファイルをディスクにフラッシュ</span><br>
+<span class="S4">FileFlush</span><span class="S8">(</span><span class="S9">$hFile</span><span class="S8">)</span><br>
+<br>
+<span class="S1">; ファイルポジションを調べ、現在のポジションからのファイル内容読み込みを試みる</span><br>
+<span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Position: "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S4">FileGetPos</span><span class="S8">(</span><span class="S9">$hFile</span><span class="S8">)</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">"Data: "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S4">FileRead</span><span class="S8">(</span><span class="S9">$hFile</span><span class="S8">))</span><br>
+<br>
+<span class="S1">; ポジションを先頭に設定</span><br>
+<span class="S5">Local</span><span class="S0"> </span><span class="S9">$n</span><span class="S0"> </span><span class="S8">=</span><span class="S0"> </span><span class="S4">FileSetPos</span><span class="S8">(</span><span class="S9">$hFile</span><span class="S8">,</span><span class="S0"> </span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S9">$FILE_BEGIN</span><span class="S8">)</span><br>
+<br>
+<span class="S1">; ファイルポジションを調べ、現在のポジションからのファイル内容読み込みを試みる</span><br>
+<span class="S4">MsgBox</span><span class="S8">(</span><span class="S3">0</span><span class="S8">,</span><span class="S0"> </span><span class="S7">""</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"Position: "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S4">FileGetPos</span><span class="S8">(</span><span class="S9">$hFile</span><span class="S8">)</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S7">"Data: "</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S6">@CRLF</span><span class="S0"> </span><span class="S8">&amp;</span><span class="S0"> </span><span class="S4">FileRead</span><span class="S8">(</span><span class="S9">$hFile</span><span class="S8">))</span><br>
+<br>
+<span class="S1">; ハンドルを閉じる</span><br>
+<span class="S4">FileClose</span><span class="S8">(</span><span class="S9">$hFile</span><span class="S8">)</span><br>
+<br>
+<span class="S1">; 一時ァイルを削除</span><br>
+<span class="S4">FileDelete</span><span class="S8">(</span><span class="S9">$sFile</span><span class="S8">)</span><br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\FileSetPos.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>

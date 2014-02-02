@@ -1,0 +1,70 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Unicode Support</title>
+  <meta http-equiv="Content-Type"
+ content="text/html; charset=shift-jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<h1>Unicode Support </h1>
+<p>
+バージョン3.2.4.0からAutoItはUnicodeプログラムとしてリリースされています。Unicodeバージョンによって我々の国際的な友人たちはようやくAutoItで拡張文字とスクリプトを使うことができるようになったのです！</p>
+<p><strong>注意: 
+UnicodeバージョンのAutoIt(AutoIt3.exe)とUnicodeモードでコンパイルされたスクリプトはWindows NT/2000/XP/2003/Vista以降でのみ動作します。Windows 9x系でスクリプトを実行するためには古いバージョンのAutoItを使用する必要があります。Windows 9x系と互換性がある最後のバージョンは3.2.12.xです。</strong></p>
+<p>
+AutoItはANSIまたは有効な<a href="http://en.wikipedia.org/wiki/Byte_Order_Mark">BOM</a>付きのUTF16(ビッグエンディアン、リトルエンディアン)/UTF8で書かれたスクリプトファイルを読み取ります。さらに<a href="../functions/FileReadLine.htm">FileReadLine</a>のような関数は自動的にANSIと有効な<a href="http://en.wikipedia.org/wiki/Byte_Order_Mark">BOM</a>が見つかるUTF16/UTF8のテキストファイルからテキストを読み取ります。UTF8に関してはBOMがあるものと無いもの両方がサポートされています。</p>
+<p>
+<a href="../functions/FileWriteLine.htm">FileWriteLine</a>のような出力関数はANSI、UTF16、UTF8のいずれのフォーマットでも使用できます - 適切な<a href="../functions/FileOpen.htm">FileOpen</a>フラグを使用してファイルを開く必要があります。そうしない場合はデフォルトであるANSIモードが使用されます。</p>
+<p>
+よく知られているエディタでサポートされているテキストファイル、スクリプトのフォーマットとその表記については下表の通りです:</p>
+<table width="700" border="1">
+  <tr>
+    <td style="width: 179px"><strong>AutoItでの表記</strong></td>
+    <td style="width: 158px"><strong>Notepad</strong></td>
+    <td width="180"><b>Notepad++</b></td>
+    <td style="width: 255px"><strong>SciTe (AutoItのデフォルトのエディタ)</strong></td>
+  </tr>
+  <tr>
+    <td style="width: 179px">ANSI</td>
+    <td style="width: 158px">ANSI</td>
+    <td>ANSI</td>
+    <td style="width: 255px">8 bit / Code Page Property </td>
+  </tr>
+  <tr>
+    <td style="width: 179px">UTF16 Little Endian </td>
+    <td style="width: 158px">Unicode</td>
+    <td>UCS-2 Little Endian </td>
+    <td style="width: 255px">UCS-2 Little Endian </td>
+  </tr>
+  <tr>
+    <td style="width: 179px">UTF16 Big Endian</td>
+    <td style="width: 158px">Unicode big endian </td>
+    <td>UCS-2 Big Endian</td>
+    <td style="width: 255px">UCS-2 Big Endian </td>
+  </tr>
+  <tr>
+    <td style="width: 179px">UTF8 with BOM</td>
+    <td style="width: 158px">UTF-8</td>
+    <td>UTF-8</td>
+    <td style="width: 255px">UTF-8 with BOM </td>
+  </tr>
+  <tr>
+    <td style="width: 179px">UTF8 without BOM</td>
+    <td style="width: 158px">サポートしていません</td>
+    <td>UTF-8 without BOM</td>
+    <td style="width: 255px">UTF-8</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+<p>推奨のスクリプトフォーマットはUTF-8です。ANSIフォーマットは英語以外の言語ではお勧めしません。異なるロケールのマシンでは問題を起こす可能性があります。</p>
+<p>&nbsp; </p>
+<h2>現在の制限</h2>
+<p>以下に示すAutoItのごく一部ではまだUnicodeサポートが完了していません:</p>
+<ul>
+  <li><a href="../functions/Send.htm">Send</a>、<a href="../functions/ControlSend.htm">ControlSend</a> - 代わりに<a href="../functions/ControlSetText.htm">ControlSetText</a>関数と<a href="../functions/ClipPut.htm">Clipboard</a>関数を使ってください。</li>
+  <li><a href="../functions/ConsoleWrite.htm">コンソール</a>操作ではANSIへの変換がおこなわれます。</li>
+</ul>
+<p>以上の制限は可能であれば未来のバージョンで解決されるでしょう。</p>
+</body>
+</html>

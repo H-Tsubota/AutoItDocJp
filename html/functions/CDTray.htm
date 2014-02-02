@@ -1,0 +1,71 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <title>Function CDTray</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=shift_jis">
+  <link href="../css/default.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+<h1>Function Reference</h1>
+<font size="+1">CDTray</font>
+<hr size="2">
+<p>CDトレイの開閉をします。<br></p>
+
+<p class="codeheader">
+CDTray ( "drive", "status" )<br>
+</p>
+<p>&nbsp;</p>
+
+<p><b>パラメータ</b></p>
+<table border="1" width="100%" cellspacing="0" cellpadding="3" bordercolor="#C0C0C0">
+  <tr>
+    <td width="15%">drive</td>
+    <td width="85%">制御するCDトレイのドライブ名。<b>D:</b>、<b>E:</b>などのように記述します。</td>
+  </tr>
+  <tr>
+   <td>status</td>
+   <td>CDトレイを開けるのか閉じるのかの指定。<b>"open"</b>または<b>"closed"。</b></td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>返し値</b></p>
+<table width="100%">
+  <tr>
+    <td width="10%" valign="top">成功</td>
+    <td width="90%">1を返します。</td>
+  </tr>
+  <tr>
+    <td valign="top">失敗</td>
+    <td>ドライブがCD用ソフトウェアによってロックされている場合、指定したドライブがCDドライブでない場合は0を返します。</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+
+<p><b>注意</b></p>
+CDTrayはDAEMONツールのような仮想CDドライブを想定して動作します。<br>
+CDTrayはローカルでなかったり、マップされていないCDドライブに対しては動作しません。CDTrayはドライブの存在するコンピュータから実行されなければなりません。<br>
+ラップトップパソコンにみられる手動でしか閉じられないCDトレイに対してもCDTray("X:", "close") は0を返します。<br>
+<br>
+<p>&nbsp;</p>
+
+<p><b>関連</b></p>
+<a href="DriveGetType.htm">DriveGetType</a>, <a href="DriveStatus.htm">DriveStatus</a>
+<p>&nbsp;</p>
+
+<p><b>例</b></p>
+<p class="codebox">
+<br>
+<span><span class="S1">; ドライブEのCDトレイを開く</span><br>
+<span class="S4">CDTray</span><span class="S8">(</span><span class="S7">"E:"</span><span class="S8">,</span><span class="S0"> </span><span class="S7">"open"</span><span class="S8">)</span><br>
+<span class="S0"></span></span><br>
+<script type="text/javascript">
+
+if (document.URL.match(/^mk:@MSITStore:/i))
+document.write('<br><OBJECT id=hhctrl type="application/x-oleobject" classid="clsid:adb880a6-d8ff-11cf-9377-00aa003b7a11" width=58 height=57><PARAM name="Command" value="ShortCut"><PARAM name="Button" value="Text:Open this Script"><PARAM name="Item1" value=",Examples\\HelpFile\\CDTray.au3,"></OBJECT>');
+</script>
+<p>&nbsp;</p>
+
+</body>
+</html>
