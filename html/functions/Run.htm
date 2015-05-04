@@ -38,9 +38,9 @@ Run ( "program" [, "workingdir" [, show_flag[, opt_flag ]]] )<br>
    <td>opt_flag</td>
    <td><b>[オプション]</b>
    親プロセスと子プロセスがどのように連携するかに関連するさまざまなオプションを制御<br>
-       &nbsp;&nbsp;0x1 ($STDIN_CHILD)  = 子プロセスのSTDINストリームにハンドルを渡します<br>
-       &nbsp;&nbsp;0x2 ($STDOUT_CHILD) = 子プロセスのSTDOUTストリームにハンドルを渡します<br>
-       &nbsp;&nbsp;0x4 ($STDERR_CHILD) = 子プロセスの STDERRストリームにハンドルを渡します</td>
+       &nbsp;&nbsp;0x1 ($STDIN_CHILD)  = 子プロセスのSTDINストリームにハンドルを渡します。<br>
+       &nbsp;&nbsp;0x2 ($STDOUT_CHILD) = 子プロセスのSTDOUTストリームにハンドルを渡します。<br>
+       &nbsp;&nbsp;0x4 ($STDERR_CHILD) = 子プロセスの STDERRストリームにハンドルを渡します。<br>
        &nbsp;&nbsp;0x8 ($STDERR_MERGED) = STDOUTとSTDERRに同じハンドルを渡します。
 	   $STDOUT_CHILDと$STDERR_CHILDを両方設定するのと同じです。<br>
 	   &nbsp;&nbsp;0x10 ($STDIO_INHERIT_PARENT) = 子プロセスに親プロセスのSTDIOストリームを渡します。
